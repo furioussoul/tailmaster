@@ -1,11 +1,14 @@
 # Intro
-Esform is a web editor for building interactive web page.
-Build page on http://47.94.2.0:8082/ and get pageId,
+Esform is a web editor for building interactive web page.  
+
+Build page on http://47.94.2.0:8082/ and get pageId,  
+
 npm install esform and render page by pageId.
 ***
 
 # 0.1Version
-Esform is still weak with dozen bugs,
+Esform is still weak with dozen bugs,  
+
 but I will make it more strong and powerful.  
 ***
 
