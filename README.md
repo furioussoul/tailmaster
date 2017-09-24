@@ -13,7 +13,7 @@ but I will make it more strong and powerful.
 ***
 
 # opensource
-Opensource where star is greater than 1k.
+Opensource when star is more than 1k.
 ***
 
 
