@@ -20,9 +20,6 @@ Opensource when star is more than 1k.
 ![pic](http://chuantu.biz/t6/61/1506180947x2044993177.png "在这里输入图片标题")
 
 
-
-#  code by Iview、Vue
-
 ***
 # License
 [MIT](https://opensource.org/licenses/MIT)
