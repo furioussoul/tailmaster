@@ -1,7 +1,7 @@
 # Intro
 Esform is a web editor for building interactive web page.  
 
-Build page on http://47.94.2.0:8080/ and get pageId,  
+Build page on http://47.94.2.0:9090/ and get pageId,  
 
 npm install esform and render page by pageId.
 ***
@@ -17,8 +17,9 @@ Opensource when star is more than 1k.
 ***
 
 
-![pic](http://chuantu.biz/t6/61/1506180947x2044993177.png "在这里输入图片标题")
-
+![pic](http://chuantu.biz/t6/74/1506784745x1966915555.png "拖拽组装")
+![pic](http://chuantu.biz/t6/74/1506784773x1966915555.png "组件列表")
+![pic](http://chuantu.biz/t6/74/1506784786x1966915555.png "编辑组件")
 
 # License
 [MIT](https://opensource.org/licenses/MIT)
