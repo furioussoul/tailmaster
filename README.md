@@ -12,10 +12,6 @@ Esform is still weak with dozen bugs,
 but I will make it more strong and powerful.  
 ***
 
-# opensource
-Opensource when star is more than 1k.
-***
-
 
 ![pic](http://chuantu.biz/t6/74/1506784745x1966915555.png "拖拽组装")
 ![pic](http://chuantu.biz/t6/74/1506784773x1966915555.png "组件列表")
