@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.iml
+debug.log
+idea/
+
+ui/dist/
+
+jform/.idea/
+*.iml
+target/
+application.yml
+
+var/

@@ -1,0 +1,89 @@
+.soul-drop-panel{
+
+  .makeContainer();
+  width:100%;
+  min-height: 800px;
+  transition:  box-shadow @transition-time linear;
+  position: relative;
+
+  .is-preview &{
+    border: 1px dashed #339ae2;
+    padding: 10px;
+  }
+
+  & .ivu-row{
+    .makeContainer();
+    .is-preview &{
+      border: 1px dashed #339ae2;
+      padding: 10px;
+    }
+  }
+
+  & .ivu-col{
+    .makeContainer();
+    //preview model
+    .is-preview &{
+      border: 1px dashed #339ae2;
+      padding: 10px;
+    }
+  }
+
+  & .ivu-form{
+    .makeContainer();
+    min-height: 60px;
+    //preview model
+    .is-preview &{
+      border: 1px dashed #339ae2;
+      padding: 10px;
+    }
+  }
+
+  & .ivu-form-item{
+    .makeContainer();
+    //preview model
+    .is-preview &{
+      border: 1px dashed #339ae2;
+      padding: 10px;
+    }
+  }
+
+  & .ivu-radio-group{
+    .makeContainer();
+    min-height: 20px;
+    min-width: 40px;
+    //preview model
+    .is-preview &{
+      border: 1px dashed #339ae2;
+      padding: 10px;
+    }
+  }
+
+  & .ivu-checkbox-group{
+    .makeContainer();
+    min-height: 40px;
+    min-width: 60px;
+    //preview model
+    .is-preview &{
+      border: 1px dashed #339ae2;
+      padding: 10px;
+    }
+  }
+}
+
+.makeContainer(){
+  min-height: 40px;
+  transition:  box-shadow @transition-time linear;
+
+  //make drop be visible
+  & .drop {
+    box-shadow: 2px 2px 2px 2px #888888 inset;
+  }
+  &.drop {
+    box-shadow: 2px 2px 2px 2px #888888 inset;
+  }
+}
+
+
+
+
+

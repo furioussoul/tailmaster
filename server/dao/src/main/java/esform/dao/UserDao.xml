@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="esform.dao.UserDao">
+
+    <insert id="add" parameterType="esform.domain.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user
+        (userName,password,realName,phone,email,profession,
+        createBy,createDt,updateBy,updateDt,rowStatus)
+        VALUES (#{userName},#{password},#{realName},#{phone},#{email},#{profession},
+        #{createBy},#{createDt},#{updateBy},#{updateDt},1)
+    </insert>
+
+    <insert id="addUserRole">
+        INSERT INTO user_role
+        (userId,roleId)
+        VALUES (#{userId},#{roleId})
+    </insert>
+
+    <select id="select"
+            parameterType="esform.domain.User"
+            resultType="esform.domain.Role">
+        select *
+        from role r
+        RIGHT JOIN `user` u
+        on r.userId = u.id
+        WHERE r.rowStatus = 1
+        and u.rowStatus = 1
+        and u.userName = #{userName}
+    </select>
+
+</mapper>

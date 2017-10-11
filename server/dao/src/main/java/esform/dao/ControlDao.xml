@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="esform.dao.ControlDao">
+
+    <insert id="add" parameterType="esform.domain.Control" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO control
+        (`name`,nickname,code,createBy,createDt,updateBy,updateDt,rowStatus)
+        VALUES (#{name},#{nickname},#{code},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
+    </insert>
+
+    <delete id="del" parameterType="java.lang.Long">
+        update control
+        SET rowStatus = 0
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="esform.domain.Control">
+        update control
+        <set>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname},
+            </if>
+            <if test="code != null">
+                `code` = #{code}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="select" resultType="esform.domain.Control">
+        select *
+        from control
+        WHERE rowStatus = 1
+    </select>
+
+    <select id="selectByExample" resultType="esform.domain.Control">
+        select *
+        from control
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="name != null">
+                and `name` = #{name}
+            </if>
+            <if test="nickname != null">
+                and nickname = #{nickname}
+            </if>
+            and rowStatus = 1
+        </where>
+    </select>
+</mapper>
