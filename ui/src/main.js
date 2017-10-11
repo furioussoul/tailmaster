@@ -2,10 +2,8 @@ import Vue from 'vue';
 import VueResource from "vue-resource";
 import VueRouter from 'vue-router';
 import Iview from 'iview';
-import App from './view/app.vue';
 import {appApi, appContext} from "./plugin/config";
 import {initRouter, router, routerStore} from "./plugin/router";
-import Interceptor from "./plugin/interceptor";
 import SoulUi from "./plugin/install_component"
 import Store from './store/index'
 import initAppConstructor from './plugin/app_constuctor'
@@ -49,7 +47,5 @@ const app = new Vue({
     }
   }
 })
-
-// Interceptor(Vue, app)
 
 app.$mount('#app');

@@ -3,7 +3,7 @@ import Router from "vue-router";
 import Vuex from "vuex";
 import Sync from "vuex-router-sync";
 import Render from '../core/render'
-import RenderApp from '../view/esview/render_app.vue'
+import store from '../store'
 
 Vue.use(Vuex)
 let rs = new Vuex.Store({
@@ -32,16 +32,23 @@ export const routerStore = rs
 /**
  * pages {array} 菜单
  */
-export function initRouter(pages,assemblePage) {
-  if(assemblePage){
+export function initRouter(pages, assemblePage) {
+  if (assemblePage) {
     let routes = pages.map((page, index) => {
       return {
         path: page.url,
         component: Render
       }
     })
-    routerCache.forEach(router=>{
-      if(router.path.indexOf('assemble/index') > -1){
+
+    routes.push({
+      path: store.getters['dragModule/soul'].model.appName.value,
+      component: Render
+    })
+
+    //子应用路由加到'assemble/index'下，作为嵌套路由
+    routerCache.forEach(router => {
+      if (router.path.indexOf('assemble/index') > -1) {
         router.children = [].concat(routes)
       }
     })
@@ -49,6 +56,7 @@ export function initRouter(pages,assemblePage) {
     return
   }
 
+  //esview的路由
   let routes = pages.map((page, index) => {
       const routeComponent = () =>
         import ('../view' + page.url + '.vue')

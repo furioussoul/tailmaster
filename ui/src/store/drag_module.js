@@ -14,11 +14,11 @@ export default {
   namespaced: true,
   state: {
     dragElement: null,//当前被拖拽的元素
-    soul: null,//组件树
-    originSoul:null,
+    soul: null,//展示用的组件树
+    originSoul:null,//初始化soul
+    pageSoul: {},//对应路由的soul
     showEditorPanel: false,
-    editSoul: null,
-    pageSoul: {}
+    editSoul: null
   },
   getters: {
     appSoul({appSoul}){
@@ -39,6 +39,7 @@ export default {
   },
   mutations: {
     changeSoul(state, pagePath){
+
       if (!state.pageSoul[pagePath]) {
         const soulCopy = deepCopy(state.originSoul)
         state.pageSoul[pagePath] = soulCopy

@@ -175,7 +175,6 @@
     mapGetters,
     mapMutations
   } from 'vuex'
-  import Render from '../core/render'
 
   export default {
     name: "AppFrame",
@@ -183,9 +182,6 @@
       fullPath: [String],
       totalMenu: [Array],
       userInfo: [Object]
-    },
-    components: {
-      Render
     },
     data() {
       return {
@@ -222,7 +218,7 @@
       }
     },
     methods: {
-      ...mapMutations('dragModule',['changeSoul']),
+      ...mapMutations('dragModule', ['changeSoul']),
       toggleMenu() {
         this.show = !this.show;
         window.setTimeout(function () {
@@ -287,7 +283,9 @@
        }
        })
        }*/
-
+      this.totalMenu.forEach(menu=>{
+          menu.url = '/esview/assemble/index' + menu.url
+      })
       this.routes = getPages(this.totalMenu);
       initRouter(this.routes, true);
       this.setLayout(this.fullPath);
