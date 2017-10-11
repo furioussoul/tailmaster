@@ -53,6 +53,7 @@ export function initRouter(pages, assemblePage) {
       }
     })
     router.addRoutes(routerCache)
+    router.routers =routes
     return
   }
 
@@ -68,4 +69,5 @@ export function initRouter(pages, assemblePage) {
   )
   routerCache = routes
   router.addRoutes(routes)
+  router.routers =routes
 }

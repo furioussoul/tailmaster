@@ -265,27 +265,6 @@ export default function initAppConstructor(config) {
       }
     },
     created() {
-      // verifyToken(appApi);
-
-      /*    //get menus from server
-       this.$http.get(appApi.menu).then(res=> {
-       res = res.body;
-       if (res.code === 10000) {
-       this.totalMenu = res.data;
-       this.routes = getPages(this.totalMenu);
-       initRouter(this.routes);
-       this.setLayout(this.$route.fullPath);
-       }
-       })
-
-       //get userInfo from server
-       this.$http.get(appApi.info).then(res=> {
-       res = res.body;
-       if (res.code === 10000) {
-       this.userInfo = res.data;
-       }
-       })
-       }*/
       let res = {
         "code": 10000,
         "msg": "ok",
