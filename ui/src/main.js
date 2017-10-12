@@ -12,6 +12,7 @@ import './style/index.less'
 import directive from './directive/d_drop'
 import Login from './view/esview/login.vue'
 import RenderApp from './view/esview/render_app.vue'
+import esview from './external'
 
 Vue.dev = true
 
@@ -44,6 +45,8 @@ const app = new Vue({
         return h(manage)
       case 'app':
         return h(RenderApp)
+      case 'test':
+        return h(esview.render('appName','token'))
     }
   }
 })

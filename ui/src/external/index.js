@@ -33,5 +33,8 @@ function addRenderFn(soul) {
   })
 }
 
-module.exports = Object.assign({}, {addConfig,render});   // eslint-disable-line no-undef
+export default{
+  addConfig,
+  render
+}   // eslint-disable-line no-undef
 

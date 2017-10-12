@@ -144,7 +144,6 @@
       }
     },
     mounted(){
-
       getControlList.call(this, (data) => {
         this.classes[0].controls = []
         let controlConfigs = []
