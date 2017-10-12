@@ -1,31 +1,59 @@
 <template>
+  <div>
+    <render :soul="soul"></render>
+  </div>
 </template>
 <script>
+
+  import esview from '../../dist/client/esview.min'
+
+  import {
+    findSoul
+  } from '../helper/soul_helper'
+  import {
+    getConfig
+  } from '../helper/code_helper'
+
+  import Render from '../core/render'
+
+  import {
+    mapGetters,
+    mapMutations
+  } from 'vuex'
+  import dropDirective from '../directive/d_drop'
+  import store from '../store'
+  import Editor from '../component/editor.vue'
+  import {
+    getControlList
+  } from  '../resource/develop_resource'
+  import {
+    copyProperties
+  }from '../util/assist'
+
   export default{
     name: 'Test',
+    components:{
+      render
+    },
+    mounted(){
+        console.log(esview)
+      getControlList.call(this, (data) => {
+        let controlConfigs = []
+        data.forEach(control => {
+          let controlConfig = getConfig(control.code);
+          controlConfigs.push(controlConfig)
+        })
+
+        let dropPanelSoul = findSoul(100, controlConfigs)
+        let appFrame = findSoul(105, controlConfigs)
+        appFrame.children.push(dropPanelSoul)
+
+        this.soul = appFrame
+      })
+    },
     data(){
       return {
-        props: {
-          name: 'Row',
-          nickname: '横',
-          desc: '描述',
-          leaf: [2],
-          model: {
-            ex: {
-              name: 'width',
-              type: 'text',
-              def: 'primary',
-              desc: '宽度'
-            }
-          },
-          script: function(eventCenter){
-
-          },
-          render: function (createElement) {
-
-            return ``;
-          }
-        }
+        soul:null
       }
     }
   }

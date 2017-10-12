@@ -106,18 +106,14 @@
 
   import {
     verifyToken
-  } from '../util/assist'
+  } from '../../util/assist'
   import {
-    getCookie,
     getBreadcrumb,
     getPages,
-    initRouter,
-    routerStore
+    initRouter
   } from "./app_frame";
-  import {
-    mapGetters,
-    mapMutations
-  } from 'vuex'
+  import esview from '../index'
+  const store = esview.clientConfig.store
 
   export default {
     name: "AppFrame",
@@ -139,15 +135,15 @@
     },
     computed: {
       title() {
-        const path = routerStore.state.RouteModule.path,
+        const path = store.state.routerModule.path,
           target = this.pages.find(function (e, i) {
             return e.url === path;
           });
         return target ? target.title : '';
       },
       path() {
-        const path = routerStore.state.RouteModule.path;
-        this.changeSoul(path)
+        const path = store.state.routerModule.path;
+        store.commit('soulModule/changeSoul',path)
         return getBreadcrumb(this.totalMenu, path);
       }
     },
@@ -160,7 +156,6 @@
       }
     },
     methods: {
-      ...mapMutations('dragModule', ['changeSoul']),
       toggleMenu() {
         this.show = !this.show;
         window.setTimeout(function () {
@@ -206,15 +201,6 @@
     created() {
       verifyToken();
 
-      this.totalMenu.forEach(menu => {
-        menu.url = '/esview/assemble/index' + menu.url
-        menu.subMenuList.forEach(smenu => {
-          smenu.url = '/esview/assemble/index' + smenu.url
-          smenu.subMenuList.forEach(ssmenu => {
-            ssmenu.url = '/esview/assemble/index' + ssmenu.url
-          })
-        })
-      })
       this.pages = getPages(this.totalMenu);
       initRouter(this.pages, true);
       this.setLayout(this.fullPath);

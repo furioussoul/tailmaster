@@ -1,4 +1,4 @@
-import AppFrame from './app_frame.vue'
+import AppFrame from '../external/component/app_frame.vue'
 import Control from './control.vue'
 import Drop from './drop.vue'
 import DropPanel from './drop_panel.vue'

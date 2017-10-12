@@ -1,32 +1,7 @@
-import Render from '../core/render'
-import Vue from "vue";
-import Vuex from "vuex";
-import Sync from "vuex-router-sync";
-import {router} from "../plugin/router";
-import {clientConfig} from '../external'
+import Render from '../../core/render'
+import esview from '../index'
 
-Vue.use(Vuex);
-let routerStore = new Vuex.Store({
-  state: {} // 把router的状态同步到state对象
-});
-
-Sync.sync(routerStore, router, {
-  moduleName: 'RouteModule'
-});
-
-/**
- * 获取浏览器内的cookie
- * @param name cookie名称
- * @returns {*}
- */
-function getCookie(name) {
-  const reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-  let arr;
-  if (arr = document.cookie.match(reg)) {
-    return decodeURIComponent(arr[2]);
-  }
-  return null;
-}
+let clientConfig = esview.clientConfig
 
 /**
  * 获取面包屑
@@ -77,39 +52,22 @@ function getPages(menus) {
   }
   return pages;
 }
-/**
- * pages {array} 菜单
- */
 
 function initRouter(pages, assemblePage) {
   let router = clientConfig.router;
 
   if (assemblePage) {
 
-    let routes = pages.map((page, index) => {
-      return {
-        path: '/test/child2',
-        component: Render
-      }
-    });
-
-    router.routers.forEach(router => {
-      if (router.path.indexOf('assemble/index') > -1) {
-        debugger
-        router.children = [].concat(routes)
-      }
-    });
 
     return
   }
 
-
-  //esview的路由
+  //router configuration of client app
   let routes = pages.map((page, index) => {
-      let routeComponent;
+
+    //.vue file has higher priority
       try {
-        routeComponent = () =>
-          import ('../view' + page.url + '.vue');
+        let routeComponent = () => import ('../view' + page.url + '.vue');
 
         return {
           path: page.url,
@@ -117,21 +75,21 @@ function initRouter(pages, assemblePage) {
         }
 
       } catch (e) {
+        //use esview page if cant load .vue file by router url
         return {
           path: page.url,
           component: Render
         }
       }
+
     }
-  );
+  )
+
   router.addRoutes(routes);
-  router.routers =routes
 }
 
 export {
-  getCookie,
   getBreadcrumb,
   getPages,
-  initRouter,
-  routerStore
+  initRouter
 }

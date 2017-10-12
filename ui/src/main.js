@@ -12,9 +12,9 @@ import './style/index.less'
 import directive from './directive/d_drop'
 import Login from './view/esview/login.vue'
 import RenderApp from './view/esview/render_app.vue'
-import {option} from '../src/external'
+import esview from '../src/external'
 
-option({
+esview.option({
   router
 })
 
