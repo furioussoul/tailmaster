@@ -39,6 +39,9 @@ export default {
   },
   mutations: {
     changeSoul(state, pagePath){
+      if (!pagePath) {
+        pagePath = decodeURIComponent('')
+      }
       if (!state.pageSoul[pagePath]) {
         const soulCopy = deepCopy(state.originSoul)
         state.pageSoul[pagePath] = soulCopy
@@ -76,5 +79,9 @@ export default {
       state.showEditorPanel = false
     }
   },
-  actions: {}
+  actions: {
+    savePageSoul({state}){
+      localStorage.setItem('pageSoul', JSON.stringify(state.pageSoul))
+    }
+  }
 }

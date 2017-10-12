@@ -144,6 +144,10 @@
       }
     },
     mounted(){
+      setInterval(() => {
+        store.dispatch('dragModule/savePageSoul')
+        console.log('save')
+      }, 1000)
 
       getControlList.call(this, (data) => {
         this.classes[0].controls = []
