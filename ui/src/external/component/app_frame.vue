@@ -112,6 +112,7 @@
     getPages,
     initRouter
   } from "./app_frame";
+
   import esview from '../index'
   const store = esview.clientConfig.store
 
@@ -143,7 +144,6 @@
       },
       path() {
         const path = store.state.routerModule.path;
-        store.commit('soulModule/changeSoul',path)
         return getBreadcrumb(this.totalMenu, path);
       }
     },
@@ -200,7 +200,6 @@
     },
     created() {
       verifyToken();
-
       this.pages = getPages(this.totalMenu);
       initRouter(this.pages, true);
       this.setLayout(this.fullPath);

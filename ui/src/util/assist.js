@@ -7,6 +7,21 @@
 import Vue from 'vue';
 const isServer = Vue.prototype.$isServer;
 
+export function getQueryParam(name) {
+  let hash = window.location.hash.substring(1),
+    paramIndex = hash.indexOf('?') + 1,
+    query = hash.substring(paramIndex, hash.length),
+    lets = query.split("&");
+
+  for (let i = 0; i < lets.length; i++) {
+    let pair = lets[i].split("=");
+    if (pair[0] === name) {
+      return pair[1];
+    }
+  }
+  return (false);
+}
+
 //拷贝一层
 export function copyProperties(target,source) {
   for(let key in source){

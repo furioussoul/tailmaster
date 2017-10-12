@@ -1,3 +1,8 @@
+import{
+  getQueryParam
+} from '../util/assist'
+import store from '../store'
+
 export default function initAppConstructor(config) {
 
   const appTemplate = `
@@ -183,7 +188,6 @@ export default function initAppConstructor(config) {
     return pages;
   }
 
-
   return {
     name: "app",
     template: appTemplate,
@@ -265,6 +269,9 @@ export default function initAppConstructor(config) {
       }
     },
     created() {
+      window.addEventListener('popstate', function (event) {
+        store.commit('dragModule/changeSoul', getQueryParam('pageId'))
+      });
       let res = {
         "code": 10000,
         "msg": "ok",

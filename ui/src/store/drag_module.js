@@ -39,7 +39,6 @@ export default {
   },
   mutations: {
     changeSoul(state, pagePath){
-
       if (!state.pageSoul[pagePath]) {
         const soulCopy = deepCopy(state.originSoul)
         state.pageSoul[pagePath] = soulCopy

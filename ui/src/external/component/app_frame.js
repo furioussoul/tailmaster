@@ -1,5 +1,5 @@
-import Render from '../../core/render'
 import esview from '../index'
+import renderVue from './render.vue'
 
 let clientConfig = esview.clientConfig
 
@@ -57,7 +57,9 @@ function initRouter(pages, assemblePage) {
   let router = clientConfig.router;
 
   if (assemblePage) {
-
+    let routes = pages.map((page, index) => {
+      page.url = '/esview/assemble/index?pageId=' + decodeURIComponent(page.url)
+    })
 
     return
   }
@@ -65,7 +67,7 @@ function initRouter(pages, assemblePage) {
   //router configuration of client app
   let routes = pages.map((page, index) => {
 
-    //.vue file has higher priority
+      //.vue file has higher priority
       try {
         let routeComponent = () => import ('../view' + page.url + '.vue');
 
@@ -78,7 +80,7 @@ function initRouter(pages, assemblePage) {
         //use esview page if cant load .vue file by router url
         return {
           path: page.url,
-          component: Render
+          component: renderVue
         }
       }
 

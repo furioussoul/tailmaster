@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import store from './store'
-import eventCenter from '../core/event'
+import render from './component/render.vue'
 
 import {
   appFrame
@@ -17,22 +17,7 @@ function option(option) {
 
 Vue.component('AppFrame', appFrame);
 
-
-function render(h, {
-  token,
-  appName,
-  totalMenu,
-  userInfo
-}) {
-  h.store = store
-  h.eventCenter = eventCenter
-  //get appSoul,menu by token and appName
-  let appSoul
-  return appSoul.render(h, {
-    totalMenu,
-    userInfo
-  })
-}
+// 在这查 appSoul,放到store
 
 export default {
   option,
