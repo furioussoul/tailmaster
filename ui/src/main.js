@@ -12,7 +12,7 @@ import './style/index.less'
 import directive from './directive/d_drop'
 import Login from './view/esview/login.vue'
 import RenderApp from './view/esview/render_app.vue'
-import esview from './external'
+import esview from 'esview'
 
 Vue.dev = true
 
