@@ -2,19 +2,21 @@
   <Render :soul="soul"></Render>
 </template>
 <script>
-  import render from './render'
-  import {
-    mapGetters,
-    mapMutations
-  } from 'vuex'
+  import Render from './render'
+  import store from '../store'
 
   export default{
     name: 'renderVue',
     components: {
-      render
+      Render
     },
-    computed: {
-      ...mapGetters('soulModule', ['soul'])
+    data() {
+        return {
+          soul:store.getters['soulModule/soul']
+        }
     },
+    mounted(){
+      console.log(this.soul)
+    }
   }
 </script>

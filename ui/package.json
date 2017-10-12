@@ -1,13 +1,25 @@
 {
-  "name": "live-chat",
-  "version": "0.0.0",
-  "private": true,
+  "name": "esview",
+  "version": "0.0.1",
+  "title": "esview",
+  "main": "dist/client/esview.min.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "dist:prod": "webpack --config build/webpack.dist.prod.conf.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/furioussoul/soul-esview.git"
+  },
+  "author": "Furioussoul",
+  "license": "MIT",
   "dependencies": {
     "iview": "^2.4.0",
     "vue": "^2.4.4",

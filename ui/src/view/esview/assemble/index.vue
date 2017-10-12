@@ -128,6 +128,7 @@
           this.isPreview = !this.isPreview
         } else if (a === '6') {
 
+
             store.dispatch('dragModule/savePageSoul')
 
         } else if (a === '9') {

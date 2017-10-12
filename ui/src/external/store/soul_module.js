@@ -31,6 +31,9 @@ export default {
     setSoul(state, soul){
       state.originSoul = deepCopy(soul)
       state.soul = soul
+    },
+    setPageSoul(state, pageSoul){
+      state.pageSoul = pageSoul
     }
   },
   actions: {}

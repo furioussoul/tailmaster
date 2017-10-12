@@ -1,7 +1,9 @@
-import esview from '../index'
 import renderVue from './render.vue'
+import {
+  getConfig
+} from '../config'
 
-let clientConfig = esview.clientConfig
+let router = getConfig('router')
 
 /**
  * 获取面包屑
@@ -54,7 +56,6 @@ function getPages(menus) {
 }
 
 function initRouter(pages, assemblePage) {
-  let router = clientConfig.router;
 
   if (assemblePage) {
     let routes = pages.map((page, index) => {

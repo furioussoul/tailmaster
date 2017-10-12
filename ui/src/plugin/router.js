@@ -12,7 +12,7 @@ export const router = new Router({
   base: '/',
   routes: [
     {
-      path: '/test',
+      path: '/aa',
       component: () =>
         import ('../view/test.vue')
     }

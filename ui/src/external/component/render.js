@@ -1,5 +1,6 @@
 import store from '../store'
 import eventCenter from '../../core/event'
+
 export default {
   name: 'Render',
   props: {
