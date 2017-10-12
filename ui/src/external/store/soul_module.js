@@ -6,7 +6,6 @@ export default {
   namespaced: true,
   state: {
     soul: null,//展示用的组件树
-    originSoul:null,//初始化soul
     pageSoul: {},//对应路由的soul
   },
   getters: {
@@ -16,17 +15,12 @@ export default {
   },
   mutations: {
     changeSoul(state, pagePath){
-      if(!pagePath){
-        pagePath = ''
+      let soul
+      if (pagePath === '/' && !state.pageSoul[pagePath]) {
+        soul = state.pageSoul['']
       }
-      if (!state.pageSoul[pagePath]) {
-        const soulCopy = deepCopy(state.originSoul)
-        state.pageSoul[pagePath] = soulCopy
-        state.soul = soulCopy
-        return
-      }
-      state.soul = state.pageSoul[pagePath]
-      this.$router.push(path)
+      soul = state.pageSoul[pagePath]
+      if (soul) state.soul = soul
     },
     setSoul(state, soul){
       state.originSoul = deepCopy(soul)

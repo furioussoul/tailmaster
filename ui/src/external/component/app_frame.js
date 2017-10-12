@@ -3,8 +3,6 @@ import {
   getConfig
 } from '../config'
 
-let router = getConfig('router')
-
 /**
  * 获取面包屑
  * @param menus 菜单
@@ -55,36 +53,25 @@ function getPages(menus) {
   return pages;
 }
 
-function initRouter(pages, assemblePage) {
+function initRouter(pages) {
 
-  if (assemblePage) {
+  let router = getConfig('router')
+  let type = getConfig('type')
+
+  if (type === 'assemble') {
     let routes = pages.map((page, index) => {
-      page.url = '/esview/assemble/index?pageId=' + decodeURIComponent(page.url)
+      page.url = '/esview/assemble/index?pageId=' + encodeURIComponent(page.url)
     })
-
     return
   }
-
   //router configuration of client app
   let routes = pages.map((page, index) => {
 
       //.vue file has higher priority
-      try {
-        let routeComponent = () => import ('../view' + page.url + '.vue');
-
-        return {
-          path: page.url,
-          component: routeComponent
-        }
-
-      } catch (e) {
-        //use esview page if cant load .vue file by router url
-        return {
-          path: page.url,
-          component: renderVue
-        }
+      return {
+        path: page.url,
+        component: renderVue
       }
-
     }
   )
 

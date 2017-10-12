@@ -5,8 +5,6 @@
 </template>
 <script>
 
-  import esview from '../../dist/client/esview.min'
-
   import {
     findSoul
   } from '../helper/soul_helper'
@@ -36,7 +34,6 @@
       render
     },
     mounted(){
-        console.log(esview)
       getControlList.call(this, (data) => {
         let controlConfigs = []
         data.forEach(control => {

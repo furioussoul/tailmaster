@@ -12,7 +12,10 @@ import './style/index.less'
 import directive from './directive/d_drop'
 import Login from './view/esview/login.vue'
 import RenderApp from './view/esview/render_app.vue'
-import esview from 'esview'
+import esview from './external'
+
+esview.addConfig('router',router)
+// esview.addConfig('type','assemble')
 
 Vue.dev = true
 

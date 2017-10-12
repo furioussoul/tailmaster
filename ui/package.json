@@ -1,6 +1,6 @@
 {
   "name": "esview",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "title": "esview",
   "main": "dist/client/esview.min.js",
   "files": [
@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "cookie-parser": "~1.4.3",
-    "esview": "^0.0.2",
+    "esview": "^0.0.3",
     "express-http-proxy": "^1.0.7",
     "iview": "^2.4.0",
     "js-md5": "^0.4.2",

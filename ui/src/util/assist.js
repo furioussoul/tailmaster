@@ -19,7 +19,7 @@ export function getQueryParam(name) {
       return pair[1];
     }
   }
-  return (false);
+  return '';
 }
 
 //拷贝一层

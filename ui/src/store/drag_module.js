@@ -8,7 +8,8 @@ import {
   isPlain
 }from '../util/assist'
 import {
-  deepCopy
+  deepCopy,
+  getQueryParam
 } from '../util/assist'
 export default {
   namespaced: true,
@@ -39,16 +40,14 @@ export default {
   },
   mutations: {
     changeSoul(state, pagePath){
-      if (!pagePath) {
-        pagePath = decodeURIComponent('')
-      }
-      if (!state.pageSoul[pagePath]) {
+      let path = decodeURIComponent(getQueryParam('pageId'))
+      if (!state.pageSoul[path]) {
         const soulCopy = deepCopy(state.originSoul)
-        state.pageSoul[pagePath] = soulCopy
+        state.pageSoul[path] = soulCopy
         state.soul = soulCopy
         return
       }
-      state.soul = state.pageSoul[pagePath]
+      state.soul = state.pageSoul[path]
     },
     setAppSoul(state, appSoul){
       state.appSoul = appSoul

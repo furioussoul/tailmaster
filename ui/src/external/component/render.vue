@@ -10,10 +10,10 @@
     components: {
       Render
     },
-    data() {
-        return {
-          soul:store.getters['soulModule/soul']
-        }
+    computed:{
+      soul(){
+          return store.getters['soulModule/soul']
+      }
     },
     mounted(){
       console.log(this.soul)
