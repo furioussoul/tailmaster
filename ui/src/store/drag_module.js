@@ -58,7 +58,7 @@ export default {
     },
     setSoul(state, soul){
       state.originSoul = deepCopy(soul)
-      state.soul = soul
+      state.soul = state.pageSoul[''] = soul
     },
     showEditorPanel(state, e){
 

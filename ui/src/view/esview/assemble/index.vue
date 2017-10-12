@@ -14,7 +14,7 @@
         </MenuItem>
         <MenuItem name="6">
           <Icon type="ios-keypad"></Icon>
-          发布
+          保存
         </MenuItem>
         <MenuItem name="9">
           <Icon type="ios-keypad"></Icon>
@@ -127,9 +127,8 @@
         if (a === '2') {
           this.isPreview = !this.isPreview
         } else if (a === '6') {
-//          this.final()
-//          saveSoul()
-          this.changePage('app')
+
+            store.dispatch('dragModule/savePageSoul')
 
         } else if (a === '9') {
           undo()
@@ -144,10 +143,6 @@
       }
     },
     mounted(){
-      setInterval(() => {
-        store.dispatch('dragModule/savePageSoul')
-        console.log('save')
-      }, 1000)
 
       getControlList.call(this, (data) => {
         this.classes[0].controls = []
