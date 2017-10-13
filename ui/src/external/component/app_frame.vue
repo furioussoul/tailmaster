@@ -563,6 +563,8 @@
     created() {
       verifyToken();
       window.addEventListener('popstate', function (event) {
+
+
         store.commit('soulModule/changeSoul', window.location.hash.substring(1,window.location.hash.length  ))
       });
       this.pages = getPages(this.totalMenu);
