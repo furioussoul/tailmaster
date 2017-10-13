@@ -273,7 +273,6 @@ export default function initAppConstructor(config) {
     },
     created() {
       window.addEventListener('popstate', function (event) {
-        debugger
         store.commit('dragModule/changeSoul', getQueryParam('pageId'))
       });
       let res = {

@@ -1,5 +1,4 @@
 <template>
-  <div class="layout-content__container">
     <Row>
       <i-col span="24">
         <Card>
@@ -40,7 +39,6 @@
         </Card>
       </i-col>
     </Row>
-  </div>
 </template>
 <script>
   import {

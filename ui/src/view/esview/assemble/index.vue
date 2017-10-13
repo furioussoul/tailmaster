@@ -1,5 +1,9 @@
 <template>
-  <div class="layout-content__container">
+  <div>
+
+    <div class="edit_layer" :style="editLayer.style">
+      {{editLayer.name}}
+    </div>
 
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
@@ -108,7 +112,7 @@
       }
     },
     computed: {
-      ...mapGetters('dragModule', ['soul', 'editSoul'])
+      ...mapGetters('dragModule', ['soul', 'editSoul','editLayer'])
     },
     methods: {
       ...mapMutations('dragModule',
@@ -153,15 +157,25 @@
           this.classes[0].controls.push(controlConfigs[i])
         }
 
-        store.commit('dragModule/setControlConfigs',controlConfigs)
+        store.commit('dragModule/setControlConfigs', controlConfigs)
 
-        reload(null ,controlConfigs)
+        reload(null, controlConfigs)
       })
     }
   }
 </script>
 
 <style scoped>
+
+  .edit_layer{
+    display: none;
+    opacity: 0.5;
+    background: #eee;
+    border: 1px dashed #999;
+    pointer-events: none;
+    z-index: 10000000;
+    position: fixed;
+  }
 
   .index-layout-logo {
     width: 100px;
@@ -181,10 +195,8 @@
 
   .index-layout-content {
     min-height: 200px;
-    margin: 5px;
     overflow: hidden;
     background: #fff;
-    border-radius: 4px;
   }
 
   .action_bar {

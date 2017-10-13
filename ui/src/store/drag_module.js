@@ -16,13 +16,17 @@ export default {
   state: {
     dragElement: null,//当前被拖拽的元素
     soul: null,//展示用的组件树
-    originSoul:null,//初始化soul
+    originSoul: null,//初始化soul
     pageSoul: {},//对应路由的soul
     showEditorPanel: false,
     editSoul: null,
-    controlConfigs:null
+    controlConfigs: null,
+    editLayer: {}
   },
   getters: {
+    editLayer({editLayer}){
+      return editLayer
+    },
     controlConfigs({controlConfigs}){
       return controlConfigs
     },
@@ -43,6 +47,26 @@ export default {
     }
   },
   mutations: {
+    clearEditLayer(state){
+      state.editLayer= {
+        style: {
+          display:'none'
+        }
+      }
+    },
+    setEditLayer(state, bind){
+      let rect = bind.el.getBoundingClientRect();
+      state.editLayer = {
+        style: {
+          left: rect.left  + 'px',
+          top: rect.top  + 'px',
+          width: rect.width  + 'px',
+          height: rect.height + 'px',
+          display:'block'
+        },
+        name: bind.binding.value
+      }
+    },
     changeSoul(state, pagePath){
       let path = decodeURIComponent(getQueryParam('pageId'))
       if (!state.pageSoul[path]) {
@@ -53,7 +77,7 @@ export default {
       }
       state.soul = state.pageSoul[path]
     },
-    setControlConfigs(state,controlConfigs){
+    setControlConfigs(state, controlConfigs){
       state.controlConfigs = controlConfigs
     },
     setAppSoul(state, appSoul){
