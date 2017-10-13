@@ -5,20 +5,20 @@
 
       <div class="index-layout-nav">
         <MenuItem name="2">
-          <Icon type="ios-keypad"></Icon>
-          预览
+          <Icon type="ios-eye"></Icon>
+          preview
         </MenuItem>
         <MenuItem name="6">
-          <Icon type="ios-keypad"></Icon>
-          保存
+          <Icon type="document-text"></Icon>
+          save
         </MenuItem>
         <MenuItem name="9">
-          <Icon type="ios-keypad"></Icon>
-          撤销
+          <Icon type="android-arrow-back"></Icon>
+          undo
         </MenuItem>
         <MenuItem name="13">
-          <Icon type="ios-keypad"></Icon>
-          恢复
+          <Icon type="android-arrow-forward"></Icon>
+          redo
         </MenuItem>
       </div>
     </Menu>

@@ -93,8 +93,13 @@ function markDrop(drop, mark) {
 }
 
 function interceptDrop(saveInfo) {
-  if(saveInfo.drag.name === 'Frame'){
+  if(saveInfo.drag.type === 'AppFrame'){
     let dropPanelSoul = findSoul(100, store.getters['dragModule/controlConfigs'])
+    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
+  }else if(saveInfo.drag.type === 'WrapCard'){
+    let dropPanelSoul = findSoul(100, store.getters['dragModule/controlConfigs'])
+    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
+    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
     saveInfo.drag.children.push(deepCopy(dropPanelSoul))
   }
 }

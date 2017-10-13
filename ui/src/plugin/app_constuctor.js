@@ -32,7 +32,7 @@ export default function initAppConstructor(config) {
                           </Menu-item>
                           <Submenu :name="group.id" v-else :key="group.id">
                             <template slot="title">
-                              <Icon type="android-apps"></Icon>
+                              <Icon :type="group.icon"></Icon>
                               {{group.title}}
                             </template>
                             <Menu-item :name="child.id"
@@ -295,6 +295,7 @@ export default function initAppConstructor(config) {
                 "url": "/esview/assemble",
                 "orderNo": 1,
                 "mtype": 0,
+                "icon":'wrench',
                 "hasPermisson": 1,
                 "subMenuList": [
                   {
@@ -316,6 +317,7 @@ export default function initAppConstructor(config) {
                 "url": "/esview/develop",
                 "orderNo": 1,
                 "mtype": 0,
+                "icon":'upload',
                 "hasPermisson": 1,
                 "subMenuList": [
                   {

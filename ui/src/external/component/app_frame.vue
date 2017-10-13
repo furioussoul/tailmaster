@@ -184,11 +184,12 @@
     color: #fff;
     font-size: 24px;
     font-weight: bold;
-    background-color: #f3f3f3;
+    background-color: #2d8cf0;
     text-align: center;
     border-right: 1px solid rgba(255, 255, 255, 0.7);
     transition: all .2s ease-in-out;
     cursor: pointer;
+    overflow: hidden;
   }
 
   .layout-header .layout-title:hover{
@@ -376,7 +377,7 @@
               </Menu-item>
               <Submenu :name="group.id" v-else :key="group.id">
                 <template slot="title">
-                  <Icon type="android-apps"></Icon>
+                  <Icon :type="group.icon"></Icon>
                   {{group.title}}
                 </template>
                 <Menu-item :name="child.id"
@@ -436,7 +437,7 @@
           </h1>
         </div>
 
-        <slot name="router-view">
+        <slot name="drop-panel">
         </slot>
 
       </div>
@@ -567,6 +568,10 @@
       this.pages = getPages(this.totalMenu);
       initRouter(this.pages);
       this.setLayout(this.fullPath);
+    },
+    mounted(){
+      console.log(this.$slots)
+      console.log(this.$scopedSlots)
     }
   }
 </script>
