@@ -195,12 +195,19 @@ body {
   color: #fff;
   font-size: 24px;
   font-weight: bold;
-  background-color: @btn-primary-bg;
+  background-color: #f3f3f3;
   text-align: center;
   border-right: 1px solid rgba(255, 255, 255, 0.7);
+  transition: all .2s ease-in-out;
+  cursor: pointer;
 }
 
-.layout-title img {
+.layout-header .layout-title:hover{
+  color: #fff !important;
+  background-color: rgb(64, 165, 226);
+}
+
+.layout-header .layout-title img {
   height: 50px;
   vertical-align: middle;
   transform:scale(2);//设置缩放比例
@@ -221,16 +228,13 @@ body {
   font-size: 20px;
   text-align: center;
   color: #fff;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
 }
 
 .layout-header .layout-round-icon:hover {
   color: #fff !important;
-  background-color: rgb(27, 152, 128);
-}
-
-.layout-header .ivu-menu > * {
-  /*modified*/
-  /*border-right: 1px solid #eee*/
+  background-color: rgb(64, 165, 226);
 }
 
 .layout-header.layout-header-full {
@@ -249,7 +253,7 @@ body {
 
 .layout-header .ivu-menu-item-selected, .layout-header .ivu-menu-item-selected:hover, .layout-header .ivu-menu > .ivu-menu-item:hover {
   color: #fff !important;
-  background-color: rgb(27, 152, 128);
+  background-color: rgb(64, 165, 226);
 }
 
 .layout-header-left {
@@ -260,19 +264,11 @@ body {
 }
 
 .layout-header .ivu-menu-dark {
-  /*modified*/
   background: @btn-primary-bg;
   height: 50px;
   line-height: 50px;
   font-size: 14px;
 
-}
-
-/*.layout-header .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item-active, .layout-header .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item:hover, .layout-header .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-submenu-active, .layout-header .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-submenu:hover, .layout-header .layout-round-icon:hover {
-    color: #1ab394
-}*/
-
-.layout-header .ivu-menu-dark .ivu-menu-item {
 }
 
 .layout-header-right {
@@ -283,11 +279,6 @@ body {
   align-items: center;
 }
 
-.layout-header-right > * {
-  /*modified*/
-  /*border-left: 1px solid #eee*/
-}
-
 .layout-header-right .ivu-menu-submenu, .layout-header-right .ivu-menu-item {
   padding: 0 12px;
   color: #fff !important;
@@ -296,7 +287,7 @@ body {
 
 .layout-header-right .ivu-menu-submenu:hover, .layout-header-right .ivu-menu-item:hover {
   color: #fff !important;
-  background-color: rgb(27, 152, 128);
+  background-color: rgb(64, 165, 226);
 }
 
 .layout-content {
@@ -335,10 +326,6 @@ body {
   right: 0;
   bottom: -55px;
   text-align: center;
-}
-
-.layout-header-right .ivu-poptip-body {
-  /*padding:0;*/
 }
 
 .layout-userinfo {

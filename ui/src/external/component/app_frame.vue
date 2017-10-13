@@ -1,4 +1,4 @@
-<style lang="less">
+<style scoped lang="less">
   /*主页样式*/
 
   html, body {
@@ -12,7 +12,7 @@
   body {
     /*min-width: 1366px;*/
     overflow: auto;
-    background-color: #ecf0f5!important;
+    background-color: #ecf0f5 !important;
   }
 
   .clearfix() {
@@ -26,6 +26,9 @@
     }
   }
 
+  body {
+  }
+
   .page {
     margin: 15px;
   }
@@ -37,22 +40,28 @@
     padding: 50px 0 55px 220px;
     transition: all .3s
   }
+
   .slideleft-enter-active, .slideleft-leave-active {
     transition: transform .3s;
   }
+
   .slideleft-enter, .slideleft-leave-active {
     transform: translateX(-100%);
   }
+
   .slideView-enter-active {
     transition: all .5s ease-in;
   }
+
   .slideView-enter {
     /*transform: translate3d(0,100px,0);*/
-    opacity:.3;
+    opacity: .3;
   }
-  .layout-full-screen{
-    padding-left:0;
+
+  .layout-full-screen {
+    padding-left: 0;
   }
+
   .layout-left {
     position: absolute;
     left: 0;
@@ -62,82 +71,100 @@
     padding-top: 50px;
     z-index: 1
   }
+
   .layout-left .navigator {
     color: #4b646f;
     background: #1a2226;
     padding: 10px 25px 10px 15px;
     font-size: 12px;
   }
+
   .layout-left .ivu-menu-item {
-    padding: 0!important;
+    padding: 0 !important;
     line-height: 41px;
     overflow: hidden;
   }
+
   .layout-left .ivu-menu-item a {
     padding: 0 24px 0 40px;
   }
+
   .layout-left .ivu-menu-light {
     /*modified*/
     background: #222d32;
   }
+
   .layout-left .ivu-menu-submenu-title {
     font-weight: bold;
     padding-left: 15px;
   }
+
   .layout-left-menu .ivu-menu-light.ivu-menu-vertical .ivu-menu-opened {
     /*modified*/
     background: #2c3b41;
   }
+
   .layout-left-menu .ivu-menu-light.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title {
     /*modified*/
     color: #fff;
     background: #1e282c;
   }
+
   .layout-left-menu .ivu-menu-light.ivu-menu-vertical .ivu-menu-item:hover {
     /*modified*/
-    color: #fff!important;
-    background: transparent!important;
+    color: #fff !important;
+    background: transparent !important;
   }
+
   .layout-left-menu .ivu-menu-light.ivu-menu-vertical .ivu-menu-submenu-title:hover {
     /*modified*/
     color: #fff;
     background: #1e282c
   }
+
   .layout-left-menu {
     height: 100%;
     background: #222d32;
   }
+
   .layout-left-menu .ivu-menu-submenu > .ivu-menu {
     display: block !important;
     color: #a2acbd;
   }
+
   .layout-left-menu > .ivu-menu {
     height: 100%;
     overflow: auto;
     color: #a2acbd;
   }
+
   .layout-left-menu a {
     display: block;
     height: 100%;
     width: 100%;
     color: inherit;
   }
+
   .layout-left-menu .ivu-menu-submenu > .ivu-menu .ivu-menu-item {
     height: 0;
     transition: height .4s ease;
   }
+
   .layout-left-menu .ivu-menu-submenu.ivu-menu-opened > .ivu-menu .ivu-menu-item {
     height: 41px;
     color: #8aa4af;
   }
+
   .layout-left-menu .ivu-menu-submenu.ivu-menu-opened > .ivu-menu .ivu-menu-item:hover {
     color: #fff;
   }
+
   .ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
-    color: #fff!important;
+    color: #fff !important;
     border-right: 4px solid #1ab394;
     z-index: 2;
   }
+
   .layout-header {
     position: absolute;
     left: 0;
@@ -149,6 +176,7 @@
     transition: left .4s ease;
     z-index: 4
   }
+
   .layout-header .layout-title {
     float: left;
     line-height: 50px;
@@ -156,10 +184,24 @@
     color: #fff;
     font-size: 24px;
     font-weight: bold;
-    background-color: #2d8cf0;
+    background-color: #f3f3f3;
     text-align: center;
     border-right: 1px solid rgba(255, 255, 255, 0.7);
+    transition: all .2s ease-in-out;
+    cursor: pointer;
   }
+
+  .layout-header .layout-title:hover{
+    color: #fff !important;
+    background-color: rgb(64, 165, 226);
+  }
+
+  .layout-header .layout-title img {
+    height: 50px;
+    vertical-align: middle;
+    transform:scale(2);//设置缩放比例
+  }
+
   .layout-left .layout-logo {
     height: 50px;
     width: 220px;
@@ -167,6 +209,7 @@
     background-size: 140px;
     background-position: center;
   }
+
   .layout-header .layout-round-icon {
     float: left;
     line-height: 50px;
@@ -174,38 +217,42 @@
     font-size: 20px;
     text-align: center;
     color: #fff;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
   }
+
   .layout-header .layout-round-icon:hover {
-    color: #fff!important;
-    background-color: rgb(27, 152, 128);
+    color: #fff !important;
+    background-color: rgb(64, 165, 226);
   }
-  .layout-header .ivu-menu > * {
-    /*modified*/
-    /*border-right: 1px solid #eee*/
-  }
+
   .layout-header.layout-header-full {
     left: 0;
   }
+
   .layout-header .layout-nav-right {
     float: right;
     font-size: 16px;
   }
+
   .layout-header .ivu-menu > .ivu-menu-item {
     font-weight: bold;
     color: #fff;
   }
+
   .layout-header .ivu-menu-item-selected, .layout-header .ivu-menu-item-selected:hover, .layout-header .ivu-menu > .ivu-menu-item:hover {
-    color: #fff!important;
-    background-color: rgb(27, 152, 128);
+    color: #fff !important;
+    background-color: rgb(64, 165, 226);
   }
+
   .layout-header-left {
     float: left;
     height: 100%;
     display: flex;
     align-items: center;
   }
+
   .layout-header .ivu-menu-dark {
-    /*modified*/
     background: #2d8cf0;
     height: 50px;
     line-height: 50px;
@@ -213,12 +260,6 @@
 
   }
 
-  /*.layout-header .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item-active, .layout-header .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item:hover, .layout-header .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-submenu-active, .layout-header .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-submenu:hover, .layout-header .layout-round-icon:hover {
-      color: #1ab394
-  }*/
-
-  .layout-header .ivu-menu-dark .ivu-menu-item {
-  }
   .layout-header-right {
     float: right;
     height: 50px;
@@ -226,79 +267,83 @@
     display: flex;
     align-items: center;
   }
-  .layout-header-right > * {
-    /*modified*/
-    /*border-left: 1px solid #eee*/
-  }
+
   .layout-header-right .ivu-menu-submenu, .layout-header-right .ivu-menu-item {
     padding: 0 12px;
-    color: #fff!important;
-    height:50px;
+    color: #fff !important;
+    height: 50px;
   }
+
   .layout-header-right .ivu-menu-submenu:hover, .layout-header-right .ivu-menu-item:hover {
-    color: #fff!important;
-    background-color: rgb(27, 152, 128);
+    color: #fff !important;
+    background-color: rgb(64, 165, 226);
   }
+
   .layout-content {
     position: relative;
     width: 100%;
     height: 100%;
     min-height: 300px;
 
-    &__container{
+    &__container {
       border: 1px solid #d7dde4;
       background: #f5f7f9;
       margin-left: 15px;
     }
   }
-  .layout-scroll{
+
+  .layout-scroll {
     overflow: auto;
     width: 100%;
     height: 100%;
   }
+
   .layout-bread {
     .clearfix();
     margin: 15px 15px;
   }
-  .layout-bread h1{
+
+  .layout-bread h1 {
     font-size: 24px;
     font-weight: 400;
     line-height: 1.1;
   }
-  .layout-footer{
+
+  .layout-footer {
     position: absolute;
-    left:0;
-    right:0;
-    bottom:-55px;
+    left: 0;
+    right: 0;
+    bottom: -55px;
     text-align: center;
   }
-  .layout-header-right .ivu-poptip-body{
-    /*padding:0;*/
-  }
-  .layout-userinfo{
+
+  .layout-userinfo {
     /*background: #1ab394;*/
-    padding:10px 0;
+    padding: 10px 0;
     line-height: 25px;
     text-align: center;
   }
-  .layout-userinfo-depart{
-    font-size:17px;
+
+  .layout-userinfo-depart {
+    font-size: 17px;
 
   }
-  .layout-userinfo-name{
+
+  .layout-userinfo-name {
     font-size: 13px;
     /*line-height: 25px;*/
   }
-  .layout-userinfo-bar{
+
+  .layout-userinfo-bar {
     text-align: right;
-    padding-bottom:5px;
+    padding-bottom: 5px;
   }
 
-  .soul_form{
-    margin-bottom:10px;
+  .soul_form {
+    margin-bottom: 10px;
 
-    &__item{
-      &_inner{
+    &__item {
+      &_inner {
         width: 200px;
       }
     }
@@ -354,7 +399,7 @@
     <div class="layout-header" :class="{'layout-header-full':false}" cloak>
       <i-menu mode="horizontal" v-cloak :active-name="activedFirstMenu" theme="dark" @on-select="selectMenu"
               ref="firstMenu">
-        <div class="layout-title">发布完成的app</div>
+        <div class="layout-title" @click='home'><img src="../../../static/img/logo.png"></img></div>
         <Icon type="navicon-round" class="layout-round-icon" @click.native="toggleMenu"></Icon>
 
         <div class="layout-header-right" v-cloak>
@@ -469,6 +514,9 @@
       }
     },
     methods: {
+      home(){
+        this.$router.push('/')
+      },
       toggleMenu() {
         this.show = !this.show;
         window.setTimeout(function () {
