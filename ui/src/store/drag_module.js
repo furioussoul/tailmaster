@@ -19,9 +19,13 @@ export default {
     originSoul:null,//初始化soul
     pageSoul: {},//对应路由的soul
     showEditorPanel: false,
-    editSoul: null
+    editSoul: null,
+    controlConfigs:null
   },
   getters: {
+    controlConfigs({controlConfigs}){
+      return controlConfigs
+    },
     appSoul({appSoul}){
       return appSoul
     },
@@ -48,6 +52,9 @@ export default {
         return
       }
       state.soul = state.pageSoul[path]
+    },
+    setControlConfigs(state,controlConfigs){
+      state.controlConfigs = controlConfigs
     },
     setAppSoul(state, appSoul){
       state.appSoul = appSoul

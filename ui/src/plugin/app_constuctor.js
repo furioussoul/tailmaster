@@ -55,7 +55,7 @@ export default function initAppConstructor(config) {
                 <div class="layout-header" :class="{\'layout-header-full\':false}" cloak>
                   <i-menu mode="horizontal" v-cloak :active-name="activedFirstMenu" theme="dark" @on-select="selectMenu"
                           ref="firstMenu">
-                    <div class="layout-title">soul-esview</div>
+                    <div class="layout-title"><img src="../../static/img/logo.png"></img></div>
                     <Icon type="navicon-round" class="layout-round-icon" @click.native="toggleMenu"></Icon>
                     
                     <div class="layout-header-right" v-cloak>

@@ -10,8 +10,12 @@ import {
   deepCopy
 } from '../util/assist'
 import {
-  generateUid
+  generateUid,
+  findSoul
 } from '../helper/soul_helper'
+import {
+  drop
+} from '../helper/user_operation'
 
 function onDragStart(e) {
   store.commit('dragModule/setDragElement', e.target)
@@ -59,7 +63,6 @@ function validateDrop(drag, drop) {
 
   if (!drag) {
     return false
-
   }
 
   if(drag.controlConfig.allowPlace){
@@ -89,6 +92,13 @@ function markDrop(drop, mark) {
   }
 }
 
+function interceptDrop(saveInfo) {
+  if(saveInfo.drag.name === 'Frame'){
+    let dropPanelSoul = findSoul(100, store.getters['dragModule/controlConfigs'])
+    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
+  }
+}
+
 function onDrop(e) {
   e.stopPropagation();
   e.preventDefault();
@@ -102,9 +112,15 @@ function onDrop(e) {
   let uid = generateUid()
   let copy = deepCopy(drag.controlConfig)
   copy.uid = uid
-  this.controlConfig.children.push(copy)
 
-  //todo save for undo
+  const saveInfo = {
+    drag:copy,
+      drop:this.controlConfig
+  }
+
+  interceptDrop(saveInfo)
+
+  drop(saveInfo)
 
   markDrop(this,false)
   return true;

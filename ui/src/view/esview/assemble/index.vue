@@ -1,13 +1,9 @@
 <template>
   <div class="layout-content__container">
 
-    <Menu @on-select="action" mode="horizontal" theme="dark" active-name="1">
+    <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
       <div class="index-layout-nav">
-        <MenuItem name="1">
-          <Icon type="ios-navigate"></Icon>
-          编辑
-        </MenuItem>
         <MenuItem name="2">
           <Icon type="ios-keypad"></Icon>
           预览
@@ -23,10 +19,6 @@
         <MenuItem name="13">
           <Icon type="ios-keypad"></Icon>
           恢复
-        </MenuItem>
-        <MenuItem name="14">
-          <Icon type="ios-keypad"></Icon>
-          清空
         </MenuItem>
       </div>
     </Menu>
@@ -76,7 +68,12 @@
   import {
     getConfig
   } from '../../../helper/code_helper'
-
+  import{
+    undo,
+    redo,
+    clear,
+    reload
+  }from '../../../helper/user_operation'
   import Render from '../../../core/render'
 
   import {
@@ -126,10 +123,10 @@
       action(a){
         if (a === '2') {
           this.isPreview = !this.isPreview
+
         } else if (a === '6') {
 
-
-            store.dispatch('dragModule/savePageSoul')
+          store.dispatch('dragModule/savePageSoul')
 
         } else if (a === '9') {
           undo()
@@ -145,26 +142,27 @@
     },
     mounted(){
       getControlList.call(this, (data) => {
-        this.classes[0].controls = []
         let controlConfigs = []
+        this.classes[0].controls = []
         data.forEach(control => {
           let controlConfig = getConfig(control.code);
           controlConfigs.push(controlConfig)
         })
 
-        let dropPanelSoul = findSoul(100, controlConfigs)
-        let appFrame = findSoul(105, controlConfigs)
-        appFrame.children.push(dropPanelSoul)
-        this.setSoul(appFrame)
         for (let i = 0; i < controlConfigs.length; i++) {
           this.classes[0].controls.push(controlConfigs[i])
         }
+
+        store.commit('dragModule/setControlConfigs',controlConfigs)
+
+        reload(null ,controlConfigs)
       })
     }
   }
 </script>
 
 <style scoped>
+
   .index-layout-logo {
     width: 100px;
     height: 30px;
@@ -183,10 +181,18 @@
 
   .index-layout-content {
     min-height: 200px;
-    margin: 15px;
+    margin: 5px;
     overflow: hidden;
     background: #fff;
     border-radius: 4px;
+  }
+
+  .action_bar {
+    position: fixed;
+    line-height: 3.5;
+    top: 50px;
+    height: 50px;
+    width: 60%;
   }
 
   .index-soul-control-class-fade-enter, .soul-control-class-fade-leave-active {

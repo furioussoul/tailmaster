@@ -1,4 +1,3 @@
-//核心数据,树结构
 import store from '../store/index'
 let uid = 1
 const generateUid = (() => uid++)

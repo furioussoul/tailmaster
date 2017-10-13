@@ -1,26 +1,30 @@
-import store from '../../store/index'
+import store from '../store/index'
 import{
   deepCopy//为了soul和templateStore引用解耦
-} from '../../util/assist'
+} from '../util/assist'
 import {
   generateUid,
-  resetUid
-} from '../../core/soul_helper'
+  resetUid,
+  findSoul
+} from './soul_helper'
+import {
+  addRenderFn
+} from './code_helper'
+
 let templateStore = {
-  count: 0,
-  dataSnapshot: []
+  count: 0,//version number
+  dataSnapshot: []//version array
 };
 
 function drop(saveInfo) {
-  if(templateStore.count < templateStore.dataSnapshot.length){
+  if (templateStore.count < templateStore.dataSnapshot.length) {
     //撤销操作后新增元素则丢弃当前版本后的节点
-    templateStore.dataSnapshot = templateStore.dataSnapshot.slice(0,templateStore.count)
+    templateStore.dataSnapshot = templateStore.dataSnapshot.slice(0, templateStore.count)
   }
-  saveInfo.drop.children.push(saveInfo.drag)//版本1
+  saveInfo.drop.children.push(saveInfo.drag)
   let data = store.getters['dragModule/soul']
-  templateStore.dataSnapshot[templateStore.count] = clone(data)//版本2
+  templateStore.dataSnapshot[templateStore.count] = deepCopy(data)
   templateStore.count++
-  templateStore.currentId = saveInfo.drag.props.id + 1
 
   localStorage.setItem("templateStore", JSON.stringify(templateStore));
 }
@@ -30,8 +34,10 @@ function undo() {
     return false
   }
   let dataSnapshot = templateStore.dataSnapshot[templateStore.count - 2];
-  dataSnapshot = dataSnapshot ? dataSnapshot : {}
-  store.commit('dragModule/setSoul',clone(dataSnapshot))
+  dataSnapshot = dataSnapshot ? dataSnapshot : deepCopy(findSoul(100, store.getters['dragModule/controlConfigs']))
+  let soulCopy = deepCopy(dataSnapshot)
+  addRenderFn(soulCopy)
+  store.commit('dragModule/setSoul', soulCopy)
   templateStore.count--;
   return true;
 }
@@ -40,25 +46,35 @@ function redo() {
   if (templateStore.count === templateStore.dataSnapshot.length) {
     return false
   }
-  store.commit('dragModule/setSoul',templateStore.dataSnapshot[templateStore.count++])
+  let soulSnap = templateStore.dataSnapshot[templateStore.count++]
+  addRenderFn(soulSnap)
+  store.commit('dragModule/setSoul', soulSnap)
   return true;
 }
 
 function clear() {
   localStorage.setItem("templateStore", null)
-  resetId()
-  store.commit('dragModule/setSoul',{
+  resetUid()
+  store.commit('dragModule/setSoul', {
     props: {
-      id: generateId(),
+      id: generateUid(),
       name: 'TDiv',
     },
     children: []
   })
 }
 
+function reload(soul, controlConfigs) {
+    //soul todo
+    if(!soul){
+      let dropPanelSoul = findSoul(100, controlConfigs)
+      store.commit('dragModule/setSoul',deepCopy(dropPanelSoul))
+    }
+}
+
 function saveSoul() {
   let data = store.getters['dragModule/soul']
-  templateStore.dataSnapshot[templateStore.count] = clone(data)//版本2
+  templateStore.dataSnapshot[templateStore.count] = deepCopy(data)//版本2
   templateStore.count++
   localStorage.setItem("templateStore", JSON.stringify(templateStore));
 }
@@ -68,5 +84,6 @@ export {
   undo,
   redo,
   clear,
-  saveSoul
+  saveSoul,
+  reload
 }
