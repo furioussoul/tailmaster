@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import {
-  appFrame
+  appFrame,
+  wrapCard
 } from './component'
 
 import {
@@ -8,6 +9,7 @@ import {
 } from './config'
 
 Vue.component('AppFrame', appFrame);
+Vue.component('WrapCard', wrapCard);
 
 import store from './store'
 import renderVue from './component/render.vue'

@@ -5,7 +5,7 @@ import DropPanel from './drop_panel.vue'
 import Editor from './editor.vue'
 import {
   WrapCard
-} from './wrap'
+} from '../external/component/wrap'
 
 export {
   AppFrame,
