@@ -370,11 +370,12 @@
             <template v-for="group in menu">
               <Menu-item :name="group.id"
                          :key="group.id"
-                         v-if="!group.subMenuList || group.subMenuList.length===0">
+                         v-if="group.mtype!==-1 && (!group.subMenuList || group.subMenuList.length===0)">
                 <router-link :to="group.url">
                   {{group.title}}
                 </router-link>
               </Menu-item>
+              <div v-if="group.mtype === -1" style="display: none"></div>
               <Submenu :name="group.id" v-else :key="group.id">
                 <template slot="title">
                   <Icon :type="group.icon"></Icon>
@@ -516,7 +517,11 @@
     },
     methods: {
       home(){
-        this.$router.push('/')
+          if(getConfig('type') === 'assemble'){
+            this.$router.push('/esview/assemble/index?pageId=%2Findex')
+          }else {
+            this.$router.push('/index')
+          }
       },
       toggleMenu() {
         this.show = !this.show;
@@ -568,10 +573,6 @@
       this.pages = getPages(this.totalMenu);
       initRouter(this.pages);
       this.setLayout(this.fullPath);
-    },
-    mounted(){
-      console.log(this.$slots)
-      console.log(this.$scopedSlots)
     }
   }
 </script>

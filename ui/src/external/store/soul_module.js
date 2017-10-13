@@ -15,11 +15,7 @@ export default {
   },
   mutations: {
     changeSoul(state, pagePath){
-      let soul
-      if (pagePath === '/' && !state.pageSoul[pagePath]) {
-        soul = state.pageSoul['']
-      }
-      soul = state.pageSoul[pagePath]
+      let soul = state.pageSoul[pagePath]
       if (soul) state.soul = soul
     },
     setSoul(state, soul){

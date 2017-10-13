@@ -23,7 +23,7 @@ function render(appName, token) {
     addRenderFn(pageSoul[key])
   }
   store.commit('soulModule/setPageSoul', pageSoul)
-  store.commit('soulModule/setSoul', pageSoul[''])
+  store.commit('soulModule/setSoul', pageSoul['/index'])
   return renderVue
 }
 

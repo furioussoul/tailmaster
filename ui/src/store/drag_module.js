@@ -69,7 +69,13 @@ export default {
     },
     changeSoul(state, pagePath){
       let path = decodeURIComponent(getQueryParam('pageId'))
+
+      if(!path) return
+
       if (!state.pageSoul[path]) {
+
+        if(!state.originSoul) return
+
         const soulCopy = deepCopy(state.originSoul)
         state.pageSoul[path] = soulCopy
         state.soul = soulCopy
@@ -87,8 +93,11 @@ export default {
       state.dragElement = element
     },
     setSoul(state, soul){
+      state.soul = soul
+    },
+    setOriginSoul(state, soul){
       state.originSoul = deepCopy(soul)
-      state.soul = state.pageSoul[''] = soul
+      state.soul = state.pageSoul['/index'] = soul
     },
     showEditorPanel(state, e){
 

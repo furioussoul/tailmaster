@@ -14,7 +14,7 @@ export default function initAppConstructor(config) {
                 <transition name="slideleft">
                   <div class="layout-left" v-show="show">
                     <div class="layout-left-menu">
-                      <i-menu v-if="menu"
+                      <i-menu v-if="menu && menu.mtype!==-1"
                               v-cloak
                               :active-name="activedSecondMenu"
                               :open-names="openedMenu"
@@ -25,7 +25,7 @@ export default function initAppConstructor(config) {
                         <template v-for="group in menu">
                           <Menu-item :name="group.id"
                                      :key="group.id"
-                                     v-if="!group.subMenuList || group.subMenuList.length===0">
+                                      v-if="group.mtype!==-1 && !group.subMenuList || group.subMenuList.length===0">
                             <router-link :to="group.url">
                               {{group.title}}
                             </router-link>
