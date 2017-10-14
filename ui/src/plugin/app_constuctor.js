@@ -9,7 +9,6 @@ export default function initAppConstructor(config) {
   
               <div id="layout" class="layout" :class="{\'layout-full-screen\':!show}">
               
-              
                 <!--左侧菜单栏 start-->
                 <transition name="slideleft">
                   <div class="layout-left" v-show="show">
@@ -214,6 +213,7 @@ export default function initAppConstructor(config) {
       },
       path() {
         const path = routerStore.state.RouteModule.path;
+        store.commit('dragModule/changeSoul', getQueryParam('pageId'))
         return getBreadcrumb(this.totalMenu, path);
       }
     },
@@ -272,9 +272,6 @@ export default function initAppConstructor(config) {
       }
     },
     created() {
-      window.addEventListener('popstate', function (event) {
-        store.commit('dragModule/changeSoul', getQueryParam('pageId'))
-      });
       let res = {
         "code": 10000,
         "msg": "ok",

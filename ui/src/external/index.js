@@ -27,8 +27,6 @@ function render(appName, token) {
   return renderVue
 }
 
-
-
 export default{
   addConfig,
   render

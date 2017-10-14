@@ -17,6 +17,7 @@ export default {
     changeSoul(state, pagePath){
       let soul = state.pageSoul[pagePath]
       if (soul) state.soul = soul
+      console.log(soul)
     },
     setSoul(state, soul){
       state.originSoul = deepCopy(soul)

@@ -1,6 +1,6 @@
 {
   "name": "esview",
-  "version": "0.0.8",
+  "version": "0.0.14",
   "title": "esview",
   "main": "dist/client/esview.min.js",
   "files": [
@@ -20,21 +20,24 @@
   "author": "Furioussoul",
   "license": "MIT",
   "dependencies": {
-    "cookie-parser": "~1.4.3",
-    "esview": "^0.0.8",
-    "express-http-proxy": "^1.0.7",
-    "iview": "^2.4.0",
     "js-md5": "^0.4.2",
     "object-assign": "^4.1.0",
     "throttle-debounce": "^1.0.1",
+    "xlsx": "^0.10.5"
+   },
+  "peerDependencies": {
+    "vue": "^2.4.4"
+   },
+  "devDependencies": {
+    "iview": "^2.4.0",
     "vue": "^2.4.4",
     "vue-resource": "^1.2.1",
     "vue-router": "^2.2.1",
     "vuex": "^2.2.1",
     "vuex-router-sync": "^4.1.3",
-    "xlsx": "^0.10.5"
-  },
-  "devDependencies": {
+    "esview": "^0.0.9",
+    "express-http-proxy": "^1.0.7",
+    "cookie-parser": "~1.4.3",
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
