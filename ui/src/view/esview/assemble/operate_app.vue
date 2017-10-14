@@ -59,6 +59,13 @@
           <Editor :editSoul="editSoul"></Editor>
         </i-col>
 
+
+        <Modal
+          v-model="showConfirmAppNameModal"
+          title="confirmAppName"
+          @on-ok="ok">
+          <i-input v-model="opModel.name"></i-input>
+        </Modal>
       </Row>
     </div>
 
@@ -93,6 +100,18 @@
   import {
     copyProperties
   }from '../../../util/assist'
+
+  import {
+    addApp,
+    delApp,
+    updateApp,
+    getRichApp
+  } from '../../../resource/assemble_resource'
+  import {
+    addRenderFn
+  } from '../../../helper/code_helper'
+
+
   let classes = [
     {
       name: '测试组件',
@@ -106,13 +125,15 @@
     },
     data(){
       return {
+        showConfirmAppNameModal:false,
+        opModel: {},
         isPreview: true,
         collapseValue: "0",
         classes: classes
       }
     },
     computed: {
-      ...mapGetters('dragModule', ['soul', 'editSoul','editLayer'])
+      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer'])
     },
     methods: {
       ...mapMutations('dragModule',
@@ -124,14 +145,19 @@
         [
           'changePage'
         ]),
+      ok(){
+        addApp.call(this)
+      },
       action(a){
         if (a === '2') {
           this.isPreview = !this.isPreview
 
         } else if (a === '6') {
-
-          store.dispatch('dragModule/savePageSoul')
-
+          if(!this.opModel.id){
+            this.showConfirmAppNameModal = true
+          }else {
+            updateApp.call(this)
+          }
         } else if (a === '9') {
           undo()
         } else if (a === '13') {
@@ -159,7 +185,24 @@
 
         store.commit('dragModule/setControlConfigs', controlConfigs)
 
-        reload(null, controlConfigs)
+        let query = this.$route.query
+        if(!query.id){
+          reload(controlConfigs)
+        }else {
+          getRichApp.call(this, query.id, (data) => {
+            this.opModel = data
+            let pageSoul = data.pageSoul
+            pageSoul = JSON.parse(pageSoul)
+
+            for (let key in pageSoul) {
+              let soul = pageSoul[key];
+              addRenderFn(pageSoul[key])
+            }
+
+            store.commit('dragModule/setPageSoul', pageSoul)
+            store.commit('dragModule/setSoul', pageSoul['/index'])
+          })
+        }
       })
     }
   }
@@ -167,7 +210,7 @@
 
 <style scoped>
 
-  .edit_layer{
+  .edit_layer {
     display: none;
     opacity: 0.5;
     background: #eee;

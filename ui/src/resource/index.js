@@ -9,7 +9,7 @@ import {
 import {
   getPaginationAppSoul,
   getAppSoulList
-} from './app_resource'
+} from './assemble_resource'
 
 import {
   register,

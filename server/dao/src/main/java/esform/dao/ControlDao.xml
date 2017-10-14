@@ -26,8 +26,10 @@
                 nickname = #{nickname},
             </if>
             <if test="code != null">
-                `code` = #{code}
+                `code` = #{code},
             </if>
+            updateBy = #{updateBy},
+            updateDt = #{updateDt}
         </set>
         WHERE id = #{id}
     </update>

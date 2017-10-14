@@ -24,6 +24,9 @@ export default {
     editLayer: {}
   },
   getters: {
+    pageSoul({pageSoul}){
+      return pageSoul
+    },
     editLayer({editLayer}){
       return editLayer
     },
@@ -116,11 +119,12 @@ export default {
     hideEditorPanel(state, e){
       e.stopPropagation()
       state.showEditorPanel = false
+    },
+    setPageSoul(state,pageSoul){
+      state.pageSoul = pageSoul
     }
   },
   actions: {
-    savePageSoul({state}){
-      localStorage.setItem('pageSoul', JSON.stringify(state.pageSoul))
-    }
+
   }
 }

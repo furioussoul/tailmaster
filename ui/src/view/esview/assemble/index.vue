@@ -38,11 +38,13 @@
 </template>
 <script>
   import {
-    updateControl,
-    delControl,
-    getRichControl,
-    getTableControlList
-  } from '../../../resource/develop_resource'
+    addApp,
+    delApp,
+    updateApp,
+    getAppList,
+    getTableAppList,
+    getRichApp
+  } from '../../../resource/assemble_resource'
   import{
     paginationMixin
   } from '../../../mixin/m_pagination'
@@ -52,8 +54,8 @@
     data() {
       return {
         fn: {
-          initFns: [getTableControlList],
-          searchFns: [getTableControlList]
+          initFns: [getTableAppList],
+          searchFns: [getTableAppList]
         },
         columns: [
           {
@@ -108,13 +110,13 @@
         this.$refs[name].resetFields();
       },
       hrefAdd(){
-        this.$router.push('./operate_control')
+        this.$router.push('./operate_app')
       },
       edit(param){
-        this.$router.push({path: './operate_control', query: {id: param.row.id}})
+        this.$router.push({path: './operate_app', query: {id: param.row.id}})
       },
       del(param){
-        delControl.call(this,param.row.id)
+        delApp.call(this,param.row.id)
       }
     }
   }

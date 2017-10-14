@@ -64,12 +64,9 @@ function clear() {
   })
 }
 
-function reload(soul, controlConfigs) {
-    //soul todo
-    if(!soul){
-      let dropPanelSoul = findSoul(100, controlConfigs)
-      store.commit('dragModule/setSoul',deepCopy(dropPanelSoul))
-    }
+function reload(controlConfigs) {
+  let dropPanelSoul = findSoul(100, controlConfigs)
+  store.commit('dragModule/setSoul', deepCopy(dropPanelSoul))
 }
 
 function saveSoul() {
