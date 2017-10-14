@@ -15,7 +15,7 @@ import RenderApp from './view/esview/render_app.vue'
 import esview from './external'
 
 esview.addConfig('router',router)
-// esview.addConfig('type','assemble')
+esview.addConfig('type','assemble')
 
 Vue.dev = true
 

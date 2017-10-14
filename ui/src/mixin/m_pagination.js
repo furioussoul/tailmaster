@@ -10,11 +10,11 @@ let paginationMixin = {
         })
       }
     },
-    search(pageNo){
-      if (typeof pageNo === 'number') {
-        this.searchInput.pageNo = pageNo
+    search(pageNum){
+      if (typeof pageNum === 'number') {
+        this.searchInput.pageNum = pageNum
       } else {
-        this.searchInput.pageNo = 1
+        this.searchInput.pageNum = 1
       }
       this.fn.searchFns.forEach(fn => {
         fn.call(this)

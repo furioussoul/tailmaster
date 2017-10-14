@@ -288,7 +288,7 @@ export default function initAppConstructor(config) {
               {
                 "id": 74785,
                 "name": "s",
-                "title": "组装",
+                "title": "Assemble",
                 "url": "/esview/assemble",
                 "orderNo": 1,
                 "mtype": 0,
@@ -298,10 +298,20 @@ export default function initAppConstructor(config) {
                   {
                     "id": 74796,
                     "name": "index",
-                    "title": "组装工厂",
+                    "title": "ManageApp",
                     "url": "/esview/assemble/index",
                     "orderNo": 1,
                     "mtype": 1,
+                    "hasPermisson": 1,
+                    "subMenuList": null
+                  },
+                  {
+                    "id": 74796,
+                    "name": "index",
+                    "title": "OperateApp",
+                    "url": "/esview/assemble/operate_app",
+                    "orderNo": 1,
+                    "mtype": -1,
                     "hasPermisson": 1,
                     "subMenuList": null
                   }
@@ -310,7 +320,7 @@ export default function initAppConstructor(config) {
               {
                 "id": 74842,
                 "name": "develop",
-                "title": "开发",
+                "title": "Develop",
                 "url": "/esview/develop",
                 "orderNo": 1,
                 "mtype": 0,
@@ -320,7 +330,7 @@ export default function initAppConstructor(config) {
                   {
                     "id": 74840,
                     "name": "index",
-                    "title": "开发工厂",
+                    "title": "ManageControl",
                     "url": "/esview/develop/index",
                     "orderNo": 1,
                     "mtype": 1,
@@ -330,7 +340,7 @@ export default function initAppConstructor(config) {
                   {
                     "id": 74796,
                     "name": "add_control",
-                    "title": "编辑组件",
+                    "title": "OperateControl",
                     "url": "/esview/develop/operate_control",
                     "orderNo": 1,
                     "mtype": -1,
