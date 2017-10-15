@@ -1,8 +1,11 @@
 <p align="center"><a href="#">esview</p>
-
-<a href="https://www.npmjs.com/package/vue"><img src="https://img.shields.io/npm/dm/esview.svg" alt="Downloads"></a>
-
-
+  
+<p align="center">
+  <a href="https://www.npmjs.com/package/vue"><img src="https://img.shields.io/npm/dm/esview.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/vue"><img src="https://img.shields.io/npm/v/esview.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/vue"><img src="https://img.shields.io/npm/l/esview.svg" alt="License"></a>
+</p>
+  
 # Intro
 Esform is a web editor for building interactive web page.  
 
