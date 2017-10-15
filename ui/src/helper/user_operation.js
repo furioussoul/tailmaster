@@ -38,6 +38,8 @@ function undo() {
   let soulCopy = deepCopy(dataSnapshot)
   addRenderFn(soulCopy)
   store.commit('dragModule/setSoul', soulCopy)
+  let pageSoul = store.getters['dragModule/pageSoul'];
+  pageSoul[store.getters['dragModule/currentRouterPath']] = soulCopy
   templateStore.count--;
   return true;
 }
@@ -47,8 +49,11 @@ function redo() {
     return false
   }
   let soulSnap = templateStore.dataSnapshot[templateStore.count++]
-  addRenderFn(soulSnap)
-  store.commit('dragModule/setSoul', soulSnap)
+  let soulCopy = deepCopy(soulSnap)
+  addRenderFn(soulCopy)
+  store.commit('dragModule/setSoul', soulCopy)
+  let pageSoul = store.getters['dragModule/pageSoul'];
+  pageSoul[store.getters['dragModule/currentRouterPath']] = soulCopy
   return true;
 }
 

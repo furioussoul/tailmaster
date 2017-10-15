@@ -29,6 +29,9 @@ export default {
     pageSoul({pageSoul}){
       return pageSoul
     },
+    currentRouterPath({currentRouterPath}){
+      return currentRouterPath
+    },
     editLayer({editLayer}){
       return editLayer
     },
@@ -99,6 +102,8 @@ export default {
 
       if(!path) return
 
+      state.currentRouterPath = path
+
       if (!state.pageSoul[path]) {
 
         if(!state.originSoul) return
@@ -125,6 +130,7 @@ export default {
     setOriginSoul(state, soul){
       state.originSoul = deepCopy(soul)
       state.soul = state.pageSoul['/index'] = soul
+      state.currentRouterPath = '/index'
     },
     showEditorPanel(state, e){
       state.rightClickMenu = {}
