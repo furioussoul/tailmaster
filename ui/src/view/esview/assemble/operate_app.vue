@@ -69,13 +69,12 @@
 
     <Modal
       v-model="showEditScriptModal"
-      title="script"
-      @on-ok="okEditControl">
+      title="script">
       <div slot="footer">
       </div>
       <CodeEditor
                   style="height: 280px"
-                  :code="editControlSoul.script"
+                  :code="editControlSoul.scriptString"
                   @save="saveCode">
       </CodeEditor>
     </Modal>
@@ -99,10 +98,12 @@
   import {
     findSoul,
     findNode,
-    resetUid
+    resetUid,
+    generateUid
   } from '../../../helper/soul_helper'
   import {
-    getConfig
+    getConfig,
+    addRenderFn
   } from '../../../helper/code_helper'
   import{
     undo,
@@ -125,7 +126,8 @@
   import {
     copyProperties,
     stringify,
-    parse
+    parse,
+    deepCopy
   }from '../../../util/assist'
 
   import {
@@ -151,7 +153,7 @@
         showConfirmAppNameModal: false,
         showEditScriptModal: false,
         editControlSoul:{
-          script:''
+          scriptString:''
         },
         opModel: {},
         isPreview: true,
@@ -173,18 +175,16 @@
         ]),
       editControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
-        this.editControlSoul.script = this.editControlSoul.script.toString()
+        this.editControlSoul.scriptString = this.editControlSoul.script.toString()
         store.commit('dragModule/clear')
         this.showEditScriptModal= true
       },
       saveCode(code){
-        this.editControlSoul.script = code
+        this.editControlSoul.scriptString = code
+        this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal= false
         let soul = store.getters['dragModule/soul']
         store.commit('dragModule/syncSoul', soul)
-      },
-      okEditControl(){
-        addApp.call(this)
       },
       okAppName(){
         addApp.call(this)
@@ -227,10 +227,11 @@
         store.commit('dragModule/setControlConfigs', controlConfigs)
 
         let query = this.$route.query
-        if (!query.id) {
+        if (!query.appId) {
           reload(controlConfigs)
         } else {
-          getRichApp.call(this, query.id, (data) => {
+          getRichApp.call(this, query.appId, (data) => {
+            store.commit('dragModule/setAppId',query.appId)
             this.opModel = data
             let pageSoul = data.pageSoul
             pageSoul = parse(pageSoul)
@@ -238,11 +239,21 @@
             for (let key in pageSoul) {
                 if(key === 'maxUid'){
                   resetUid(pageSoul[key])
+                }else {
+                  addRenderFn(pageSoul[key])
                 }
             }
 
-            store.commit('dragModule/setPageSoul', pageSoul)
+            store.commit('dragModule/setPageSoul', {
+                pageSoul:pageSoul
+            })
             store.commit('dragModule/setSoul', pageSoul['/index'])
+
+            let frame = findSoul(105, store.getters['dragModule/controlConfigs'])
+            let dropPanelSoul = findSoul(100, store.getters['dragModule/controlConfigs'])
+            dropPanelSoul.uid = generateUid()
+            frame.children.push(deepCopy(dropPanelSoul))
+            store.commit('dragModule/setOriginSoul',frame)
           })
         }
       })

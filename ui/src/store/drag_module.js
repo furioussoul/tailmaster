@@ -23,9 +23,13 @@ export default {
     editSoul: {},
     controlConfigs: null,
     editLayer: {},
-    rightClickMenu:{}
+    rightClickMenu:{},
+    appId:'',
   },
   getters: {
+    appId({appId}){
+      return appId
+    },
     pageSoul({pageSoul}){
       return pageSoul
     },
@@ -58,6 +62,9 @@ export default {
     }
   },
   mutations: {
+    setAppId(state,appId){
+      state.appId = appId
+    },
     clear(state){
       state.editSoul = {}
       state.rightClickMenu = {}
@@ -129,7 +136,6 @@ export default {
     },
     setOriginSoul(state, soul){
       state.originSoul = deepCopy(soul)
-      state.soul = state.pageSoul['/index'] = soul
       state.currentRouterPath = '/index'
     },
     showEditorPanel(state, e){
@@ -150,8 +156,12 @@ export default {
       e.stopPropagation()
       state.showEditorPanel = false
     },
-    setPageSoul(state,pageSoul){
-      state.pageSoul = pageSoul
+    setPageSoul(state,{path,pageSoul}){
+      if(path){
+        state.pageSoul[path] = pageSoul
+      }else {
+        state.pageSoul = pageSoul
+      }
     },
     syncSoul(state,soul){
       state.pageSoul[state.currentRouterPath] = soul

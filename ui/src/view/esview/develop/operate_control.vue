@@ -18,9 +18,7 @@
     data(){
       return {
         editor: null,//ace editor
-        opModel: {
-            code:''
-        }
+        opModel: {}
       }
     },
     methods: {

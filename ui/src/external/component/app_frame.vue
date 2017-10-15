@@ -117,7 +117,7 @@
   import {
     getConfig
   } from '../config'
-  import store from '../store'
+  import store from '../../store'
   import {
     mapGetters,
     mapMutations
@@ -168,7 +168,7 @@
     methods: {
       home(){
           if(getConfig('type') === 'assemble'){
-            this.$router.push('/esview/assemble/operate_app?pageId=%2Findex')
+            this.$router.push('/esview/assemble/operate_app?pageId=%2Findex' + '&appId=' + store.getters['dragModule/appId'])
           }else {
             this.$router.push('/index')
           }

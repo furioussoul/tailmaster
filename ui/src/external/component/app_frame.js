@@ -2,6 +2,7 @@ import renderVue from './render.vue'
 import {
   getConfig
 } from '../config'
+import store from '../../store'
 
 /**
  * 获取面包屑
@@ -60,7 +61,9 @@ function initRouter(pages) {
 
   if (type === 'assemble') {
     let routes = pages.map((page, index) => {
-      page.url = '/esview/assemble/operate_app?pageId=' + encodeURIComponent(page.url)
+      page.url = '/esview/assemble/operate_app?pageId='
+        + encodeURIComponent(page.url)
+        + '&appId=' + store.getters['dragModule/appId']
     })
     return
   }

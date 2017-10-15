@@ -14,7 +14,7 @@ function addApp() {
     return void this.$Message.error('can\'t save empty app,please drop Frame into middle area');
   }
 
-  pageSoul.maxUid = currentUid
+  pageSoul.maxUid = currentUid()
 
   this.opModel.pageSoul = stringify(pageSoul)
   this.$http.post('app/add', this.opModel).then(res => {
@@ -39,7 +39,7 @@ function delApp(id) {
 
 function updateApp() {
   let pageSoul = store.getters['dragModule/pageSoul']
-  pageSoul.maxUid = currentUid
+  pageSoul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(pageSoul)
   this.$http.post('app/update', this.opModel).then(res => {
     if (res.data.code === 10000) {

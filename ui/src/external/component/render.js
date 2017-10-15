@@ -11,8 +11,8 @@ export default {
   render(h){
     if(!this.soul) return
     h.store = store
-    h.appStore = getConfig('store')
     h.eventCenter = eventCenter
-    return this.soul.render(h)
+    this.soul.script(eventCenter,getConfig('store'))
+    return this.soul.renderProd(h)
   }
 }

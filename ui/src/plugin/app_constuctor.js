@@ -103,6 +103,10 @@ export default function initAppConstructor(config) {
                   <!--footer start-->
                   <Card class="layout-footer">
                       Copyright© 2017-2020 版权所有 soul-esview
+                      <a href="https://github.com/furioussoul/soul-esview.git">
+                        <img style="width:30px;margin-left:10px;vertical-align:top" src="../../static/img/git.jpg">
+                        </img>
+                      </a>
                   </Card>  
                   <!--footer end-->
                   
