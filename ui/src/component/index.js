@@ -3,6 +3,7 @@ import Control from './control.vue'
 import Drop from './drop.vue'
 import DropPanel from './drop_panel.vue'
 import Editor from './editor.vue'
+import CodeEditor from './code_editor.vue'
 import {
   WrapCard
 } from '../external/component/wrap'
@@ -13,5 +14,6 @@ export {
   Drop,
   DropPanel,
   Editor,
-  WrapCard
+  WrapCard,
+  CodeEditor
 }

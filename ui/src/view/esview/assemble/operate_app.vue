@@ -1,17 +1,5 @@
 <template>
   <div>
-
-    <div class="edit_layer" :style="editLayer.style">
-      {{editLayer.name}}
-    </div>
-    <div class="rightClickMenu" :style="rightClickMenu.style">
-      <Dropdown trigger="custom" visible>
-        <DropdownMenu slot="list">
-          <DropdownItem @click.native="editControl">编辑</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-    </div>
-
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
       <div class="index-layout-nav">
@@ -69,13 +57,33 @@
           <Editor :editSoul="editSoul"></Editor>
         </i-col>
 
-        <Modal
-          v-model="showConfirmAppNameModal"
-          title="confirmAppName"
-          @on-ok="ok">
-          <i-input v-model="opModel.name"></i-input>
-        </Modal>
       </Row>
+    </div>
+
+    <Modal
+      v-model="showConfirmAppNameModal"
+      title="confirmAppName"
+      @on-ok="okAppName">
+      <i-input v-model="opModel.name"></i-input>
+    </Modal>
+
+    <Modal
+      v-model="showEditScriptModal"
+      title="script"
+      @on-ok="okEditControl">
+
+    </Modal>
+
+    <div class="edit_layer" :style="editLayer.style">
+      {{editLayer.name}}
+    </div>
+
+    <div class="rightClickMenu" :style="rightClickMenu.style">
+      <Dropdown trigger="custom" visible>
+        <DropdownMenu slot="list">
+          <DropdownItem @click.native="editControl">editScript</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
     </div>
 
   </div>
@@ -135,6 +143,7 @@
     data(){
       return {
         showConfirmAppNameModal: false,
+        showEditScriptModal: false,
         opModel: {},
         isPreview: true,
         collapseValue: "0",
@@ -153,7 +162,13 @@
         [
           'changePage'
         ]),
-      ok(){
+      editControl(){
+         this.rightClickMenu.uid
+      },
+      okEditControl(){
+        addApp.call(this)
+      },
+      okAppName(){
         addApp.call(this)
       },
       action(a){

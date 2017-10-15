@@ -1,5 +1,5 @@
-import wrapCard from './wrapCard.vue'
+import WrapCard from './wrapCard.vue'
 
 export {
-  wrapCard
+  WrapCard
 }

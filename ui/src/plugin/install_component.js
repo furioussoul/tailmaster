@@ -4,7 +4,8 @@ import {
   Drop,
   DropPanel,
   Editor,
-  WrapCard
+  WrapCard,
+  CodeEditor
 } from '../component'
 
 const soul = {
@@ -13,7 +14,8 @@ const soul = {
   Drop,
   DropPanel,
   Editor,
-  WrapCard
+  WrapCard,
+  CodeEditor
 };
 
 
