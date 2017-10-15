@@ -6,7 +6,6 @@ var express = require('express'),
   proxy = require("express-http-proxy"),
   port = 9090;
 
-//捕获node进程异常
 process.on('uncaughtException', function (err) {
   console.error('An uncaught error occurred!');
   console.error(err.stack);
@@ -18,7 +17,6 @@ var apiProxy = proxy("localhost:8080",{
   }
 })
 
-//express配置
 app.use(cookie())
 app.use('/esview/*', apiProxy);
 app.use('/static', express.static(appPath + '/dist/static'))

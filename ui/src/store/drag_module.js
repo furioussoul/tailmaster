@@ -19,9 +19,10 @@ export default {
     originSoul: null,//初始化soul
     pageSoul: {},//对应路由的soul
     showEditorPanel: false,
-    editSoul: null,
+    editSoul: {},
     controlConfigs: null,
-    editLayer: {}
+    editLayer: {},
+    rightClickMenu:{}
   },
   getters: {
     pageSoul({pageSoul}){
@@ -29,6 +30,9 @@ export default {
     },
     editLayer({editLayer}){
       return editLayer
+    },
+    rightClickMenu({rightClickMenu}){
+      return rightClickMenu
     },
     controlConfigs({controlConfigs}){
       return controlConfigs
@@ -45,11 +49,16 @@ export default {
     soul({soul}){
       return soul
     },
-    showEditorPanel({showEditorPanel}){
-      return showEditorPanel;
+    showEditorPanel({editSoul}){
+      return !isPlain(editSoul);
     }
   },
   mutations: {
+    clear(state){
+      state.editLayer = {}
+      state.editSoul = {}
+      state.rightClickMenu = {}
+    },
     clearEditLayer(state){
       state.editLayer= {
         style: {
@@ -68,6 +77,21 @@ export default {
           display:'block'
         },
         name: bind.binding.value
+      }
+    },
+    setRightClickMenu(state,el){
+      let e = e || window.event;
+      //鼠标点的坐标
+      let oX = e.clientX;
+      let oY = e.clientY - 20;
+      //菜单出现后的位置
+      state.rightClickMenu= {
+        style:{
+          display : "block",
+          left:oX + "px",
+          top : oY + "px"
+        },
+        uid : el.controlConfig.uid
       }
     },
     changeSoul(state, pagePath){
@@ -103,7 +127,7 @@ export default {
       state.soul = state.pageSoul['/index'] = soul
     },
     showEditorPanel(state, e){
-
+      state.rightClickMenu = {}
       e.stopPropagation()
       const el = findElUpward(e.target);
       const soul = findNode(el.controlConfig.uid, state.soul);

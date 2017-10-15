@@ -3,19 +3,19 @@
       <i-col span="24">
         <Card>
           <div>
-            <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
-              <Form-item prop="controlName" label="组件名称">
+            <Form ref="searchForm" :model="searchInput" :label-width="85" inline>
+              <Form-item prop="controlName" label="controlName:">
                 <Input v-model="searchInput.controlName">
                 </Input>
               </Form-item>
-              <Form-item prop="controlClass" label="组件分类">
+              <Form-item prop="controlClass" label="controlClass:">
                 <Input v-model="searchInput.controlClass">
                 </Input>
               </Form-item>
               <ButtonGroup>
-                <Button @click="search" type="primary">筛选</Button>
-                <Button @click="reset('searchForm')">重置</Button>
-                <Button style="float: right" @click="hrefAdd()" type="ghost">添加</Button>
+                <Button @click="search" type="primary">search</Button>
+                <Button @click="reset('searchForm')">reset</Button>
+                <Button style="float: right" @click="hrefAdd()" type="ghost">add</Button>
               </ButtonGroup>
             </Form>
           </div>
@@ -61,18 +61,18 @@
         },
         columns: [
           {
-            title: '名称',
+            title: 'name',
             key: 'name'
           },
           {
-            title: '别名',
+            title: 'nickname',
             key: 'nickname'
           }, {
-            title: '分类',
+            title: 'class',
             key: 'class'
           },
           {
-            title: '操作',
+            title: 'action',
             key: 'action',
             width: 300,
             align: 'center',
@@ -88,7 +88,7 @@
                       this.edit(params)
                     }
                   }
-                }, '编辑'),
+                }, 'edit'),
                 h('Button', {
                   props: {
                     type: 'error',
@@ -99,7 +99,7 @@
                       this.del(params)
                     }
                   }
-                }, '删除')
+                }, 'del')
               ]);
             }
           }

@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%;width: 98%;  margin-left: 15px;position: relative;">
     <ButtonGroup>
-      <Button @click="save">保存</Button>
+      <Button @click="save">save</Button>
     </ButtonGroup>
     <Modal></Modal>
     <div id="editor"></div>
@@ -21,7 +21,7 @@
     data(){
       return {
         editor: null,//ace editor
-        opModel: {} //添加，更新的model
+        opModel: {}
       }
     },
     methods: {

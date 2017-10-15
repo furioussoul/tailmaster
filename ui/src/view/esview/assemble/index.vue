@@ -4,7 +4,7 @@
         <Card>
           <div>
             <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
-              <Form-item prop="controlName" label="appName">
+              <Form-item prop="controlName" label="appName:">
                 <Input v-model="searchInput.controlName">
                 </Input>
               </Form-item>

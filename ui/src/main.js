@@ -13,6 +13,7 @@ import directive from './directive/d_drop'
 import Login from './view/esview/login.vue'
 import RenderApp from './view/esview/render_app.vue'
 import esview from './external'
+import locale  from 'iview/dist/locale/en-US';
 
 esview.addConfig('router',router)
 esview.addConfig('type','assemble')
@@ -23,7 +24,7 @@ Vue.directive('drop',directive)
 Vue.use(VueResource)
 Vue.use(VueRouter)
 Vue.use(SoulUi)
-Vue.use(Iview)
+Vue.use(Iview, { locale })
 
 Vue.http.options.root = appContext.apiUrl;
 

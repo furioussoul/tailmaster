@@ -1,12 +1,19 @@
 import store from '../store'
+import {
+  isPlain
+} from '../util/assist'
 
 function addApp() {
-  this.opModel.pageSoul = JSON.stringify(store.getters['dragModule/pageSoul'])
+  let pageSoul = JSON.stringify(store.getters['dragModule/pageSoul'])
+  if(isPlain(pageSoul)){
+    return void this.$Message.error('can\'t save empty app,please drop Frame into middle area');
+  }
+  this.opModel.pageSoul = pageSoul
   this.$http.post('app/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
-      this.$Message.success('保存成功')
+      this.$Message.success('saved')
     } else {
-      this.$Message.error('保存失败')
+      this.$Message.error('save failed')
     }
   })
 }
@@ -15,9 +22,9 @@ function delApp(id) {
   this.$http.get('app/del/' + id).then(res => {
     if (res.data.code === 10000) {
       getTableAppList.call(this)
-      this.$Message.success('删除成功')
+      this.$Message.success('deleted')
     } else {
-      this.$Message.error('删除失败')
+      this.$Message.error('delete failed')
     }
   })
 }
@@ -26,9 +33,9 @@ function updateApp() {
   this.opModel.pageSoul = JSON.stringify(store.getters['dragModule/pageSoul'])
   this.$http.post('app/update', this.opModel).then(res => {
     if (res.data.code === 10000) {
-      this.$Message.success('保存成功')
+      this.$Message.success('saved')
     } else {
-      this.$Message.error('保存失败')
+      this.$Message.error('save failed')
     }
   })
 }
@@ -41,7 +48,7 @@ function getAppList(fn) {
         fn.call(this,res.data.data)
       }
     } else {
-      this.$Message.error('查询失败')
+      this.$Message.error('query failed')
     }
   })
 }
@@ -53,7 +60,7 @@ function getTableAppList() {
       this.searchInput.total = data.total
       this.tableData = data.list
     } else {
-      this.$Message.error('查询失败')
+      this.$Message.error('query failed')
     }
   })
 }
@@ -65,7 +72,7 @@ function getRichApp(id, fn) {
         fn.call(this, res.data.data)
       }
     } else {
-      this.$Message.error('查询失败')
+      this.$Message.error('query failed')
     }
   })
 }

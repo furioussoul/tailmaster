@@ -9,9 +9,9 @@ function addControl() {
 
   this.$http.post('control/add', config).then(res => {
     if (res.data.code === 10000) {
-      this.$Message.success('保存成功')
+      this.$Message.success('saved')
     } else {
-      this.$Message.error('保存失败')
+      this.$Message.error('saved failed')
     }
   })
 }
@@ -20,9 +20,9 @@ function delControl(id) {
   this.$http.get('control/del/' + id).then(res => {
     if (res.data.code === 10000) {
       getTableControlList.call(this)
-      this.$Message.success('删除成功')
+      this.$Message.success('deleted')
     } else {
-      this.$Message.error('删除失败')
+      this.$Message.error('delete failed')
     }
   })
 }
@@ -33,9 +33,9 @@ function updateControl() {
   config.id = this.opModel.id
   this.$http.post('control/update', config).then(res => {
     if (res.data.code === 10000) {
-      this.$Message.success('保存成功')
+      this.$Message.success('saved')
     } else {
-      this.$Message.error('保存失败')
+      this.$Message.error('save failed')
     }
   })
 }
@@ -48,7 +48,7 @@ function getControlList(fn) {
         fn.call(this,res.data.data)
       }
     } else {
-      this.$Message.error('查询失败')
+      this.$Message.error('query failed')
     }
   })
 }
@@ -60,7 +60,7 @@ function getTableControlList() {
       this.searchInput.total = data.total
       this.tableData = data.list
     } else {
-      this.$Message.error('查询失败')
+      this.$Message.error('query failed')
     }
   })
 }
@@ -72,7 +72,7 @@ function getRichControl(id, fn) {
         fn.call(this, res.data.data)
       }
     } else {
-      this.$Message.error('查询失败')
+      this.$Message.error('query failed')
     }
   })
 }

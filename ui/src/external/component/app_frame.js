@@ -60,7 +60,7 @@ function initRouter(pages) {
 
   if (type === 'assemble') {
     let routes = pages.map((page, index) => {
-      page.url = '/esview/assemble/index?pageId=' + encodeURIComponent(page.url)
+      page.url = '/esview/assemble/operate_app?pageId=' + encodeURIComponent(page.url)
     })
     return
   }

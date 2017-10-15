@@ -4,6 +4,13 @@
     <div class="edit_layer" :style="editLayer.style">
       {{editLayer.name}}
     </div>
+    <div class="rightClickMenu" :style="rightClickMenu.style">
+      <Dropdown trigger="custom" visible>
+        <DropdownMenu slot="list">
+          <DropdownItem @click.native="editControl">编辑</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
 
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
@@ -32,7 +39,7 @@
 
         <i-col span="3">
           <transition name="index-soul-control-class-fade">
-            <div v-show="showEditorPanel">
+            <div>
               <Collapse v-model="collapseValue" :key="classIndex" v-for="(controlClass, classIndex) in classes">
                 <Panel :name="classIndex+''">
                   {{controlClass.name}}
@@ -51,14 +58,16 @@
           </transition>
         </i-col>
 
-        <i-col span="18" :class="{'is-preview':isPreview}">
+        <i-col v-if="showEditorPanel" span="18" :class="{'is-preview':isPreview}">
+          <Render :soul="soul"></Render>
+        </i-col>
+        <i-col v-else span="21" :class="{'is-preview':isPreview}">
           <Render :soul="soul"></Render>
         </i-col>
 
-        <i-col span="3">
+        <i-col v-show="showEditorPanel" span="3">
           <Editor :editSoul="editSoul"></Editor>
         </i-col>
-
 
         <Modal
           v-model="showConfirmAppNameModal"
@@ -111,10 +120,9 @@
     addRenderFn
   } from '../../../helper/code_helper'
 
-
   let classes = [
     {
-      name: '测试组件',
+      name: 'test controls',
       controls: []
     }
   ]
@@ -125,7 +133,7 @@
     },
     data(){
       return {
-        showConfirmAppNameModal:false,
+        showConfirmAppNameModal: false,
         opModel: {},
         isPreview: true,
         collapseValue: "0",
@@ -133,13 +141,12 @@
       }
     },
     computed: {
-      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer'])
+      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu','showEditorPanel'])
     },
     methods: {
       ...mapMutations('dragModule',
         [
-          'setSoul',
-          'showEditorPanel'
+          'setSoul'
         ]),
       ...mapMutations('userModule',
         [
@@ -153,9 +160,9 @@
           this.isPreview = !this.isPreview
 
         } else if (a === '6') {
-          if(!this.opModel.id){
+          if (!this.opModel.id) {
             this.showConfirmAppNameModal = true
-          }else {
+          } else {
             updateApp.call(this)
           }
         } else if (a === '9') {
@@ -186,9 +193,9 @@
         store.commit('dragModule/setControlConfigs', controlConfigs)
 
         let query = this.$route.query
-        if(!query.id){
+        if (!query.id) {
           reload(controlConfigs)
-        }else {
+        } else {
           getRichApp.call(this, query.id, (data) => {
             this.opModel = data
             let pageSoul = data.pageSoul
@@ -216,7 +223,13 @@
     background: #eee;
     border: 1px dashed #999;
     pointer-events: none;
-    z-index: 10000000;
+    z-index: 10000;
+    position: fixed;
+  }
+
+  .rightClickMenu {
+    display: none;
+    z-index: 10001;
     position: fixed;
   }
 
@@ -247,7 +260,7 @@
     line-height: 3.5;
     top: 50px;
     height: 50px;
-    width: 60%;
+    width: 84.7%;
   }
 
   .index-soul-control-class-fade-enter, .soul-control-class-fade-leave-active {

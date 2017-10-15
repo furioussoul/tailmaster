@@ -121,7 +121,7 @@ function onDrop(e) {
 
   const saveInfo = {
     drag:copy,
-      drop:this.controlConfig
+    drop:this.controlConfig
   }
 
   interceptDrop(saveInfo)
