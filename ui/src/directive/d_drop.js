@@ -17,10 +17,10 @@ export default {
         binding
       })
     }
-    el.oncontextmenu = function(e) {
+    el.oncontextmenu = function (e) {
       e.preventDefault()
       e.stopPropagation()
-      store.commit('dragModule/setRightClickMenu',el)
+      store.commit('dragModule/setRightClickMenu', el)
       return false;
     }
   },

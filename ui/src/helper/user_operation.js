@@ -65,8 +65,11 @@ function clear() {
 }
 
 function reload(controlConfigs) {
-  let dropPanelSoul = findSoul(100, controlConfigs)
-  store.commit('dragModule/setSoul', deepCopy(dropPanelSoul))
+  let dropPanelSoul = findSoul(100, controlConfigs),
+  copy = deepCopy(dropPanelSoul);
+  copy.uid = generateUid()
+  store.commit('dragModule/setSoul', copy)
+  store.commit('dragModule/setPageSoul', {})
 }
 
 function saveSoul() {

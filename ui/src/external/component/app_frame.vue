@@ -168,7 +168,7 @@
     methods: {
       home(){
           if(getConfig('type') === 'assemble'){
-            this.$router.push('/esview/assemble/index?pageId=%2Findex')
+            this.$router.push('/esview/assemble/operate_app?pageId=%2Findex')
           }else {
             this.$router.push('/index')
           }
@@ -223,7 +223,7 @@
     }
   }
 </script>
-<style lang="less">
+<style scoped lang="less">
   /*主页样式*/
 
   html, body {
@@ -406,7 +406,7 @@
     color: #fff;
     font-size: 24px;
     font-weight: bold;
-    background-color: #2d8cf0;
+    background-color: #2be5a0;
     text-align: center;
     border-right: 1px solid rgba(255, 255, 255, 0.7);
     transition: all .2s ease-in-out;
@@ -476,7 +476,7 @@
   }
 
   .layout-header .ivu-menu-dark {
-    background: #2d8cf0;
+    background: #2be5a0;
     height: 50px;
     line-height: 50px;
     font-size: 14px;

@@ -2,13 +2,19 @@ import store from '../store'
 import {
   isPlain
 } from '../util/assist'
+import {
+  currentUid
+} from '../helper/soul_helper'
 
 function addApp() {
-  let pageSoul = JSON.stringify(store.getters['dragModule/pageSoul'])
+  let pageSoul = store.getters['dragModule/pageSoul']
   if(isPlain(pageSoul)){
     return void this.$Message.error('can\'t save empty app,please drop Frame into middle area');
   }
-  this.opModel.pageSoul = pageSoul
+
+  pageSoul.maxUid = currentUid
+
+  this.opModel.pageSoul = JSON.stringify(pageSoul)
   this.$http.post('app/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')
@@ -30,7 +36,9 @@ function delApp(id) {
 }
 
 function updateApp() {
-  this.opModel.pageSoul = JSON.stringify(store.getters['dragModule/pageSoul'])
+  let pageSoul = store.getters['dragModule/pageSoul']
+  pageSoul.maxUid = currentUid
+  this.opModel.pageSoul = JSON.stringify(pageSoul)
   this.$http.post('app/update', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')

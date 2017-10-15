@@ -110,6 +110,7 @@
         this.$refs[name].resetFields();
       },
       hrefAdd(){
+
         this.$router.push('./operate_app')
       },
       edit(param){

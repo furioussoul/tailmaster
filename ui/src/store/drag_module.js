@@ -18,6 +18,7 @@ export default {
     soul: null,//展示用的组件树
     originSoul: null,//初始化soul
     pageSoul: {},//对应路由的soul
+    currentRouterPath:'',
     showEditorPanel: false,
     editSoul: {},
     controlConfigs: null,
@@ -55,7 +56,6 @@ export default {
   },
   mutations: {
     clear(state){
-      state.editLayer = {}
       state.editSoul = {}
       state.rightClickMenu = {}
     },

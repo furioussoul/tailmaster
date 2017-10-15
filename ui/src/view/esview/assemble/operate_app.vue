@@ -83,7 +83,8 @@
 <script>
 
   import {
-    findSoul
+    findSoul,
+    resetUid
   } from '../../../helper/soul_helper'
   import {
     getConfig
@@ -122,7 +123,7 @@
 
   let classes = [
     {
-      name: 'test controls',
+      name: 'controls',
       controls: []
     }
   ]
@@ -202,8 +203,12 @@
             pageSoul = JSON.parse(pageSoul)
 
             for (let key in pageSoul) {
-              let soul = pageSoul[key];
-              addRenderFn(pageSoul[key])
+                if(key === 'maxUid'){
+                  resetUid(pageSoul[key])
+                }else {
+                  let soul = pageSoul[key];
+                  addRenderFn(pageSoul[key])
+                }
             }
 
             store.commit('dragModule/setPageSoul', pageSoul)
@@ -260,7 +265,7 @@
     line-height: 3.5;
     top: 50px;
     height: 50px;
-    width: 84.7%;
+    width: 100%;
   }
 
   .index-soul-control-class-fade-enter, .soul-control-class-fade-leave-active {
