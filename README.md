@@ -1,4 +1,4 @@
-<p align="center"><a href="#">esview</p>
+<p align="center"><a href="#">Esview</p>
   
 <p align="center">
   <a href="https://www.npmjs.com/package/vue"><img src="https://img.shields.io/npm/dm/esview.svg" alt="Downloads"></a>
