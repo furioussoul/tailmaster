@@ -8,12 +8,16 @@
   <a href="https://saucelabs.com/u/vuejs"><img src="https://saucelabs.com/browser-matrix/vuejs.svg" alt="Sauce Test Status"></a>
 </p>
   
-# Intro
-Esform is a web editor for building interactive web page.  
+# Introduction
+Esview is a web frontend platform for building vue spa through html5 drag/drop api.  
 
-Build page on http://47.94.2.0:9090/ and get pageId,  
+To build vue spa,you only need 3 steps, after then run script : npm run dev 
 
-npm install esform and render page by pageId.
+First step : download vue-spa demo https://github.com/furioussoul/esview-demo 
+Second step : assemble pages online(this is online demo : http://47.94.2.0:9090/)
+Third : install esview npm package
+
+
 ***
 
 # demo
