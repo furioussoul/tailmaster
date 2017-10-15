@@ -49,6 +49,16 @@ public class AppResource {
         return Response.ok();
     }
 
+    @PostMapping("appList")
+    @ResponseBody
+    public Response appList(@RequestBody OperateAppRequest request) {
+        List<App> apps = appDao.selectByExample(new App(request.getName()));
+        if (!CollectionUtils.isEmpty(apps)) {
+            return Response.ok(apps.get(0));
+        }
+        return Response.ok();
+    }
+
     @PostMapping("tableAppList")
     @ResponseBody
     public Response tableAppList(@RequestBody BaseRequest request) {

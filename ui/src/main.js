@@ -50,7 +50,7 @@ const app = new Vue({
       case 'app':
         return h(RenderApp)
       case 'test':
-        return h(esview.render('appName','token'))
+        return h(esview.render('MyApp','token'))
     }
   }
 })

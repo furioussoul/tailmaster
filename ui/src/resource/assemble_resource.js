@@ -50,8 +50,8 @@ function updateApp() {
   })
 }
 
-function getAppList(fn) {
-  this.$http.post('control/appList').then(res => {
+function getAppList({appName,token},fn) {
+  this.http.post('app/appList',{name:appName}).then(res => {
     if (res.data.code === 10000) {
       this.controls = res.data.data
       if(fn){

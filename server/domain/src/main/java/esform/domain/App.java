@@ -17,6 +17,9 @@ public class App extends BaseDomain{
     public App() {
     }
 
+    public App(String name) {
+    }
+
     public String getName() {
         return name;
     }

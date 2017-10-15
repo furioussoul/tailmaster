@@ -117,7 +117,8 @@
   import {
     getConfig
   } from '../config'
-  import store from '../../store'
+  import store from '../store'
+  import esstore from '../../store'
   import {
     mapGetters,
     mapMutations
@@ -151,6 +152,7 @@
       },
       path() {
         const path = store.state.routerModule.path;
+
         if(!getConfig('type')){
           store.commit('soulModule/changeSoul', path)
         }
@@ -168,7 +170,7 @@
     methods: {
       home(){
           if(getConfig('type') === 'assemble'){
-            this.$router.push('/esview/assemble/operate_app?pageId=%2Findex' + '&appId=' + store.getters['dragModule/appId'])
+            this.$router.push('/esview/assemble/operate_app?pageId=%2Findex' + '&appId=' + esstore.getters['dragModule/appId'])
           }else {
             this.$router.push('/index')
           }

@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9348b697-3ebf-43e0-a987-74bc942b4ec8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/component/code_editor.vue" afterPath="$PROJECT_DIR$/../ui/src/component/code_editor.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/helper/code_helper.js" afterPath="$PROJECT_DIR$/../ui/src/helper/code_helper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/helper/soul_helper.js" afterPath="$PROJECT_DIR$/../ui/src/helper/soul_helper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/helper/user_operation.js" afterPath="$PROJECT_DIR$/../ui/src/helper/user_operation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/store/drag_module.js" afterPath="$PROJECT_DIR$/../ui/src/store/drag_module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/view/esview/assemble/operate_app.vue" afterPath="$PROJECT_DIR$/../ui/src/view/esview/assemble/operate_app.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domain/src/main/java/esform/domain/App.java" afterPath="$PROJECT_DIR$/domain/src/main/java/esform/domain/App.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/main/java/esform/app/resource/AppResource.java" afterPath="$PROJECT_DIR$/web/src/main/java/esform/app/resource/AppResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/package.json" afterPath="$PROJECT_DIR$/../ui/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/external/index.js" afterPath="$PROJECT_DIR$/../ui/src/external/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/main.js" afterPath="$PROJECT_DIR$/../ui/src/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/resource/assemble_resource.js" afterPath="$PROJECT_DIR$/../ui/src/resource/assemble_resource.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ui/src/store/user_module.js" afterPath="$PROJECT_DIR$/../ui/src/store/user_module.js" />
     </list>
     <ignored path="esform.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,12 +36,69 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="ControlResource.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ControlResource.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/src/main/java/esform/control/resource/ControlResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+            <state relative-caret-position="276">
+              <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OperateAppRequest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/src/main/java/esform/app/request/OperateAppRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="10" column="30" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppResource.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/src/main/java/esform/app/resource/AppResource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppDao.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dao/src/main/java/esform/dao/AppDao.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="383">
+              <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
+              <folding>
+                <marker date="1507953749739" expanded="true" signature="301:475" ph="INSERT INTO app... " />
+                <marker date="1507953749739" expanded="true" signature="552:613" ph="update app S... " />
+                <marker date="1507953749739" expanded="true" signature="696:1019" ph="update app `... " />
+                <marker date="1507953749739" expanded="true" signature="1099:1152" ph="select * fro... app" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/domain/src/main/java/esform/domain/App.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dao/src/main/java/esform/dao/AppDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,6 +127,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/web/src/main/java/esform/control/resource/ControlResource.java" />
+        <option value="$PROJECT_DIR$/web/src/main/java/esform/app/request/OperateAppRequest.java" />
+        <option value="$PROJECT_DIR$/domain/src/main/java/esform/domain/App.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/esform/dao/AppDao.xml" />
+        <option value="$PROJECT_DIR$/web/src/main/java/esform/app/resource/AppResource.java" />
       </list>
     </option>
   </component>
@@ -86,8 +148,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="495" />
-    <option name="y" value="113" />
+    <option name="x" value="243" />
+    <option name="y" value="118" />
     <option name="width" value="1924" />
     <option name="height" value="1056" />
   </component>
@@ -1050,16 +1112,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508040346663</updated>
-      <workItem from="1508040347992" duration="2635000" />
+      <workItem from="1508040347992" duration="3992000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3393000" />
+    <option name="totallyTimeSpent" value="4750000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="495" y="113" width="1924" height="1056" extended-state="0" />
-    <editor active="true" />
+    <frame x="243" y="118" width="1924" height="1056" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1069,7 +1131,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32955772" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32700893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32700893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1077,6 +1139,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25080907" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1087,7 +1150,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -1152,32 +1214,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/esform/dao/AppDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/domain/src/main/java/esform/domain/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#219#220#0" expanded="false" />
-            <element signature="e#244#245#0" expanded="false" />
-            <element signature="e#301#302#0" expanded="false" />
-            <element signature="e#328#329#0" expanded="false" />
-            <element signature="e#368#369#0" expanded="false" />
-            <element signature="e#400#401#0" expanded="false" />
-            <element signature="e#435#436#0" expanded="false" />
-            <element signature="e#466#467#0" expanded="false" />
-            <element signature="e#514#515#0" expanded="false" />
-            <element signature="e#554#555#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dao/src/main/java/esform/dao/ControlDao.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
@@ -1191,54 +1227,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/esform/dao/AppDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
-          <folding>
-            <marker date="1507953749739" expanded="true" signature="301:475" ph="INSERT INTO app... " />
-            <marker date="1507953749739" expanded="true" signature="552:613" ph="update app S... " />
-            <marker date="1507953749739" expanded="true" signature="696:1019" ph="update app `... " />
-            <marker date="1507953749739" expanded="true" signature="1099:1152" ph="select * fro... app" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/main/java/esform/app/resource/AppResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="30" column="48" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/main/java/esform/app/request/OperateAppRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
-          <folding>
-            <element signature="e#439#440#0" expanded="false" />
-            <element signature="e#464#465#0" expanded="false" />
-            <element signature="e#498#499#0" expanded="false" />
-            <element signature="e#526#527#0" expanded="false" />
-            <element signature="e#557#558#0" expanded="false" />
-            <element signature="e#584#585#0" expanded="false" />
-            <element signature="e#624#625#0" expanded="false" />
-            <element signature="e#656#657#0" expanded="false" />
-            <element signature="e#691#692#0" expanded="false" />
-            <element signature="e#722#723#0" expanded="false" />
-            <element signature="e#770#771#0" expanded="false" />
-            <element signature="e#810#811#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dao/src/main/java/esform/dao/ControlDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
           <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1252,8 +1245,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/src/main/java/esform/control/resource/ControlResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+        <state relative-caret-position="276">
+          <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/esform/dao/AppDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/esform/request/BaseRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/main/java/esform/app/request/OperateAppRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="10" column="30" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/domain/src/main/java/esform/domain/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/esform/dao/AppDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
+          <folding>
+            <marker date="1507953749739" expanded="true" signature="301:475" ph="INSERT INTO app... " />
+            <marker date="1507953749739" expanded="true" signature="552:613" ph="update app S... " />
+            <marker date="1507953749739" expanded="true" signature="696:1019" ph="update app `... " />
+            <marker date="1507953749739" expanded="true" signature="1099:1152" ph="select * fro... app" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/main/java/esform/app/resource/AppResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
           <folding />
         </state>
       </provider>

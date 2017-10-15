@@ -72,6 +72,7 @@ function reload(controlConfigs) {
   copy = deepCopy(dropPanelSoul);
   copy.uid = generateUid()
   store.commit('dragModule/setSoul', copy)
+  store.commit('dragModule/setPageSoul', {pageSoul:{}})
 }
 
 function saveSoul() {
