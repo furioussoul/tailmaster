@@ -4,7 +4,8 @@ import {
   wrapCard
 } from './component'
 import {
-  addConfig
+  addConfig,
+  getConfig
 } from './config'
 import {
   parse
@@ -41,6 +42,7 @@ function render(appName, token) {
 
 export default{
   addConfig,
+  getConfig,
   render
 }   // eslint-disable-line no-undef
 
