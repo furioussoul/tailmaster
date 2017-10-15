@@ -29,7 +29,7 @@ live: http://47.94.2.0:9090/
 usage: https://github.com/furioussoul/esview-demo
 
 
-![pic](http://chuantu.biz/t6/98/1508081160x1968430843.png "esview")
+![pic](http://chuantu.biz/t6/98/1508081223x1968430843.png "esview")
 
 
 # License
