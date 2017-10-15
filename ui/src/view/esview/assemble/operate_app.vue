@@ -71,7 +71,13 @@
       v-model="showEditScriptModal"
       title="script"
       @on-ok="okEditControl">
-
+      <div slot="footer">
+      </div>
+      <CodeEditor
+                  style="height: 280px"
+                  :code="editControlSoul.script"
+                  @save="saveCode">
+      </CodeEditor>
     </Modal>
 
     <div class="edit_layer" :style="editLayer.style">
@@ -92,6 +98,7 @@
 
   import {
     findSoul,
+    findNode,
     resetUid
   } from '../../../helper/soul_helper'
   import {
@@ -116,7 +123,9 @@
     getControlList
   } from  '../../../resource/develop_resource'
   import {
-    copyProperties
+    copyProperties,
+    stringify,
+    parse
   }from '../../../util/assist'
 
   import {
@@ -125,9 +134,6 @@
     updateApp,
     getRichApp
   } from '../../../resource/assemble_resource'
-  import {
-    addRenderFn
-  } from '../../../helper/code_helper'
 
   let classes = [
     {
@@ -144,6 +150,9 @@
       return {
         showConfirmAppNameModal: false,
         showEditScriptModal: false,
+        editControlSoul:{
+          script:''
+        },
         opModel: {},
         isPreview: true,
         collapseValue: "0",
@@ -163,7 +172,16 @@
           'changePage'
         ]),
       editControl(){
-         this.rightClickMenu.uid
+        this.editControlSoul = findNode(this.rightClickMenu.uid)
+        this.editControlSoul.script = this.editControlSoul.script.toString()
+        store.commit('dragModule/clear')
+        this.showEditScriptModal= true
+      },
+      saveCode(code){
+        this.editControlSoul.script = code
+        this.showEditScriptModal= false
+        let soul = store.getters['dragModule/soul']
+        store.commit('dragModule/syncSoul', soul)
       },
       okEditControl(){
         addApp.call(this)
@@ -215,14 +233,11 @@
           getRichApp.call(this, query.id, (data) => {
             this.opModel = data
             let pageSoul = data.pageSoul
-            pageSoul = JSON.parse(pageSoul)
+            pageSoul = parse(pageSoul)
 
             for (let key in pageSoul) {
                 if(key === 'maxUid'){
                   resetUid(pageSoul[key])
-                }else {
-                  let soul = pageSoul[key];
-                  addRenderFn(pageSoul[key])
                 }
             }
 

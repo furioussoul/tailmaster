@@ -152,6 +152,9 @@ export default {
     },
     setPageSoul(state,pageSoul){
       state.pageSoul = pageSoul
+    },
+    syncSoul(state,soul){
+      state.pageSoul[state.currentRouterPath] = soul
     }
   },
   actions: {

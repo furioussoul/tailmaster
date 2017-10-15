@@ -7,6 +7,26 @@
 import Vue from 'vue';
 const isServer = Vue.prototype.$isServer;
 
+export function stringify(obj) {
+  return JSON.stringify(obj, function (key, val) {
+    if (typeof val === 'function') {
+      return val.toString();
+    }
+    return val;
+  });
+}
+
+export function parse(string) {
+  return JSON.parse(string, function (k, v) {
+    if (k === 'render' ||
+      k === 'renderProd' ||
+      k === 'script') {
+      return eval("(function(){return " + v + " })()")
+    }
+    return v;
+  });
+}
+
 export function getQueryParam(name) {
   let hash = window.location.hash.substring(1),
     paramIndex = hash.indexOf('?') + 1,
@@ -23,9 +43,9 @@ export function getQueryParam(name) {
 }
 
 //拷贝一层
-export function copyProperties(target,source) {
-  for(let key in source){
-    if(!target.hasOwnProperty(key)){
+export function copyProperties(target, source) {
+  for (let key in source) {
+    if (!target.hasOwnProperty(key)) {
       target[key] = source[key]
     }
   }
@@ -33,7 +53,7 @@ export function copyProperties(target,source) {
 
 //非负整数
 export function isNumber() {
-  const reg =  "^\\d+$"
+  const reg = "^\\d+$"
   return
 }
 
@@ -42,7 +62,7 @@ const dayStamp = 24 * 60 * 60 * 1000
 const hourStamp = 60 * 60 * 1000
 const minStamp = 60 * 1000
 export function getTimeSpan(timeStamp) {
-  if(timeStamp <= 0){
+  if (timeStamp <= 0) {
     return '1分钟'
   }
   let remainTime
@@ -224,7 +244,7 @@ export function getParamInUrl(url) {
 }
 
 // 判断参数是否是其中之一
-export function oneOf (value, validList) {
+export function oneOf(value, validList) {
   for (let i = 0; i < validList.length; i++) {
     if (value === validList[i]) {
       return true;
@@ -233,13 +253,13 @@ export function oneOf (value, validList) {
   return false;
 }
 
-export function camelcaseToHyphen (str) {
+export function camelcaseToHyphen(str) {
   return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
 // For Modal scrollBar hidden
 let cached;
-export function getScrollBarSize (fresh) {
+export function getScrollBarSize(fresh) {
   if (isServer) return 0;
   if (fresh || cached === undefined) {
     const inner = document.createElement('div');
@@ -284,12 +304,12 @@ const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
 const MOZ_HACK_REGEXP = /^moz([A-Z])/;
 
 function camelCase(name) {
-  return name.replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
+  return name.replace(SPECIAL_CHARS_REGEXP, function (_, separator, letter, offset) {
     return offset ? letter.toUpperCase() : letter;
   }).replace(MOZ_HACK_REGEXP, 'Moz$1');
 }
 // getStyle
-export function getStyle (element, styleName) {
+export function getStyle(element, styleName) {
   if (!element || !styleName) return null;
   styleName = camelCase(styleName);
   if (styleName === 'float') {
@@ -298,7 +318,7 @@ export function getStyle (element, styleName) {
   try {
     const computed = document.defaultView.getComputedStyle(element, '');
     return element.style[styleName] || computed ? computed[styleName] : null;
-  } catch(e) {
+  } catch (e) {
     return element.style[styleName];
   }
 }
@@ -319,16 +339,16 @@ export function warnProp(component, prop, correctType, wrongType) {
 function typeOf(obj) {
   const toString = Object.prototype.toString;
   const map = {
-    '[object Boolean]'  : 'boolean',
-    '[object Number]'   : 'number',
-    '[object String]'   : 'string',
-    '[object Function]' : 'function',
-    '[object Array]'    : 'array',
-    '[object Date]'     : 'date',
-    '[object RegExp]'   : 'regExp',
+    '[object Boolean]': 'boolean',
+    '[object Number]': 'number',
+    '[object String]': 'string',
+    '[object Function]': 'function',
+    '[object Array]': 'array',
+    '[object Date]': 'date',
+    '[object RegExp]': 'regExp',
     '[object Undefined]': 'undefined',
-    '[object Null]'     : 'null',
-    '[object Object]'   : 'object'
+    '[object Null]': 'null',
+    '[object Object]': 'object'
   };
   return map[toString.call(obj)];
 }
@@ -340,7 +360,7 @@ function deepCopy(data) {
 
   if (t === 'array') {
     o = [];
-  } else if ( t === 'object') {
+  } else if (t === 'object') {
     o = {};
   } else {
     return data;
@@ -350,7 +370,7 @@ function deepCopy(data) {
     for (let i = 0; i < data.length; i++) {
       o.push(deepCopy(data[i]));
     }
-  } else if ( t === 'object') {
+  } else if (t === 'object') {
     for (let i in data) {
       o[i] = deepCopy(data[i]);
     }
@@ -368,7 +388,7 @@ export function scrollTop(el, from = 0, to, duration = 500) {
       window.mozRequestAnimationFrame ||
       window.msRequestAnimationFrame ||
       function (callback) {
-        return window.setTimeout(callback, 1000/60);
+        return window.setTimeout(callback, 1000 / 60);
       }
     );
   }
@@ -390,11 +410,12 @@ export function scrollTop(el, from = 0, to, duration = 500) {
     }
     window.requestAnimationFrame(() => scroll(d, end, step));
   }
+
   scroll(from, to, step);
 }
 
 // Find components upward
-function findComponentUpward (context, componentName, componentNames) {
+function findComponentUpward(context, componentName, componentNames) {
   if (typeof componentName === 'string') {
     componentNames = [componentName];
   } else {
@@ -412,7 +433,7 @@ function findComponentUpward (context, componentName, componentNames) {
 export {findComponentUpward};
 
 // Find component downward
-function findComponentDownward (context, componentName) {
+function findComponentDownward(context, componentName) {
   const childrens = context.$children;
   let children = null;
 
@@ -441,7 +462,7 @@ function findComponentDownward (context, componentName) {
 export {findComponentDownward};
 
 // Find components downward
-function findComponentsDownward (context, componentName, components = []) {
+function findComponentsDownward(context, componentName, components = []) {
   const childrens = context.$children;
 
   if (childrens.length) {
@@ -461,7 +482,7 @@ function findComponentsDownward (context, componentName, components = []) {
 export {findComponentsDownward};
 
 /* istanbul ignore next */
-const trim = function(string) {
+const trim = function (string) {
   return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 };
 

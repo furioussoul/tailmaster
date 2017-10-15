@@ -1,6 +1,8 @@
 import store from '../store'
 import {
-  isPlain
+  isPlain,
+  stringify,
+  parse
 } from '../util/assist'
 import {
   currentUid
@@ -14,7 +16,7 @@ function addApp() {
 
   pageSoul.maxUid = currentUid
 
-  this.opModel.pageSoul = JSON.stringify(pageSoul)
+  this.opModel.pageSoul = stringify(pageSoul)
   this.$http.post('app/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')
@@ -38,7 +40,7 @@ function delApp(id) {
 function updateApp() {
   let pageSoul = store.getters['dragModule/pageSoul']
   pageSoul.maxUid = currentUid
-  this.opModel.pageSoul = JSON.stringify(pageSoul)
+  this.opModel.pageSoul = stringify(pageSoul)
   this.$http.post('app/update', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')

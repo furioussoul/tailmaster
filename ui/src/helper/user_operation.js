@@ -8,8 +8,9 @@ import {
   findSoul
 } from './soul_helper'
 import {
-  addRenderFn
-} from './code_helper'
+  stringify,
+  parse
+}from '../util/assist'
 
 let templateStore = {
   count: 0,//version number
@@ -22,11 +23,11 @@ function drop(saveInfo) {
     templateStore.dataSnapshot = templateStore.dataSnapshot.slice(0, templateStore.count)
   }
   saveInfo.drop.children.push(saveInfo.drag)
-  let data = store.getters['dragModule/soul']
-  templateStore.dataSnapshot[templateStore.count] = deepCopy(data)
+  let soul = store.getters['dragModule/soul']
+  templateStore.dataSnapshot[templateStore.count] = deepCopy(soul)
   templateStore.count++
 
-  localStorage.setItem("templateStore", JSON.stringify(templateStore));
+  localStorage.setItem("templateStore", stringify(templateStore));
 }
 
 function undo() {
@@ -36,10 +37,9 @@ function undo() {
   let dataSnapshot = templateStore.dataSnapshot[templateStore.count - 2];
   dataSnapshot = dataSnapshot ? dataSnapshot : deepCopy(findSoul(100, store.getters['dragModule/controlConfigs']))
   let soulCopy = deepCopy(dataSnapshot)
-  addRenderFn(soulCopy)
+
   store.commit('dragModule/setSoul', soulCopy)
-  let pageSoul = store.getters['dragModule/pageSoul'];
-  pageSoul[store.getters['dragModule/currentRouterPath']] = soulCopy
+  store.commit('dragModule/syncSoul', soulCopy)
   templateStore.count--;
   return true;
 }
@@ -50,10 +50,8 @@ function redo() {
   }
   let soulSnap = templateStore.dataSnapshot[templateStore.count++]
   let soulCopy = deepCopy(soulSnap)
-  addRenderFn(soulCopy)
   store.commit('dragModule/setSoul', soulCopy)
-  let pageSoul = store.getters['dragModule/pageSoul'];
-  pageSoul[store.getters['dragModule/currentRouterPath']] = soulCopy
+  store.commit('dragModule/syncSoul', soulCopy)
   return true;
 }
 
@@ -81,7 +79,7 @@ function saveSoul() {
   let data = store.getters['dragModule/soul']
   templateStore.dataSnapshot[templateStore.count] = deepCopy(data)//版本2
   templateStore.count++
-  localStorage.setItem("templateStore", JSON.stringify(templateStore));
+  localStorage.setItem("templateStore", stringify(templateStore));
 }
 
 export {

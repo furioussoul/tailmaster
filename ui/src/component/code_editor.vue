@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 100%">
     <ButtonGroup>
       <Button @click="save">save</Button>
     </ButtonGroup>
@@ -24,7 +24,7 @@
     },
     watch:{
       code(n){
-        this.editor.setValue(this.code)
+        this.editor.setValue(n)
       }
     },
     mounted(){

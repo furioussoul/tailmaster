@@ -1,13 +1,5 @@
 const REG_EX = new RegExp(/.([a-zA-Z]+)[\s]*=[\s]*([\s\S]*)(;*)/)
 
-export function addRenderFn(soul) {
-  let config = getConfig(soul.code);
-  soul.render = config.render
-  soul.children.forEach(child => {
-    addRenderFn(child)
-  })
-}
-
 export function getConfig(code) {
   code = code.trim()
   let config = {
