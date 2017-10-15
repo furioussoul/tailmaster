@@ -23,8 +23,6 @@ Second step : assemble pages online(this is online demo : http://47.94.2.0:9090/
 Third : install esview npm package
 
 
-***
-
 # demo
 live: http://47.94.2.0:9090/  
 
@@ -35,7 +33,6 @@ usage: https://github.com/furioussoul/esview-demo
 Esform is still weak with dozen bugs,  
 
 but I will make it more strong and powerful.  
-***
 
 
 ![pic](http://chuantu.biz/t6/74/1506784745x1966915555.png "拖拽组装")
