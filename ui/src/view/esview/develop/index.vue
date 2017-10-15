@@ -125,7 +125,7 @@
         this.$router.push({path: './operate_control', query: {id: param.row.id}})
       },
       del(param){
-        delControl.call(this,param.row.id)
+//        delControl.call(this,param.row.id)
       }
     }
   }

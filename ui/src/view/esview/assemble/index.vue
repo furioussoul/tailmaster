@@ -117,7 +117,7 @@
         this.$router.push({path: './operate_app', query: {appId: param.row.id}})
       },
       del(param){
-        delApp.call(this,param.row.id)
+//        delApp.call(this,param.row.id)
       }
     }
   }
