@@ -9,22 +9,29 @@
 </p>
   
 # Introduction
-Esview is a web frontend platform for building vue spa through html5 drag/drop api.
+Esview is a web frontend platform for building vue spa through html5 drag/drop api.  
+
+Recommand use webpack constructor spa to inject esview.
 
 
 # Quick Start
 
-To build vue spa,you only need 3 steps, after then run script : npm run dev 
+To build vue spa,you only need 3 steps, after then run script
 
-First step : download vue-spa demo https://github.com/furioussoul/esview-demo   
+First step : download vue-spa demo(esview-demo) https://github.com/furioussoul/esview-demo   
 
-Second step : assemble pages online(this is online demo : http://47.94.2.0:9090/)  
+Second step : assemble pages online on manager-site(this is online demo : http://47.94.2.0:9090/)  
 
-Third : install esview npm package
+Third step: esview-demo install esview npm package and npm run dev to deploy
 
 
-# Demo
-live: http://47.94.2.0:9090/  
+# Live Demo
+
+Assemble vue spa on manager-site,then you can see spa changed on client-site.
+
+manager-site: http://47.94.2.0:9090/  
+
+client-site: http://47.94.2.0:9091/#/index  
 
 usage: https://github.com/furioussoul/esview-demo
 
