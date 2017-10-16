@@ -29,7 +29,7 @@ Third step: esview-demo install esview npm package and npm run dev to deploy
 
 Assemble vue spa on manager-site,then you can see spa changed on client-site.
 
-manager-site: http://47.94.2.0:9090/  
+manager-site: http://47.94.2.0:9090/#/esview/assemble/operate_app?appId=36 
 
 client-site: http://47.94.2.0:9091/#/index  
 
