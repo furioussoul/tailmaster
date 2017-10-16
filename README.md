@@ -25,7 +25,7 @@ Second step : assemble pages online on manager-site(this is online demo : http:/
 Third step: esview-demo install esview npm package and npm run dev to deploy
 
 
-# Live Demo
+# Demo
 
 Assemble vue spa on manager-site,then you can see spa changed on client-site.
 
@@ -37,6 +37,7 @@ usage: https://github.com/furioussoul/esview-demo
 
 
 ![pic](http://chuantu.biz/t6/98/1508081223x1968430843.png "esview")
+![pic](http://chuantu.biz/t6/99/1508130896x1114690581.png "esview")
 
 
 # License
