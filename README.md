@@ -23,7 +23,7 @@ Second step : assemble pages online(this is online demo : http://47.94.2.0:9090/
 Third : install esview npm package
 
 
-# demo
+# Demo
 live: http://47.94.2.0:9090/  
 
 usage: https://github.com/furioussoul/esview-demo
