@@ -12,8 +12,9 @@ export function addRenderFn(soul) {
 export function getConfig(code) {
   code = code.trim()
   let config = {
-    children :[]
+    children: []
   }
+
   let fragments = code.split('exports')
   fragments.forEach(fragment => {
     let match = fragment.match(REG_EX);
@@ -34,7 +35,7 @@ export function getConfig(code) {
         //obj
         configValue = configValue.replace(/\r\n/, "")
         configValue = configValue.replace(/;/, "")
-        configValue = eval('(' + configValue+')')
+        configValue = eval('(' + configValue + ')')
       } else if (configValue.indexOf('function') === 0) {
         //function
         configValue = '(function () { \r\n return ' + configValue + '})()'
@@ -44,10 +45,10 @@ export function getConfig(code) {
         const reg = /\[([\s\S]*)\]/
         configValue = configValue.match(reg)[1].split(',')
         let emptyIndex = configValue.indexOf('')
-        if(emptyIndex > -1){
-          configValue.splice(emptyIndex,1)
+        if (emptyIndex > -1) {
+          configValue.splice(emptyIndex, 1)
         }
-      }else if(configValue.indexOf('null') === 0){
+      } else if (configValue.indexOf('null') === 0) {
         configValue = null
       }
       config[configKey] = configValue
