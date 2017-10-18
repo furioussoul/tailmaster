@@ -5,11 +5,11 @@ import Iview from 'iview';
 import {appApi, appContext} from "./plugin/config";
 import {initRouter, router, routerStore} from "./plugin/router";
 import SoulUi from "./plugin/install_component"
+import installDirective from "./plugin/install_directive"
 import Store from './store/index'
 import initAppConstructor from './plugin/app_constuctor'
 import 'iview/dist/styles/iview.css'
 import './style/index.less'
-import directive from './directive/d_drop'
 import Login from './view/esview/login.vue'
 import RenderApp from './view/esview/render_app.vue'
 import esview from './external'
@@ -20,7 +20,6 @@ esview.addConfig('type','assemble')
 
 Vue.dev = true
 
-Vue.directive('drop',directive)
 Vue.use(VueResource)
 Vue.use(VueRouter)
 Vue.use(SoulUi)

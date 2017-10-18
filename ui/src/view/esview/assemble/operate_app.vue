@@ -117,7 +117,7 @@
     mapGetters,
     mapMutations
   } from 'vuex'
-  import dropDirective from '../../../directive/d_drop'
+  import dropDirective from '../../../directive/droppable'
   import store from '../../../store'
   import Editor from '../../../component/editor.vue'
   import {

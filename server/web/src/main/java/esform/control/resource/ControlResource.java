@@ -41,6 +41,15 @@ public class ControlResource {
         return Response.ok();
     }
 
+    @PostMapping("updateProps")
+    @ResponseBody
+    public Response updateProps(@RequestBody OperateControlRequest request) {
+        //// TODO: 2017/10/18  
+        Control domain = request.getDomain();
+        controlDao.update(domain);
+        return Response.ok();
+    }
+
     @PostMapping("update")
     @ResponseBody
     public Response update(@RequestBody OperateControlRequest request) {

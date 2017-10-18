@@ -46,10 +46,12 @@
     }
   }
 
-  & .ivu-radio-group{
+  & .ivu-radio-group,
+  & .ivu-checkbox-group,
+  & .ivu-tabs{
     .makeContainer();
-    min-height: 20px;
-    min-width: 40px;
+    min-height: 40px;
+    min-width: 60px;
     //preview model
     .is-preview &{
       border: 1px dashed #339ae2;
@@ -57,10 +59,9 @@
     }
   }
 
-  & .ivu-checkbox-group{
+  & .ivu-tabs-tabpane{
     .makeContainer();
     min-height: 40px;
-    min-width: 60px;
     //preview model
     .is-preview &{
       border: 1px dashed #339ae2;
