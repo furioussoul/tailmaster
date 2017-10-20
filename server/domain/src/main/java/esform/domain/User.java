@@ -17,6 +17,13 @@ public class User extends BaseDomain {
     private String profession;
     private List<Role> roleList;
 
+    public User(String userName) {
+        this.userName = userName;
+    }
+
+    public User() {
+    }
+
     public List<Role> getRoleList() {
         return roleList;
     }

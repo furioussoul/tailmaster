@@ -31,8 +31,8 @@ public class Response {
 
     }
 
-    public static Response unAuthenticated() {
-        return ok(Status.unAuthenticated);
+    public static Response unAuthenticated(String msg) {
+        return ok(Status.unAuthenticated, msg);
     }
 
     public static Response fail() {

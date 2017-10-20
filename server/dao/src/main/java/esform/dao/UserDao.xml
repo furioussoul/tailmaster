@@ -12,22 +12,12 @@
         #{createBy},#{createDt},#{updateBy},#{updateDt},1)
     </insert>
 
-    <insert id="addUserRole">
-        INSERT INTO user_role
-        (userId,roleId)
-        VALUES (#{userId},#{roleId})
-    </insert>
-
     <select id="select"
             parameterType="esform.domain.User"
-            resultType="esform.domain.Role">
-        select *
-        from role r
-        RIGHT JOIN `user` u
-        on r.userId = u.id
-        WHERE r.rowStatus = 1
-        and u.rowStatus = 1
-        and u.userName = #{userName}
+            resultType="esform.domain.User">
+        select * from `user`
+        WHERE rowStatus = 1
+        and userName = #{userName}
     </select>
 
 </mapper>

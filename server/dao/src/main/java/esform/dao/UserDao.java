@@ -1,7 +1,6 @@
 package esform.dao;
 
 import esform.domain.User;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * Created by
@@ -11,8 +10,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserDao {
     int add(User user);
-
-    int addUserRole(@Param("userId") Long userId, @Param("roleId") Long roleId);
 
     User select(User example);
 }
