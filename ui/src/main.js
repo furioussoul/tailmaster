@@ -5,6 +5,7 @@ import Iview from 'iview';
 import {appApi, appContext} from "./plugin/config";
 import {initRouter, router, routerStore} from "./plugin/router";
 import interceptor from './plugin/interceptor'
+import installDirective from "./plugin/install_directive"
 import SoulUi from "./plugin/install_component"
 import Store from './store/index'
 import initAppConstructor from './plugin/app_constuctor'
