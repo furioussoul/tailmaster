@@ -35,6 +35,9 @@
         select *
         from app
         WHERE rowStatus = 1
+        <if test="name != null and name != ''">
+           `name` LIKE CONCAT(CONCAT('%', #{name}),'%')
+        </if>
     </select>
 
     <select id="selectByExample" resultType="esform.domain.App">

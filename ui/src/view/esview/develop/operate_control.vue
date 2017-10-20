@@ -25,10 +25,14 @@
       saveCode(code){
         this.opModel.code = code
         if (this.opModel.id) {
-          updateControl.call(this)
+          updateControl.call(this,()=>{
+            this.$router.push('./index')
+          })
         }
         else {
-          addControl.call(this)
+          addControl.call(this,()=>{
+            this.$router.push('./index')
+          })
         }
       }
     },

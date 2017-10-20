@@ -1,7 +1,5 @@
 package esform.domain;
 
-import com.sun.org.apache.xpath.internal.operations.String;
-
 /**
  * Created by
  *
@@ -11,6 +9,7 @@ import com.sun.org.apache.xpath.internal.operations.String;
 public class Clazz extends BaseDomain{
     private String name;
     private Integer type;
+    private Integer sort;
 
     public Clazz(String name) {
         this.name = name;
@@ -33,5 +32,13 @@ public class Clazz extends BaseDomain{
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

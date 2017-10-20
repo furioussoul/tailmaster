@@ -6,8 +6,8 @@
 
     <insert id="add" parameterType="esform.domain.Control" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO control
-        (`name`,nickname,code,createBy,createDt,updateBy,updateDt,rowStatus)
-        VALUES (#{name},#{nickname},#{code},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
+        (`name`,nickname,code,clazzId,sort,createBy,createDt,updateBy,updateDt,rowStatus)
+        VALUES (#{name},#{nickname},#{code},#{clazzId},#{sort},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
     </insert>
 
     <delete id="del" parameterType="java.lang.Long">
@@ -28,6 +28,12 @@
             <if test="code != null">
                 `code` = #{code},
             </if>
+            <if test="clazzId != null">
+                `clazzId` = #{clazzId},
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort},
+            </if>
             updateBy = #{updateBy},
             updateDt = #{updateDt}
         </set>
@@ -35,25 +41,40 @@
     </update>
 
     <select id="select" resultType="esform.domain.Control">
-        select *
+        select control.*, clazz.name AS clazzName
         from control
-        WHERE rowStatus = 1
+        LEFT JOIN  clazz
+        ON control.clazzId = clazz.id
+        <where>
+            control.rowStatus = 1
+            AND clazz.rowStatus = 1
+            <if test="controlName != null and controlName != ''">
+              and control.name LIKE CONCAT(CONCAT('%', #{controlName}),'%')
+            </if>
+            <if test="controlClass != null and controlClass != ''">
+              and clazz.name LIKE CONCAT(CONCAT('%', #{controlClass}),'%')
+            </if>
+        </where>
+        order BY control.id desc
     </select>
 
     <select id="selectByExample" resultType="esform.domain.Control">
-        select *
-        from control
+        select control.*, clazz.name AS clazzName
+        from control control
+        LEFT JOIN  clazz clazz
+        ON control.clazzId = clazz.id
         <where>
             <if test="id != null">
-                id = #{id}
+                control.id = #{id}
             </if>
             <if test="name != null">
-                and `name` = #{name}
+                and control.name = #{name}
             </if>
             <if test="nickname != null">
-                and nickname = #{nickname}
+                and control.nickname = #{nickname}
             </if>
-            and rowStatus = 1
+            and control.rowStatus = 1
+            and clazz.rowStatus = 1
         </where>
     </select>
 </mapper>

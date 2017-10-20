@@ -11,6 +11,9 @@ public class Control extends BaseDomain {
     private String name;
     private String nickname;
     private String code;
+    private Long clazzId;
+    private String clazzName;
+    private Integer sort;
 
     public Control() {
     }
@@ -41,5 +44,29 @@ public class Control extends BaseDomain {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Long getClazzId() {
+        return clazzId;
+    }
+
+    public void setClazzId(Long clazzId) {
+        this.clazzId = clazzId;
+    }
+
+    public String getClazzName() {
+        return clazzName;
+    }
+
+    public void setClazzName(String clazzName) {
+        this.clazzName = clazzName;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

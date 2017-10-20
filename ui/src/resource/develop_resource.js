@@ -2,13 +2,15 @@ import {
   getConfig
 } from '../helper/code_helper'
 
-
-function addControl() {
+function addControl(fn) {
 
   let config = getConfig(this.opModel.code)
 
   this.$http.post('control/add', config).then(res => {
     if (res.data.code === 10000) {
+      if(fn){
+        fn.call(this)
+      }
       this.$Message.success('saved')
     } else {
       this.$Message.error('saved failed')
@@ -27,12 +29,14 @@ function delControl(id) {
   })
 }
 
-function updateControl() {
+function updateControl(fn) {
 
-  let config = getConfig(this.opModel.code)
-  config.id = this.opModel.id
-  this.$http.post('control/update', config).then(res => {
+  this.$http.post('control/update', this.opModel).then(res => {
     if (res.data.code === 10000) {
+      if(fn){
+        fn.call(this)
+      }
+      getTableControlList.call(this)
       this.$Message.success('saved')
     } else {
       this.$Message.error('save failed')

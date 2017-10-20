@@ -4,8 +4,8 @@
         <Card>
           <div>
             <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
-              <Form-item prop="controlName" label="appName:">
-                <Input v-model="searchInput.controlName">
+              <Form-item prop="name" label="appName:">
+                <Input v-model="searchInput.name">
                 </Input>
               </Form-item>
               <ButtonGroup>
@@ -100,8 +100,7 @@
           pageNum: 1,
           pageSize: 20,
           total: 0,
-          controlName: '',
-          controlClass: ''
+          name: ''
         }
       }
     },
@@ -116,6 +115,7 @@
       edit(param){
         this.$router.push({path: './operate_app', query: {appId: param.row.id}})
       },
+
       del(param){
 //        delApp.call(this,param.row.id)
       }

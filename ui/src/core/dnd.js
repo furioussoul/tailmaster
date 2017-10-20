@@ -60,7 +60,6 @@ function onDragLeave(e) {
 }
 
 function validateDrop(drag, drop) {
-
   if (!drag) {
     return false
   }

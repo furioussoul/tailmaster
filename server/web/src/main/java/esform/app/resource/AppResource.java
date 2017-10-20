@@ -3,9 +3,9 @@ package esform.app.resource;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import esform.app.request.OperateAppRequest;
+import esform.app.request.QueryAppRequest;
 import esform.dao.AppDao;
 import esform.domain.App;
-import esform.request.BaseRequest;
 import esform.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,7 +61,7 @@ public class AppResource {
 
     @PostMapping("tableAppList")
     @ResponseBody
-    public Response tableAppList(@RequestBody BaseRequest request) {
+    public Response tableAppList(@RequestBody QueryAppRequest request) {
         PageInfo<App> apps = PageHelper
                 .startPage(request.getPageNum(), request.getPageSize())
                 .doSelectPageInfo(() -> {

@@ -73,9 +73,9 @@
       <div slot="footer">
       </div>
       <CodeEditor
-                  style="height: 280px"
-                  :code="editControlSoul.scriptString"
-                  @save="saveCode">
+        style="height: 280px"
+        :code="editControlSoul.scriptString"
+        @save="saveCode">
       </CodeEditor>
     </Modal>
 
@@ -137,12 +137,6 @@
     getRichApp
   } from '../../../resource/assemble_resource'
 
-  let classes = [
-    {
-      name: 'controls',
-      controls: []
-    }
-  ]
   export default {
     components: {
       Render,
@@ -152,17 +146,17 @@
       return {
         showConfirmAppNameModal: false,
         showEditScriptModal: false,
-        editControlSoul:{
-          scriptString:''
+        editControlSoul: {
+          scriptString: ''
         },
         opModel: {},
         isPreview: true,
         collapseValue: "0",
-        classes: classes
+        classes: []
       }
     },
     computed: {
-      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu','showEditorPanel'])
+      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu', 'showEditorPanel'])
     },
     methods: {
       ...mapMutations('dragModule',
@@ -177,12 +171,12 @@
         this.editControlSoul = findNode(this.rightClickMenu.uid)
         this.editControlSoul.scriptString = this.editControlSoul.script.toString()
         store.commit('dragModule/clear')
-        this.showEditScriptModal= true
+        this.showEditScriptModal = true
       },
       saveCode(code){
         this.editControlSoul.scriptString = code
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
-        this.showEditScriptModal= false
+        this.showEditScriptModal = false
         let soul = store.getters['dragModule/soul']
         store.commit('dragModule/syncSoul', soul)
       },
@@ -214,14 +208,27 @@
     mounted(){
       getControlList.call(this, (data) => {
         let controlConfigs = []
-        this.classes[0].controls = []
         data.forEach(control => {
           let controlConfig = getConfig(control.code);
           controlConfigs.push(controlConfig)
         })
 
-        for (let i = 0; i < controlConfigs.length; i++) {
-          this.classes[0].controls.push(controlConfigs[i])
+        let map = {}
+
+        data.forEach(item => {
+
+          if (!map[item.clazzName]) {
+            map[item.clazzName] = []
+          }
+          map[item.clazzName].push(item)
+        })
+
+
+        for(let key in map){
+            this.classes.push({
+              name:key,
+              controls:map[key]
+            })
         }
 
         store.commit('dragModule/setControlConfigs', controlConfigs)
@@ -231,21 +238,21 @@
           reload(controlConfigs)
         } else {
           getRichApp.call(this, query.appId, (data) => {
-            store.commit('dragModule/setAppId',query.appId)
+            store.commit('dragModule/setAppId', query.appId)
             this.opModel = data
             let pageSoul = data.pageSoul
             pageSoul = parse(pageSoul)
 
             for (let key in pageSoul) {
-                if(key === 'maxUid'){
-                  resetUid(pageSoul[key])
-                }else {
-                  addRenderFn(pageSoul[key])
-                }
+              if (key === 'maxUid') {
+                resetUid(pageSoul[key])
+              } else {
+                addRenderFn(pageSoul[key])
+              }
             }
 
             store.commit('dragModule/setPageSoul', {
-                pageSoul:pageSoul
+              pageSoul: pageSoul
             })
             store.commit('dragModule/setSoul', pageSoul['/index'])
 
@@ -253,7 +260,7 @@
             let dropPanelSoul = findSoul(100, store.getters['dragModule/controlConfigs'])
             dropPanelSoul.uid = generateUid()
             frame.children.push(deepCopy(dropPanelSoul))
-            store.commit('dragModule/setOriginSoul',frame)
+            store.commit('dragModule/setOriginSoul', frame)
           })
         }
       })

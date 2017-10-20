@@ -14,6 +14,8 @@ public class OperateControlRequest {
     private String name;
     private String nickname;
     private String code;
+    private Long clazzId;
+    private Integer sort;
 
     public Control getDomain() {
         Control control = new Control();
@@ -21,6 +23,8 @@ public class OperateControlRequest {
         control.setName(name);
         control.setNickname(nickname);
         control.setCode(code);
+        control.setClazzId(clazzId != null ? clazzId : 6 );
+        control.setSort(sort != null ? sort : -100);
         return control;
     }
 
@@ -54,5 +58,21 @@ public class OperateControlRequest {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Long getClazzId() {
+        return clazzId;
+    }
+
+    public void setClazzId(Long clazzId) {
+        this.clazzId = clazzId;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

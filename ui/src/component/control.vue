@@ -15,7 +15,6 @@
     onDragEnd
   } from '../core/dnd'
 
-
   export default{
     name: 'Control',
     props: {

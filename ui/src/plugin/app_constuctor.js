@@ -3,6 +3,11 @@ import{
 } from '../util/assist'
 import store from '../store'
 
+import {
+  mapGetters,
+  mapMutations,
+  mapActions
+} from 'vuex'
 export default function initAppConstructor(config) {
 
   const appTemplate = `
@@ -124,7 +129,6 @@ export default function initAppConstructor(config) {
   const initRouter = config.initRouter;
   const routerStore = config.routerStore;
 
-
   /**
    * 获取浏览器内的cookie
    * @param name cookie名称
@@ -191,6 +195,7 @@ export default function initAppConstructor(config) {
     return pages;
   }
 
+
   return {
     name: "app",
     template: appTemplate,
@@ -230,6 +235,7 @@ export default function initAppConstructor(config) {
       }
     },
     methods: {
+      ...mapActions('userModule', ['getControlClazzes']),
       home(){
         this.$router.push('/')
       },
@@ -276,6 +282,8 @@ export default function initAppConstructor(config) {
       }
     },
     created() {
+      this.getControlClazzes()
+
       let res = {
         "code": 10000,
         "msg": "ok",

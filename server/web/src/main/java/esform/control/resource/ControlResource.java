@@ -3,9 +3,9 @@ package esform.control.resource;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import esform.control.request.OperateControlRequest;
+import esform.control.request.QueryControlRequest;
 import esform.dao.ControlDao;
 import esform.domain.Control;
-import esform.request.BaseRequest;
 import esform.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,15 +41,6 @@ public class ControlResource {
         return Response.ok();
     }
 
-    @PostMapping("updateProps")
-    @ResponseBody
-    public Response updateProps(@RequestBody OperateControlRequest request) {
-        //// TODO: 2017/10/18  
-        Control domain = request.getDomain();
-        controlDao.update(domain);
-        return Response.ok();
-    }
-
     @PostMapping("update")
     @ResponseBody
     public Response update(@RequestBody OperateControlRequest request) {
@@ -60,7 +51,7 @@ public class ControlResource {
 
     @PostMapping("tableControlList")
     @ResponseBody
-    public Response tableControlList(@RequestBody BaseRequest request) {
+    public Response tableControlList(@RequestBody QueryControlRequest request) {
         PageInfo<Control> controls = PageHelper
                 .startPage(request.getPageNum(), request.getPageSize())
                 .doSelectPageInfo(() -> {

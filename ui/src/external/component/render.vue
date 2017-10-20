@@ -12,7 +12,6 @@
     },
     computed:{
       soul(){
-          console.log(123)
           return store.getters['soulModule/soul']
       }
     },
