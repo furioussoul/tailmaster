@@ -20,7 +20,7 @@ export default {
         if (res.data.code === 10000) {
           state.controlClazzes = res.data.data
         } else {
-          this.$Message.error('queried failed')
+          console.error('queried failed')
         }
       })
     }

@@ -22,7 +22,7 @@ function register() {
 function login() {
   this.$http.post('./auth/login',this.userInfo).then(res=>{
     if(res.data.code === 10000){
-      this.$router.push('./')
+      this.$router.push('/')
       store.commit('userModule/changePage','manage')
     }else {
       this.$Message.error(res.data.msg)
