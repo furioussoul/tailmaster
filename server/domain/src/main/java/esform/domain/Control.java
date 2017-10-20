@@ -8,6 +8,7 @@ package esform.domain;
  */
 public class Control extends BaseDomain {
 
+    private Long cid;
     private String name;
     private String nickname;
     private String code;
@@ -16,6 +17,14 @@ public class Control extends BaseDomain {
     private Integer sort;
 
     public Control() {
+    }
+
+    public Long getCid() {
+        return cid;
+    }
+
+    public void setCid(Long cid) {
+        this.cid = cid;
     }
 
     public Control(Long id) {

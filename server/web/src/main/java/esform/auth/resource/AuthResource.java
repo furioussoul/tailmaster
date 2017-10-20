@@ -1,9 +1,7 @@
 package esform.auth.resource;
 
 import esform.auth.request.AuthRequest;
-import esform.dao.RoleDao;
 import esform.dao.UserDao;
-import esform.domain.Role;
 import esform.domain.User;
 import esform.response.Response;
 import org.apache.commons.lang3.StringUtils;
@@ -14,9 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by
@@ -30,8 +25,6 @@ public class AuthResource {
 
     @Autowired
     private UserDao userDao;
-    @Autowired
-    private RoleDao roleDao;
 
     @PostMapping("register")
     @ResponseBody
@@ -39,14 +32,7 @@ public class AuthResource {
     public Response register(@RequestBody AuthRequest request) {
         User user = request.getDomain();
         userDao.add(user);
-        userDao.addUserRole(user.getId(), 1L);//1是管理员
-        List<Role> roleList = new ArrayList<>();
-        Role role = new Role();
-        role.setRoleName("游客");
-        role.setId(1L);
-        roleList.add(role);
-        user.setRoleList(roleList);
-        return Response.ok(user);
+        return Response.ok();
     }
 
     @PostMapping("login")
@@ -57,7 +43,7 @@ public class AuthResource {
         if (!StringUtils.equals(select.getPassword(), user.getPassword())) {
             return Response.unAuthenticated();
         }
-        return Response.ok(select);
+        return Response.ok();
     }
 }
 
