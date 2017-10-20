@@ -32,10 +32,14 @@
                 <Panel :name="classIndex+''">
                   {{controlClass.name}}
                   <p slot="content" class="index-layout-content__class">
-                    <Control :controlConfig="control" :key="controlIndex"
-                             v-for="(control,controlIndex) in controlClass.controls">
+                    <Control
+                      v-for="(control,controlIndex) in controlClass.controls"
+                      v-if="control.cid != 100"
+                      :controlConfig="control"
+                      :key="controlIndex">
                       <div slot="preview">
-                        <MenuItem :name="classIndex + '-' + controlIndex">{{control.name}}
+                        <MenuItem
+                          :name="classIndex + '-' + controlIndex">{{control.name}}
                         </MenuItem>
                       </div>
                     </Control>
@@ -210,12 +214,12 @@
         let controlConfigs = []
         data.forEach(control => {
           let controlConfig = getConfig(control.code);
+          controlConfig.clazzName = control.clazzName
           controlConfigs.push(controlConfig)
         })
 
         let map = {}
-
-        data.forEach(item => {
+        controlConfigs.forEach(item => {
 
           if (!map[item.clazzName]) {
             map[item.clazzName] = []
@@ -223,8 +227,8 @@
           map[item.clazzName].push(item)
         })
 
-
         for(let key in map){
+
             this.classes.push({
               name:key,
               controls:map[key]
