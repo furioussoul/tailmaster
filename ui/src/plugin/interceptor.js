@@ -4,6 +4,7 @@ import {
 import {
   verifyToken
 } from '../util/assist'
+import store from '../store'
 
 export default function install(Vue, app) {
 
@@ -34,7 +35,7 @@ export default function install(Vue, app) {
     }
     next(function (response) {
       if (response.body.code === 405) {
-        window.href = '/login'
+        store.commit('userModule/changePage', 'login')
       } else if (response.body.code === 20000) {
         app.$Notice.warning({
           title: '出错了',

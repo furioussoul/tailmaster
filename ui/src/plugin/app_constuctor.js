@@ -75,7 +75,7 @@ export default function initAppConstructor(config) {
                             <p class="layout-userinfo-name">{{userInfo.username}} - {{userInfo.workId}}</p>
                           </div>
                           <div class="layout-userinfo-bar">
-                            <i-button @click="logout">退出</i-button>
+                            <i-button @click.native="logout">退出</i-button>
                           </div>
                         </div>
                       </Poptip>
@@ -275,13 +275,17 @@ export default function initAppConstructor(config) {
         }.bind(this));
       },
       logout() {
-        if (appApi.clearAuth) {
-          this.$http.get(appApi.clearAuth);
+        if (appApi.logout) {
+          store.commit('userModule/changePage','login')
+          this.$http.get(appApi.logout);
         }
-        location.href = appApi.logout;
       }
     },
-    created() {
+    mounted() {
+
+      let accessToken = getCookie("access_token");
+      if(!accessToken) store.commit('userModule/changePage', 'login')
+
       this.getControlClazzes()
 
       let res = {
@@ -378,6 +382,9 @@ export default function initAppConstructor(config) {
         }
       }
       this.userInfo = res.data;
+
+
+      console.log()
     }
   }
 }

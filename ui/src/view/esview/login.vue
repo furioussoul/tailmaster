@@ -1,29 +1,29 @@
 <template>
   <Card style="width:350px" class="loginPanel">
     <p slot="title">esview</p>
-    <Form :model="formItem" :label-width="80">
+    <Form ref="auth" :model="userInfo" :label-width="80">
       <FormItem label="username">
-        <Input v-model="formItem.userName" placeholder="enter..."></Input>
+        <Input v-model="userInfo.userName"></Input>
       </FormItem>
       <FormItem label="password">
-        <Input v-model="formItem.password" placeholder="enter..."></Input>
+        <Input v-model="userInfo.password"></Input>
       </FormItem>
-      <div v-if="register">
+      <div v-if="isRegister">
         <FormItem label="confirm password">
-          <Input v-model="formItem.passwordConfirm" placeholder="enter..."></Input>
+          <Input v-model="userInfo.passwordConfirm"></Input>
         </FormItem>
         <FormItem label="profession">
-          <Input v-model="formItem.profession" placeholder="enter..."></Input>
+          <Input v-model="userInfo.profession"></Input>
         </FormItem>
         <FormItem>
           <a @click="toggle">go login?</a>
-          <Button type="primary">register</Button>
+          <Button type="primary" @click="register">register</Button>
         </FormItem>
       </div>
       <div v-else>
         <FormItem>
           <a @click="toggle">go register?</a>
-          <Button type="primary">login</Button>
+          <Button type="primary" @click="login">login</Button>
         </FormItem>
       </div>
     </Form>
@@ -38,8 +38,8 @@
     name: 'Login',
     data () {
       return {
-        register: false,
-        formItem: {
+        isRegister: false,
+        userInfo: {
           userName: '',
           password: '',
           passwordConfirm: '',
@@ -55,7 +55,8 @@
         login.call(this)
       },
       toggle(){
-          this.register = !this.register
+        this.$refs['auth'].resetFields();
+        this.isRegister = !this.isRegister
       }
     }
   }
@@ -64,6 +65,5 @@
   .loginPanel {
     margin: 0 auto;
     margin-top: 200px;
-
   }
 </style>
