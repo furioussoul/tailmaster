@@ -19,6 +19,7 @@ import locale  from 'iview/dist/locale/en-US';
 
 esview.addConfig('router',router)
 esview.addConfig('type','assemble')
+esview.addConfig('esstore',Store)
 
 Vue.dev = true
 
@@ -50,7 +51,7 @@ const app = new Vue({
       case 'manage':
         return h(manage)
       case 'app':
-        return h(RenderApp)
+        return h(esview.render('MyApp','token'))
       case 'login':
         return h(Login)
     }
