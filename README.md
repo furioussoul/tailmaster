@@ -19,7 +19,7 @@ Esview use grid system,
 
 for creating an app, you should drop 'Frame' into 'DropPanel',  
 
-drop 'Row' into dropPanel,drop 'Col' into 'Row'.  
+drop 'Row' into 'DropPanel',drop 'Col' into 'Row'.  
 
 For creating a search form ,you should drop 'Form' into 'Col'.  
 
