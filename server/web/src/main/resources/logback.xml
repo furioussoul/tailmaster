@@ -22,7 +22,7 @@
     </appender>
 
     <appender name="REQ_RECORDS" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/tmp/logs/zhidian/req-info.log</file>
+        <file>/tmp/logs/esview/req-info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>var/logs/req-info.%d{yyyy-MM-dd}.log</FileNamePattern>
         </rollingPolicy>
@@ -40,7 +40,7 @@
             <OnMatch>ACCEPT</OnMatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>var/logs/es-form-err.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>var/logs/err.%d{yyyy-MM-dd}.log</FileNamePattern>
             <MaxHistory>180</MaxHistory>
         </rollingPolicy>
         <encoder>
@@ -51,7 +51,7 @@
 
     <appender name="STAT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>/var/logs/es-form-stat.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>/var/logs/stat.%d{yyyy-MM-dd}.log</FileNamePattern>
             <MaxHistory>180</MaxHistory>
         </rollingPolicy>
         <encoder>
