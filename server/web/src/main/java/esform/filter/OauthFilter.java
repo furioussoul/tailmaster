@@ -25,9 +25,9 @@ import java.util.Map;
  * @email:20076581@qq.com on 2017/9/17.
  */
 @Component
-public class SAuthFilter implements Filter {
+public class OauthFilter implements Filter {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(SAuthFilter.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(OauthFilter.class);
     private static ThreadLocal<Map<String, Object>> LOCAL_VARS = new ThreadLocal<Map<String, Object>>();
 
     @Autowired
@@ -95,6 +95,11 @@ public class SAuthFilter implements Filter {
             LOCAL_VARS.set(stringObjectMap);
         }
         stringObjectMap.put(key, obj);
+    }
+
+    public static User getUser(){
+        Map<String, Object> stringObjectMap = LOCAL_VARS.get();
+        return null != stringObjectMap ? (User)stringObjectMap.get("user") : null;
     }
 
     public static Object getVar(String key) {

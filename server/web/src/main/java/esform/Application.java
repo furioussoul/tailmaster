@@ -1,7 +1,7 @@
 package esform;
 
 import esform.filter.LoggerFilter;
-import esform.filter.SAuthFilter;
+import esform.filter.OauthFilter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -28,7 +28,7 @@ public class Application {
     @Autowired
     private LoggerFilter loggerFilter;
     @Autowired
-    private SAuthFilter authFilter;
+    private OauthFilter oauthFilter;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -46,7 +46,7 @@ public class Application {
     @Bean
     public FilterRegistrationBean authFilter() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(authFilter);
+        registrationBean.setFilter(oauthFilter);
         registrationBean.setOrder(2);
         return registrationBean;
     }
