@@ -29,6 +29,8 @@
     "vue": "^2.4.4"
    },
   "devDependencies": {
+    "countup": "^1.8.2",
+    "echarts":"^3.7.2",
     "vue-i18n":"^7.3.1",
     "iview": "^2.4.0",
     "vue": "^2.4.4",

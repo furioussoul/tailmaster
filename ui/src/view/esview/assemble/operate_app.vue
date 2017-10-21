@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 50px">
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
       <div class="index-layout-nav">

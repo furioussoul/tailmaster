@@ -14,29 +14,6 @@ body {
   background-color: #ecf0f5 !important;
 }
 
-/*.layout-left-menu > .ivu-menu::-webkit-scrollbar {
-    width: 8px;
-    height: 0;
-    background: #e7eaec;
-    display: block;
-}
-.layout-left-menu > .ivu-menu::-webkit-scrollbar-thumb {
-    background: #a3adb4;
-    border-radius: 4px;
-    -webkit-box-shadow: none;
-    visibility: visible;
-    border: none;
-}
-.layout-left-menu > .ivu-menu::-webkit-scrollbar-track {
-    -webkit-box-shadow: none;
-    width: 8px;
-    background: transparent !important;
-    border: none;
-}
-.layout-left-menu > .ivu-menu::-webkit-scrollbar {
-    background: transparent;
-}*/
-
 body {
 }
 
@@ -48,7 +25,7 @@ body {
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 50px 0 55px 220px;
+  padding: 50px 0 0 200px;
   transition: all .3s
 }
 
@@ -78,9 +55,8 @@ body {
   left: 0;
   top: 0;
   height: 100%;
-  width: 220px;
-  padding-top: 50px;
-  z-index: 1
+  width: 200px;
+  z-index:5
 }
 
 .layout-left .navigator {
@@ -157,6 +133,7 @@ body {
 }
 
 .layout-left-menu .ivu-menu-submenu > .ivu-menu .ivu-menu-item {
+  color: black;
   height: 0;
   transition: height .4s ease;
 }
@@ -180,18 +157,20 @@ body {
   position: absolute;
   left: 0;
   top: 0;
+  padding-left: 200px;
   width: 100%;
   height: 50px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
   background: #fff;
   transition: left .4s ease;
-  z-index: 4
+  z-index: 4;
+  color: black;
 }
 
 .layout-header .layout-title {
   float: left;
   line-height: 50px;
-  width: 220px;
+  width: 200px;
   color: #fff;
   font-size: 24px;
   font-weight: bold;
@@ -207,11 +186,19 @@ body {
   color: #fff !important;
   background-color: rgb(64, 165, 226);
 }
+.layout-logo-left{
+  width: 150px;
+  height: 30px;
+  background: #5b6270;
+  border-radius: 3px;
+  margin: 15px auto;
+}
 
-.layout-header .layout-title img {
-  height: 50px;
-  vertical-align: middle;
-  transform:scale(2);//设置缩放比例
+.layout-logo-left img{
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .layout-left .layout-logo {
@@ -228,7 +215,6 @@ body {
   width: 50px;
   font-size: 20px;
   text-align: center;
-  color: #fff;
   cursor: pointer;
   transition: all .2s ease-in-out;
 }
@@ -249,7 +235,7 @@ body {
 
 .layout-header .ivu-menu > .ivu-menu-item {
   font-weight: bold;
-  color: #fff;
+  color: black;
 }
 
 .layout-header .ivu-menu-item-selected, .layout-header .ivu-menu-item-selected:hover, .layout-header .ivu-menu > .ivu-menu-item:hover {
@@ -265,7 +251,7 @@ body {
 }
 
 .layout-header .ivu-menu-dark {
-  background: @btn-primary-bg;
+  background: white;
   height: 50px;
   line-height: 50px;
   font-size: 14px;
@@ -273,6 +259,9 @@ body {
 }
 
 .layout-header-right {
+  position: relative;
+  right: 0;
+  top:0;
   float: right;
   height: 50px;
   line-height: 50px;
@@ -280,10 +269,11 @@ body {
   align-items: center;
 }
 
+
 .layout-header-right .ivu-menu-submenu, .layout-header-right .ivu-menu-item {
   padding: 0 12px;
-  color: #fff !important;
   height: 50px;
+  color:black !important ;
 }
 
 .layout-header-right .ivu-menu-submenu:hover, .layout-header-right .ivu-menu-item:hover {
@@ -311,8 +301,13 @@ body {
 }
 
 .layout-bread {
+  position: relative;
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  display: flex;
+  align-items: center;
   .clearfix();
-  margin: 15px 15px;
 }
 
 .layout-bread h1 {

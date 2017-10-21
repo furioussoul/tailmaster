@@ -11,9 +11,10 @@
                   :active-name="activedSecondMenu"
                   :open-names="openedMenu"
                   theme="light"
-                  width="220px"
+                  width="200px"
                   :accordion="true"
                   ref="secondMenu">
+            <div class="layout-logo-left"><img @click="home" src="../../../static/img/logo.png"></img></div>
             <template v-for="group in menu">
               <Menu-item :name="group.id"
                          :key="group.id"
@@ -48,11 +49,17 @@
     <div class="layout-header" :class="{'layout-header-full':false}" cloak>
       <i-menu mode="horizontal" v-cloak :active-name="activedFirstMenu" theme="dark" @on-select="selectMenu"
               ref="firstMenu">
-        <div class="layout-title" @click='home'><img src="../../../static/img/logo.png"></img></div>
-        <Icon type="navicon-round" class="layout-round-icon" @click.native="toggleMenu"></Icon>
 
+        <Icon type="navicon-round" class="layout-round-icon" @click.native="toggleMenu"></Icon>
+        <div class="layout-bread">
+          <h1>
+            <Breadcrumb ref="bread" v-if="path" separator=">" >
+              <Breadcrumb-item v-for="item in path" :key="item.id">{{item.title}}</Breadcrumb-item>
+            </Breadcrumb>
+          </h1>
+        </div>
         <div class="layout-header-right" v-cloak>
-          <Poptip style="height: 50px;" trigger="hover" title="提示标题" content="提示内容" placement="bottom-end"
+          <Poptip style="height: 50px;" trigger="hover" title="user" content="" placement="bottom-end"
                   v-if="userInfo">
             <div class="ivu-menu-item">
               <Icon type="person"></Icon>
@@ -77,26 +84,11 @@
     <!--主视图 start-->
     <div class="layout-content" id="layout-content" v-cloak>
       <div class="layout-scroll">
-        <div class="layout-bread">
-          <h1>
-            <Breadcrumb ref="bread" v-if="path" separator=">" style="float:right;padding:5px 5px 0 0;">
-              <Breadcrumb-item v-for="item in path" :key="item.id">{{item.title}}</Breadcrumb-item>
-            </Breadcrumb>
-          </h1>
-        </div>
 
         <slot name="drop-panel">
         </slot>
 
       </div>
-
-
-      <!--footer start-->
-      <Card class="layout-footer">
-        Copyright© 2017-2020 版权所有 soul-esview
-      </Card>
-      <!--footer end-->
-
 
     </div>
     <!--主视图 end-->
@@ -226,6 +218,7 @@
   }
 </script>
 <style scoped lang="less">
+
   /*主页样式*/
 
   html, body {
@@ -242,15 +235,7 @@
     background-color: #ecf0f5 !important;
   }
 
-  .clearfix() {
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
-      visibility: hidden;
-      font-size: 0;
-      height: 0;
-    }
+  body {
   }
 
   .page {
@@ -261,7 +246,7 @@
     height: 100%;
     width: 100%;
     position: relative;
-    padding: 50px 0 55px 220px;
+    padding: 50px 0 0 200px;
     transition: all .3s
   }
 
@@ -291,9 +276,8 @@
     left: 0;
     top: 0;
     height: 100%;
-    width: 220px;
-    padding-top: 50px;
-    z-index: 1
+    width: 200px;
+    z-index:5
   }
 
   .layout-left .navigator {
@@ -393,22 +377,24 @@
     position: absolute;
     left: 0;
     top: 0;
+    padding-left: 200px;
     width: 100%;
     height: 50px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
     background: #fff;
     transition: left .4s ease;
-    z-index: 4
+    z-index: 4;
+    color: black;
   }
 
   .layout-header .layout-title {
     float: left;
     line-height: 50px;
-    width: 220px;
+    width: 200px;
     color: #fff;
     font-size: 24px;
     font-weight: bold;
-    background-color: #2be5a0;
+    background-color: #2d8cf0;
     text-align: center;
     border-right: 1px solid rgba(255, 255, 255, 0.7);
     transition: all .2s ease-in-out;
@@ -420,17 +406,24 @@
     color: #fff !important;
     background-color: rgb(64, 165, 226);
   }
+  .layout-logo-left{
+    width: 150px;
+    height: 30px;
+    background: #5b6270;
+    border-radius: 3px;
+    margin: 15px auto;
+  }
 
-  .layout-header .layout-title img {
-    height: 50px;
-    vertical-align: middle;
-    transform:scale(2);//设置缩放比例
+  .layout-logo-left img{
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
   .layout-left .layout-logo {
     height: 50px;
     width: 220px;
-    background: url('//file.40017.cn/tcwlcrm/common/img/logo.png') no-repeat;
     background-size: 140px;
     background-position: center;
   }
@@ -441,7 +434,6 @@
     width: 50px;
     font-size: 20px;
     text-align: center;
-    color: #fff;
     cursor: pointer;
     transition: all .2s ease-in-out;
   }
@@ -462,7 +454,7 @@
 
   .layout-header .ivu-menu > .ivu-menu-item {
     font-weight: bold;
-    color: #fff;
+    color: black;
   }
 
   .layout-header .ivu-menu-item-selected, .layout-header .ivu-menu-item-selected:hover, .layout-header .ivu-menu > .ivu-menu-item:hover {
@@ -478,7 +470,7 @@
   }
 
   .layout-header .ivu-menu-dark {
-    background: #2be5a0;
+    background: white;
     height: 50px;
     line-height: 50px;
     font-size: 14px;
@@ -486,6 +478,9 @@
   }
 
   .layout-header-right {
+    position: relative;
+    right: 0;
+    top:0;
     float: right;
     height: 50px;
     line-height: 50px;
@@ -494,8 +489,8 @@
   }
 
   .layout-header-right .ivu-menu-submenu, .layout-header-right .ivu-menu-item {
+    color:black !important ;
     padding: 0 12px;
-    color: #fff !important;
     height: 50px;
   }
 
@@ -523,9 +518,14 @@
     height: 100%;
   }
 
-  .layout-bread {
+  layout-bread {
+    position: relative;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
     .clearfix();
-    margin: 15px 15px;
   }
 
   .layout-bread h1 {
@@ -574,4 +574,30 @@
     }
   }
 
+  /*主页样式*/
+
+  html, body {
+    height: 100%;
+  }
+
+  [v-cloak] {
+    display: none !important;
+  }
+
+  body {
+    /*min-width: 1366px;*/
+    overflow: auto;
+    background-color: #ecf0f5 !important;
+  }
+
+  .clearfix() {
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+      visibility: hidden;
+      font-size: 0;
+      height: 0;
+    }
+  }
 </style>

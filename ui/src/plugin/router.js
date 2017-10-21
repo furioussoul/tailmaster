@@ -12,9 +12,9 @@ export const router = new Router({
   base: '/',
   routes: [
     {
-      path: '/aa',
+      path: '/',
       component: () =>
-        import ('../view/test.vue')
+        import ('../view/esview/home/home.vue')
     }
   ]
 })

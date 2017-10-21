@@ -23,9 +23,10 @@ export default function initAppConstructor(config) {
                               :active-name="activedSecondMenu"
                               :open-names="openedMenu"
                               theme="light"
-                              width="220px"
+                              width="100%"
                               :accordion="true"
                               ref="secondMenu">
+                        <div class="layout-logo-left"><img @click="home" src="../../../static/img/logo.png"></img></div>
                         <template v-for="group in menu">
                           <Menu-item :name="group.id"
                                      :key="group.id"
@@ -59,11 +60,16 @@ export default function initAppConstructor(config) {
                 <div class="layout-header" :class="{\'layout-header-full\':false}" cloak>
                   <i-menu mode="horizontal" v-cloak :active-name="activedFirstMenu" theme="dark" @on-select="selectMenu"
                           ref="firstMenu">
-                    <div class="layout-title" @click='home'><img src="../../static/img/logo.png"></img></div>
                     <Icon type="navicon-round" class="layout-round-icon" @click.native="toggleMenu"></Icon>
-                    
+                    <div class="layout-bread">
+                      <h1>
+                        <Breadcrumb ref="bread" v-if="path" separator=">">
+                          <Breadcrumb-item v-for="item in path" :key="item.id">{{item.title}}</Breadcrumb-item>
+                        </Breadcrumb>
+                      </h1>
+                    </div>
                     <div class="layout-header-right" v-cloak>
-                      <Poptip style="height: 50px;" trigger="hover" title="提示标题" content="提示内容" placement="bottom-end"
+                      <Poptip style="height: 50px;" trigger="hover" title="user" content="" placement="bottom-end"
                               v-if="userInfo">
                         <div class="ivu-menu-item">
                           <Icon type="person"></Icon>
@@ -88,15 +94,7 @@ export default function initAppConstructor(config) {
                 <!--主视图 start-->
                 <div class="layout-content" id="layout-content" v-cloak>
                   <div class="layout-scroll">
-                    <div class="layout-bread">
-                      <h1>
-                        <Breadcrumb ref="bread" v-if="path" separator=">" style="float:right;padding:5px 5px 0 0;">
-                          <Breadcrumb-item v-for="item in path" :key="item.id">{{item.title}}</Breadcrumb-item>
-                        </Breadcrumb>
-                      </h1>
-                    </div>
-                    
-                    
+                          
                     <!--路由视图 start-->
                     <router-view></router-view>
                     <!--路由视图 end-->
@@ -104,26 +102,12 @@ export default function initAppConstructor(config) {
                     
                   </div>
                   
-                  
-                  <!--footer start-->
-                  <Card class="layout-footer">
-                      Copyright© 2017-2020 版权所有 soul-esview
-                      <a href="https://github.com/furioussoul/soul-esview.git">
-                        <img style="width:30px;margin-left:10px;vertical-align:top" src="../../static/img/git.jpg">
-                        </img>
-                      </a>
-                  </Card>  
-                  <!--footer end-->
-                  
-                  
                 </div>
                 <!--主视图 end-->
-                  
                   
               </div>
              
              `
-
 
   const appApi = config.appApi;
   const initRouter = config.initRouter;
@@ -374,11 +358,13 @@ export default function initAppConstructor(config) {
       initRouter(this.routes);
       this.setLayout(this.$route.fullPath);
 
+      let split = accessToken.split('@');
+
       res = {
         "code": 10000,
         "msg": "ok",
         "data": {
-          "username": "furioussoul"
+          "username": split[0]
         }
       }
       this.userInfo = res.data;
