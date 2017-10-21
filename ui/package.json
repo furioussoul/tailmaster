@@ -1,6 +1,6 @@
 {
   "name": "esview",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "title": "esview",
   "main": "dist/client/esview.min.js",
   "files": [
@@ -20,16 +20,15 @@
   "author": "Furioussoul",
   "license": "MIT",
   "dependencies": {
-
+    "js-md5": "^0.4.2",
+    "object-assign": "^4.1.0",
+    "throttle-debounce": "^1.0.1",
+    "xlsx": "^0.10.5"
    },
   "peerDependencies": {
     "vue": "^2.4.4"
    },
   "devDependencies": {
-    "js-md5": "^0.4.2",
-    "object-assign": "^4.1.0",
-    "throttle-debounce": "^1.0.1",
-    "xlsx": "^0.10.5",
     "countup": "^1.8.2",
     "echarts":"^3.7.2",
     "vue-i18n":"^7.3.1",
