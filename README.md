@@ -14,6 +14,21 @@ Esview is a web frontend platform for building vue spa through html5 drag/drop a
 Recommand use webpack constructor spa to inject esview.
 
 
+# How to drag/drop?
+Esview use grid system,  
+
+for creating an app, you should drop 'Frame' into 'DropPanel',  
+
+drop 'Row' into dropPanel,drop 'Col' into 'Row'.  
+
+For creating a search form ,you should drop 'Form' into 'Col'.  
+
+then drop 'FormItem' into 'Form',drop 'Input、Radio、Button etc.' into 'FormItem'.
+
+right click to edit script to use eventCenter to comminute between components,  
+
+also you can use ajax in script in the same domain.  
+
 # Quick Start
 
 To build vue spa,you only need 3 steps, after then run script
@@ -37,21 +52,6 @@ usage: https://github.com/furioussoul/esview-demo
 ![pic](http://chuantu.biz/t6/98/1508081223x1968430843.png "esview")
 ![pic](http://chuantu.biz/t6/99/1508130896x1114690581.png "esview")
 
-
-# How to drag/drop?
-Esview use grid system,  
-
-for creating an app, you should drop 'Frame' into 'DropPanel',  
-
-drop 'Row' into dropPanel,drop 'Col' into 'Row'.  
-
-For creating a search form ,you should drop 'Form' into 'Col'.  
-
-then drop 'FormItem' into 'Form',drop 'Input、Radio、Button etc.' into 'FormItem'.
-
-right click to edit script to use eventCenter to comminute between components,  
-
-also you can use ajax in script in the same domain.
 
 # License
 [MIT](https://opensource.org/licenses/MIT)
