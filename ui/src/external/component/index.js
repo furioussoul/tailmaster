@@ -1,11 +1,11 @@
 import appFrame from './app_frame.vue'
 import render from './render'
 import {
-  wrapCard
+  WrapCard
 } from './wrap'
 
 export {
   appFrame,
   render,
-  wrapCard
+  WrapCard
 }

@@ -467,9 +467,6 @@
 <script>
 
   import {
-    verifyToken
-  } from '../../util/assist'
-  import {
     getBreadcrumb,
     getPages,
     initRouter
@@ -578,7 +575,6 @@
       }
     },
     created() {
-//      verifyToken();
       this.pages = getPages(this.totalMenu);
       initRouter(this.pages);
       this.setLayout(this.fullPath);

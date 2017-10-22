@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {
   appFrame,
-  wrapCard
+  WrapCard
 } from './component'
 import {
   addConfig,
@@ -10,16 +10,26 @@ import {
 import {
   parse
 }from '../util/assist'
-import {
-  getAppList
-}from '../resource/assemble_resource'
 
 Vue.component('AppFrame', appFrame);
-Vue.component('WrapCard', wrapCard);
+Vue.component('WrapCard', WrapCard);
 
 import store from './store'
 import renderVue from './component/render.vue'
 import {addRenderFn} from '../helper/code_helper'
+
+function getAppList({appName,token},fn) {
+  this.http.post('app/appList',{name:appName}).then(res => {
+    if (res.data.code === 10000) {
+      this.controls = res.data.data
+      if(fn){
+        fn.call(this,res.data.data)
+      }
+    } else {
+      this.$Message.error('query failed')
+    }
+  })
+}
 
 // 在这查 appSoul,放到store
 function render(appName, token) {
