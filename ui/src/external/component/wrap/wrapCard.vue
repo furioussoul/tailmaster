@@ -1,13 +1,13 @@
 <template>
   <Card>
-    <div slot="title">
-      <slot name="drop-title">
-      </slot>
-    </div>
-    <div slot="extra">
+    <!--<div slot="title">-->
+      <!--<slot name="drop-title">-->
+      <!--</slot>-->
+    <!--</div>-->
+  <!--  <div slot="extra">
       <slot name="drop-extra">
       </slot>
-    </div>
+    </div>-->
     <slot name="drop-body">
     </slot>
   </Card>
