@@ -6,7 +6,7 @@ import java.util.List;
  * Created by
  *
  * @name:孙证杰
- * @email:20076581@qq.com on 2017/9/17.
+ * @email:200765821@qq.com on 2017/9/17.
  */
 public class User extends BaseDomain {
     private String userName;

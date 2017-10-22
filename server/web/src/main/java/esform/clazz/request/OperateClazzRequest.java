@@ -4,7 +4,7 @@ package esform.clazz.request;
  * Created by
  *
  * @name:孙证杰
- * @email:20076581@qq.com on 2017/10/18.
+ * @email:200765821@qq.com on 2017/10/18.
  */
 public class OperateClazzRequest {
     private String name;

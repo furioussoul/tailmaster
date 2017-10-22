@@ -75,6 +75,7 @@
             </if>
             and control.rowStatus = 1
             and clazz.rowStatus = 1
+            order BY control.sort
         </where>
     </select>
 </mapper>
