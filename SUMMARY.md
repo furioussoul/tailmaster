@@ -2,7 +2,7 @@
 
 ## Overview
 
-* [My Awesome API](README.md)
+* [Introduction](README.md)
 * [Quick Start](quick-start.md)
 
 ## Methods
