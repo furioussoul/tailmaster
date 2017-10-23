@@ -20,7 +20,8 @@ export default function install(Vue, app) {
       request.url.indexOf('del') !== -1 ||
       request.url.indexOf('save') !== -1 ||
       request.url.indexOf('set') !== -1 ||
-      request.url.indexOf('send') !== -1) {
+      request.url.indexOf('send') !== -1 ||
+      request.url.indexOf('add') !== -1) {
 
       if (!lockMap[request.url]) {
         //没锁

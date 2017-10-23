@@ -10,13 +10,12 @@ import {
 import {
   parse
 }from '../util/assist'
-
-Vue.component('AppFrame', appFrame);
-Vue.component('WrapCard', WrapCard);
-
 import store from './store'
 import renderVue from './component/render.vue'
 import {addRenderFn} from '../helper/code_helper'
+
+Vue.component('AppFrame', appFrame);
+Vue.component('WrapCard', WrapCard);
 
 function getAppList({appName,token},fn) {
   this.http.post('app/appList',{name:appName}).then(res => {
@@ -54,5 +53,5 @@ export default{
   addConfig,
   getConfig,
   render
-}   // eslint-disable-line no-undef
+}
 

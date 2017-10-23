@@ -5,7 +5,6 @@
  */
 
 import store from '../store/index'
-
 import {
   deepCopy
 } from '../util/assist'
@@ -33,7 +32,6 @@ function onDragEnd(e) {
 }
 
 function onDragEnter(e) {
-
   e.preventDefault()
   e.stopPropagation()
   return true
@@ -102,8 +100,6 @@ function interceptDrop(saveInfo) {
     })
   }else if(saveInfo.drag.type === 'WrapCard'){
     let dropPanelSoul = findSoul(100, store.getters['dragModule/controlConfigs'])
-    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
-    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
     saveInfo.drag.children.push(deepCopy(dropPanelSoul))
   }
 }

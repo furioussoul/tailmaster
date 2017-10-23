@@ -1,5 +1,5 @@
 <template>
-    <CodeEditor style="height: 100%;width: 98%;  margin-left: 15px;position: relative;"
+    <CodeEditor class="code-editor"
                 :code="opModel.code"
                 @save="saveCode">
     </CodeEditor>
@@ -46,4 +46,11 @@
     }
   }
 </script>
-
+<style scoped>
+  .code-editor{
+    height: 100%;
+    width: 98%;
+    margin-left: 15px;
+    position: relative;
+  }
+</style>

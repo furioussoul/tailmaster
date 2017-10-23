@@ -8,6 +8,7 @@ export default {
   },
   render(h){
     if(!this.soul) return
+    h.vm = this
     h.store = store
     h.eventCenter = eventCenter
     return this.soul.render(h)

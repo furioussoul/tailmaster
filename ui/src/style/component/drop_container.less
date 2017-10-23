@@ -3,10 +3,14 @@
   .is-preview &{
     .makeContainer();
     width:100%;
-    min-height: 200px;
+    min-height:100%;
     transition:  box-shadow @transition-time linear;
     position: relative;
     border: 1px dashed #339ae2;
+
+    .assemble &{
+      min-height: 800px;
+    }
   }
 
   & .ivu-row{

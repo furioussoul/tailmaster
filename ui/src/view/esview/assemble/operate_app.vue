@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 50px">
+  <div class="assemble">
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
       <div class="index-layout-nav">
@@ -77,7 +77,7 @@
       <div slot="footer">
       </div>
       <CodeEditor
-        style="height: 280px"
+        style="height: 500px"
         :code="editControlSoul.scriptString"
         @save="saveCode">
       </CodeEditor>
@@ -123,7 +123,7 @@
   } from 'vuex'
   import dropDirective from '../../../directive/droppable'
   import store from '../../../store'
-  import Editor from '../../../component/editor.vue'
+  import Editor from '../../../component/model_editor.vue'
   import {
     getControlList
   } from  '../../../resource/develop_resource'
@@ -322,5 +322,9 @@
 
   .index-soul-control-class-fade-enter, .soul-control-class-fade-leave-active {
     opacity: 0;
+  }
+
+  .assemble{
+    margin-top: 50px
   }
 </style>

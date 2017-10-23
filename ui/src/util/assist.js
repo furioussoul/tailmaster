@@ -83,7 +83,6 @@ export function getTimeSpan(timeStamp) {
     timeSpan
 }
 
-
 function s2ab(s) { //字符串转字符流
   let buf = new ArrayBuffer(s.length);
   let view = new Uint8Array(buf);

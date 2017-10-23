@@ -16,7 +16,6 @@ import RenderApp from './view/esview/render_app.vue'
 import esview from './external'
 import locale  from 'iview/dist/locale/en-US';
 
-
 esview.addConfig('router',router)
 esview.addConfig('type','assemble')
 esview.addConfig('esstore',Store)

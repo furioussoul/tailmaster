@@ -1,9 +1,7 @@
 import {
   AppFrame,
   Control,
-  Drop,
-  DropPanel,
-  Editor,
+  ModelEditor,
   WrapCard,
   CodeEditor
 } from '../component'
@@ -11,9 +9,7 @@ import {
 const soul = {
   AppFrame,
   Control,
-  Drop,
-  DropPanel,
-  Editor,
+  ModelEditor,
   WrapCard,
   CodeEditor
 };

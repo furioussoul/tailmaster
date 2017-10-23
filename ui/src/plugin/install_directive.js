@@ -1,6 +1,8 @@
 import Vue from 'vue';
-import droppable from '../directive/droppable'
-import editable from '../directive/editable'
+import {
+  droppable,
+  editable
+} from '../directive'
 
 Vue.directive('droppable',droppable)
 Vue.directive('editable',editable)

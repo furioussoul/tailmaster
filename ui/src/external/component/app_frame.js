@@ -70,7 +70,6 @@ function initRouter(pages) {
   //router configuration of client app
   let routes = pages.map((page, index) => {
 
-      //.vue file has higher priority
       return {
         path: page.url,
         component: renderVue

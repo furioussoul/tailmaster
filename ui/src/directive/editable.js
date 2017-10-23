@@ -19,11 +19,5 @@ export default {
       store.commit('dragModule/setRightClickMenu', el)
       return false;
     }
-  },
-  update () {
-
-  },
-  unbind (el, binding) {
-
   }
 };

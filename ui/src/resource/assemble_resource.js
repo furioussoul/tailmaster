@@ -1,8 +1,7 @@
 import store from '../store'
 import {
   isPlain,
-  stringify,
-  parse
+  stringify
 } from '../util/assist'
 import {
   currentUid

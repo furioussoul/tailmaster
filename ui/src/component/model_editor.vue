@@ -1,5 +1,5 @@
 <template>
-  <Row class="vertical-center">
+  <Row>
     <i-col span="24">
       <Card>
         <p slot="title">
