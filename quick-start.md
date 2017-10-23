@@ -8,8 +8,6 @@
 npm install esview
 ```
 
-
-
 安装完成后，需要给esview配置额外的属性。
 
 ```js
@@ -24,7 +22,6 @@ const app = new Vue({
     return h(esview.render('MyApp','token'))
   }
 })
-
 ```
 
 
