@@ -36,7 +36,7 @@ To build vue spa,you only need 3 steps, after then run script
 
 First step : download vue-spa demo(esview-demo) https://github.com/furioussoul/esview-demo   
 
-Second step : assemble pages online on manager-site(this is online demo : http://47.94.2.0:9090/)  
+Second step : assemble pages online on manager-site(this is online demo : http://localhost:9090/#/esview/assemble/index)  
 
 Third step: esview-demo install esview npm package and npm run dev to deploy
 
