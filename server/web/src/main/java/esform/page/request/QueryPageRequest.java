@@ -11,6 +11,7 @@ import esform.request.BaseRequest;
 public class QueryPageRequest extends BaseRequest {
     private String name;
     private Long appId;
+    private Long pageId;
 
     public String getName() {
         return name;
@@ -26,5 +27,13 @@ public class QueryPageRequest extends BaseRequest {
 
     public void setAppId(Long appId) {
         this.appId = appId;
+    }
+
+    public Long getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(Long pageId) {
+        this.pageId = pageId;
     }
 }

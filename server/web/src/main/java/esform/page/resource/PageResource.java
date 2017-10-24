@@ -54,6 +54,7 @@ public class PageResource {
     public Response pageList(@RequestBody QueryPageRequest request) {
         Page page = new Page(request.getName());
         page.setAppId(request.getAppId());
+        page.setId(request.getPageId());
         List<Page> pages = pageDao.selectByExample(page);
         return Response.ok(pages);
     }
