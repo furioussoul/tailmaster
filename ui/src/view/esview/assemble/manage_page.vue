@@ -101,8 +101,7 @@
           pageNum: 1,
           pageSize: 20,
           total: 0,
-          name: '',
-          appId:this.$route.query.appId
+          name: ''
         }
       }
     },
@@ -111,12 +110,11 @@
         this.$refs[name].resetFields();
       },
       hrefAdd(){
-        this.$router.push('./assemble_page')
+        this.$router.push({path: './assemble_page', query: {appId: this.$route.query.appId}})
       },
       edit(param){
         this.$router.push({path: './assemble_page', query: {pageSoulId: param.row.id}})
       },
-
       del(param){
       }
     }

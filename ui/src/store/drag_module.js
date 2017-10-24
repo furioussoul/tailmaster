@@ -39,13 +39,15 @@ export default {
     setPageSoul(state, {path, pageSoul}){
       if (path) {
         state.pageSoul[path] = pageSoul
-      } else {
+      } else if(!pageSoul.soulType || pageSoul.soulType === 'multiple'){
         state.pageSoul = pageSoul
 
         if(!state.soul){
           //when update page
           state.soul = pageSoul['/index']
         }
+      }else {
+        state.soul = pageSoul
       }
     },
     syncSoul(state, soul){

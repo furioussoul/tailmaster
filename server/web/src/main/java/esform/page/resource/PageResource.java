@@ -31,7 +31,7 @@ public class PageResource {
     public Response add(@RequestBody OperatePageRequest request) {
         Page domain = request.getDomain();
         pageDao.add(domain);
-        return Response.ok();
+        return Response.ok(domain);
     }
 
     @GetMapping("del/{id}")

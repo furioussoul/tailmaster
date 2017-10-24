@@ -69,14 +69,9 @@
       title="confirmPageName"
       @on-ok="okPageName">
       <i-form :label-width="100">
-        <FormItem  label="AppName" >
-          <Select filterable v-model="opModel.appId" size="small" style="width:100px">
-            <Option v-for="item in apps" :value="item.id" :key="item.id">{{ item.name }}</Option>
-          </Select>
-        </FormItem >
-        <FormItem  label="PageName">
+        <FormItem label="PageName">
           <i-input v-model="opModel.name"></i-input>
-        </FormItem >
+        </FormItem>
       </i-form>
     </Modal>
 
@@ -125,15 +120,14 @@
   } from '../../../resource/assemble_resource'
 
   export default {
-    name:'AssemblePage',
+    name: 'AssemblePage',
     data(){
       return {
         isPreview: true,
         showConfirmPageNameModal: false,
         showEditScriptModal: false,
         opModel: {},
-        editControlSoul: {scriptString: ''},
-        apps:[]
+        editControlSoul: {scriptString: ''}
       }
     },
     computed: {
@@ -182,9 +176,6 @@
       }
     },
     mounted(){
-      getAppList.call(this,{},(data)=>{
-          this.apps = data
-      })
 
       getControlList.call(this, (data) => {
 
@@ -226,18 +217,17 @@
             this.opModel = data
             let pageSoul = data.pageSoul
             pageSoul = parse(pageSoul)//deserialize functions from json
-
+            resetUid(pageSoul['maxUid'])
+            let type = pageSoul['soulType']
             for (let key in pageSoul) {
-
-              if (key === 'maxUid') {
-//              pageSoul has keys contains routerPath and 'maxUid'
-                resetUid(pageSoul[key])
-
-              } else {
-                addRenderFn(pageSoul[key])
+              if (key !== 'maxUid' && key !== 'soulType') {
+                if(type ==='multiple'){
+                  addRenderFn(pageSoul[key])
+                }else {
+                  addRenderFn(pageSoul)
+                }
               }
             }
-
             this.setPageSoul({pageSoul})
           })
         }

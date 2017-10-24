@@ -9,10 +9,10 @@ import {
 } from '../helper/soul_helper'
 
 function addApp() {
-  if(!this.opModel.name){
+  if (!this.opModel.name) {
     return void this.$Message.error('name cant be empty')
   }
-  if(!isNumber(this.opModel.sort)){
+  if (!isNumber(this.opModel.sort)) {
     return void this.$Message.error('sort must be number')
   }
   this.$http.post('app/add', this.opModel).then(res => {
@@ -33,10 +33,10 @@ function delApp(id) {
 }
 
 function updateApp() {
-  if(!this.opModel.name){
+  if (!this.opModel.name) {
     return void this.$Message.error('name cant be empty')
   }
-  if(!isNumber(this.opModel.sort)){
+  if (!isNumber(this.opModel.sort)) {
     return void this.$Message.error('sort must be positive')
   }
   this.$http.post('app/update', this.opModel).then(res => {
@@ -47,11 +47,11 @@ function updateApp() {
   })
 }
 
-function getAppList({appName},fn) {
-  this.$http.post('app/appList',{name:appName}).then(res => {
+function getAppList({appName}, fn) {
+  this.$http.post('app/appList', {name: appName}).then(res => {
     if (res.data.code === 10000) {
-      if(fn){
-        fn.call(this,res.data.data)
+      if (fn) {
+        fn.call(this, res.data.data)
       }
     }
   })
@@ -78,16 +78,23 @@ function getRichApp(id, fn) {
 }
 
 function addPage() {
-  let pageSoul = store.getters['dragModule/pageSoul']
-  if(isPlain(pageSoul)){
-    return void this.$Message.error('can\'t save empty page,please drop something into middle area');
+  let pageSoul = store.getters['dragModule/pageSoul'],
+  saveSoul
+
+  if (!isPlain(pageSoul)) {
+    saveSoul = pageSoul
+    saveSoul.soulType='multiple'
+  }else {
+    saveSoul = store.getters['dragModule/soul']
+    saveSoul.soulType='single'
   }
 
-  pageSoul.maxUid = currentUid()
-
-  this.opModel.pageSoul = stringify(pageSoul)
+  saveSoul.maxUid = currentUid()
+  this.opModel.pageSoul = stringify(saveSoul)
+  this.opModel.appId = this.$route.query.appId
   this.$http.post('page/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
+      this.opModel.id = res.data.data.id
       this.$Message.success('saved')
     }
   })
@@ -103,9 +110,19 @@ function delPage(id) {
 }
 
 function updatePage() {
-  let pageSoul = store.getters['dragModule/pageSoul']
-  pageSoul.maxUid = currentUid()
-  this.opModel.pageSoul = stringify(pageSoul)
+  let pageSoul = store.getters['dragModule/pageSoul'],
+    saveSoul
+
+  if (!isPlain(pageSoul)) {
+    saveSoul = pageSoul
+    saveSoul.soulType='multiple'
+  }else {
+    saveSoul = store.getters['dragModule/soul']
+    saveSoul.soulType='single'
+  }
+
+  saveSoul.maxUid = currentUid()
+  this.opModel.pageSoul = stringify(saveSoul)
   this.$http.post('page/update', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')
@@ -113,12 +130,12 @@ function updatePage() {
   })
 }
 
-function getPageList({pageName,token},fn) {
-  this.http.post('page/pageList',{name:pageName}).then(res => {
+function getPageList({pageName, token}, fn) {
+  this.http.post('page/pageList', {name: pageName}).then(res => {
     if (res.data.code === 10000) {
       this.controls = res.data.data
-      if(fn){
-        fn.call(this,res.data.data)
+      if (fn) {
+        fn.call(this, res.data.data)
       }
     }
   })
