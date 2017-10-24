@@ -7,6 +7,7 @@ package esform.domain;
  * @email:200765821@qq.com on 2017/10/14.
  */
 public class Page extends BaseDomain{
+    private String appName;
     private String name;
     private String pageSoul;
     private Long appId;
@@ -19,6 +20,14 @@ public class Page extends BaseDomain{
     }
 
     public Page(String name) {
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
     }
 
     public String getName() {

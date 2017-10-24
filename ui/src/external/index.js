@@ -17,8 +17,8 @@ import {addRenderFn} from '../helper/code_helper'
 Vue.component('AppFrame', appFrame);
 Vue.component('WrapCard', WrapCard);
 
-function getAppList({appName,token},fn) {
-  this.http.post('app/appList',{name:appName}).then(res => {
+function getPageList({appId,pageName,token},fn) {
+  this.http.post('page/pageList',{name:pageName,appId}).then(res => {
     if (res.data.code === 10000) {
       this.controls = res.data.data
       if(fn){
@@ -31,9 +31,9 @@ function getAppList({appName,token},fn) {
 }
 
 // 在这查 appSoul,放到store
-function render({appName,pageName}, token) {
-  getAppList.call(Vue,{
-    appName,
+function render({appId,pageName}, token) {
+  getPageList.call(Vue,{
+    appId,
     pageName,
     token
   },data=>{

@@ -52,7 +52,9 @@ public class PageResource {
     @PostMapping("pageList")
     @ResponseBody
     public Response pageList(@RequestBody QueryPageRequest request) {
-        List<Page> pages = pageDao.selectByExample(new Page(request.getName()));
+        Page page = new Page(request.getName());
+        page.setAppId(request.getAppId());
+        List<Page> pages = pageDao.selectByExample(page);
         return Response.ok(pages);
     }
 
