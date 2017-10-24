@@ -3,7 +3,7 @@
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
       <div class="index-layout-nav">
-        <MenuItem name="2">
+        <MenuItem name="3">
           <Icon type="ios-eye"></Icon>
           preview
         </MenuItem>
@@ -15,7 +15,7 @@
           <Icon type="android-arrow-back"></Icon>
           undo
         </MenuItem>
-        <MenuItem name="13">
+        <MenuItem name="12">
           <Icon type="android-arrow-forward"></Icon>
           redo
         </MenuItem>
@@ -98,41 +98,13 @@
   </div>
 </template>
 <script>
-
-  import {
-    findSoul,
-    findNode,
-    resetUid,
-    generateUid
-  } from '../../../helper/soul_helper'
-  import {
-    makeControl,
-    addRenderFn
-  } from '../../../helper/code_helper'
-  import{
-    undo,
-    redo,
-    clear,
-    init
-  }from '../../../helper/user_operation'
-  import Render from '../../../core/render'
-
-  import {
-    mapGetters,
-    mapMutations
-  } from 'vuex'
+  import {mapGetters, mapMutations} from 'vuex'
   import store from '../../../store'
-  import Editor from '../../../component/model_editor.vue'
-  import {
-    getControlList
-  } from  '../../../resource/develop_resource'
-  import {
-    copyProperties,
-    stringify,
-    parse,
-    deepCopy
-  }from '../../../util/assist'
-
+  import {findSoul, findNode, resetUid} from '../../../helper/soul_helper'
+  import {makeControl, addRenderFn} from '../../../helper/code_helper'
+  import{undo, redo, clear, init}from '../../../helper/user_operation'
+  import {copyProperties, stringify, parse, deepCopy}from '../../../util/assist'
+  import {getControlList} from  '../../../resource/develop_resource'
   import {
     addPage,
     delPage,
@@ -143,19 +115,13 @@
   } from '../../../resource/assemble_resource'
 
   export default {
-    components: {
-      Render,
-      Editor
-    },
     data(){
       return {
         isPreview: true,
         showConfirmPageNameModal: false,
         showEditScriptModal: false,
         opModel: {},
-        editControlSoul: {
-          scriptString: ''
-        }
+        editControlSoul: {scriptString: ''}
       }
     },
     computed: {
@@ -165,6 +131,7 @@
     methods: {
       ...mapMutations('dragModule', ['setSoul', 'clear', 'syncSoul', 'setDraggableControls', 'setPageSoul', 'setOriginSoul']),
       ...mapMutations('userModule', ['changePage']),
+
       editControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
         this.editControlSoul.scriptString = this.editControlSoul.script.toString()
@@ -175,31 +142,30 @@
         this.editControlSoul.scriptString = code
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal = false
-        this.syncSoul(this.soul)
+        this.syncSoul(this.soul)//edited soul, must synchronize pageSoul for saving changes
       },
-      okPageName(){
-        addPage.call(this)
-      },
+
+      okPageName: () => addPage.call(this),
+
       action(a){
-        if (a === '2') {
+        if (a === '3') {
+          //toggle preview
           this.isPreview = !this.isPreview
 
         } else if (a === '6') {
+          //save changes of page
           if (!this.opModel.id) {
             this.showConfirmPageNameModal = true
           } else {
             updatePage.call(this)
           }
+
         } else if (a === '9') {
           undo()
-        } else if (a === '13') {
+
+        } else if (a === '12') {
           redo()
-        } else if (a === '14') {
-          clear()
         }
-      },
-      final(){
-        this.$router.push('./final')
       }
     },
     mounted(){
@@ -227,7 +193,6 @@
             clazz.controls = controls
           }
         })
-
         //store draggableControls
         this.setDraggableControls(draggableControls)
 

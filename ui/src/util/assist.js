@@ -222,16 +222,6 @@ export function containsChineseChar(str) {
   return reg.test(str);
 }
 
-
-/**
- * 通过教研access_token来验证用户登陆凭证是否有效
- */
-export function verifyToken() {
-  if (!getCookie('access_token')) {
-    window.href = '/login'
-  }
-}
-
 //获取url中的参数
 export function getParamInUrl(url) {
   const pattern = /(\w+)=(\w+)/ig;

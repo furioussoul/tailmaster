@@ -7,7 +7,7 @@
     mapMutations
   } from 'vuex'
 
-  import Render from '../../core/render'
+  import Render from '../../component/render_dev'
 
   export default{
     name: 'RenderApp',

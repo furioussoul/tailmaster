@@ -1,5 +1,5 @@
-import store from '../store'
-import eventCenter from './event'
+import store from '../store/index'
+import eventCenter from '../core/event'
 
 export default {
   name: 'Render',

@@ -41,7 +41,11 @@ export default {
         state.pageSoul[path] = pageSoul
       } else {
         state.pageSoul = pageSoul
-        state.soul = pageSoul['/index']
+
+        if(!state.soul){
+          //when update page
+          state.soul = pageSoul['/index']
+        }
       }
     },
     syncSoul(state, soul){

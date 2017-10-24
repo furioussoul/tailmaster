@@ -1,6 +1,7 @@
 package esform.auth.resource;
 
 import esform.auth.request.AuthRequest;
+import esform.auth.response.Menu;
 import esform.dao.UserDao;
 import esform.domain.User;
 import esform.response.Response;
@@ -67,7 +68,7 @@ public class AuthResource {
 
     @GetMapping("logout")
     @ResponseBody
-    public Response clearAccessToken(HttpServletResponse response) {
+    public Response logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("access_token", null);
         cookie.setMaxAge(0);
         cookie.setPath("/");

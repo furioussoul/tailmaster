@@ -3,7 +3,8 @@ import {
   Control,
   ModelEditor,
   WrapCard,
-  CodeEditor
+  CodeEditor,
+  RenderDev
 } from '../component'
 
 const soul = {
@@ -11,7 +12,8 @@ const soul = {
   Control,
   ModelEditor,
   WrapCard,
-  CodeEditor
+  CodeEditor,
+  RenderDev
 };
 
 
