@@ -115,6 +115,7 @@
   } from '../../../resource/assemble_resource'
 
   export default {
+    name:'AssemblePage',
     data(){
       return {
         isPreview: true,

@@ -12,8 +12,6 @@ function addControl(fn) {
         fn.call(this)
       }
       this.$Message.success('saved')
-    } else {
-      this.$Message.error('saved failed')
     }
   })
 }
@@ -23,8 +21,6 @@ function delControl(id) {
     if (res.data.code === 10000) {
       getTableControlList.call(this)
       this.$Message.success('deleted')
-    } else {
-      this.$Message.error('delete failed')
     }
   })
 }
@@ -38,8 +34,6 @@ function updateControl(fn) {
       }
       getTableControlList.call(this)
       this.$Message.success('saved')
-    } else {
-      this.$Message.error('save failed')
     }
   })
 }
@@ -51,8 +45,6 @@ function getControlList(fn) {
       if(fn){
         fn.call(this,res.data.data)
       }
-    } else {
-      this.$Message.error('query failed')
     }
   })
 }
@@ -63,8 +55,6 @@ function getTableControlList() {
       let data = res.data.data
       this.searchInput.total = data.total
       this.tableData = data.list
-    } else {
-      this.$Message.error('query failed')
     }
   })
 }
@@ -75,8 +65,6 @@ function getRichControl(id, fn) {
       if (fn) {
         fn.call(this, res.data.data)
       }
-    } else {
-      this.$Message.error('query failed')
     }
   })
 }

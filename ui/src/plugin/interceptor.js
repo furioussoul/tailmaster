@@ -38,10 +38,7 @@ export default function install(Vue, app) {
         store.commit('userModule/changePage', 'login')
 
       } else if (response.body.code === 20000) {
-        app.$Notice.warning({
-          title: 'error',
-          desc: response.body.msg
-        })
+        app.$Message.error(response.body.msg)
       }
       return response
     })

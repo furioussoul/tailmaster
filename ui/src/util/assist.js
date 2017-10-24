@@ -52,9 +52,9 @@ export function copyProperties(target, source) {
 }
 
 //非负整数
-export function isNumber() {
-  const reg = "^\\d+$"
-  return
+export function isNumber(obj) {
+  const reg = /^-?\d+$/
+  return reg.test(obj)
 }
 
 //获取 ?天?小时?分

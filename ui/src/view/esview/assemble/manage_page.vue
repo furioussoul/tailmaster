@@ -4,7 +4,7 @@
       <Card>
         <div>
           <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
-            <Form-item prop="name" label="pageName:">
+            <Form-item prop="name" label="PageName:">
               <Input v-model="searchInput.name">
               </Input>
             </Form-item>
@@ -49,7 +49,7 @@
     paginationMixin
   } from '../../../mixin/m_pagination'
   export default{
-    name: 'assemble',
+    name: 'ManagePage',
     mixins: [paginationMixin],
     data() {
       return {

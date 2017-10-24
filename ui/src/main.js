@@ -25,7 +25,6 @@ Vue.use(VueResource)
 Vue.use(VueRouter)
 Vue.use(SoulUi)
 Vue.use(Iview, { locale })
-Vue.use(interceptor)
 
 Vue.http.options.root = appContext.apiUrl;
 
@@ -55,5 +54,4 @@ const app = new Vue({
 })
 
 app.$mount('#app');
-
-window.app = app
+interceptor(Vue,app)

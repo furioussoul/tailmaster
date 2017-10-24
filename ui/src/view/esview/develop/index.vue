@@ -4,11 +4,11 @@
       <Card>
         <div>
           <Form ref="searchForm" :model="searchInput" :label-width="85" inline>
-            <Form-item prop="controlName" label="controlName:">
+            <Form-item prop="controlName" label="ControlName:">
               <Input v-model="searchInput.controlName">
               </Input>
             </Form-item>
-            <Form-item prop="controlClass" label="controlClass:">
+            <Form-item prop="controlClass" label="ControlClass:">
               <Input v-model="searchInput.controlClass">
               </Input>
             </Form-item>

@@ -1,11 +1,81 @@
 import store from '../store'
 import {
   isPlain,
-  stringify
+  stringify,
+  isNumber
 } from '../util/assist'
 import {
   currentUid
 } from '../helper/soul_helper'
+
+function addApp() {
+  if(!this.opModel.name){
+    return void this.$Message.error('name cant be empty')
+  }
+  if(!isNumber(this.opModel.sort)){
+    return void this.$Message.error('sort must be number')
+  }
+  this.$http.post('app/add', this.opModel).then(res => {
+    if (res.data.code === 10000) {
+      getTableAppList.call(this)
+      this.$Message.success('saved')
+    }
+  })
+}
+
+function delApp(id) {
+  this.$http.get('app/del/' + id).then(res => {
+    if (res.data.code === 10000) {
+      getTableAppList.call(this)
+      this.$Message.success('deleted')
+    }
+  })
+}
+
+function updateApp() {
+  if(!this.opModel.name){
+    return void this.$Message.error('name cant be empty')
+  }
+  if(!isNumber(this.opModel.sort)){
+    return void this.$Message.error('sort must be positive')
+  }
+  this.$http.post('app/update', this.opModel).then(res => {
+    if (res.data.code === 10000) {
+      getTableAppList.call(this)
+      this.$Message.success('saved')
+    }
+  })
+}
+
+function getAppList({appName},fn) {
+  this.http.post('app/appList',{name:appName}).then(res => {
+    if (res.data.code === 10000) {
+      if(fn){
+        fn.call(this,res.data.data)
+      }
+    }
+  })
+}
+
+function getTableAppList() {
+  this.$http.post('app/tableAppList', this.searchInput).then(res => {
+    if (res.data.code === 10000) {
+      let data = res.data.data
+      this.searchInput.total = data.total
+      this.tableData = data.list
+    }
+  })
+}
+
+function getRichApp(id, fn) {
+  this.$http.get('app/richApp/' + id).then(res => {
+    if (res.data.code === 10000) {
+      if (fn) {
+        fn.call(this, res.data.data)
+      }
+    }
+  })
+}
 
 function addPage() {
   let pageSoul = store.getters['dragModule/pageSoul']
@@ -19,8 +89,6 @@ function addPage() {
   this.$http.post('page/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')
-    } else {
-      this.$Message.error('save failed')
     }
   })
 }
@@ -30,8 +98,6 @@ function delPage(id) {
     if (res.data.code === 10000) {
       getTablePageList.call(this)
       this.$Message.success('deleted')
-    } else {
-      this.$Message.error('delete failed')
     }
   })
 }
@@ -43,8 +109,6 @@ function updatePage() {
   this.$http.post('page/update', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')
-    } else {
-      this.$Message.error('save failed')
     }
   })
 }
@@ -56,8 +120,6 @@ function getPageList({pageName,token},fn) {
       if(fn){
         fn.call(this,res.data.data)
       }
-    } else {
-      this.$Message.error('query failed')
     }
   })
 }
@@ -68,8 +130,6 @@ function getTablePageList() {
       let data = res.data.data
       this.searchInput.total = data.total
       this.tableData = data.list
-    } else {
-      this.$Message.error('query failed')
     }
   })
 }
@@ -80,8 +140,6 @@ function getRichPage(id, fn) {
       if (fn) {
         fn.call(this, res.data.data)
       }
-    } else {
-      this.$Message.error('query failed')
     }
   })
 }
@@ -92,5 +150,11 @@ export {
   updatePage,
   getPageList,
   getTablePageList,
-  getRichPage
+  getRichPage,
+  addApp,
+  delApp,
+  updateApp,
+  getAppList,
+  getTableAppList,
+  getRichApp
 }

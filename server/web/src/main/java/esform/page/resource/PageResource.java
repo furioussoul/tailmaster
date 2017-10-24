@@ -51,7 +51,7 @@ public class PageResource {
 
     @PostMapping("pageList")
     @ResponseBody
-    public Response pageList(@RequestBody OperatePageRequest request) {
+    public Response pageList(@RequestBody QueryPageRequest request) {
         List<Page> pages = pageDao.selectByExample(new Page(request.getName()));
         if (!CollectionUtils.isEmpty(pages)) {
             return Response.ok(pages.get(0));
