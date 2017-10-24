@@ -31,14 +31,15 @@ function getAppList({appName,token},fn) {
 }
 
 // 在这查 appSoul,放到store
-function render(appName, token) {
+function render({appName,pageName}, token) {
   getAppList.call(Vue,{
     appName,
+    pageName,
     token
   },data=>{
     let pageSoul = parse(data.pageSoul)
     for (let key in pageSoul) {
-      if(key !=='maxUid'){
+      if(key !=='maxUid' && key !=='soulType'){
         let soul = pageSoul[key];
         addRenderFn(pageSoul[key])
       }

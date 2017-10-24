@@ -12,12 +12,7 @@ import 'iview/dist/styles/iview.css'
 import './style/index.less'
 import manageApp from './view/esview/app.vue'
 import Login from './view/esview/login.vue'
-import esview from './external'
 import locale  from 'iview/dist/locale/en-US';
-
-esview.addConfig('router',router)
-esview.addConfig('type','assemble')
-esview.addConfig('esstore',Store)
 
 Vue.dev = true
 
@@ -45,8 +40,6 @@ const app = new Vue({
     switch (Store.getters['userModule/page']){
       case 'manage':
         return h(manageApp)
-      case 'app':
-        return h(esview.render('MyApp','token'))
       case 'login':
         return h(Login)
     }
