@@ -37,6 +37,7 @@
   </Row>
 </template>
 <script>
+  import {mapGetters, mapMutations} from 'vuex'
   import {
     addPage,
     delPage,
@@ -106,6 +107,7 @@
       }
     },
     methods: {
+      ...mapMutations('dragModule', ['setSoul']),
       reset(name){
         this.$refs[name].resetFields();
       },
@@ -113,6 +115,7 @@
         this.$router.push({path: './assemble_page', query: {appId: this.$route.query.appId}})
       },
       edit(param){
+        this.setSoul(null)
         this.$router.push({path: './assemble_page', query: {pageSoulId: param.row.id}})
       },
       del(param){
