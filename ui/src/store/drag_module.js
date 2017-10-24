@@ -99,10 +99,9 @@ export default {
         uid: el.controlConfig.uid
       }
     },
-    changeSoul(state, pagePath){
+    changeSoul(state){
       let path = decodeURIComponent(getQueryParam('pageId'))
       if (!path) return
-
       state.currentRouterPath = path
 
       if (!state.pageSoul[path]) {

@@ -104,7 +104,7 @@
 <script>
   import {mapGetters, mapMutations} from 'vuex'
   import store from '../../../store'
-  import {findSoul, findNode, resetUid} from '../../../helper/soul_helper'
+  import {findSoul, findNode, resetUid,generateUid} from '../../../helper/soul_helper'
   import {makeControl, addRenderFn} from '../../../helper/code_helper'
   import{undo, redo, clear, init}from '../../../helper/user_operation'
   import {copyProperties, stringify, parse, deepCopy}from '../../../util/assist'
@@ -231,6 +231,12 @@
             this.setPageSoul({pageSoul})
           })
         }
+
+        let frame = findSoul(105, this.draggableControls)
+        let dropPanelSoul = findSoul(100, this.draggableControls)
+        dropPanelSoul.uid = generateUid()
+        frame.children.push(deepCopy(dropPanelSoul))
+        this.setOriginSoul(frame)
       })
     }
   }

@@ -15,6 +15,7 @@ export default {
   },
   mutations: {
     changeSoul(state, pagePath){
+      debugger
       let soul = state.pageSoul[pagePath]
       if (soul) state.soul = soul
     },

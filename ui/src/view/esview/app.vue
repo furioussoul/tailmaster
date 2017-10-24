@@ -129,7 +129,7 @@ export default{
       },
       path() {
         const path = routerStore.state.RouteModule.path;
-        store.commit('dragModule/changeSoul', getQueryParam('pageId'))// key of the frame's router
+        store.commit('dragModule/changeSoul')// key of the frame's router
         return getBreadcrumb(this.totalMenu, path);
       }
     },
