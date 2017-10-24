@@ -1,6 +1,6 @@
 package esform.dao;
 
-import esform.domain.App;
+import esform.domain.Page;
 import esform.request.BaseRequest;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -14,15 +14,15 @@ import java.util.List;
  * @email:200765821@qq.com on 2017/10/14.
  */
 @Mapper
-public interface AppDao {
+public interface PageDao {
 
-    int add(App control);
+    int add(Page control);
 
     int del(@Param("id") Long id);
 
-    int update(App control);
+    int update(Page control);
 
-    List<App> select(BaseRequest request);
+    List<Page> select(BaseRequest request);
 
-    List<App> selectByExample(App example);
+    List<Page> selectByExample(Page example);
 }

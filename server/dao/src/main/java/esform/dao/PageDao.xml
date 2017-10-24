@@ -2,22 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="esform.dao.AppDao">
+<mapper namespace="esform.dao.PageDao">
 
-    <insert id="add" parameterType="esform.domain.App" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO app
+    <insert id="add" parameterType="esform.domain.Page" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO page
         (`name`,pageSoul,createBy,createDt,updateBy,updateDt,rowStatus)
         VALUES (#{name},#{pageSoul},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
     </insert>
 
     <delete id="del" parameterType="java.lang.Long">
-        update app
+        update page
         SET rowStatus = 0
         WHERE id = #{id}
     </delete>
 
-    <update id="update" parameterType="esform.domain.App">
-        update app
+    <update id="update" parameterType="esform.domain.Page">
+        update page
         <set>
             <if test="name != null">
                 `name` = #{name},
@@ -31,18 +31,18 @@
         WHERE id = #{id}
     </update>
 
-    <select id="select" resultType="esform.domain.App">
+    <select id="select" resultType="esform.domain.Page">
         select *
-        from app
+        from page
         WHERE rowStatus = 1
         <if test="name != null and name != ''">
            `name` LIKE CONCAT(CONCAT('%', #{name}),'%')
         </if>
     </select>
 
-    <select id="selectByExample" resultType="esform.domain.App">
+    <select id="selectByExample" resultType="esform.domain.Page">
         select *
-        from app
+        from page
         <where>
             <if test="id != null">
                 id = #{id}

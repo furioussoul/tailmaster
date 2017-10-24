@@ -4,7 +4,7 @@
         <Card>
           <div>
             <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
-              <Form-item prop="name" label="appName:">
+              <Form-item prop="name" label="pageName:">
                 <Input v-model="searchInput.name">
                 </Input>
               </Form-item>
@@ -38,24 +38,24 @@
 </template>
 <script>
   import {
-    addApp,
-    delApp,
-    updateApp,
-    getAppList,
-    getTableAppList,
-    getRichApp
+    addPage,
+    delPage,
+    updatePage,
+    getPageList,
+    getTablePageList,
+    getRichPage
   } from '../../../resource/assemble_resource'
   import{
     paginationMixin
   } from '../../../mixin/m_pagination'
   export default{
-    name: 'develop',
+    name: 'assemble',
     mixins: [paginationMixin],
     data() {
       return {
         fn: {
-          initFns: [getTableAppList],
-          searchFns: [getTableAppList]
+          initFns: [getTablePageList],
+          searchFns: [getTablePageList]
         },
         columns: [
           {
@@ -109,15 +109,13 @@
         this.$refs[name].resetFields();
       },
       hrefAdd(){
-
-        this.$router.push('./operate_app')
+        this.$router.push('./assemble_page')
       },
       edit(param){
-        this.$router.push({path: './operate_app', query: {appId: param.row.id}})
+        this.$router.push({path: './assemble_page', query: {pageId: param.row.id}})
       },
 
       del(param){
-//        delApp.call(this,param.row.id)
       }
     }
   }

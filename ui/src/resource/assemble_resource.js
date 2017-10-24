@@ -7,7 +7,7 @@ import {
   currentUid
 } from '../helper/soul_helper'
 
-function addApp() {
+function addPage() {
   let pageSoul = store.getters['dragModule/pageSoul']
   if(isPlain(pageSoul)){
     return void this.$Message.error('can\'t save empty app,please drop Frame into middle area');
@@ -16,7 +16,7 @@ function addApp() {
   pageSoul.maxUid = currentUid()
 
   this.opModel.pageSoul = stringify(pageSoul)
-  this.$http.post('app/add', this.opModel).then(res => {
+  this.$http.post('page/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')
     } else {
@@ -25,10 +25,10 @@ function addApp() {
   })
 }
 
-function delApp(id) {
-  this.$http.get('app/del/' + id).then(res => {
+function delPage(id) {
+  this.$http.get('page/del/' + id).then(res => {
     if (res.data.code === 10000) {
-      getTableAppList.call(this)
+      getTablePageList.call(this)
       this.$Message.success('deleted')
     } else {
       this.$Message.error('delete failed')
@@ -36,11 +36,11 @@ function delApp(id) {
   })
 }
 
-function updateApp() {
+function updatePage() {
   let pageSoul = store.getters['dragModule/pageSoul']
   pageSoul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(pageSoul)
-  this.$http.post('app/update', this.opModel).then(res => {
+  this.$http.post('page/update', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')
     } else {
@@ -49,8 +49,8 @@ function updateApp() {
   })
 }
 
-function getAppList({appName,token},fn) {
-  this.http.post('app/appList',{name:appName}).then(res => {
+function getPageList({pageName,token},fn) {
+  this.http.post('page/appList',{name:pageName}).then(res => {
     if (res.data.code === 10000) {
       this.controls = res.data.data
       if(fn){
@@ -62,8 +62,8 @@ function getAppList({appName,token},fn) {
   })
 }
 
-function getTableAppList() {
-  this.$http.post('app/tableAppList', this.searchInput).then(res => {
+function getTablePageList() {
+  this.$http.post('page/tablePageList', this.searchInput).then(res => {
     if (res.data.code === 10000) {
       let data = res.data.data
       this.searchInput.total = data.total
@@ -74,8 +74,8 @@ function getTableAppList() {
   })
 }
 
-function getRichApp(id, fn) {
-  this.$http.get('app/richApp/' + id).then(res => {
+function getRichPage(id, fn) {
+  this.$http.get('page/richPage/' + id).then(res => {
     if (res.data.code === 10000) {
       if (fn) {
         fn.call(this, res.data.data)
@@ -87,10 +87,10 @@ function getRichApp(id, fn) {
 }
 
 export {
-  addApp,
-  delApp,
-  updateApp,
-  getAppList,
-  getTableAppList,
-  getRichApp
+  addPage,
+  delPage,
+  updatePage,
+  getPageList,
+  getTablePageList,
+  getRichPage
 }

@@ -28,7 +28,7 @@
         <i-col span="3">
           <transition name="index-soul-control-class-fade">
             <div>
-              <Collapse v-model="collapseValue" :key="classIndex" v-for="(controlClass, classIndex) in classes">
+              <Collapse :key="classIndex" v-for="(controlClass, classIndex) in controlClazzes">
                 <Panel :name="classIndex+''">
                   {{controlClass.name}}
                   <p slot="content" class="index-layout-content__class">
@@ -65,9 +65,9 @@
     </div>
 
     <Modal
-      v-model="showConfirmAppNameModal"
-      title="confirmAppName"
-      @on-ok="okAppName">
+      v-model="showConfirmPageNameModal"
+      title="confirmPageName"
+      @on-ok="okPageName">
       <i-input v-model="opModel.name"></i-input>
     </Modal>
 
@@ -106,7 +106,7 @@
     generateUid
   } from '../../../helper/soul_helper'
   import {
-    getConfig,
+    makeControl,
     addRenderFn
   } from '../../../helper/code_helper'
   import{
@@ -121,7 +121,6 @@
     mapGetters,
     mapMutations
   } from 'vuex'
-  import dropDirective from '../../../directive/droppable'
   import store from '../../../store'
   import Editor from '../../../component/model_editor.vue'
   import {
@@ -135,10 +134,12 @@
   }from '../../../util/assist'
 
   import {
-    addApp,
-    delApp,
-    updateApp,
-    getRichApp
+    addPage,
+    delPage,
+    updatePage,
+    getPageList,
+    getTablePageList,
+    getRichPage
   } from '../../../resource/assemble_resource'
 
   export default {
@@ -148,44 +149,36 @@
     },
     data(){
       return {
-        showConfirmAppNameModal: false,
+        isPreview: true,
+        showConfirmPageNameModal: false,
         showEditScriptModal: false,
+        opModel: {},
         editControlSoul: {
           scriptString: ''
-        },
-        opModel: {},
-        isPreview: true,
-        collapseValue: "0",
-        classes: []
+        }
       }
     },
     computed: {
-      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu', 'showEditorPanel'])
+      ...mapGetters('userModule',['controlClazzes']),
+      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu', 'showEditorPanel','controlConfigs'])
     },
     methods: {
-      ...mapMutations('dragModule',
-        [
-          'setSoul'
-        ]),
-      ...mapMutations('userModule',
-        [
-          'changePage'
-        ]),
+      ...mapMutations('dragModule',[ 'setSoul','clear','syncSoul','setControlConfigs','setPageSoul','setOriginSoul']),
+      ...mapMutations('userModule',['changePage']),
       editControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
         this.editControlSoul.scriptString = this.editControlSoul.script.toString()
-        store.commit('dragModule/clear')
+        this.clear()
         this.showEditScriptModal = true
       },
       saveCode(code){
         this.editControlSoul.scriptString = code
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal = false
-        let soul = store.getters['dragModule/soul']
-        store.commit('dragModule/syncSoul', soul)
+        this.syncSoul(this.soul)
       },
-      okAppName(){
-        addApp.call(this)
+      okPageName(){
+        addPage.call(this)
       },
       action(a){
         if (a === '2') {
@@ -193,9 +186,9 @@
 
         } else if (a === '6') {
           if (!this.opModel.id) {
-            this.showConfirmAppNameModal = true
+            this.showConfirmPageNameModal = true
           } else {
-            updateApp.call(this)
+            updatePage.call(this)
           }
         } else if (a === '9') {
           undo()
@@ -211,38 +204,41 @@
     },
     mounted(){
       getControlList.call(this, (data) => {
-        let controlConfigs = []
-        data.forEach(control => {
-          let controlConfig = getConfig(control.code);
-          controlConfig.clazzName = control.clazzName
-          controlConfigs.push(controlConfig)
+
+        //draggableControls are the draggable items on the left side of dropPanel
+        let draggableControls = []
+
+        data.forEach(origin => {
+          let control = makeControl(origin.code);
+          control.clazzId = origin.clazzId
+          draggableControls.push(control)
         })
 
+
+
+        //classify draggableControls
         let map = {}
-        controlConfigs.forEach(item => {
-
-          if (!map[item.clazzName]) {
-            map[item.clazzName] = []
+        draggableControls.forEach(item => {
+          if (!map[item.clazzId]) {
+            map[item.clazzId] = []
           }
-          map[item.clazzName].push(item)
+          map[item.clazzId].push(item)
         })
 
-        for(let key in map){
+        this.controlClazzes.forEach(clazz=>{
+            let controls = map[clazz.id]
+            if(controls){
+                clazz.controls = controls
+            }
+        })
 
-            this.classes.push({
-              name:key,
-              controls:map[key]
-            })
-        }
-
-        store.commit('dragModule/setControlConfigs', controlConfigs)
+       this.setControlConfigs(draggableControls)
 
         let query = this.$route.query
-        if (!query.appId) {
-          reload(controlConfigs)
+        if (!query.pageId) {
+          reload(draggableControls)
         } else {
-          getRichApp.call(this, query.appId, (data) => {
-            store.commit('dragModule/setAppId', query.appId)
+          getRichPage.call(this, query.pageId, (data) => {
             this.opModel = data
             let pageSoul = data.pageSoul
             pageSoul = parse(pageSoul)
@@ -255,16 +251,14 @@
               }
             }
 
-            store.commit('dragModule/setPageSoul', {
-              pageSoul: pageSoul
-            })
-            store.commit('dragModule/setSoul', pageSoul['/index'])
+            this.setPageSoul({pageSoul})
+            this.setSoul(pageSoul['/index'])
 
-            let frame = findSoul(105, store.getters['dragModule/controlConfigs'])
-            let dropPanelSoul = findSoul(100, store.getters['dragModule/controlConfigs'])
+            let frame = findSoul(105, this.controlConfigs)
+            let dropPanelSoul = findSoul(100, this.controlConfigs)
             dropPanelSoul.uid = generateUid()
             frame.children.push(deepCopy(dropPanelSoul))
-            store.commit('dragModule/setOriginSoul', frame)
+            this.setOriginSoul(frame)
           })
         }
       })
@@ -324,7 +318,7 @@
     opacity: 0;
   }
 
-  .assemble{
+  .assemble {
     margin-top: 50px
   }
 </style>

@@ -1,10 +1,10 @@
 import {
-  getConfig
+  makeControl
 } from '../helper/code_helper'
 
 function addControl(fn) {
 
-  let config = getConfig(this.opModel.code)
+  let config = makeControl(this.opModel.code)
 
   this.$http.post('control/add', config).then(res => {
     if (res.data.code === 10000) {

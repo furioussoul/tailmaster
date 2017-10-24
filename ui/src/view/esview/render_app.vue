@@ -12,7 +12,7 @@
   export default{
     name: 'RenderApp',
     props: {
-      appId: [String]
+      pageId: [String]
     },
     components: {
       Render

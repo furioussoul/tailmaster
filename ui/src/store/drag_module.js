@@ -24,11 +24,11 @@ export default {
     controlConfigs: null,
     editLayer: {},
     rightClickMenu:{},
-    appId:'',
+    pageId:'',
   },
   getters: {
-    appId({appId}){
-      return appId
+    pageId({pageId}){
+      return pageId
     },
     pageSoul({pageSoul}){
       return pageSoul
@@ -62,8 +62,8 @@ export default {
     }
   },
   mutations: {
-    setAppId(state,appId){
-      state.appId = appId
+    setPageId(state, pageId){
+      state.pageId = pageId
     },
     clear(state){
       state.editSoul = {}

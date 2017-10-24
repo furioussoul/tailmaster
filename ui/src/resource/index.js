@@ -7,8 +7,12 @@ import {
 } from './develop_resource'
 
 import {
-  getPaginationAppSoul,
-  getAppSoulList
+  addPage,
+  delPage,
+  updatePage,
+  getPageList,
+  getTablePageList,
+  getRichPage
 } from './assemble_resource'
 
 import {
@@ -22,8 +26,12 @@ export {
   updateControl,
   getTableControlList,
   getRichControl,
-  getPaginationAppSoul,
-  getAppSoulList,
+  addPage,
+  delPage,
+  updatePage,
+  getPageList,
+  getTablePageList,
+  getRichPage,
   register,
   login
 }

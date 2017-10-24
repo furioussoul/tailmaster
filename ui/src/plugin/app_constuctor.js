@@ -309,7 +309,7 @@ export default function initAppConstructor(config) {
                     "id": 74796,
                     "name": "index",
                     "title": "OperateApp",
-                    "url": "/esview/assemble/operate_app",
+                    "url": "/esview/assemble/assemble_page",
                     "orderNo": 1,
                     "mtype": -1,
                     "hasPermisson": 1,
@@ -368,9 +368,6 @@ export default function initAppConstructor(config) {
         }
       }
       this.userInfo = res.data;
-
-
-      console.log()
     }
   }
 }

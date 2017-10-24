@@ -1,6 +1,4 @@
-package esform.app.request;
-
-import esform.domain.App;
+package esform.domain;
 
 /**
  * Created by
@@ -8,26 +6,18 @@ import esform.domain.App;
  * @name:孙证杰
  * @email:200765821@qq.com on 2017/10/14.
  */
-public class OperateAppRequest {
-
-    private Long id;
+public class Page extends BaseDomain{
     private String name;
     private String pageSoul;
 
-    public App getDomain() {
-        App app = new App();
-        app.setId(id);
-        app.setName(name);
-        app.setPageSoul(pageSoul);
-        return app;
+    public Page(Long id) {
+        setId(id);
     }
 
-    public Long getId() {
-        return id;
+    public Page() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Page(String name) {
     }
 
     public String getName() {
