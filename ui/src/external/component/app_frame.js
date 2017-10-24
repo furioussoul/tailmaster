@@ -2,14 +2,7 @@ import renderVue from './render.vue'
 import {
   getConfig
 } from '../config'
-import store from '../../store'
 
-/**
- * 获取面包屑
- * @param menus 菜单
- * @param path 当前路径
- * @returns {*}
- */
 function getBreadcrumb(menus, path) {
   let breadcrumb = [];
   if (menus && menus.length) {
@@ -35,11 +28,7 @@ function getBreadcrumb(menus, path) {
   return breadcrumb;
 }
 
-/**
- * 把菜单生成vue路由对象
- * @param menus 菜单
- * @returns {Array}
- */
+// make vue router path
 function getPages(menus) {
   let pages = [];
   if (menus && menus.length > 0) {
@@ -56,28 +45,24 @@ function getPages(menus) {
 
 function initRouter(pages) {
 
-  let router = getConfig('router')
-  let type = getConfig('type')
-
-  if (type === 'assemble') {
+  if (getConfig('type') === 'assemble') {
+    //frame is used in the assemble_page.vue
     let routes = pages.map((page, index) => {
       page.url = '/esview/assemble/assemble_page?pageId='
         + encodeURIComponent(page.url)
-        + '&pageId=' + store.getters['dragModule/pageId']
     })
     return
   }
-  //router configuration of client app
-  let routes = pages.map((page, index) => {
 
+  let routes = pages.map((page) => {
       return {
         path: page.url,
-        component: renderVue
+        component: renderVue //all routerPath render components 'renderVue'
       }
     }
   )
 
-  router.addRoutes(routes);
+  getConfig('router').addRoutes(routes);
 }
 
 export {

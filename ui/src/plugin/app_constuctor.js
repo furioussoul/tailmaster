@@ -206,7 +206,7 @@ export default function initAppConstructor(config) {
       },
       path() {
         const path = routerStore.state.RouteModule.path;
-        store.commit('dragModule/changeSoul', getQueryParam('pageId'))
+        store.commit('dragModule/changeSoul', getQueryParam('pageId'))// key of the frame's router
         return getBreadcrumb(this.totalMenu, path);
       }
     },

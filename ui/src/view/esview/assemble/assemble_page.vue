@@ -205,7 +205,6 @@
     mounted(){
       getControlList.call(this, (data) => {
 
-        //draggableControls are the draggable items on the left side of dropPanel
         let draggableControls = []
 
         data.forEach(origin => {
@@ -233,7 +232,7 @@
         this.setDraggableControls(draggableControls)
 
         let query = this.$route.query
-        if (!query.pageId) {
+        if (!query.pageSoulId) {
           //when add new page
           init(draggableControls)
 
@@ -241,7 +240,7 @@
 
           //when update page
 
-          getRichPage.call(this, query.pageId, (data) => {
+          getRichPage.call(this, query.pageSoulId, (data) => {
             this.opModel = data
             let pageSoul = data.pageSoul
             pageSoul = parse(pageSoul)//deserialize functions from json
@@ -257,7 +256,6 @@
               }
             }
 
-            this.setSoul(pageSoul['/index'])
             this.setPageSoul({pageSoul})
           })
         }

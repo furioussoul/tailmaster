@@ -41,7 +41,7 @@ function onDragOver(e) {
   e.preventDefault()
   e.stopPropagation()
 
-  const drag = store.getters['dragModule/getDragElement'];
+  const drag = store.getters['dragModule/dragElement'];
 
   if (validateDrop(drag, this)) {
     markDrop(this, true)
@@ -108,7 +108,7 @@ function onDrop(e) {
   e.stopPropagation();
   e.preventDefault();
 
-  const drag = store.getters['dragModule/getDragElement'];
+  const drag = store.getters['dragModule/dragElement'];
 
   if (!validateDrop(drag,this)) {
     return false;

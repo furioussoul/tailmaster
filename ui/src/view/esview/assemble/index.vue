@@ -112,7 +112,7 @@
         this.$router.push('./assemble_page')
       },
       edit(param){
-        this.$router.push({path: './assemble_page', query: {pageId: param.row.id}})
+        this.$router.push({path: './assemble_page', query: {pageSoulId: param.row.id}})
       },
 
       del(param){

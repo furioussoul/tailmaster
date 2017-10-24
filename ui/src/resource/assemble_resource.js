@@ -10,7 +10,7 @@ import {
 function addPage() {
   let pageSoul = store.getters['dragModule/pageSoul']
   if(isPlain(pageSoul)){
-    return void this.$Message.error('can\'t save empty app,please drop Frame into middle area');
+    return void this.$Message.error('can\'t save empty page,please drop something into middle area');
   }
 
   pageSoul.maxUid = currentUid()
@@ -50,7 +50,7 @@ function updatePage() {
 }
 
 function getPageList({pageName,token},fn) {
-  this.http.post('page/appList',{name:pageName}).then(res => {
+  this.http.post('page/pageList',{name:pageName}).then(res => {
     if (res.data.code === 10000) {
       this.controls = res.data.data
       if(fn){

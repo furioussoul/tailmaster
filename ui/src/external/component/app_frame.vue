@@ -527,7 +527,7 @@
     methods: {
       home(){
           if(getConfig('type') === 'assemble'){
-            this.$router.push('/esview/assemble/assemble_page?pageId=%2Findex' + '&pageId=' + getConfig('esstore').getters['dragModule/pageId'])
+            this.$router.push('/esview/assemble/assemble_page?pageId=%2Findex')
           }else {
             this.$router.push('/index')
           }

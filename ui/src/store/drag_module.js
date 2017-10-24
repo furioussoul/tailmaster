@@ -1,78 +1,67 @@
-import {
-  findNode
-} from '../helper/soul_helper'
-import {
-  findElUpward
-} from '../helper/dom_helper'
-import {
-  isPlain
-}from '../util/assist'
-import {
-  deepCopy,
-  getQueryParam
-} from '../util/assist'
+import {findNode} from '../helper/soul_helper'
+import {findElUpward} from '../helper/dom_helper'
+import {isPlain}from '../util/assist'
+import {deepCopy, getQueryParam} from '../util/assist'
+
 export default {
   namespaced: true,
   state: {
-    dragElement: null,//当前被拖拽的元素
-    soul: null,//展示用的组件树
-    originSoul: null,//初始化soul
-    pageSoul: {},//对应路由的soul
-    currentRouterPath:'',
-    showEditorPanel: false,
-    editSoul: {},
-    draggableControls: null,
-    editLayer: {},
-    rightClickMenu:{},
-    pageId:'',
+    originSoul: null,//flatten soul of frame with dropPanel
+    soul: null,//the view data of current routerPath
+    pageSoul: {},//view data of all routerPaths
+    editSoul: {},//editable part of soul which you can edit on the right side of drop area
+    dragElement: null,//current dragging element
+    draggableControls: null,//draggableControls are the draggable items on the left side of dropPanel
+    currentRouterPath: '',//current path of window's path, not hash
+    showEditorPanel: false,//show the panel of 'editSoul'
+    editLayer: {},//the cover appears when hover the dropped element
+    rightClickMenu: {}//right click menu when right click the dropped element
   },
   getters: {
-    pageId({pageId}){
-      return pageId
-    },
-    pageSoul({pageSoul}){
-      return pageSoul
-    },
-    currentRouterPath({currentRouterPath}){
-      return currentRouterPath
-    },
-    editLayer({editLayer}){
-      return editLayer
-    },
-    rightClickMenu({rightClickMenu}){
-      return rightClickMenu
-    },
-    draggableControls({draggableControls}){
-      return draggableControls
-    },
-    appSoul({appSoul}){
-      return appSoul
-    },
-    editSoul({editSoul}){
-      return editSoul
-    },
-    getDragElement({dragElement}){
-      return dragElement
-    },
-    soul({soul}){
-      return soul
-    },
-    showEditorPanel({editSoul}){
-      return !isPlain(editSoul);
-    }
+    soul: ({soul}) => soul,
+    pageSoul: ({pageSoul}) => pageSoul,
+    editSoul: ({editSoul}) => editSoul,
+    dragElement: ({dragElement}) => dragElement,
+    draggableControls: ({draggableControls}) => draggableControls,
+    currentRouterPath: ({currentRouterPath}) => currentRouterPath,
+    showEditorPanel: ({editSoul}) => !isPlain(editSoul),
+    editLayer: ({editLayer}) => editLayer,
+    rightClickMenu: ({rightClickMenu}) => rightClickMenu
   },
   mutations: {
-    setPageId(state, pageId){
-      state.pageId = pageId
+    setOriginSoul(state, soul){
+      state.originSoul = deepCopy(soul)
+      state.currentRouterPath = '/index'
+    },
+    setSoul: (state, soul) => {
+      state.soul = soul
+    },
+    setPageSoul(state, {path, pageSoul}){
+      if (path) {
+        state.pageSoul[path] = pageSoul
+      } else {
+        state.pageSoul = pageSoul
+        state.soul = pageSoul['/index']
+      }
+    },
+    syncSoul(state, soul){
+      //sync changes of soul to pageSoul by routerPath
+      state.pageSoul[state.currentRouterPath] = soul
+    },
+    setDraggableControls(state, draggableControls){
+      state.draggableControls = draggableControls
+    },
+    setDragElement(state, element){
+      state.dragElement = element
     },
     clear(state){
       state.editSoul = {}
       state.rightClickMenu = {}
     },
     clearEditLayer(state){
-      state.editLayer= {
+      state.editLayer = {
         style: {
-          display:'none'
+          display: 'none'
         }
       }
     },
@@ -80,40 +69,39 @@ export default {
       let rect = bind.el.getBoundingClientRect();
       state.editLayer = {
         style: {
-          left: rect.left  + 'px',
-          top: rect.top  + 'px',
-          width: rect.width  + 'px',
+          left: rect.left + 'px',
+          top: rect.top + 'px',
+          width: rect.width + 'px',
           height: rect.height + 'px',
-          display:'block'
+          display: 'block'
         },
         name: bind.binding.value
       }
     },
-    setRightClickMenu(state,el){
+    setRightClickMenu(state, el){
       let e = e || window.event;
-      //鼠标点的坐标
+      //x,y of mouse
       let oX = e.clientX;
       let oY = e.clientY - 20;
-      //菜单出现后的位置
-      state.rightClickMenu= {
-        style:{
-          display : "block",
-          left:oX + "px",
-          top : oY + "px"
+      //x,y of menu appears
+      state.rightClickMenu = {
+        style: {
+          display: "block",
+          left: oX + "px",
+          top: oY + "px"
         },
-        uid : el.controlConfig.uid
+        uid: el.controlConfig.uid
       }
     },
     changeSoul(state, pagePath){
       let path = decodeURIComponent(getQueryParam('pageId'))
-
-      if(!path) return
+      if (!path) return
 
       state.currentRouterPath = path
 
       if (!state.pageSoul[path]) {
 
-        if(!state.originSoul) return
+        if (!state.originSoul) return
 
         const soulCopy = deepCopy(state.originSoul)
         state.pageSoul[path] = soulCopy
@@ -122,25 +110,9 @@ export default {
       }
       state.soul = state.pageSoul[path]
     },
-    setDraggableControls(state, draggableControls){
-      state.draggableControls = draggableControls
-    },
-    setAppSoul(state, appSoul){
-      state.appSoul = appSoul
-    },
-    setDragElement(state, element){
-      state.dragElement = element
-    },
-    setSoul(state, soul){
-      state.soul = soul
-    },
-    setOriginSoul(state, soul){
-      state.originSoul = deepCopy(soul)
-      state.currentRouterPath = '/index'
-    },
     showEditorPanel(state, e){
-      state.rightClickMenu = {}
       e.stopPropagation()
+      state.rightClickMenu = {}
       const el = findElUpward(e.target);
       const soul = findNode(el.controlConfig.uid, state.soul);
       if (!soul || !isPlain(soul.model)) {
@@ -155,19 +127,7 @@ export default {
     hideEditorPanel(state, e){
       e.stopPropagation()
       state.showEditorPanel = false
-    },
-    setPageSoul(state,{path,pageSoul}){
-      if(path){
-        state.pageSoul[path] = pageSoul
-      }else {
-        state.pageSoul = pageSoul
-      }
-    },
-    syncSoul(state,soul){
-      state.pageSoul[state.currentRouterPath] = soul
     }
   },
-  actions: {
-
-  }
+  actions: {}
 }
