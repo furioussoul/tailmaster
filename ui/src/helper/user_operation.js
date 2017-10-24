@@ -35,7 +35,7 @@ function undo() {
     return false
   }
   let dataSnapshot = templateStore.dataSnapshot[templateStore.count - 2];
-  dataSnapshot = dataSnapshot ? dataSnapshot : deepCopy(findSoul(100, store.getters['dragModule/controlConfigs']))
+  dataSnapshot = dataSnapshot ? dataSnapshot : deepCopy(findSoul(100, store.getters['dragModule/draggableControls']))
   let soulCopy = deepCopy(dataSnapshot)
 
   store.commit('dragModule/setSoul', soulCopy)
@@ -67,12 +67,12 @@ function clear() {
   })
 }
 
-function reload(controlConfigs) {
-  let dropPanelSoul = findSoul(100, controlConfigs),
-  copy = deepCopy(dropPanelSoul);
-  copy.uid = generateUid()
+function init(draggableControls) {
+  let dropPanelSoul = findSoul(100, draggableControls),
+  copy = deepCopy(dropPanelSoul);//before drop ,must copy drag control
+  copy.uid = generateUid() //dropped control has unique uid
   store.commit('dragModule/setSoul', copy)
-  store.commit('dragModule/setPageSoul', {pageSoul:{}})
+  store.commit('dragModule/setPageSoul', {pageSoul:{}})//now we have no pages
 }
 
 function saveSoul() {
@@ -88,5 +88,5 @@ export {
   redo,
   clear,
   saveSoul,
-  reload
+  init
 }

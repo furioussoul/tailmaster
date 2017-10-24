@@ -113,7 +113,7 @@
     undo,
     redo,
     clear,
-    reload
+    init
   }from '../../../helper/user_operation'
   import Render from '../../../core/render'
 
@@ -159,12 +159,12 @@
       }
     },
     computed: {
-      ...mapGetters('userModule',['controlClazzes']),
-      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu', 'showEditorPanel','controlConfigs'])
+      ...mapGetters('userModule', ['controlClazzes']),
+      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu', 'showEditorPanel', 'draggableControls'])
     },
     methods: {
-      ...mapMutations('dragModule',[ 'setSoul','clear','syncSoul','setControlConfigs','setPageSoul','setOriginSoul']),
-      ...mapMutations('userModule',['changePage']),
+      ...mapMutations('dragModule', ['setSoul', 'clear', 'syncSoul', 'setDraggableControls', 'setPageSoul', 'setOriginSoul']),
+      ...mapMutations('userModule', ['changePage']),
       editControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
         this.editControlSoul.scriptString = this.editControlSoul.script.toString()
@@ -214,8 +214,6 @@
           draggableControls.push(control)
         })
 
-
-
         //classify draggableControls
         let map = {}
         draggableControls.forEach(item => {
@@ -224,41 +222,43 @@
           }
           map[item.clazzId].push(item)
         })
-
-        this.controlClazzes.forEach(clazz=>{
-            let controls = map[clazz.id]
-            if(controls){
-                clazz.controls = controls
-            }
+        this.controlClazzes.forEach(clazz => {
+          let controls = map[clazz.id]
+          if (controls) {
+            clazz.controls = controls
+          }
         })
 
-       this.setControlConfigs(draggableControls)
+        //store draggableControls
+        this.setDraggableControls(draggableControls)
 
         let query = this.$route.query
         if (!query.pageId) {
-          reload(draggableControls)
+          //when add new page
+          init(draggableControls)
+
         } else {
+
+          //when update page
+
           getRichPage.call(this, query.pageId, (data) => {
             this.opModel = data
             let pageSoul = data.pageSoul
-            pageSoul = parse(pageSoul)
+            pageSoul = parse(pageSoul)//deserialize functions from json
 
             for (let key in pageSoul) {
+
               if (key === 'maxUid') {
+//              pageSoul has keys contains routerPath and 'maxUid'
                 resetUid(pageSoul[key])
+
               } else {
                 addRenderFn(pageSoul[key])
               }
             }
 
-            this.setPageSoul({pageSoul})
             this.setSoul(pageSoul['/index'])
-
-            let frame = findSoul(105, this.controlConfigs)
-            let dropPanelSoul = findSoul(100, this.controlConfigs)
-            dropPanelSoul.uid = generateUid()
-            frame.children.push(deepCopy(dropPanelSoul))
-            this.setOriginSoul(frame)
+            this.setPageSoul({pageSoul})
           })
         }
       })

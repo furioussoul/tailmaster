@@ -21,7 +21,7 @@ export default {
     currentRouterPath:'',
     showEditorPanel: false,
     editSoul: {},
-    controlConfigs: null,
+    draggableControls: null,
     editLayer: {},
     rightClickMenu:{},
     pageId:'',
@@ -42,8 +42,8 @@ export default {
     rightClickMenu({rightClickMenu}){
       return rightClickMenu
     },
-    controlConfigs({controlConfigs}){
-      return controlConfigs
+    draggableControls({draggableControls}){
+      return draggableControls
     },
     appSoul({appSoul}){
       return appSoul
@@ -122,8 +122,8 @@ export default {
       }
       state.soul = state.pageSoul[path]
     },
-    setControlConfigs(state, controlConfigs){
-      state.controlConfigs = controlConfigs
+    setDraggableControls(state, draggableControls){
+      state.draggableControls = draggableControls
     },
     setAppSoul(state, appSoul){
       state.appSoul = appSoul

@@ -91,7 +91,7 @@ function markDrop(drop, mark) {
 
 function interceptDrop(saveInfo) {
   if(saveInfo.drag.type === 'AppFrame'){
-    let dropPanelSoul = findSoul(100, store.getters['dragModule/controlConfigs'])
+    let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
     saveInfo.drag.children.push(deepCopy(dropPanelSoul))
     store.commit('dragModule/setOriginSoul',saveInfo.drag)
     store.commit('dragModule/setPageSoul',{
@@ -99,7 +99,7 @@ function interceptDrop(saveInfo) {
       pageSoul:saveInfo.drag
     })
   }else if(saveInfo.drag.type === 'WrapCard'){
-    let dropPanelSoul = findSoul(100, store.getters['dragModule/controlConfigs'])
+    let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
     saveInfo.drag.children.push(deepCopy(dropPanelSoul))
   }
 }
