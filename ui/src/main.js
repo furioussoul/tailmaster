@@ -12,14 +12,18 @@ import 'iview/dist/styles/iview.css'
 import './style/index.less'
 import manageApp from './view/esview/app.vue'
 import Login from './view/esview/login.vue'
+import esview from './external'
 import locale  from 'iview/dist/locale/en-US';
+
+esview.addConfig('router', router)
+esview.addConfig('type', 'assemble')
 
 Vue.dev = true
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
 Vue.use(SoulUi)
-Vue.use(Iview, { locale })
+Vue.use(Iview, {locale})
 
 Vue.http.options.root = appContext.apiUrl;
 
@@ -30,21 +34,27 @@ let config = {
 }
 
 const app = new Vue({
-  store:Store,
+  store: Store,
   router: router,
   render (h) {
-    if(!Store.getters['userModule/me']){
+    if (!Store.getters['userModule/me']) {
       return h(Login)
     }
 
-    switch (Store.getters['userModule/page']){
+    switch (Store.getters['userModule/page']) {
       case 'manage':
         return h(manageApp)
       case 'login':
         return h(Login)
+      case 'test':
+        return h(esview.render({
+          appId: '14',
+          pageId: '89',
+          token: ''
+        }))
     }
   }
 })
 
 app.$mount('#app');
-interceptor(Vue,app)
+interceptor(Vue, app)

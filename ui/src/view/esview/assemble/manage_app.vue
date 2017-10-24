@@ -74,6 +74,10 @@
             key: 'name'
           },
           {
+            title: 'AppId',
+            key: 'id'
+          },
+          {
             title: 'action',
             key: 'action',
             width: 300,

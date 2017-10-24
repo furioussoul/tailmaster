@@ -17,8 +17,8 @@ import {addRenderFn} from '../helper/code_helper'
 Vue.component('AppFrame', appFrame);
 Vue.component('WrapCard', WrapCard);
 
-function getPageList({appId,pageName,token},fn) {
-  this.http.post('page/pageList',{name:pageName,appId}).then(res => {
+function getPageList({appId,pageId,token},fn) {
+  this.http.post('page/pageList',{appId,pageId}).then(res => {
     if (res.data.code === 10000) {
       this.controls = res.data.data
       if(fn){
@@ -31,17 +31,21 @@ function getPageList({appId,pageName,token},fn) {
 }
 
 // 在这查 appSoul,放到store
-function render({appId,pageName}, token) {
+function render({appId,pageId}, token) {
   getPageList.call(Vue,{
     appId,
-    pageName,
+    pageId,
     token
   },data=>{
-    let pageSoul = parse(data.pageSoul)
+    let pageSoul = parse(data[0].pageSoul)
+    let soulType = pageSoul.soulType
     for (let key in pageSoul) {
       if(key !=='maxUid' && key !=='soulType'){
-        let soul = pageSoul[key];
-        addRenderFn(pageSoul[key])
+        if(!soulType || soulType==='multiple'){
+          addRenderFn(pageSoul[key])
+        }else {
+          addRenderFn(pageSoul)
+        }
       }
     }
     store.commit('soulModule/setPageSoul', pageSoul)
