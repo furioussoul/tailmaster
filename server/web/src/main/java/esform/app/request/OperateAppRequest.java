@@ -13,12 +13,14 @@ public class OperateAppRequest {
     private Long id;
     private String name;
     private Integer sort;
+    private String url;
 
     public App getDomain() {
         App app = new App();
         app.setId(id);
         app.setName(name);
         app.setSort(sort);
+        app.setUrl(url);
         return app;
     }
 
@@ -44,5 +46,13 @@ public class OperateAppRequest {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

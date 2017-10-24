@@ -6,8 +6,8 @@
 
     <insert id="add" parameterType="esform.domain.App" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO app
-        (`name`,sort,createBy,createDt,updateBy,updateDt,rowStatus)
-        VALUES (#{name},#{sort},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
+        (`name`,sort,url,createBy,createDt,updateBy,updateDt,rowStatus)
+        VALUES (#{name},#{sort},#{url},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
     </insert>
 
     <delete id="del" parameterType="java.lang.Long">
@@ -24,6 +24,9 @@
             </if>
             <if test="sort != null">
                 sort = #{sort},
+            </if>
+            <if test="url != null">
+                url = #{url},
             </if>
             updateBy = #{updateBy},
             updateDt = #{updateDt}

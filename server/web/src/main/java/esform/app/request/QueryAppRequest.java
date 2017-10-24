@@ -10,6 +10,7 @@ import esform.request.BaseRequest;
  */
 public class QueryAppRequest extends BaseRequest {
     private String name;
+    private String url;
 
     public String getName() {
         return name;
@@ -18,4 +19,13 @@ public class QueryAppRequest extends BaseRequest {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
+

@@ -9,11 +9,13 @@ package esform.domain;
 public class App extends BaseDomain{
     private String name;
     private Integer sort;
-
-    public App(String name) {
-    }
+    private String url;
 
     public App() {
+    }
+
+    public App(String name) {
+        this.name = name;
     }
 
     public App(Long id) {
@@ -34,5 +36,13 @@ public class App extends BaseDomain{
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

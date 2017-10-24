@@ -48,6 +48,9 @@
         <form-item prop="sort" label="sort">
           <i-input v-model="opModel.sort"></i-input>
         </form-item>
+        <form-item prop="url" label="url">
+          <i-input v-model="opModel.url"></i-input>
+        </form-item>
       </i-form>
     </Modal>
   </Row>
@@ -67,7 +70,7 @@
         },
         columns: [
           {
-            title: 'name',
+            title: 'AppName',
             key: 'name'
           },
           {
@@ -123,7 +126,8 @@
         },
         opModel:{
           sort:'',
-          name:''
+          name:'',
+          url:''
         },
         showConfirmAppModal:false
       }

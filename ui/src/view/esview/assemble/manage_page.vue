@@ -60,7 +60,7 @@
         },
         columns: [
           {
-            title: 'name',
+            title: 'PageName',
             key: 'name'
           },
           {
