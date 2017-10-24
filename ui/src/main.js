@@ -5,14 +5,13 @@ import Iview from 'iview';
 import {appApi, appContext} from "./plugin/config";
 import {initRouter, router, routerStore} from "./plugin/router";
 import interceptor from './plugin/interceptor'
-import installDirective from "./plugin/install_directive"
+import installDirective from "./plugin/install_directive"//don't delete,let vue install
 import SoulUi from "./plugin/install_component"
 import Store from './store/index'
-import initAppConstructor from './plugin/app_constuctor'
 import 'iview/dist/styles/iview.css'
 import './style/index.less'
+import manageApp from './view/esview/app.vue'
 import Login from './view/esview/login.vue'
-import RenderApp from './view/esview/render_app.vue'
 import esview from './external'
 import locale  from 'iview/dist/locale/en-US';
 
@@ -36,8 +35,6 @@ let config = {
   routerStore: routerStore
 }
 
-const manage = initAppConstructor(config);
-
 const app = new Vue({
   store:Store,
   router: router,
@@ -48,7 +45,7 @@ const app = new Vue({
 
     switch (Store.getters['userModule/page']){
       case 'manage':
-        return h(manage)
+        return h(manageApp)
       case 'app':
         return h(esview.render('MyApp','token'))
       case 'login':

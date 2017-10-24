@@ -1,40 +1,40 @@
 <template>
-    <Row>
-      <i-col span="24">
-        <Card>
-          <div>
-            <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
-              <Form-item prop="name" label="pageName:">
-                <Input v-model="searchInput.name">
-                </Input>
-              </Form-item>
-              <ButtonGroup>
-                <Button @click="search" type="primary">search</Button>
-                <Button @click="reset('searchForm')">reset</Button>
-                <Button style="float: right" @click="hrefAdd()" type="ghost">add</Button>
-              </ButtonGroup>
-            </Form>
-          </div>
+  <Row>
+    <i-col span="24">
+      <Card>
+        <div>
+          <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
+            <Form-item prop="name" label="pageName:">
+              <Input v-model="searchInput.name">
+              </Input>
+            </Form-item>
+            <ButtonGroup>
+              <Button @click="search" type="primary">search</Button>
+              <Button @click="reset('searchForm')">reset</Button>
+              <Button style="float: right" @click="hrefAdd()" type="ghost">add</Button>
+            </ButtonGroup>
+          </Form>
+        </div>
 
-          <Table border
-                 :columns="columns"
-                 :data="tableData"
-                 :stripe="true"
-                 size="small">
-          </Table>
-          <Row style="margin-top:15px;">
-            <Page style="float:right;"
-                  :current="searchInput.pageNo"
-                  :page-size="searchInput.pageSize"
-                  show-total
-                  :total="searchInput.total"
-                  show-elevator
-                  @on-change="search">
-            </Page>
-          </Row>
-        </Card>
-      </i-col>
-    </Row>
+        <Table border
+               :columns="columns"
+               :data="tableData"
+               :stripe="true"
+               size="small">
+        </Table>
+        <Row style="margin-top:15px;">
+          <Page style="float:right;"
+                :current="searchInput.pageNo"
+                :page-size="searchInput.pageSize"
+                show-total
+                :total="searchInput.total"
+                show-elevator
+                @on-change="search">
+          </Page>
+        </Row>
+      </Card>
+    </i-col>
+  </Row>
 </template>
 <script>
   import {
