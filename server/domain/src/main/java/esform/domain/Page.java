@@ -9,6 +9,7 @@ package esform.domain;
 public class Page extends BaseDomain{
     private String name;
     private String pageSoul;
+    private Long appId;
 
     public Page(Long id) {
         setId(id);
@@ -34,5 +35,13 @@ public class Page extends BaseDomain{
 
     public void setPageSoul(String pageSoul) {
         this.pageSoul = pageSoul;
+    }
+
+    public Long getAppId() {
+        return appId;
+    }
+
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 }

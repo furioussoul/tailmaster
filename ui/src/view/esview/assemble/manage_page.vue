@@ -48,6 +48,7 @@
   import{
     paginationMixin
   } from '../../../mixin/m_pagination'
+
   export default{
     name: 'ManagePage',
     mixins: [paginationMixin],
@@ -100,7 +101,8 @@
           pageNum: 1,
           pageSize: 20,
           total: 0,
-          name: ''
+          name: '',
+          appId:this.$route.query.appId
         }
       }
     },

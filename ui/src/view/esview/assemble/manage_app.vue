@@ -79,6 +79,17 @@
               return h('ButtonGroup', [
                 h('Button', {
                   props: {
+                    type: 'ghost',
+                    size: 'small'
+                  },
+                  on: {
+                    click: () => {
+                      this.page(params)
+                    }
+                  }
+                }, 'page'),
+                h('Button', {
+                  props: {
                     type: 'primary',
                     size: 'small'
                   },
@@ -120,6 +131,9 @@
     methods: {
       reset(name){
         this.$refs[name].resetFields();
+      },
+      page(param){
+        this.$router.push({path: './manage_page', query: {appId: param.row.id}})
       },
       add(){
         this.$refs['confirmApp'].resetFields();

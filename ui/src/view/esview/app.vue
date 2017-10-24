@@ -252,7 +252,7 @@ let res = {
               "title": "ManagePage",
               "url": "/esview/assemble/manage_page",
               "orderNo": 3,
-              "mtype": 1,
+              "mtype": -1,
               "hasPermisson": 1,
               "subMenuList": null
             },

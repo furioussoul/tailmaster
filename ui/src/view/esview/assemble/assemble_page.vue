@@ -68,7 +68,16 @@
       v-model="showConfirmPageNameModal"
       title="confirmPageName"
       @on-ok="okPageName">
-      <i-input v-model="opModel.name"></i-input>
+      <i-form :label-width="100">
+        <FormItem  label="AppName" >
+          <Select filterable v-model="opModel.appId" size="small" style="width:100px">
+            <Option v-for="item in apps" :value="item.id" :key="item.id">{{ item.name }}</Option>
+          </Select>
+        </FormItem >
+        <FormItem  label="PageName">
+          <i-input v-model="opModel.name"></i-input>
+        </FormItem >
+      </i-form>
     </Modal>
 
     <Modal
@@ -111,7 +120,8 @@
     updatePage,
     getPageList,
     getTablePageList,
-    getRichPage
+    getRichPage,
+    getAppList
   } from '../../../resource/assemble_resource'
 
   export default {
@@ -122,7 +132,8 @@
         showConfirmPageNameModal: false,
         showEditScriptModal: false,
         opModel: {},
-        editControlSoul: {scriptString: ''}
+        editControlSoul: {scriptString: ''},
+        apps:[]
       }
     },
     computed: {
@@ -171,6 +182,10 @@
       }
     },
     mounted(){
+      getAppList.call(this,{},(data)=>{
+          this.apps = data
+      })
+
       getControlList.call(this, (data) => {
 
         let draggableControls = []

@@ -13,12 +13,14 @@ public class OperatePageRequest {
     private Long id;
     private String name;
     private String pageSoul;
+    private Long appId;
 
     public Page getDomain() {
         Page page = new Page();
         page.setId(id);
         page.setName(name);
         page.setPageSoul(pageSoul);
+        page.setAppId(appId);
         return page;
     }
 
@@ -44,5 +46,13 @@ public class OperatePageRequest {
 
     public void setPageSoul(String pageSoul) {
         this.pageSoul = pageSoul;
+    }
+
+    public Long getAppId() {
+        return appId;
+    }
+
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 }

@@ -6,8 +6,8 @@
 
     <insert id="add" parameterType="esform.domain.Page" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO page
-        (`name`,pageSoul,createBy,createDt,updateBy,updateDt,rowStatus)
-        VALUES (#{name},#{pageSoul},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
+        (`name`,pageSoul,appId,createBy,createDt,updateBy,updateDt,rowStatus)
+        VALUES (#{name},#{pageSoul},#{appId},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
     </insert>
 
     <delete id="del" parameterType="java.lang.Long">
@@ -25,6 +25,9 @@
             <if test="pageSoul != null">
                 pageSoul = #{pageSoul},
             </if>
+            <if test="appId != null">
+                `appId` = #{appId},
+            </if>
             updateBy = #{updateBy},
             updateDt = #{updateDt}
         </set>
@@ -38,6 +41,9 @@
         <if test="name != null and name != ''">
            `name` LIKE CONCAT(CONCAT('%', #{name}),'%')
         </if>
+        <if test="appId != null">
+            and `appId` = #{appId}
+        </if>
     </select>
 
     <select id="selectByExample" resultType="esform.domain.Page">
@@ -49,6 +55,9 @@
             </if>
             <if test="name != null">
                 and `name` = #{name}
+            </if>
+            <if test="appId != null">
+                and `appId` = #{appId}
             </if>
             and rowStatus = 1
         </where>

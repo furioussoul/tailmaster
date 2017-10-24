@@ -54,10 +54,7 @@ public class AppResource {
     @ResponseBody
     public Response pageList(@RequestBody QueryAppRequest request) {
         List<App> apps = appDao.selectByExample(new App(request.getName()));
-        if (!CollectionUtils.isEmpty(apps)) {
-            return Response.ok(apps.get(0));
-        }
-        return Response.ok();
+        return Response.ok(apps);
     }
 
     @PostMapping("tableAppList")

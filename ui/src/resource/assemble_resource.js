@@ -48,7 +48,7 @@ function updateApp() {
 }
 
 function getAppList({appName},fn) {
-  this.http.post('app/appList',{name:appName}).then(res => {
+  this.$http.post('app/appList',{name:appName}).then(res => {
     if (res.data.code === 10000) {
       if(fn){
         fn.call(this,res.data.data)
