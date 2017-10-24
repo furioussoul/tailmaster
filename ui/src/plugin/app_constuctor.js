@@ -267,7 +267,13 @@ export default function initAppConstructor(config) {
 
       let split = accessToken.split('@');
 
-
+      res = {
+        "code": 10000,
+        "msg": "ok",
+        "data": {
+          "username": split[0]
+        }
+      }
       this.userInfo = res.data;
     }
   }

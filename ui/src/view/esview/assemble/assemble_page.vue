@@ -51,14 +51,14 @@
         </i-col>
 
         <i-col v-if="showEditorPanel" span="18" :class="{'is-preview':isPreview}">
-          <Render :soul="soul"></Render>
+          <RenderDev :soul="soul"></RenderDev>
         </i-col>
         <i-col v-else span="21" :class="{'is-preview':isPreview}">
-          <Render :soul="soul"></Render>
+          <RenderDev :soul="soul"></RenderDev>
         </i-col>
 
         <i-col v-show="showEditorPanel" span="3">
-          <Editor :editSoul="editSoul"></Editor>
+          <ModelEditor :editSoul="editSoul"></ModelEditor>
         </i-col>
 
       </Row>
@@ -145,8 +145,9 @@
         this.syncSoul(this.soul)//edited soul, must synchronize pageSoul for saving changes
       },
 
-      okPageName: () => addPage.call(this),
-
+      okPageName(){
+        addPage.call(this)
+      },
       action(a){
         if (a === '3') {
           //toggle preview
