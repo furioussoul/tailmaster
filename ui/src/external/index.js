@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import {
   appFrame,
-  WrapCard
+  WrapCard,
+  UploadWrap
 } from './component'
 import {
   addConfig,
@@ -16,6 +17,7 @@ import {addRenderFn} from '../helper/code_helper'
 
 Vue.component('AppFrame', appFrame);
 Vue.component('WrapCard', WrapCard);
+Vue.component('UploadWrap', UploadWrap);
 
 function getPageList({appId,pageId,token},fn) {
   this.http.post('page/pageList',{appId,pageId}).then(res => {
