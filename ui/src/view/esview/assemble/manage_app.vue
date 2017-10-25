@@ -151,7 +151,7 @@
         this.$refs[name].resetFields();
       },
       page(param){
-        localStorage.setItem('appId', param.row.id)
+        sessionStorage.setItem('appId', param.row.id)
         this.showManagePageModal = true
       },
       add(){
