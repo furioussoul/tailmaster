@@ -511,7 +511,7 @@
         const path = store.state.routerModule.path;
 
         if(!getConfig('type')){
-          store.commit('soulModule/changeSoul', path)
+          store.commit('soulModule/changeSoul', path)//router of client app
         }
         return getBreadcrumb(this.totalMenu, path);
       }
@@ -527,8 +527,10 @@
     methods: {
       home(){
           if(getConfig('type') === 'assemble'){
+            // router of the frame inside assemble factory
             this.$router.push('/esview/assemble/assemble_page?pageId=%2Findex')
           }else {
+            // router of client app
             this.$router.push('/index')
           }
       },

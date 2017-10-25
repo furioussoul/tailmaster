@@ -129,7 +129,7 @@ export default{
       },
       path() {
         const path = routerStore.state.RouteModule.path;
-        store.commit('dragModule/changeSoul')// key of the frame's router
+        store.commit('dragModule/changeSoul')// router of the frame inside assemble factory
         return getBreadcrumb(this.totalMenu, path);
       }
     },

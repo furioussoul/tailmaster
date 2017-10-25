@@ -3,7 +3,7 @@ export default {
   namespaced: true,
   state: {
     me: 1,
-    page: "manage",
+    page: "manage", //test
     controlClazzes: []
   },
   getters: {

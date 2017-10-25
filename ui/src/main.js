@@ -8,12 +8,13 @@ import interceptor from './plugin/interceptor'
 import installDirective from "./plugin/install_directive"//don't delete,let vue install
 import SoulUi from "./plugin/install_component"
 import Store from './store/index'
-import 'iview/dist/styles/iview.css'
-import './style/index.less'
 import manageApp from './view/esview/app.vue'
 import Login from './view/esview/login.vue'
-import esview from './external'
 import locale  from 'iview/dist/locale/en-US';
+import 'iview/dist/styles/iview.css'
+import './style/index.less'
+
+import esview from './external' //test
 
 esview.addConfig('router', router)
 esview.addConfig('type', 'assemble')
