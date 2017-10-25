@@ -178,8 +178,7 @@
     mounted(){
       this.$route.query.appId = sessionStorage.getItem('appId')
       this.$route.query.pageSoulId = sessionStorage.getItem('pageSoulId')
-      console.log(this.$route.query.appId)
-      console.log(this.$route.query.pageSoulId)
+
       getControlList.call(this, (data) => {
 
         let draggableControls = []

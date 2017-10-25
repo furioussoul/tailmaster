@@ -79,14 +79,14 @@ function getRichApp(id, fn) {
 
 function addPage() {
   let pageSoul = store.getters['dragModule/pageSoul'],
-  saveSoul
+    saveSoul
 
   if (!isPlain(pageSoul)) {
     saveSoul = pageSoul
-    saveSoul.soulType='multiple'
-  }else {
+    saveSoul.soulType = 'multiple'
+  } else {
     saveSoul = store.getters['dragModule/soul']
-    saveSoul.soulType='single'
+    saveSoul.soulType = 'single'
   }
 
   saveSoul.maxUid = currentUid()
@@ -95,7 +95,7 @@ function addPage() {
   this.$http.post('page/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.opModel.id = res.data.data.id
-      sessionStorage.setItem('pageSoulId',this.opModel.id)
+      localStorage.setItem('pageSoulId', this.opModel.id)
       this.$Message.success('saved')
     }
   })
@@ -116,10 +116,10 @@ function updatePage() {
 
   if (!isPlain(pageSoul)) {
     saveSoul = pageSoul
-    saveSoul.soulType='multiple'
-  }else {
+    saveSoul.soulType = 'multiple'
+  } else {
     saveSoul = store.getters['dragModule/soul']
-    saveSoul.soulType='single'
+    saveSoul.soulType = 'single'
   }
 
   saveSoul.maxUid = currentUid()
@@ -143,6 +143,7 @@ function getPageList({pageName, token}, fn) {
 }
 
 function getTablePageList() {
+  this.tableData = []
   this.$http.post('page/tablePageList', this.searchInput).then(res => {
     if (res.data.code === 10000) {
       let data = res.data.data

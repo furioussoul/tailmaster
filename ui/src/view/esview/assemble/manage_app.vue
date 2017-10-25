@@ -57,7 +57,7 @@
     <Modal
       v-model="showManagePageModal"
       title="managePage">
-      <ManagePage></ManagePage>
+      <ManagePage :refresh="random"></ManagePage>
     </Modal>
   </Row>
 </template>
@@ -143,7 +143,8 @@
           url:''
         },
         showManagePageModal:false,
-        showConfirmAppModal:false
+        showConfirmAppModal:false,
+        random:-1
       }
     },
     methods: {
@@ -151,6 +152,7 @@
         this.$refs[name].resetFields();
       },
       page(param){
+        this.random = Math.random()
         sessionStorage.setItem('appId', param.row.id)
         this.showManagePageModal = true
       },

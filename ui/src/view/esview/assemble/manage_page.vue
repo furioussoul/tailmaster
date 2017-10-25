@@ -53,6 +53,15 @@
   export default{
     name: 'ManagePage',
     mixins: [paginationMixin],
+    props: {
+      refresh: [String, Number]
+    },
+    watch: {
+      refresh(n){
+        this.searchInput.appId = sessionStorage.getItem('appId')
+          getTablePageList.call(this)
+      }
+    },
     data() {
       return {
         fn: {
