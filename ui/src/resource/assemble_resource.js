@@ -58,8 +58,11 @@ function getAppList({appName}, fn) {
 }
 
 function getTableAppList() {
+  this.tableData = []
+  this.loading = true
   this.$http.post('app/tableAppList', this.searchInput).then(res => {
     if (res.data.code === 10000) {
+      this.loading = false
       let data = res.data.data
       this.searchInput.total = data.total
       this.tableData = data.list
@@ -144,8 +147,10 @@ function getPageList({pageName, token}, fn) {
 
 function getTablePageList() {
   this.tableData = []
+  this.loading = true
   this.$http.post('page/tablePageList', this.searchInput).then(res => {
     if (res.data.code === 10000) {
+      this.loading = false
       let data = res.data.data
       this.searchInput.total = data.total
       this.tableData = data.list

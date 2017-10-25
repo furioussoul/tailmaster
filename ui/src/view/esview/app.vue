@@ -1,6 +1,5 @@
 <template>
   <div id="layout" class="layout" :class="{'layout-full-screen':!show}">
-
     <!--左侧菜单栏 start-->
     <transition name="slideleft">
       <div class="layout-left" v-show="show">

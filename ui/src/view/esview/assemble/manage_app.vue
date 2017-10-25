@@ -17,6 +17,7 @@
         </div>
 
         <Table border
+               :loading="loading"
                :columns="columns"
                :data="tableData"
                :stripe="true"
@@ -144,6 +145,7 @@
         },
         showManagePageModal:false,
         showConfirmAppModal:false,
+        loading:false,
         random:-1
       }
     },

@@ -17,6 +17,7 @@
         </div>
 
         <Table border
+               :loading="loading"
                :columns="columns"
                :data="tableData"
                :stripe="true"
@@ -65,7 +66,7 @@
     data() {
       return {
         fn: {
-          initFns: [getTablePageList],
+          initFns: [],
           searchFns: [getTablePageList]
         },
         columns: [
@@ -106,6 +107,7 @@
             }
           }
         ],
+        loading:false,
         tableData: [],
         searchInput: {
           pageNum: 1,
