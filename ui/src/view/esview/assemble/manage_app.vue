@@ -155,7 +155,7 @@
       },
       page(param){
         this.random = Math.random()
-        sessionStorage.setItem('appId', param.row.id)
+        localStorage.setItem('appId', param.row.id)
         this.showManagePageModal = true
       },
       add(){

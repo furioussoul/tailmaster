@@ -1,6 +1,8 @@
 import WrapCard from './wrapCard.vue'
-import UploadWrap from './uploadWrap.vue'
+import WrapUpload from './wrapUpload.vue'
+import WrapModal from './wrapModal.vue'
 export {
   WrapCard,
-  UploadWrap
+  WrapUpload,
+  WrapModal
 }

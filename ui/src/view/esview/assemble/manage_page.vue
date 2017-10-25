@@ -59,7 +59,7 @@
     },
     watch: {
       refresh(n){
-        this.searchInput.appId = sessionStorage.getItem('appId')
+        this.searchInput.appId = localStorage.getItem('appId')
           getTablePageList.call(this)
       }
     },
@@ -123,12 +123,12 @@
         this.$refs[name].resetFields();
       },
       hrefAdd(){
-        sessionStorage.setItem('pageSoulId','')
+        localStorage.setItem('pageSoulId','')
         this.$router.push({path: './assemble_page', query: {appId: this.$route.query.appId}})
       },
       edit(param){
         this.setSoul(null)
-        sessionStorage.setItem('pageSoulId', param.row.id)
+        localStorage.setItem('pageSoulId', param.row.id)
         this.$router.push({path: './assemble_page', query: {pageSoulId: param.row.id}})
       },
       del(param){
