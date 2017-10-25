@@ -151,7 +151,7 @@
         this.$refs[name].resetFields();
       },
       page(param){
-//        this.$router.push({path: './manage_page', query: {appId: param.row.id}})
+        localStorage.setItem('appId', param.row.id)
         this.showManagePageModal = true
       },
       add(){

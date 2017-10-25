@@ -112,7 +112,7 @@
         this.$refs[name].resetFields();
       },
       hrefAdd(){
-        localStorage.setItem('appId',this.$route.query.appId)
+        localStorage.setItem('pageSoulId','')
         this.$router.push({path: './assemble_page', query: {appId: this.$route.query.appId}})
       },
       edit(param){
