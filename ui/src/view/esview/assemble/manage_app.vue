@@ -80,6 +80,10 @@
         },
         columns: [
           {
+            title: 'id',
+            key: 'id'
+          },
+          {
             title: 'AppName',
             key: 'name'
           },

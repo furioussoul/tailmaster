@@ -71,6 +71,10 @@
         },
         columns: [
           {
+            title: 'id',
+            key: 'id'
+          },
+          {
             title: 'PageName',
             key: 'name'
           },

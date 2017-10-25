@@ -82,7 +82,6 @@
       </div>
       <CodeEditor
         style="height: 500px"
-        :buttonStyle="codeButtonStyle"
         :code="editControlSoul.scriptString"
         @save="saveCode">
       </CodeEditor>
@@ -128,8 +127,7 @@
         showConfirmPageNameModal: false,
         showEditScriptModal: false,
         opModel: {},
-        editControlSoul: {scriptString: ''},
-        codeButtonStyle:{display:'none'}
+        editControlSoul: {scriptString: ''}
       }
     },
     computed: {

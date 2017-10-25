@@ -87,6 +87,10 @@
         },
         columns: [
           {
+            title: 'id',
+            key: 'id'
+          },
+          {
             title: 'name',
             key: 'name'
           },
