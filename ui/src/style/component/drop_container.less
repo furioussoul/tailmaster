@@ -3,7 +3,6 @@
   width:100%;
   transition:  box-shadow @transition-time linear;
   position: relative;
-  border: 1px dashed #339ae2;
   height: 100%;
   .makeContainer();
 
@@ -11,19 +10,19 @@
     height:800px;
   }
 
+  .layout-scroll > &{
+    height:800px;
+  }
+
   & .ivu-row{
     .is-preview &{
       .makeContainer();
-      border: 1px dashed #339ae2;
-      padding: 10px;
     }
   }
 
   & .ivu-col{
     .is-preview &{
       .makeContainer();
-      border: 1px dashed #339ae2;
-      padding: 10px;
     }
   }
 
@@ -31,16 +30,12 @@
     min-height: 60px;
     .is-preview &{
       .makeContainer();
-      border: 1px dashed #339ae2;
-      padding: 10px;
     }
   }
 
   & .ivu-form-item{
     .is-preview &{
       .makeContainer();
-      border: 1px dashed #339ae2;
-      padding: 10px;
     }
   }
 
@@ -51,8 +46,6 @@
     min-width: 60px;
     .is-preview &{
       .makeContainer();
-      border: 1px dashed #339ae2;
-      padding: 10px;
     }
   }
 
@@ -60,8 +53,6 @@
     min-height: 40px;
     .is-preview &{
       .makeContainer();
-      border: 1px dashed #339ae2;
-      padding: 10px;
     }
   }
 
@@ -75,6 +66,8 @@
 .makeContainer(){
   min-height: 40px;
   transition:  box-shadow @transition-time linear;
+  padding: 10px;
+  border: 1px dashed #339ae2;
 
   //make drop be visible
   & .drop {
