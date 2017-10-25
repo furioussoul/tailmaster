@@ -3,6 +3,8 @@ import store from '../store'
 export default {
   bind (el, binding, vnode) {
     el.onmouseout = function (e) {
+      e.preventDefault()
+      e.stopPropagation()
       store.commit('dragModule/clearEditLayer')
     }
     el.onmouseover = function (e) {
