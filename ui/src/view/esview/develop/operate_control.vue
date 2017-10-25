@@ -1,5 +1,6 @@
 <template>
-    <CodeEditor class="code-editor"
+    <CodeEditor :buttonStyle="codeButtonStyle"
+                class="code-editor"
                 :code="opModel.code"
                 @save="saveCode">
     </CodeEditor>
@@ -18,7 +19,13 @@
     data(){
       return {
         editor: null,//ace editor
-        opModel: {}
+        opModel: {},
+        codeButtonStyle:{
+          position: 'fixed',
+          top: '50px',
+          height: '50px',
+          zIndex:1000000
+        }
       }
     },
     methods: {
@@ -51,6 +58,7 @@
     height: 100%;
     width: 98%;
     margin-left: 15px;
+    margin-top: 35px;
     position: relative;
   }
 </style>

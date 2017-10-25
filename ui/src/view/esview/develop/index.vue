@@ -95,6 +95,10 @@
             key: 'clazzName'
           },
           {
+            title: 'sort',
+            key: 'sort'
+          },
+          {
             title: 'action',
             key: 'action',
             width: 300,

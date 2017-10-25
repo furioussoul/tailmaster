@@ -82,6 +82,7 @@
       </div>
       <CodeEditor
         style="height: 500px"
+        :buttonStyle="codeButtonStyle"
         :code="editControlSoul.scriptString"
         @save="saveCode">
       </CodeEditor>
@@ -127,7 +128,8 @@
         showConfirmPageNameModal: false,
         showEditScriptModal: false,
         opModel: {},
-        editControlSoul: {scriptString: ''}
+        editControlSoul: {scriptString: ''},
+        codeButtonStyle:{display:'none'}
       }
     },
     computed: {
@@ -178,9 +180,6 @@
     mounted(){
       this.$route.query.appId = localStorage.getItem('appId')
       this.$route.query.pageSoulId = localStorage.getItem('pageSoulId')
-
-      console.log( this.$route.query.appId)
-      console.log(  this.$route.query.pageSoulId )
 
       getControlList.call(this, (data) => {
 

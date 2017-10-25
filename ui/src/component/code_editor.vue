@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%">
-    <ButtonGroup>
+    <ButtonGroup :style="buttonStyle">
       <Button @click="save">save</Button>
     </ButtonGroup>
     <div id="editor"></div>
@@ -10,7 +10,8 @@
   export default{
     name: 'CodeEditor',
     props: {
-      code: [String]
+      code: [String],
+      buttonStyle:[Object]
     },
     data(){
       return {
