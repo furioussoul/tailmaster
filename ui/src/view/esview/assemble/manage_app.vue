@@ -53,15 +53,24 @@
         </form-item>
       </i-form>
     </Modal>
+
+    <Modal
+      v-model="showManagePageModal"
+      title="managePage">
+      <ManagePage></ManagePage>
+    </Modal>
   </Row>
 </template>
 <script>
   import {addApp,delApp, updateApp, getAppList, getTableAppList,getRichApp } from '../../../resource/assemble_resource'
   import{ paginationMixin} from '../../../mixin/m_pagination'
-
+  import ManagePage from '../assemble/manage_page.vue'
   export default{
     name: 'ManageApp',
     mixins: [paginationMixin],
+    components:{
+      ManagePage
+    },
     data() {
       return {
         fn: {
@@ -133,6 +142,7 @@
           name:'',
           url:''
         },
+        showManagePageModal:false,
         showConfirmAppModal:false
       }
     },
@@ -141,7 +151,8 @@
         this.$refs[name].resetFields();
       },
       page(param){
-        this.$router.push({path: './manage_page', query: {appId: param.row.id}})
+//        this.$router.push({path: './manage_page', query: {appId: param.row.id}})
+        this.showManagePageModal = true
       },
       add(){
         this.$refs['confirmApp'].resetFields();

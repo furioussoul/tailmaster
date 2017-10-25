@@ -176,6 +176,12 @@
       }
     },
     mounted(){
+      if(!this.$route.query.appId){
+        this.$route.query.appId = localStorage.getItem('appId')
+      }
+      if(!this.$route.query.pageSoulId){
+        this.$route.query.pageSoulId = localStorage.getItem('pageSoulId')
+      }
 
       getControlList.call(this, (data) => {
 

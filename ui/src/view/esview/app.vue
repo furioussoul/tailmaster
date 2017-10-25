@@ -247,16 +247,6 @@ let res = {
               "subMenuList": null
             },
             {
-              "id": 1,
-              "name": "ManagePage",
-              "title": "ManagePage",
-              "url": "/esview/assemble/manage_page",
-              "orderNo": 3,
-              "mtype": -1,
-              "hasPermisson": 1,
-              "subMenuList": null
-            },
-            {
               "id": 4,
               "name": "AssemblePage",
               "title": "AssemblePage",
