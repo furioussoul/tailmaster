@@ -15,6 +15,6 @@ export default {
     h.vm = this
     h.store = store
     h.eventCenter = eventCenter
-    return this.soul.render(h)
+    return this.soul.renderProd(h)
   }
 }

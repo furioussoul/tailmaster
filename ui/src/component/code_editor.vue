@@ -1,7 +1,7 @@
 <template>
-  <div style="height: 100%">
+  <div style="height: 110%">
     <ButtonGroup :style="buttonStyle">
-      <Button @click="save">save</Button>
+      <Button type="primary" @click="save">save</Button>
     </ButtonGroup>
     <div id="editor"></div>
   </div>
