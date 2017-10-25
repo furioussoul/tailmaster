@@ -21,6 +21,7 @@
         </div>
 
         <Table border
+               :loading="loading"
                :columns="columns"
                :data="tableData"
                :stripe="true"
@@ -144,7 +145,8 @@
           total: 0,
           controlName: '',
           controlClass: ''
-        }
+        },
+        loading:false
       }
     },
     computed:{

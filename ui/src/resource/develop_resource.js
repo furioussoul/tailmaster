@@ -50,8 +50,10 @@ function getControlList(fn) {
 }
 
 function getTableControlList() {
+  this.loading = true
   this.$http.post('control/tableControlList', this.searchInput).then(res => {
     if (res.data.code === 10000) {
+      this.loading = false
       let data = res.data.data
       this.searchInput.total = data.total
       this.tableData = data.list
