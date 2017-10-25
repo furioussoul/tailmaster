@@ -1,5 +1,5 @@
 <template>
-  <div class="assemble">
+  <div style="margin-top: 50px">
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
       <div class="index-layout-nav">
@@ -295,9 +295,5 @@
 
   .index-soul-control-class-fade-enter, .soul-control-class-fade-leave-active {
     opacity: 0;
-  }
-
-  .assemble {
-    margin-top: 50px
   }
 </style>

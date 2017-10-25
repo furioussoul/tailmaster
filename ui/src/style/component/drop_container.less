@@ -1,16 +1,14 @@
 .soul-drop-panel{
 
-  .is-preview &{
-    .makeContainer();
-    width:100%;
-    min-height:100%;
-    transition:  box-shadow @transition-time linear;
-    position: relative;
-    border: 1px dashed #339ae2;
+  width:100%;
+  transition:  box-shadow @transition-time linear;
+  position: relative;
+  border: 1px dashed #339ae2;
+  height: 100%;
+  .makeContainer();
 
-    .assemble &{
-      min-height: 800px;
-    }
+  .is-preview > &{
+    height:800px;
   }
 
   & .ivu-row{
