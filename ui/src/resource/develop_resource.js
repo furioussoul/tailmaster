@@ -32,7 +32,6 @@ function updateControl(fn) {
       if(fn){
         fn.call(this)
       }
-      getTableControlList.call(this)
       this.$Message.success('saved')
     }
   })
