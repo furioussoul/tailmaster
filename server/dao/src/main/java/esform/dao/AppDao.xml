@@ -39,7 +39,7 @@
         from app
         WHERE rowStatus = 1
         <if test="name != null and name != ''">
-            `name` LIKE CONCAT(CONCAT('%', #{name}),'%')
+            AND `name` LIKE CONCAT(CONCAT('%', #{name}),'%')
         </if>
         ORDER  BY id DESC
     </select>

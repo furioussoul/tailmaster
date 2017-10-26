@@ -25,6 +25,7 @@
     },
     watch:{
       code(n){
+        if(n===undefined ) n = ''
         this.editor.setValue(n)
       }
     },

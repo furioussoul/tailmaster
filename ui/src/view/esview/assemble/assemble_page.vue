@@ -95,6 +95,7 @@
       <Dropdown trigger="custom" visible>
         <DropdownMenu slot="list">
           <DropdownItem @click.native="editControl">editScript</DropdownItem>
+          <DropdownItem @click.native="deleteControl">delete</DropdownItem>
         </DropdownMenu>
       </Dropdown>
     </div>
@@ -139,7 +140,17 @@
     methods: {
       ...mapMutations('dragModule', ['setSoul', 'clear', 'syncSoul', 'setDraggableControls', 'setPageSoul', 'setOriginSoul']),
       ...mapMutations('userModule', ['changePage']),
-
+      deleteControl(){
+        this.editControlSoul = findNode(this.rightClickMenu.uid)
+        let pSoul = findNode(this.editControlSoul.pid);
+        if(pSoul){
+          let index = pSoul.children.indexOf(this.editControlSoul);
+          pSoul.children.splice(index,1)
+        }else {
+          init(this.draggableControls)
+        }
+        this.clear()
+      },
       editControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
         this.editControlSoul.scriptString = this.editControlSoul.script.toString()
@@ -231,6 +242,7 @@
           })
         }
         let frame = findSoul(105, this.draggableControls)
+        frame.uid = generateUid()
         let dropPanelSoul = findSoul(100, this.draggableControls)
         dropPanelSoul.uid = generateUid()
         frame.children.push(deepCopy(dropPanelSoul))

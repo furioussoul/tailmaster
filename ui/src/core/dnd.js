@@ -92,6 +92,7 @@ function markDrop(drop, mark) {
 function interceptDrop(saveInfo) {
   if(saveInfo.drag.type === 'AppFrame'){
     let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
+    dropPanelSoul.uid = generateUid()
     saveInfo.drag.children.push(deepCopy(dropPanelSoul))
     store.commit('dragModule/setSoul',saveInfo.drag)
 

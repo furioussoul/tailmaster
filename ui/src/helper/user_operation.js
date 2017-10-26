@@ -17,6 +17,8 @@ let templateStore = {
   dataSnapshot: []//version array
 };
 
+
+
 function drop(saveInfo) {
   if (templateStore.count < templateStore.dataSnapshot.length) {
     //撤销操作后新增元素则丢弃当前版本后的节点
