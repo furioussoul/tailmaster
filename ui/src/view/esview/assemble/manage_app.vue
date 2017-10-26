@@ -185,6 +185,7 @@
         }
       },
       del(param){
+        delApp.call(this,param.row.id)
       }
     }
   }

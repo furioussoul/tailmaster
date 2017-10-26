@@ -5,7 +5,8 @@ import {
   isNumber
 } from '../util/assist'
 import {
-  currentUid
+  currentUid,
+  resetModel
 } from '../helper/soul_helper'
 
 function addApp() {
@@ -81,20 +82,12 @@ function getRichApp(id, fn) {
 }
 
 function addPage() {
-  let pageSoul = store.getters['dragModule/pageSoul'],
-    saveSoul
+  let pageSoul = store.getters['dragModule/pageSoul']
 
-  if (!isPlain(pageSoul)) {
-    saveSoul = pageSoul
-    saveSoul.soulType = 'multiple'
-  } else {
-    saveSoul = store.getters['dragModule/soul']
-    saveSoul.soulType = 'single'
-  }
-
-  saveSoul.maxUid = currentUid()
-  this.opModel.pageSoul = stringify(saveSoul)
-  this.opModel.appId = this.$route.query.appId
+  resetModel(pageSoul)
+  pageSoul.maxUid = currentUid()
+  this.opModel.pageSoul = stringify(pageSoul)
+  this.opModel.appId = this.appId
   this.$http.post('page/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.opModel.id = res.data.data.id
@@ -114,19 +107,11 @@ function delPage(id) {
 }
 
 function updatePage() {
-  let pageSoul = store.getters['dragModule/pageSoul'],
-    saveSoul
+  let pageSoul = store.getters['dragModule/pageSoul']
 
-  if (!isPlain(pageSoul)) {
-    saveSoul = pageSoul
-    saveSoul.soulType = 'multiple'
-  } else {
-    saveSoul = store.getters['dragModule/soul']
-    saveSoul.soulType = 'single'
-  }
-
-  saveSoul.maxUid = currentUid()
-  this.opModel.pageSoul = stringify(saveSoul)
+  resetModel(pageSoul)
+  pageSoul.maxUid = currentUid()
+  this.opModel.pageSoul = stringify(pageSoul)
   this.$http.post('page/update', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')

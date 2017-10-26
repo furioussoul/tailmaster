@@ -41,6 +41,7 @@
         <if test="name != null and name != ''">
             `name` LIKE CONCAT(CONCAT('%', #{name}),'%')
         </if>
+        ORDER  BY id DESC
     </select>
 
     <select id="selectByExample" resultType="esform.domain.App">
@@ -55,5 +56,6 @@
             </if>
             and rowStatus = 1
         </where>
+        ORDER  BY id DESC
     </select>
 </mapper>
