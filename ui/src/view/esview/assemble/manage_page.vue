@@ -136,6 +136,7 @@
         this.$router.push({path: './assemble_page', query: {pageSoulId: param.row.id}})
       },
       del(param){
+        delPage.call(this,param.row.id)
       }
     }
   }

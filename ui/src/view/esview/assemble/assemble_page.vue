@@ -127,7 +127,9 @@
         showConfirmPageNameModal: false,
         showEditScriptModal: false,
         opModel: {},
-        editControlSoul: {scriptString: ''}
+        editControlSoul: {scriptString: ''},
+        pageSoulId:'',
+        appId:''
       }
     },
     computed: {
@@ -176,8 +178,8 @@
       }
     },
     mounted(){
-      this.$route.query.appId = localStorage.getItem('appId')
-      this.$route.query.pageSoulId = localStorage.getItem('pageSoulId')
+      this.appId = localStorage.getItem('appId')
+      this.pageSoulId = localStorage.getItem('pageSoulId')
 
       getControlList.call(this, (data) => {
 
@@ -206,8 +208,7 @@
         //store draggableControls
         this.setDraggableControls(draggableControls)
 
-        let query = this.$route.query
-        if (!query.pageSoulId) {
+        if (!this.pageSoulId) {
           //when add new page
           init(draggableControls)
 
@@ -215,7 +216,7 @@
 
           //when update page
 
-          getRichPage.call(this, query.pageSoulId, (data) => {
+          getRichPage.call(this, this.pageSoulId, (data) => {
             this.opModel = data
             let pageSoul = data.pageSoul
             pageSoul = parse(pageSoul)//deserialize functions from json

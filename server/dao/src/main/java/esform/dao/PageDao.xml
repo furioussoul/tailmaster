@@ -44,22 +44,30 @@
         <if test="appId != null">
             and `appId` = #{appId}
         </if>
+        ORDER  BY id DESC
     </select>
 
     <select id="selectByExample" resultType="esform.domain.Page">
         select *
         from page
+        RIGHT JOIN app
+        on app.id = page.appId
         <where>
             <if test="id != null">
-                id = #{id}
+                page.id = #{id}
             </if>
             <if test="name != null">
-                and `name` = #{name}
+                and page.name = #{name}
+            </if>
+            <if test="appName != null">
+                and app.name = #{appName}
             </if>
             <if test="appId != null">
-                and `appId` = #{appId}
+                and app.appId = #{appId}
             </if>
-            and rowStatus = 1
+            and app.rowStatus = 1
+            and page.rowStatus = 1
         </where>
+        ORDER  BY page.id DESC
     </select>
 </mapper>

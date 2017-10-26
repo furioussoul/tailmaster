@@ -21,8 +21,12 @@ Vue.component('WrapCard', WrapCard);
 Vue.component('WrapUpload', WrapUpload);
 Vue.component('WrapModal', WrapModal);
 
-function getPageList({appId,pageId,token},fn) {
-  this.http.post('page/pageList',{appId,pageId}).then(res => {
+function getPageList({appName,pageName,token},fn) {
+  this.http.post('page/pageList',{
+    appName,
+    name:pageName,
+    token
+  }).then(res => {
     if (res.data.code === 10000) {
       this.controls = res.data.data
       if(fn){
@@ -35,10 +39,10 @@ function getPageList({appId,pageId,token},fn) {
 }
 
 // 在这查 appSoul,放到store
-function render({appId,pageId}, token) {
+function render({appName,pageName}, token) {
   getPageList.call(Vue,{
-    appId,
-    pageId,
+    appName,
+    pageName,
     token
   },data=>{
     let pageSoul = parse(data[0].pageSoul)

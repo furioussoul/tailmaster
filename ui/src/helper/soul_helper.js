@@ -4,6 +4,15 @@ const generateUid = (() => uid++)
 const resetUid = (newuid => uid = newuid || 1)
 const currentUid = (() => uid)
 
+function resetModel(soul) {
+  if(!soul.model.save){
+    soul.model.value = null
+  }
+  soul.children.forEach(child=>{
+    resetModel(child)
+  })
+}
+
 function findSoul(cid, controls) {
   for (let i = 0; i < controls.length; i++) {
     if (cid == controls[i].cid) {
@@ -35,5 +44,6 @@ export {
   findNode,
   resetUid,
   currentUid,
-  findSoul
+  findSoul,
+  resetModel
 }

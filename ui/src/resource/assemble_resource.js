@@ -5,7 +5,8 @@ import {
   isNumber
 } from '../util/assist'
 import {
-  currentUid
+  currentUid,
+  resetModel
 } from '../helper/soul_helper'
 
 function addApp() {
@@ -91,10 +92,10 @@ function addPage() {
     saveSoul = store.getters['dragModule/soul']
     saveSoul.soulType = 'single'
   }
-
+  resetModel(saveSoul)
   saveSoul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(saveSoul)
-  this.opModel.appId = this.$route.query.appId
+  this.opModel.appId = this.appId
   this.$http.post('page/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.opModel.id = res.data.data.id
@@ -125,6 +126,7 @@ function updatePage() {
     saveSoul.soulType = 'single'
   }
 
+  resetModel(saveSoul)
   saveSoul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(saveSoul)
   this.$http.post('page/update', this.opModel).then(res => {

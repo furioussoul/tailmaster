@@ -49,8 +49,8 @@ const app = new Vue({
         return h(Login)
       case 'test':
         return h(esview.render({
-          appId: '14',
-          pageId: '89',
+          appName: 'app1',
+          pageName: '1',
           token: ''
         }))
     }
