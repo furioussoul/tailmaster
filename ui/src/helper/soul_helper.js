@@ -14,7 +14,7 @@ function resetModel(pageSoul) {
 
 function reset(soul) {
   if (soul.model && !soul.model.save) {
-    soul.model.value = null
+    soul.model.value = ''
   }
 
   for (let i = 0; i < soul.children.length; i++) {
