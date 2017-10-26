@@ -76,12 +76,13 @@
           },
           {
             title: 'PageName',
-            key: 'name'
+            key: 'name',
+            width:150
           },
           {
             title: 'action',
             key: 'action',
-            width: 300,
+            width: 200,
             align: 'center',
             render: (h, params) => {
               return h('ButtonGroup', [

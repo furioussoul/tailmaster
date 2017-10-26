@@ -23,6 +23,9 @@ function reset(soul) {
 }
 
 function findSoul(cid, controls) {
+  if(!controls){
+    controls = store.getters['dragModule/draggableControls']
+  }
   for (let i = 0; i < controls.length; i++) {
     if (cid == controls[i].cid) {
       return controls[i]

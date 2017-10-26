@@ -150,6 +150,7 @@
         this.editControlSoul.scriptString = code
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal = false
+        this.editControlSoul.initScript = false
         this.syncSoul(this.soul)//edited soul, must synchronize pageSoul for saving changes
       },
 

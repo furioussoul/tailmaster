@@ -98,6 +98,8 @@ function interceptDrop(saveInfo) {
   }else if(saveInfo.drag.type === 'WrapCard'){
     let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
     saveInfo.drag.children.push(deepCopy(dropPanelSoul))
+    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
+    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
 
   }else if(saveInfo.drag.type === 'WrapModal'){
     let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
@@ -123,6 +125,7 @@ function onDrop(e) {
     drag:copy,
     drop:this.controlConfig
   }
+  saveInfo.drag.pid = saveInfo.drop.uid
 
   interceptDrop(saveInfo)
 
