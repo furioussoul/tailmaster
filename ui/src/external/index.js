@@ -3,7 +3,8 @@ import {
   appFrame,
   WrapCard,
   WrapUpload,
-  WrapModal
+  WrapModal,
+  WrapSelect
 } from './component'
 import {
   addConfig,
@@ -20,6 +21,7 @@ Vue.component('AppFrame', appFrame);
 Vue.component('WrapCard', WrapCard);
 Vue.component('WrapUpload', WrapUpload);
 Vue.component('WrapModal', WrapModal);
+Vue.component('WrapSelect', WrapSelect);
 
 function getPageList({appName,pageName,token},fn) {
   this.http.post('page/pageList',{

@@ -3,7 +3,8 @@ import render from './render'
 import {
   WrapCard,
   WrapUpload,
-  WrapModal
+  WrapModal,
+  WrapSelect
 } from './wrap'
 
 export {
@@ -11,5 +12,6 @@ export {
   render,
   WrapCard,
   WrapUpload,
-  WrapModal
+  WrapModal,
+  WrapSelect
 }
