@@ -221,20 +221,14 @@
             let pageSoul = data.pageSoul
             pageSoul = parse(pageSoul)//deserialize functions from json
             resetUid(pageSoul['maxUid'])
-            let type = pageSoul['soulType']
             for (let key in pageSoul) {
-              if (key !== 'maxUid' && key !== 'soulType') {
-                if(type ==='multiple'){
-                  addRenderFn(pageSoul[key])
-                }else {
-                  addRenderFn(pageSoul)
-                }
+              if (key !== 'maxUid') {
+                addRenderFn(pageSoul[key])
               }
             }
             this.setPageSoul({pageSoul})
           })
         }
-
         let frame = findSoul(105, this.draggableControls)
         let dropPanelSoul = findSoul(100, this.draggableControls)
         dropPanelSoul.uid = generateUid()

@@ -73,7 +73,7 @@ function init(draggableControls) {
   copy = deepCopy(dropPanelSoul);//before drop ,must copy drag control
   copy.uid = generateUid() //dropped control has unique uid
   store.commit('dragModule/setSoul', copy)
-  store.commit('dragModule/setPageSoul', {'pageSoul':{}})//now we have no pages
+  store.commit('dragModule/setPageSoul', {'pageSoul':{'/index':copy}})//now we have no pages
 }
 
 function saveSoul() {

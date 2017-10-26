@@ -4,13 +4,22 @@ const generateUid = (() => uid++)
 const resetUid = (newuid => uid = newuid || 1)
 const currentUid = (() => uid)
 
-function resetModel(soul) {
-  if(!soul.model.save){
+function resetModel(pageSoul) {
+  for (let key in pageSoul) {
+    if (key !== 'maxUid') {
+      reset(pageSoul[key])
+    }
+  }
+}
+
+function reset(soul) {
+  if (soul.model && !soul.model.save) {
     soul.model.value = null
   }
-  soul.children.forEach(child=>{
-    resetModel(child)
-  })
+
+  for (let i = 0; i < soul.children.length; i++) {
+    reset(soul.children[i])
+  }
 }
 
 function findSoul(cid, controls) {
