@@ -2,11 +2,13 @@
   <Card>
     <div slot="title">App List</div>
     <div class="app-flow-container">
-      <div class="app-flow"
-           v-for="app in apps"
-           key="app.sort">
+      <div
+        @click="openApp(app)"
+        class="app-flow"
+        v-for="app in apps"
+        key="app.sort">
         <Card>
-          <a @click="openApp(app)">{{app.name}}</a>
+          <a>{{app.name}}</a>
         </Card>
       </div>
     </div>
@@ -46,13 +48,11 @@
 
   .app-flow {
     margin-right: 50px;
-    flex-basis: 20%;
+    flex-basis: 10%;
     text-align: center;
-
-    &:last-child{
+    cursor: pointer;
+    &:last-child {
       margin-right: 0;
     }
   }
-
-
 </style>
