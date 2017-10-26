@@ -1,6 +1,6 @@
 {
   "name": "esview",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "title": "esview",
   "main": "dist/client/esview.min.js",
   "files": [
