@@ -45,7 +45,14 @@
   }
 
   .app-flow {
+    margin-right: 50px;
     flex-basis: 20%;
     text-align: center;
+
+    &:last-child{
+      margin-right: 0;
+    }
   }
+
+
 </style>
