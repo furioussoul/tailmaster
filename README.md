@@ -1,11 +1,16 @@
 <p align="center"><a href="#">Esview</p>
   
+<p align="right">
+  <a href="https://github.com/furioussoul/soul-esview/blob/master/ui/README-ch.md">中文</a>
+ 
+   <br>
+</p>  
+
 <p align="center">
   <a href="https://www.npmjs.com/package/esview"><img src="https://img.shields.io/npm/dm/esview.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/esview"><img src="https://img.shields.io/npm/v/esview.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/esview"><img src="https://img.shields.io/npm/l/esview.svg" alt="License"></a>
    <br>
- 
 </p>
   
   
