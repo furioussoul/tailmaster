@@ -107,7 +107,7 @@
   import store from '../../../store'
   import {findSoul, findNode, resetUid,generateUid} from '../../../helper/soul_helper'
   import {makeControl, addRenderFn} from '../../../helper/code_helper'
-  import{undo, redo, clear, init}from '../../../helper/user_operation'
+  import{undo, redo, clear, init, saveSoul}from '../../../helper/user_operation'
   import {copyProperties, stringify, parse, deepCopy}from '../../../util/assist'
   import {getControlList} from  '../../../resource/develop_resource'
   import {
@@ -247,6 +247,7 @@
         dropPanelSoul.uid = generateUid()
         frame.children.push(deepCopy(dropPanelSoul))
         this.setOriginSoul(frame)
+        saveSoul()
       })
     }
   }

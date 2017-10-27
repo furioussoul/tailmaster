@@ -38,8 +38,8 @@ function undo() {
     return false
   }
   let dataSnapshot = templateStore.dataSnapshot[templateStore.count - 2];
-  dataSnapshot = dataSnapshot ? dataSnapshot : deepCopy(findSoul(100, store.getters['dragModule/draggableControls']))
-  let soulCopy = deepCopy(dataSnapshot)
+  if(!dataSnapshot) return
+  let soulCopy = deepCopy(findSoul(100, store.getters['dragModule/draggableControls']))
 
   store.commit('dragModule/setSoul', soulCopy)
   store.commit('dragModule/syncSoul', soulCopy)
