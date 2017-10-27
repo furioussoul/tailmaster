@@ -17,7 +17,12 @@ let templateStore = {
   dataSnapshot: []//version array
 };
 
-
+function resetSnapShot() {
+  templateStore = {
+    count: 0,//version number
+    dataSnapshot: []//version array
+  };
+}
 
 function drop(saveInfo) {
   if (templateStore.count < templateStore.dataSnapshot.length) {
@@ -39,7 +44,7 @@ function undo() {
   }
   let dataSnapshot = templateStore.dataSnapshot[templateStore.count - 2];
   if(!dataSnapshot) return
-  let soulCopy = deepCopy(findSoul(100, store.getters['dragModule/draggableControls']))
+  let soulCopy = deepCopy(dataSnapshot)
 
   store.commit('dragModule/setSoul', soulCopy)
   store.commit('dragModule/syncSoul', soulCopy)
@@ -91,5 +96,6 @@ export {
   redo,
   clear,
   saveSoul,
-  init
+  init,
+  resetSnapShot
 }

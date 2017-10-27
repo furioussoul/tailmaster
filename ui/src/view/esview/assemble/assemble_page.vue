@@ -107,7 +107,7 @@
   import store from '../../../store'
   import {findSoul, findNode, resetUid,generateUid} from '../../../helper/soul_helper'
   import {makeControl, addRenderFn} from '../../../helper/code_helper'
-  import{undo, redo, clear, init, saveSoul}from '../../../helper/user_operation'
+  import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../helper/user_operation'
   import {copyProperties, stringify, parse, deepCopy}from '../../../util/assist'
   import {getControlList} from  '../../../resource/develop_resource'
   import {
@@ -201,6 +201,7 @@
       }
     },
     mounted(){
+      resetSnapShot()
       this.appId = localStorage.getItem('appId')
       this.pageSoulId = localStorage.getItem('pageSoulId')
 
@@ -234,6 +235,7 @@
         if (!this.pageSoulId) {
           //when add new page
           init(draggableControls)
+          saveSoul()
 
         } else {
 
@@ -250,6 +252,7 @@
               }
             }
             this.setPageSoul({pageSoul})
+            saveSoul()
           })
         }
         let frame = findSoul(105, this.draggableControls)
@@ -258,7 +261,6 @@
         dropPanelSoul.uid = generateUid()
         frame.children.push(deepCopy(dropPanelSoul))
         this.setOriginSoul(frame)
-        saveSoul()
       })
     }
   }

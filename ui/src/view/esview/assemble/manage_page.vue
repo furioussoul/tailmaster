@@ -50,7 +50,6 @@
   import{
     paginationMixin
   } from '../../../mixin/m_pagination'
-
   export default{
     name: 'ManagePage',
     mixins: [paginationMixin],
