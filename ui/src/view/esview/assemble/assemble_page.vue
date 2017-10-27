@@ -165,16 +165,11 @@
         this.showEditScriptModal = false
         let pSoul = findNode(this.editControlSoul.pid);
         if(pSoul){
-          let editSoulCopy = deepCopy(findSoul(this.editControlSoul.cid, this.draggableControls))
-          editSoulCopy.uid = generateUid()
-          editSoulCopy.model = this.editControlSoul.model
-          editSoulCopy.script = this.editControlSoul.script
+          let editSoulCopy = deepCopy(this.editControlSoul)
           let index = pSoul.children.indexOf(this.editControlSoul);
-          let saveInfo = {drag:editSoulCopy}
-          interceptDrop(saveInfo)
           pSoul.children.splice(index,1)
-          editSoulCopy.pid = pSoul.uid
           setTimeout(()=>{
+            editSoulCopy.initScript = false
             pSoul.children.splice(index,0,editSoulCopy)
           },1)
         }

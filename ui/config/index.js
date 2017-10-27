@@ -29,7 +29,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/esview': {
-        target: 'http://localhost:8080',
+        target: 'http://47.94.2.0:8080',
         changeOrigin: true,
         pathRewrite: {
           '^/esview': '/esview'
