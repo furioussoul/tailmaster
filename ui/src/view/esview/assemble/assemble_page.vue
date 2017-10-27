@@ -119,7 +119,9 @@
     getRichPage,
     getAppList
   } from '../../../resource/assemble_resource'
-
+  import{
+    interceptDrop
+  }from '../../../core/dnd'
   export default {
     name: 'AssemblePage',
     data(){
@@ -161,7 +163,16 @@
         this.editControlSoul.scriptString = code
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal = false
-        this.editControlSoul.initScript = false
+        let pSoul = findNode(this.editControlSoul.pid);
+        if(pSoul){
+          let editSoulCopy = deepCopy(this.editControlSoul)
+          let index = pSoul.children.indexOf(this.editControlSoul);
+          pSoul.children.splice(index,1)
+          setTimeout(()=>{
+            editSoulCopy.initScript = false
+            pSoul.children.splice(index,0,editSoulCopy)
+          },1)
+        }
         this.syncSoul(this.soul)//edited soul, must synchronize pageSoul for saving changes
       },
 

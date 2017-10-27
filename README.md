@@ -1,11 +1,15 @@
+<p align="right">
+  <a href="https://github.com/furioussoul/soul-esview/blob/master/ui/README-ch.md">中文</a>
+</p>  
 <p align="center"><a href="#">Esview</p>
   
+
+
 <p align="center">
   <a href="https://www.npmjs.com/package/esview"><img src="https://img.shields.io/npm/dm/esview.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/esview"><img src="https://img.shields.io/npm/v/esview.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/esview"><img src="https://img.shields.io/npm/l/esview.svg" alt="License"></a>
    <br>
- 
 </p>
   
   
@@ -50,10 +54,6 @@ manager-site: http://47.94.2.0:9090
 client-site: http://47.94.2.0:9091
 
 usage: https://github.com/furioussoul/esview-demo
-
-
-![pic](http://chuantu.biz/t6/98/1508081223x1968430843.png "esview")
-![pic](http://chuantu.biz/t6/99/1508130896x1114690581.png "esview")
 
 
 # License
