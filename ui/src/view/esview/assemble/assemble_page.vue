@@ -34,7 +34,6 @@
                   <p slot="content" class="index-layout-content__class">
                     <Control
                       v-for="(control,controlIndex) in controlClass.controls"
-                      v-if="control.cid != 100"
                       :controlConfig="control"
                       :key="controlIndex">
                       <div slot="preview">
