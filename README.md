@@ -52,10 +52,6 @@ client-site: http://47.94.2.0:9091
 usage: https://github.com/furioussoul/esview-demo
 
 
-![pic](http://chuantu.biz/t6/98/1508081223x1968430843.png "esview")
-![pic](http://chuantu.biz/t6/99/1508130896x1114690581.png "esview")
-
-
 # License
 [MIT](https://opensource.org/licenses/MIT)
 
