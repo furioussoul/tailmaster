@@ -151,5 +151,6 @@ export {
   onDragOver,
   onDrop,
   onDragLeave,
-  initDropEvents
+  initDropEvents,
+  interceptDrop
 }
