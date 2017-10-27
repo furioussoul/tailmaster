@@ -17,6 +17,6 @@ export default {
     h.store = store
     h.eventCenter = eventCenter
     eventCenter.createElement = h
-    return this.soul.render(h)
+    return this.soul.renderProd(h)
   }
 }
