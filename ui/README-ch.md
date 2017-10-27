@@ -33,7 +33,7 @@ Esview是一个Vue拖拽可视化开发平台，在借鉴美团’乐高’可�
 
 3） 修改main.js的render方法，填写创建了的应用的名称和页面名称， npm run dev，就能显示创建的应用了。
 
-![QQ图片20171027113639.png](//dn-cnode.qbox.me/FoGFnssFD2H0-ozXy6MjTMYadnzC)
+![QQ图片20171027113639.png](//http://chuantu.biz/t6/114/1509075922x986935075.png)
 
 
 # 安装
@@ -70,7 +70,7 @@ Esview平台分为三个部分：面向用户的组装工厂、面向开发者�
 
 第二个是组件的开发工厂，用户可以编辑组件的全部脚本。
 
-![QQ图片20171027083158.png](//dn-cnode.qbox.me/FhbcnfWAHo2pcY0mt1eS1t0XVnmR)
+![QQ图片20171027083158.png](//http://chuantu.biz/t6/114/1509075952x986935075.png)
 
 
 # 视图脚本
@@ -78,7 +78,7 @@ this.model封装了Iview组件对外暴露的接口，修改model属性来控制
 
 利用eventCenter（事件中心）实现组件间通信。
 
-![QQ图片20171027091954.jpg](//dn-cnode.qbox.me/Frrw3ahGatNo__WiPi1T-LJwWAdJ)
+![QQ图片20171027091954.jpg](//http://chuantu.biz/t6/114/1509075967x986935075.jpg)
 
 # License
 [MIT](https://opensource.org/licenses/MIT)
