@@ -31,7 +31,6 @@ export default {
   mutations: {
     setOriginSoul(state, soul){
       state.originSoul = deepCopy(soul)
-      state.currentRouterPath = '/index'
     },
     setSoul: (state, soul) => {
       state.soul = soul
@@ -41,10 +40,6 @@ export default {
         state.pageSoul[path] = pageSoul
       } else {
         state.pageSoul = pageSoul
-        if(!state.soul){
-          //when update page
-          state.soul = pageSoul['/index']
-        }
       }
     },
     syncSoul(state, soul){

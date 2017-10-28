@@ -13,7 +13,7 @@
                   width="200px"
                   :accordion="true"
                   ref="secondMenu">
-            <div class="layout-logo-left"><img @click="home" src="../../../static/img/logo.png"></img></div>
+            <div class="layout-logo-left"><img src="../../../static/img/logo.png"></img></div>
             <template v-for="group in menu">
               <Menu-item :name="group.id"
                          :key="group.id"
@@ -159,20 +159,15 @@
       path(n) {
         const self = this;
         this.$nextTick(function () {
-          self.$refs.bread.updateChildren();
+            try{
+              self.$refs.bread.updateChildren();
+            }catch (ex){
+
+            }
         });
       }
     },
     methods: {
-      home(){
-        if(getConfig('type') === 'assemble'){
-          // router of the frame inside assemble factory
-          this.$router.push('/esview/assemble/assemble_page?pageId=%2Findex')
-        }else {
-          // router of client app
-          this.$router.push('/index')
-        }
-      },
       toggleMenu() {
         this.show = !this.show;
         window.setTimeout(function () {
@@ -203,9 +198,14 @@
           }
         }
         this.$nextTick(function () {
-          this.$refs.firstMenu.updateActiveName();
-          this.$refs.secondMenu.updateActiveName();
-          this.$refs.secondMenu.updateOpened();
+            try{
+              this.$refs.firstMenu.updateActiveName();
+              this.$refs.secondMenu.updateActiveName();
+              this.$refs.secondMenu.updateOpened();
+            }catch (ex){
+
+            }
+
         }.bind(this));
       },
       logout() {
