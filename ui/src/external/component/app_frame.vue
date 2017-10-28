@@ -97,9 +97,11 @@
 
   </div>
 </template>
+<style lang="less">
+ @import '../../style/component/frame.less';
 
+</style>
 <script>
-  import frame from '../../style/component/frame.less'
   import {
     getBreadcrumb,
     getPages,
