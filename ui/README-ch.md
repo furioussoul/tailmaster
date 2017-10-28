@@ -38,7 +38,11 @@ Vue可视化：![QQ图片20171027113639.png](http://chuantu.biz/t6/115/150916721
 
 
 # 安装
-下载demo ： https://github.com/furioussoul/esview-demo， npm install 依赖， npm run dev就能显示创建的应用了
+下载demo ： https://github.com/furioussoul/esview-demo， npm install 依赖， npm run dev就能启动前端了。
+
+如果要部署后端，请安装jdk1.80,并且启动server包下面的Application.java(springboot 项目)。
+
+数据库表也在server包下，名soul-esview.sql。
 
 
 
