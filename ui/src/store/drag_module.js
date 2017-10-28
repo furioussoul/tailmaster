@@ -35,12 +35,12 @@ export default {
     setSoul: (state, soul) => {
       state.soul = soul
     },
-    setPageSoul(state, {path, pageSoul}){
-      if (path) {
-        state.pageSoul[path] = pageSoul
-      } else {
-        state.pageSoul = pageSoul
+    setPageSoul(state, {pageSoul}){
+      for (let key in pageSoul) {
+        state.soul = pageSoul[key]
+        break
       }
+      state.pageSoul = pageSoul
     },
     syncSoul(state, soul){
       //sync changes of soul to pageSoul by routerPath
@@ -92,6 +92,7 @@ export default {
       }
     },
     changeSoul(state){
+
       let path = decodeURIComponent(getQueryParam('pageId'))
       if (!path) return
       state.currentRouterPath = path
