@@ -151,6 +151,7 @@
           init(this.draggableControls)
         }
         this.clear()
+        saveSoul()
       },
       editControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
