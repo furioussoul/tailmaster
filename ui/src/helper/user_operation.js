@@ -73,18 +73,16 @@ function clear() {
   })
 }
 
-function init(draggableControls,isDel) {
+function init(draggableControls) {
 
   let dropPanelSoul = findSoul(100, draggableControls),
   copy = deepCopy(dropPanelSoul);//before drop ,must copy drag control
   copy.uid = generateUid() //dropped control has unique uid
 
   store.commit('dragModule/setSoul', copy)
-  if(isDel){
-    store.commit('dragModule/setPageSoul', {pageSoul:{}})//now we have no pages
-  }else {
-    store.commit('dragModule/setPageSoul', {pageSoul:copy})//now we have no pages
-  }
+
+  let pageSoul = {'index':copy}
+  store.commit('dragModule/setPageSoul', {pageSoul})//now we have no pages
 }
 
 function saveSoul() {

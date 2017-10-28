@@ -132,7 +132,7 @@
       ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu',  'draggableControls'])
     },
     methods: {
-      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setPageSoul', 'setOriginSoul']),
+      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setPageSoul', 'setOriginSoul','clearPageSoul']),
       ...mapMutations('userModule', ['changePage']),
       deleteControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
@@ -141,7 +141,7 @@
           let index = pSoul.children.indexOf(this.editControlSoul);
           pSoul.children.splice(index,1)
         }else {
-          init(this.draggableControls,true)
+          store.commit('dragModule/clearPageSoul')
         }
         this.clear()
         saveSoul()

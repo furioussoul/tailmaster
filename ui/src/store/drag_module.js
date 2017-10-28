@@ -1,4 +1,4 @@
-import {generateUid} from '../helper/soul_helper'
+import {generateUid, findSoul} from '../helper/soul_helper'
 import {deepCopy, getQueryParam,isPlain} from '../util/assist'
 
 export default {
@@ -35,14 +35,24 @@ export default {
       state.pageSoul[state.currentRouterPath] = soul
     },
     setPageSoul(state, {pageSoul}){
-      if(!isPlain(pageSoul)){
-        state.soul = pageSoul['index']
-        state.pageSoul = pageSoul
-      }else {
-        for(let key in state.pageSoul){
-          delete pageSoul[key]
-        }
+      let copy = deepCopy(pageSoul)
+      //vue bug
+      delete state.pageSoul
+      delete state.pageSoul
+      state.soul = copy['index']
+      state.pageSoul = copy
+    },
+    clearPageSoul(state){
+      for(let key in state.pageSoul){
+        //maybe vue's bug
+        delete state.pageSoul[key]
+        delete state.pageSoul[key]
       }
+      let dropPanelSoul = findSoul(100, this.draggableControls),
+      copy = deepCopy(dropPanelSoul);//before drop ,must copy drag control
+      copy.uid = generateUid() //dropped control has unique uid
+      state.soul = copy
+      state.pageSoul['index'] = copy
     },
     setDraggableControls(state, draggableControls){
       state.draggableControls = draggableControls

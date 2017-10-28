@@ -108,7 +108,6 @@ function delPage(id) {
 
 function updatePage() {
   let pageSoul = store.getters['dragModule/pageSoul']
-
   resetModel(pageSoul)
   pageSoul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(pageSoul)

@@ -66,7 +66,7 @@ function render({appName, pageName}, token) {
       }
     }
     store.commit('soulModule/setPageSoul', pageSoul)
-    store.commit('soulModule/setSoul', pageSoul['/index'])
+    store.commit('soulModule/setSoul', pageSoul['index'])
 
     if(!getConfig('type')){
       Vue.directive('droppable',emptyDirective)
