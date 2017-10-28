@@ -43,7 +43,7 @@
     <!--左侧菜单栏 end-->
 
     <!--顶部菜单栏 start-->
-    <div class="layout-header" :class="{'layout-header-full':false}" cloak>
+    <div style="z-index: 901" class="layout-header" :class="{'layout-header-full':false}" cloak>
       <i-menu mode="horizontal" v-cloak :active-name="activedFirstMenu" theme="dark" @on-select="selectMenu"
               ref="firstMenu">
         <Icon type="navicon-round" class="layout-round-icon" @click.native="toggleMenu"></Icon>

@@ -66,7 +66,7 @@
     top: 0;
     height: 100%;
     width: 200px;
-    z-index:901
+    z-index:902
   }
 
   .layout-left .navigator {
@@ -526,13 +526,13 @@
     },
     methods: {
       home(){
-          if(getConfig('type') === 'assemble'){
-            // router of the frame inside assemble factory
-            this.$router.push('/esview/assemble/assemble_page?pageId=%2Findex')
-          }else {
-            // router of client app
-            this.$router.push('/index')
-          }
+        if(getConfig('type') === 'assemble'){
+          // router of the frame inside assemble factory
+          this.$router.push('/esview/assemble/assemble_page?pageId=%2Findex')
+        }else {
+          // router of client app
+          this.$router.push('/index')
+        }
       },
       toggleMenu() {
         this.show = !this.show;
