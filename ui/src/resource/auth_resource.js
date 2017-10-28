@@ -13,6 +13,8 @@ function register() {
     if(res.data.code === 10000){
       this.$router.push('./')
       store.commit('userModule/changePage','manage')
+    }else {
+      this.$Message.error(res.data.msg)
     }
   })
 }
@@ -22,6 +24,8 @@ function login() {
     if(res.data.code === 10000){
       this.$router.push('/')
       store.commit('userModule/changePage','manage')
+    }else {
+      this.$Message.error(res.data.msg)
     }
   })
 }

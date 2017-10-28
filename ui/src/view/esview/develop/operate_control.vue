@@ -6,7 +6,9 @@
     </CodeEditor>
 </template>
 <script>
-
+  import{
+    mapGetters
+  }from 'vuex'
   import {
     addControl,
     delControl,
@@ -24,9 +26,13 @@
           position: 'fixed',
           top: '50px',
           height: '50px',
-          zIndex:1000000
+          zIndex:1000000,
+          display:'none'
         }
       }
+    },
+    computed: {
+      ...mapGetters('userModule', ['me'])
     },
     methods: {
       saveCode(code){
@@ -48,7 +54,12 @@
       if (query.id) {
         getRichControl.call(this, query.id, (data) => {
           this.opModel = data
+          if(data.createBy === this.me.username){
+              this.codeButtonStyle.display = 'block'
+          }
         })
+      }else {
+        this.codeButtonStyle.display = 'block'
       }
     }
   }

@@ -7,6 +7,7 @@ import esform.control.request.QueryControlRequest;
 import esform.dao.ControlDao;
 import esform.domain.Control;
 import esform.response.Response;
+import esform.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -30,6 +31,7 @@ public class ControlResource {
     @ResponseBody
     public Response add(@RequestBody OperateControlRequest request) {
         Control domain = request.getDomain();
+        Util.trace(domain,true);
         controlDao.add(domain);
         return Response.ok();
     }

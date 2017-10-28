@@ -45,21 +45,21 @@
       title="edit"
       @on-ok="okEdit">
       <i-form :label-width="100">
-        <FormItem  label="control class" >
+        <FormItem label="control class">
           <Select filterable v-model="opModel.clazzId" size="small" style="width:100px">
             <Option v-for="item in controlClazzes" :value="item.id" :key="item.id">{{ item.name }}</Option>
           </Select>
-        </FormItem >
-        <FormItem  label="sort">
+        </FormItem>
+        <FormItem label="sort">
           <InputNumber v-model="opModel.sort" style="width:100px"></InputNumber>
-        </FormItem >
+        </FormItem>
       </i-form>
     </Modal>
   </Row>
 </template>
 <script>
   import{
-      mapGetters
+    mapGetters
   }from 'vuex'
   import {
     updateControl,
@@ -79,7 +79,7 @@
         opModel: {
           id: '',
           clazzId: '',
-          sort:-1
+          sort: -1
         },
         fn: {
           initFns: [getTableControlList],
@@ -108,8 +108,7 @@
             width: 300,
             align: 'center',
             render: (h, params) => {
-              return h('ButtonGroup', [
-                h('Button', {
+              let code = h('Button', {
                   props: {
                     type: 'ghost',
                     size: 'small'
@@ -120,7 +119,7 @@
                     }
                   }
                 }, 'code'),
-                h('Button', {
+                edit = this.me.username === params.row.createBy && h('Button', {
                   props: {
                     type: 'primary',
                     size: 'small'
@@ -131,7 +130,7 @@
                     }
                   }
                 }, 'edit'),
-                h('Button', {
+                del = this.me.username === params.row.createBy && h('Button', {
                   props: {
                     type: 'error',
                     size: 'small'
@@ -142,7 +141,7 @@
                     }
                   }
                 }, 'del')
-              ]);
+              return h('ButtonGroup', [code,edit,del]);
             }
           }
         ],
@@ -154,11 +153,11 @@
           controlName: '',
           controlClass: ''
         },
-        loading:false
+        loading: false
       }
     },
-    computed:{
-      ...mapGetters('userModule',['controlClazzes'])
+    computed: {
+      ...mapGetters('userModule', ['controlClazzes','me'])
     },
     methods: {
       reset(name){
@@ -172,27 +171,27 @@
       },
       edit(param){
         this.opModel.id = param.row.id
-        if(param.row.clazzId !== null){
+        if (param.row.clazzId !== null) {
           this.opModel.clazzId = param.row.clazzId
-        }else {
+        } else {
           this.opModel.clazzId = ''
         }
 
-        if(param.row.sort !== null){
+        if (param.row.sort !== null) {
           this.opModel.sort = param.row.sort
-        }else {
+        } else {
           this.opModel.sort = ''
         }
         this.showEditModal = true
       },
       okEdit(){
-        updateControl.call(this,()=>{
-            getTableControlList.call(this)
+        updateControl.call(this, () => {
+          getTableControlList.call(this)
         })
         this.showEditModal = false
       },
       del(param){
-//        delControl.call(this,param.row.id)
+        delControl.call(this,param.row.id)
       }
     }
   }

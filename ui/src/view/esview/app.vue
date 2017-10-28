@@ -188,11 +188,92 @@ export default{
       }
     },
     mounted() {
-
       let accessToken = getCookie("access_token");
       if(!accessToken) store.commit('userModule/changePage', 'login')
 
       this.getControlClazzes()
+
+      let res = {
+        "code": 10000,
+        "msg": "ok",
+        "data": [
+          {
+            "id": 1,
+            "name": "esview",
+            "title": "esview",
+            "url": "/esview",
+            "orderNo": 1,
+            "mtype": 0,
+            "hasPermisson": 1,
+            "subMenuList": [
+              {
+                "id": 2,
+                "name": "s",
+                "title": "Assemble",
+                "url": "/esview/assemble",
+                "orderNo": 1,
+                "mtype": 0,
+                "icon": 'wrench',
+                "hasPermisson": 1,
+                "subMenuList": [
+                  {
+                    "id": 3,
+                    "name": "ManageApp",
+                    "title": "ManageApp",
+                    "url": "/esview/assemble/manage_app",
+                    "orderNo": 1,
+                    "mtype": 1,
+                    "hasPermisson": 1,
+                    "subMenuList": null
+                  },
+                  {
+                    "id": 4,
+                    "name": "AssemblePage",
+                    "title": "AssemblePage",
+                    "url": "/esview/assemble/assemble_page",
+                    "orderNo": 2,
+                    "mtype": -1,
+                    "hasPermisson": 1,
+                    "subMenuList": null
+                  }
+                ]
+              },
+              {
+                "id": 74842,
+                "name": "develop",
+                "title": "Develop",
+                "url": "/esview/develop",
+                "orderNo": 1,
+                "mtype": 0,
+                "icon": 'upload',
+                "hasPermisson": 1,
+                "subMenuList": [
+                  {
+                    "id": 74840,
+                    "name": "index",
+                    "title": "ManageControl",
+                    "url": "/esview/develop/index",
+                    "orderNo": 1,
+                    "mtype": 1,
+                    "hasPermisson": 1,
+                    "subMenuList": null
+                  },
+                  {
+                    "id": 74796,
+                    "name": "add_control",
+                    "title": "OperateControl",
+                    "url": "/esview/develop/operate_control",
+                    "orderNo": 1,
+                    "mtype": -1,
+                    "hasPermisson": 1,
+                    "subMenuList": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
 
       this.totalMenu = res.data;
       this.routes = getPages(this.totalMenu);
@@ -209,88 +290,7 @@ export default{
         }
       }
       this.userInfo = res.data;
+      store.commit('userModule/setMe',this.userInfo)
     }
   }
-
-let res = {
-  "code": 10000,
-  "msg": "ok",
-  "data": [
-    {
-      "id": 1,
-      "name": "esview",
-      "title": "esview",
-      "url": "/esview",
-      "orderNo": 1,
-      "mtype": 0,
-      "hasPermisson": 1,
-      "subMenuList": [
-        {
-          "id": 2,
-          "name": "s",
-          "title": "Assemble",
-          "url": "/esview/assemble",
-          "orderNo": 1,
-          "mtype": 0,
-          "icon": 'wrench',
-          "hasPermisson": 1,
-          "subMenuList": [
-            {
-              "id": 3,
-              "name": "ManageApp",
-              "title": "ManageApp",
-              "url": "/esview/assemble/manage_app",
-              "orderNo": 1,
-              "mtype": 1,
-              "hasPermisson": 1,
-              "subMenuList": null
-            },
-            {
-              "id": 4,
-              "name": "AssemblePage",
-              "title": "AssemblePage",
-              "url": "/esview/assemble/assemble_page",
-              "orderNo": 2,
-              "mtype": -1,
-              "hasPermisson": 1,
-              "subMenuList": null
-            }
-          ]
-        },
-        {
-          "id": 74842,
-          "name": "develop",
-          "title": "Develop",
-          "url": "/esview/develop",
-          "orderNo": 1,
-          "mtype": 0,
-          "icon": 'upload',
-          "hasPermisson": 1,
-          "subMenuList": [
-            {
-              "id": 74840,
-              "name": "index",
-              "title": "ManageControl",
-              "url": "/esview/develop/index",
-              "orderNo": 1,
-              "mtype": 1,
-              "hasPermisson": 1,
-              "subMenuList": null
-            },
-            {
-              "id": 74796,
-              "name": "add_control",
-              "title": "OperateControl",
-              "url": "/esview/develop/operate_control",
-              "orderNo": 1,
-              "mtype": -1,
-              "hasPermisson": 1,
-              "subMenuList": null
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
 </script>

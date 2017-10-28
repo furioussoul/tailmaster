@@ -2,7 +2,7 @@ import Vue from 'vue'
 export default {
   namespaced: true,
   state: {
-    me: 1,
+    me: {},
     page: "manage", //test
     controlClazzes: []
   },
@@ -12,6 +12,9 @@ export default {
     controlClazzes: ({controlClazzes}) => controlClazzes
   },
   mutations: {
+    setMe(state,me){
+      state.me = me
+    },
     changePage(state, page){
       state.page = page
     },
