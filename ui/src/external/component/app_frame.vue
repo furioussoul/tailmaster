@@ -453,8 +453,11 @@
     <div class="layout-content" id="layout-content" v-cloak>
       <div class="layout-scroll">
 
-        <slot name="drop-panel">
+        <slot v-if="routerPath.indexOf('esview') > -1" name="drop-panel">
         </slot>
+
+        <router-view v-else>
+        </router-view>
 
       </div>
 
@@ -506,6 +509,9 @@
             return e.url === path;
           });
         return target ? target.title : '';
+      },
+      routerPath(){
+          return store.state.routerModule.path;
       },
       path() {
         const path = store.state.routerModule.path;
