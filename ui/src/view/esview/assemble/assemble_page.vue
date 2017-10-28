@@ -25,7 +25,7 @@
     <div class="index-layout-content">
       <Row>
 
-        <i-col span="3">
+        <i-col class="controls-container" span="3">
           <transition name="index-soul-control-class-fade">
             <div>
               <Collapse :key="classIndex" v-for="(controlClass, classIndex) in controlClazzes">
@@ -49,15 +49,8 @@
           </transition>
         </i-col>
 
-        <i-col v-if="showEditorPanel" span="18" :class="{'is-preview':isPreview}">
+        <i-col style="margin-left: 200px" span="21" :class="{'is-preview':isPreview}">
           <RenderDev :soul="soul"></RenderDev>
-        </i-col>
-        <i-col v-else span="21" :class="{'is-preview':isPreview}">
-          <RenderDev :soul="soul"></RenderDev>
-        </i-col>
-
-        <i-col v-show="showEditorPanel" span="3">
-          <ModelEditor :editSoul="editSoul"></ModelEditor>
         </i-col>
 
       </Row>
@@ -267,6 +260,13 @@
 </script>
 
 <style scoped>
+
+  .controls-container{
+    position: fixed;
+    top: 100px;
+    left: 200px;
+    width: 200px
+  }
 
   .edit_layer {
     display: none;

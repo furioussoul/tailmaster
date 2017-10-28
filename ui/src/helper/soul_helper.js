@@ -13,6 +13,7 @@ function resetModel(pageSoul) {
 }
 
 function reset(soul) {
+  soul.initScript=false
   if (soul.model && !soul.model.save) {
     soul.model.value = ''
   }
