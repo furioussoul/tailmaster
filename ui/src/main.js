@@ -17,7 +17,7 @@ import './style/index.less'
 import esview from './external' //test
 
 esview.addConfig('router', router)
-esview.addConfig('type', 'assemble')
+// esview.addConfig('type', 'assemble')
 
 Vue.dev = true
 

@@ -17,12 +17,12 @@ export const router = new Router({
         import ('../view/esview/home/home.vue')
     },
     {
-      path: '/test/test_router1',
+      path: '/testRouter/test_router1',
       component: () =>
         import ('../view/esview/test1.vue')
     },
     {
-      path: '/test/test_router2',
+      path: '/testRouter/test_router2',
       component: () =>
         import ('../view/esview/test2.vue')
     }
