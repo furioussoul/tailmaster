@@ -25,8 +25,6 @@ module.exports = merge(webpackBaseConfig, {
       amd: 'vue'
     }
   },
-  devtool: '#source-map',
-
   plugins: [
     // @todo
     new webpack.DefinePlugin({
