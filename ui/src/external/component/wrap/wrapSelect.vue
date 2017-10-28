@@ -7,7 +7,6 @@
   export default{
     name: 'WrapSelect',
     props:{
-      value:[Object,String,Number],
       items:[Array]
     },
     methods:{

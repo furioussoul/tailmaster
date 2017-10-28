@@ -186,7 +186,9 @@
         this.showEditModal = true
       },
       okEdit(){
-        updateControl.call(this)
+        updateControl.call(this,()=>{
+            getTableControlList.call(this)
+        })
         this.showEditModal = false
       },
       del(param){
