@@ -159,7 +159,11 @@
       path(n) {
         const self = this;
         this.$nextTick(function () {
-          self.$refs.bread.updateChildren();
+          try{
+            self.$refs.bread.updateChildren();
+          }catch (ex){
+
+          }
         });
       }
     },
@@ -203,9 +207,14 @@
           }
         }
         this.$nextTick(function () {
-          this.$refs.firstMenu.updateActiveName();
-          this.$refs.secondMenu.updateActiveName();
-          this.$refs.secondMenu.updateOpened();
+            try{
+              this.$refs.firstMenu.updateActiveName();
+              this.$refs.secondMenu.updateActiveName();
+              this.$refs.secondMenu.updateOpened();
+            }catch (ex){
+
+            }
+
         }.bind(this));
       },
       logout() {
