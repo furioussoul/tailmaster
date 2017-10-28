@@ -1,7 +1,5 @@
-import {findNode} from '../helper/soul_helper'
-import {findElUpward} from '../helper/dom_helper'
-import {isPlain}from '../util/assist'
-import {deepCopy, getQueryParam} from '../util/assist'
+import {generateUid} from '../helper/soul_helper'
+import {deepCopy, getQueryParam,isPlain} from '../util/assist'
 
 export default {
   namespaced: true,
@@ -37,11 +35,14 @@ export default {
       state.pageSoul[state.currentRouterPath] = soul
     },
     setPageSoul(state, {pageSoul}){
-      for (let key in pageSoul) {
-        state.soul = pageSoul[key]
-        break
+      if(!isPlain(pageSoul)){
+        state.soul = pageSoul['index']
+        state.pageSoul = pageSoul
+      }else {
+        for(let key in state.pageSoul){
+          delete pageSoul[key]
+        }
       }
-      state.pageSoul = pageSoul
     },
     setDraggableControls(state, draggableControls){
       state.draggableControls = draggableControls
@@ -90,20 +91,19 @@ export default {
       }
     },
     changeSoul(state){
-
       let path = decodeURIComponent(getQueryParam('pageId'))
       if (!path) return
       state.currentRouterPath = path
 
-      if (!state.pageSoul[path]) {
-
+      if (state.pageSoul[path]) {
+        state.soul = state.pageSoul[path]
+      }else {
         if (!state.originSoul) return
-
         const soulCopy = deepCopy(state.originSoul)
+        soulCopy.children[0].uid = generateUid
+        soulCopy.uid = soulCopy.children[0].pid = generateUid()
         state.pageSoul[path] = soulCopy
         state.soul = soulCopy
-      }else {
-        state.soul = state.pageSoul[path]
       }
     }
   },

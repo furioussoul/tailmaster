@@ -141,7 +141,7 @@
           let index = pSoul.children.indexOf(this.editControlSoul);
           pSoul.children.splice(index,1)
         }else {
-          init(this.draggableControls)
+          init(this.draggableControls,true)
         }
         this.clear()
         saveSoul()
@@ -236,21 +236,15 @@
           getRichPage.call(this, this.pageSoulId, (data) => {
             this.opModel = data
             let pageSoul = data.pageSoul
-            let hashRouter=false
             pageSoul = parse(pageSoul)//deserialize functions from json
             resetUid(pageSoul['maxUid'])
             for (let key in pageSoul) {
               if (key !== 'maxUid') {
-                hashRouter=true
                 addRenderFn(pageSoul[key])
               }
             }
 
-            if(!hashRouter){
-              init(draggableControls)
-            }else {
-              this.setPageSoul({pageSoul})
-            }
+            this.setPageSoul({pageSoul})
 
             saveSoul()
           })

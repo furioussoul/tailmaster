@@ -1,7 +1,9 @@
 import store from '../store/index'
 let uid = 1
 const generateUid = (() => uid++)
-const resetUid = (newuid => uid = newuid || 1)
+const resetUid =function (newuid) {
+  uid = newuid || 1
+}
 const currentUid = (() => uid)
 
 function resetModel(pageSoul) {
