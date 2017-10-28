@@ -13,7 +13,7 @@
                   width="200px"
                   :accordion="true"
                   ref="secondMenu">
-            <div class="layout-logo-left"><img src="../../../static/img/logo.png"></img></div>
+            <div class="layout-logo-left"><img @click="home" src="../../../static/img/logo.png"></img></div>
             <template v-for="group in menu">
               <Menu-item :name="group.id"
                          :key="group.id"
@@ -122,7 +122,11 @@
     props: {
       fullPath: [String],
       totalMenu: [Array],
-      userInfo: [Object]
+      userInfo: [Object],
+      indexUrl:{
+        type:[String],
+        default:'/'
+      }
     },
     data() {
       return {
@@ -168,6 +172,12 @@
       }
     },
     methods: {
+      home(){
+          if(getConfig('type') === 'assemble'){
+              return
+          }
+          this.$router.push(this.indexUrl)
+      },
       toggleMenu() {
         this.show = !this.show;
         window.setTimeout(function () {
