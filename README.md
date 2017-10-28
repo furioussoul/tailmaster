@@ -17,7 +17,7 @@
 Esview is a web frontend platform for building vue spa through html5 drag/drop api.  
 
 Recommand use webpack constructor spa to inject esview.
-
+![QQ图片20171027113639.png](http://chuantu.biz/t6/115/1509167213x1926933951.gif)
 
 # How to drag/drop?
 Esview use grid system,  
