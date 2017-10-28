@@ -80,16 +80,12 @@
         },
         columns: [
           {
-            title: 'id',
+            title: 'AppId',
             key: 'id'
           },
           {
             title: 'AppName',
             key: 'name'
-          },
-          {
-            title: 'AppId',
-            key: 'id'
           },
           {
             title: 'sort',

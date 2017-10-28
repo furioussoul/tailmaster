@@ -173,7 +173,7 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
     background: #fff;
     transition: left .4s ease;
-    z-index: 4;
+    z-index: 30000;
     color: black;
   }
 

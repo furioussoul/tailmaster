@@ -70,7 +70,7 @@
         },
         columns: [
           {
-            title: 'id',
+            title: 'PageId',
             key: 'id'
           },
           {
