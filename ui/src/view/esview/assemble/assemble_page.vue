@@ -254,6 +254,8 @@
         dropPanelSoul.uid = generateUid()
         frame.children.push(deepCopy(dropPanelSoul))
         this.setOriginSoul(frame)
+
+        this.clear()
       })
     }
   }
