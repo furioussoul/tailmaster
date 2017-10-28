@@ -5,7 +5,7 @@ export default {
     el.onmouseout = function (e) {
       e.preventDefault()
       e.stopPropagation()
-      store.commit('dragModule/clearEditLayer')
+      store.commit('dragModule/clear','layer')
     }
     el.onmouseover = function (e) {
       e.preventDefault()

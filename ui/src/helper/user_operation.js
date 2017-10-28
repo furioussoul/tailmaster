@@ -47,7 +47,6 @@ function undo() {
   let soulCopy = deepCopy(dataSnapshot)
 
   store.commit('dragModule/setSoul', soulCopy)
-  store.commit('dragModule/syncSoul', soulCopy)
   templateStore.count--;
   return true;
 }
@@ -59,7 +58,6 @@ function redo() {
   let soulSnap = templateStore.dataSnapshot[templateStore.count++]
   let soulCopy = deepCopy(soulSnap)
   store.commit('dragModule/setSoul', soulCopy)
-  store.commit('dragModule/syncSoul', soulCopy)
   return true;
 }
 

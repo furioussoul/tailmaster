@@ -129,10 +129,10 @@
     },
     computed: {
       ...mapGetters('userModule', ['controlClazzes']),
-      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu', 'showEditorPanel', 'draggableControls'])
+      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu',  'draggableControls'])
     },
     methods: {
-      ...mapMutations('dragModule', ['setSoul', 'clear', 'syncSoul', 'setDraggableControls', 'setPageSoul', 'setOriginSoul']),
+      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setPageSoul', 'setOriginSoul']),
       ...mapMutations('userModule', ['changePage']),
       deleteControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
@@ -166,7 +166,6 @@
             pSoul.children.splice(index,0,editSoulCopy)
           },1)
         }
-        this.syncSoul(this.soul)//edited soul, must synchronize pageSoul for saving changes
       },
 
       okPageName(){
