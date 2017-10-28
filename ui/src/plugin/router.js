@@ -14,7 +14,7 @@ export const router = new Router({
     {
       path: '/',
       component: () =>
-        import ('../view/esview/index.vue')
+        import ('../view/esview/home/home.vue')
     },
     {
       path: '/test/test_router1',
