@@ -237,14 +237,22 @@
           getRichPage.call(this, this.pageSoulId, (data) => {
             this.opModel = data
             let pageSoul = data.pageSoul
+            let hashRouter=false
             pageSoul = parse(pageSoul)//deserialize functions from json
             resetUid(pageSoul['maxUid'])
             for (let key in pageSoul) {
               if (key !== 'maxUid') {
+                hashRouter=true
                 addRenderFn(pageSoul[key])
               }
             }
-            this.setPageSoul({pageSoul})
+
+            if(!hashRouter){
+              init(draggableControls)
+            }else {
+              this.setPageSoul({pageSoul})
+            }
+
             saveSoul()
           })
         }
@@ -254,6 +262,8 @@
         dropPanelSoul.uid = generateUid()
         frame.children.push(deepCopy(dropPanelSoul))
         this.setOriginSoul(frame)
+
+        this.clear()
       })
     }
   }

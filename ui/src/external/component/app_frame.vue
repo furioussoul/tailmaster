@@ -122,7 +122,11 @@
     props: {
       fullPath: [String],
       totalMenu: [Array],
-      userInfo: [Object]
+      userInfo: [Object],
+      indexUrl:{
+        type:[String],
+        default:'/'
+      }
     },
     data() {
       return {
@@ -159,23 +163,20 @@
       path(n) {
         const self = this;
         this.$nextTick(function () {
-          try{
-            self.$refs.bread.updateChildren();
-          }catch (ex){
+            try{
+              self.$refs.bread.updateChildren();
+            }catch (ex){
 
-          }
+            }
         });
       }
     },
     methods: {
       home(){
-        if(getConfig('type') === 'assemble'){
-          // router of the frame inside assemble factory
-          this.$router.push('/esview/assemble/assemble_page?pageId=%2Findex')
-        }else {
-          // router of client app
-          this.$router.push('/index')
-        }
+          if(getConfig('type') === 'assemble'){
+              return
+          }
+          this.$router.push(this.indexUrl)
       },
       toggleMenu() {
         this.show = !this.show;
