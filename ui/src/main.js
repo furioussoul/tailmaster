@@ -17,7 +17,7 @@ import './style/index.less'
 import esview from './external' //test
 
 esview.addConfig('router', router)
-esview.addConfig('type', 'assemble')
+// esview.addConfig('type', 'assemble')
 
 Vue.dev = true
 
@@ -49,8 +49,8 @@ const app = new Vue({
         return h(Login)
       case 'test':
         return h(esview.render({
-          appName: 'app1',
-          pageName: '1',
+          appName: 'MyApp',
+          pageName: 'Page1',
           token: ''
         }))
     }

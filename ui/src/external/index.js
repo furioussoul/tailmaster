@@ -23,16 +23,23 @@ Vue.component('WrapUpload', WrapUpload);
 Vue.component('WrapModal', WrapModal);
 Vue.component('WrapSelect', WrapSelect);
 
-function getPageList({appName,pageName,token},fn) {
-  this.http.post('page/pageList',{
+const emptyDirective = {
+  bind (el, binding, vnode) {
+    el.oncontextmenu = function (e) {
+    }
+  }
+}
+
+function getPageList({appName, pageName, token}, fn) {
+  this.http.post('page/pageList', {
     appName,
-    name:pageName,
+    name: pageName,
     token
   }).then(res => {
     if (res.data.code === 10000) {
       this.controls = res.data.data
-      if(fn){
-        fn.call(this,res.data.data)
+      if (fn) {
+        fn.call(this, res.data.data)
       }
     } else {
       this.$Message.error('query failed')
@@ -41,25 +48,30 @@ function getPageList({appName,pageName,token},fn) {
 }
 
 // 在这查 appSoul,放到store
-function render({appName,pageName}, token) {
-  getPageList.call(Vue,{
+function render({appName, pageName}, token) {
+  getPageList.call(Vue, {
     appName,
     pageName,
     token
-  },data=>{
+  }, data => {
     let pageSoul = parse(data[0].pageSoul)
     let soulType = pageSoul.soulType
     for (let key in pageSoul) {
-      if(key !=='maxUid' && key !=='soulType'){
-        if(!soulType || soulType==='multiple'){
+      if (key !== 'maxUid' && key !== 'soulType') {
+        if (!soulType || soulType === 'multiple') {
           addRenderFn(pageSoul[key])
-        }else {
+        } else {
           addRenderFn(pageSoul)
         }
       }
     }
     store.commit('soulModule/setPageSoul', pageSoul)
     store.commit('soulModule/setSoul', pageSoul['/index'])
+
+    if(!getConfig('type')){
+      Vue.directive('droppable',emptyDirective)
+      Vue.directive('editable',emptyDirective)
+    }
   })
   return renderVue
 }
