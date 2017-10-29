@@ -15,6 +15,7 @@ function resetModel(pageSoul) {
 }
 
 function reset(soul) {
+  if(!soul) return
   soul.initScript=false
   if (soul.model && !soul.model.save) {
     soul.model.value = ''

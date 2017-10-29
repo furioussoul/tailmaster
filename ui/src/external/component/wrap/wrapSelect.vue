@@ -1,22 +1,43 @@
 <template>
-  <Select @on-change="change" v-model="model">
+  <Select
+    :disabled="disabled"
+    :filterable="filterable"
+    :clearable="clearable"
+    @on-change="change"
+    @on-query-change="onQueryChange"
+    v-model="model">
     <Option v-for="item in items" :value="item.value" :key="item.value">{{ item.label }}</Option>
   </Select>
 </template>
 <script>
   export default{
     name: 'WrapSelect',
-    props:{
-      items:[Array]
+    props: {
+      items: [Array],
+      disabled:{
+        type:Boolean,
+        default:false
+      },
+      filterable:{
+        type:Boolean,
+        default:true
+      },
+      clearable:{
+        type:Boolean,
+        default:true
+      }
     },
-    methods:{
+    methods: {
       change(n){
         this.$emit('on-change', n);
+      },
+      onQueryChange(n){
+        this.$emit('on-query-change', n);
       }
     },
     data(){
       return {
-          model:''
+        model: ''
       }
     }
   }

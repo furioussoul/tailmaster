@@ -16,6 +16,9 @@
     getTableControlList,
     getRichControl
   } from '../../../resource'
+  import{
+     makeControl
+  }from'../../../helper/code_helper'
 
   export default{
     data(){
@@ -36,6 +39,13 @@
     },
     methods: {
       saveCode(code){
+
+        try{
+          makeControl(code)
+        }catch(ex) {
+          return void this.$Message.error('code error')
+        }
+
         this.opModel.code = code
         if (this.opModel.id) {
           updateControl.call(this,()=>{

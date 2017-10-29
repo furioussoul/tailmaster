@@ -38,7 +38,6 @@ export default {
       let copy = deepCopy(pageSoul)
       //vue bug
       delete state.pageSoul
-      delete state.pageSoul
       state.soul = copy['index']
       state.pageSoul = copy
     },
