@@ -1,33 +1,40 @@
 <template>
-  <Card style="width:350px" class="loginPanel">
-    <p slot="title">esview</p>
-    <Form ref="auth" :model="userInfo" :label-width="80">
-      <FormItem label="username">
-        <Input v-model="userInfo.userName"></Input>
-      </FormItem>
-      <FormItem label="password">
-        <Input v-model="userInfo.password"></Input>
-      </FormItem>
-      <div v-if="isRegister">
-        <FormItem label="confirm password">
-          <Input v-model="userInfo.passwordConfirm"></Input>
+  <div class="login-background">
+    <img class="login-background" src="../../../static/img/login.jpg">
+    <Card class="loginPanel">
+      <p slot="title">esview</p>
+      <Form ref="auth" :model="userInfo" :label-width="80">
+        <FormItem label="username">
+          <Input v-model="userInfo.userName"></Input>
         </FormItem>
-        <FormItem label="profession">
-          <Input v-model="userInfo.profession"></Input>
+        <FormItem label="password">
+          <Input type="password" v-model="userInfo.password"></Input>
         </FormItem>
-        <FormItem>
-          <a @click="toggle">go login?</a>
-          <Button type="primary" @click="register">register</Button>
-        </FormItem>
-      </div>
-      <div v-else>
-        <FormItem>
-          <a @click="toggle">go register?</a>
-          <Button type="primary" @click="login">login</Button>
-        </FormItem>
-      </div>
-    </Form>
-  </Card>
+        <div v-if="isRegister">
+          <FormItem label="confirm password">
+            <Input type="password" v-model="userInfo.passwordConfirm"></Input>
+          </FormItem>
+          <FormItem label="profession">
+            <Input v-model="userInfo.profession"></Input>
+          </FormItem>
+          <FormItem>
+            <Button class="authButton" type="primary" @click="register">register</Button>
+          </FormItem>
+          <FormItem>
+            <a @click="toggle">go login?</a>
+          </FormItem>
+        </div>
+        <div v-else>
+          <FormItem>
+            <Button class="authButton" type="primary" @click="login">login</Button>
+          </FormItem>
+          <FormItem>
+            <a @click="toggle">go register?</a>
+          </FormItem>
+        </div>
+      </Form>
+    </Card>
+  </div>
 </template>
 <script>
   import {
@@ -63,7 +70,18 @@
 </script>
 <style scoped>
   .loginPanel {
-    margin: 0 auto;
-    margin-top: 200px;
+    width: 350px;
+    position: fixed;
+    right: 50px;
+    top: 20%;
+  }
+
+  .login-background{
+    width: 100%;
+    height: 100%;
+  }
+
+  .authButton{
+    width: 100%;
   }
 </style>

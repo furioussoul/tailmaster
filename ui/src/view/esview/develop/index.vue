@@ -157,7 +157,8 @@
       }
     },
     computed: {
-      ...mapGetters('dragModule', ['controlClazzes','me'])
+      ...mapGetters('dragModule', ['controlClazzes']),
+      ...mapGetters('userModule', ['me'])
     },
     methods: {
       reset(name){

@@ -17,8 +17,5 @@ export default {
     }
   },
   actions: {
-    getControlClazzes({commit}){
-      commit('getControlClazzes')
-    }
   }
 }

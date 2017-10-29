@@ -74,8 +74,6 @@ export default {
       Vue.http.post('class/classList').then(res => {
         if (res.data.code === 10000) {
           state.controlClazzes = res.data.data
-        } else {
-          console.error('queried failed')
         }
       })
     }

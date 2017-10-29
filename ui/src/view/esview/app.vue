@@ -174,9 +174,13 @@ export default{
           }
         }
         this.$nextTick(function () {
-          this.$refs.firstMenu.updateActiveName();
-          this.$refs.secondMenu.updateActiveName();
-          this.$refs.secondMenu.updateOpened();
+          try{
+            this.$refs.firstMenu.updateActiveName();
+            this.$refs.secondMenu.updateActiveName();
+            this.$refs.secondMenu.updateOpened();
+          }catch (ex){
+
+          }
         }.bind(this));
       },
       logout() {
