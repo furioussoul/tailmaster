@@ -22,7 +22,7 @@ qq群号：660181363，有问题可以进群聊。
 Vue可视化：![QQ图片20171027113639.png](http://chuantu.biz/t6/115/1509167213x1926933951.gif)
 
 # 文档
-https://cnodejs.org/topic/59f406d1085668ad5e6984a7/edit
+https://cnodejs.org/topic/59f406d1085668ad5e6984a7  
 
 # 快速上手
 1） 在manager-site: http://47.94.2.0:9090, 创建一个单页面应用,
