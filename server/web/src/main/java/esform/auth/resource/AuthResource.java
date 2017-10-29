@@ -1,7 +1,6 @@
 package esform.auth.resource;
 
 import esform.auth.request.AuthRequest;
-import esform.auth.response.Menu;
 import esform.dao.UserDao;
 import esform.domain.User;
 import esform.response.Response;
@@ -74,6 +73,66 @@ public class AuthResource {
         cookie.setPath("/");
         response.addCookie(cookie);
         return Response.ok();
+    }
+
+    @GetMapping("menu")
+    @ResponseBody
+    public Response menu() {
+        String menuJson = " [\n" +
+                "          {\n" +
+                "            \"id\": 74784,\n" +
+                "            \"name\": \"app\",\n" +
+                "            \"title\": \"app\",\n" +
+                "            \"url\": \"/\",\n" +
+                "            \"orderNo\": 1,\n" +
+                "            \"mtype\": 0,\n" +
+                "            \"hasPermisson\": 1,\n" +
+                "            \"subMenuList\": [\n" +
+                "              {\n" +
+                "                    \"id\": 74796,\n" +
+                "                    \"name\": \"index\",\n" +
+                "                    \"title\": \"index\",\n" +
+                "                    \"url\": \"/index\",\n" +
+                "                    \"orderNo\": 1,\n" +
+                "                    \"mtype\": -1,\n" +
+                "                    \"hasPermisson\": 1,\n" +
+                "                    \"subMenuList\": null\n" +
+                "              },\n" +
+                "              {\n" +
+                "                \"id\": 74785,\n" +
+                "                \"name\": \"s\",\n" +
+                "                \"title\": \"测试\",\n" +
+                "                \"url\": \"/test\",\n" +
+                "                \"orderNo\": 1,\n" +
+                "                \"mtype\": 0,\n" +
+                "                \"hasPermisson\": 1,\n" +
+                "                \"subMenuList\": [\n" +
+                "                  {\n" +
+                "                    \"id\": 74796,\n" +
+                "                    \"name\": \"child1\",\n" +
+                "                    \"title\": \"chil1\",\n" +
+                "                    \"url\": \"/test/child1\",\n" +
+                "                    \"orderNo\": 1,\n" +
+                "                    \"mtype\": 1,\n" +
+                "                    \"hasPermisson\": 1,\n" +
+                "                    \"subMenuList\": null\n" +
+                "                  },\n" +
+                "                  {\n" +
+                "                    \"id\": 74797,\n" +
+                "                    \"name\": \"child2\",\n" +
+                "                    \"title\": \"child2\",\n" +
+                "                    \"url\": \"/test/child2\",\n" +
+                "                    \"orderNo\": 1,\n" +
+                "                    \"mtype\": 1,\n" +
+                "                    \"hasPermisson\": 1,\n" +
+                "                    \"subMenuList\": null\n" +
+                "                  }\n" +
+                "                ]\n" +
+                "              }\n" +
+                "            ]\n" +
+                "          }\n" +
+                "        ]";
+        return Response.ok(menuJson);
     }
 
     private void addAccessToken(HttpServletResponse response,User user){
