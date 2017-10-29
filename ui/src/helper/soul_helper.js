@@ -6,26 +6,6 @@ const resetUid =function (newuid) {
 }
 const currentUid = (() => uid)
 
-function resetModel(pageSoul) {
-  for (let key in pageSoul) {
-    if (key !== 'maxUid') {
-      reset(pageSoul[key])
-    }
-  }
-}
-
-function reset(soul) {
-  if(!soul) return
-  soul.initScript=false
-  if (soul.model && !soul.model.save) {
-    soul.model.value = ''
-  }
-
-  for (let i = 0; i < soul.children.length; i++) {
-    reset(soul.children[i])
-  }
-}
-
 function findSoul(cid, controls) {
   if(!controls){
     controls = store.getters['dragModule/draggableControls']
@@ -60,6 +40,5 @@ export {
   findNode,
   resetUid,
   currentUid,
-  findSoul,
-  resetModel
+  findSoul
 }

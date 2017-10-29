@@ -5,8 +5,7 @@ import {
   isNumber
 } from '../util/assist'
 import {
-  currentUid,
-  resetModel
+  currentUid
 } from '../helper/soul_helper'
 
 function addApp() {
@@ -84,7 +83,6 @@ function getRichApp(id, fn) {
 function addPage() {
   let pageSoul = store.getters['dragModule/pageSoul']
 
-  resetModel(pageSoul)
   pageSoul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(pageSoul)
   this.opModel.appId = this.appId
@@ -108,7 +106,6 @@ function delPage(id) {
 
 function updatePage() {
   let pageSoul = store.getters['dragModule/pageSoul']
-  resetModel(pageSoul)
   pageSoul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(pageSoul)
   this.$http.post('page/update', this.opModel).then(res => {
