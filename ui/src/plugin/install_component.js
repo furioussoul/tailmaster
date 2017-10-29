@@ -1,5 +1,4 @@
 import {
-  AppFrame,
   Control,
   ModelEditor,
   WrapCard,
@@ -8,7 +7,6 @@ import {
 } from '../component'
 
 const soul = {
-  AppFrame,
   Control,
   ModelEditor,
   WrapCard,

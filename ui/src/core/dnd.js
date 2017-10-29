@@ -98,13 +98,11 @@ function interceptDrop(saveInfo) {
 
   }else if(saveInfo.drag.type === 'WrapCard'){
     let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
-    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
-    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
-    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
-
-  }else if(saveInfo.drag.type === 'WrapModal'){
-    let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
-    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
+    for(let i = 0;i<3;i++){
+      let copy = deepCopy(dropPanelSoul)
+      copy.uid = generateUid()
+      saveInfo.drag.children.push(copy)
+    }
   }
 }
 

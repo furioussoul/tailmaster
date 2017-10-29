@@ -1,5 +1,4 @@
-import appFrame from './app_frame.vue'
-import render from './render'
+import Render from './render'
 import {
   WrapCard,
   WrapUpload,
@@ -8,8 +7,7 @@ import {
 } from './wrap'
 
 export {
-  appFrame,
-  render,
+  Render,
   WrapCard,
   WrapUpload,
   WrapModal,

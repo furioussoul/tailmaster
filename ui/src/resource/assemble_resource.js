@@ -6,7 +6,7 @@ import {
 } from '../util/assist'
 import {
   currentUid,
-  resetModel
+  refreshInitScript
 } from '../helper/soul_helper'
 
 function addApp() {
@@ -82,11 +82,8 @@ function getRichApp(id, fn) {
 }
 
 function addPage() {
-  let pageSoul = store.getters['dragModule/pageSoul']
-
-  resetModel(pageSoul)
-  pageSoul.maxUid = currentUid()
-  this.opModel.pageSoul = stringify(pageSoul)
+  let soul = store.getters['dragModule/soul']
+  this.opModel.pageSoul = stringify(soul)
   this.opModel.appId = this.appId
   this.$http.post('page/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
@@ -107,10 +104,10 @@ function delPage(id) {
 }
 
 function updatePage() {
-  let pageSoul = store.getters['dragModule/pageSoul']
-  resetModel(pageSoul)
-  pageSoul.maxUid = currentUid()
-  this.opModel.pageSoul = stringify(pageSoul)
+  let soul = store.getters['dragModule/soul']
+  refreshInitScript(soul)
+  soul.maxUid = currentUid()
+  this.opModel.pageSoul = stringify(soul)
   this.$http.post('page/update', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.$Message.success('saved')

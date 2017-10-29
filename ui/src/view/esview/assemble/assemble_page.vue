@@ -129,19 +129,16 @@
     },
     computed: {
       ...mapGetters('userModule', ['controlClazzes']),
-      ...mapGetters('dragModule', ['soul', 'editSoul', 'editLayer', 'rightClickMenu',  'draggableControls'])
+      ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu',  'draggableControls'])
     },
     methods: {
-      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setPageSoul', 'setOriginSoul','clearPageSoul']),
-      ...mapMutations('userModule', ['changePage']),
+      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls',]),
       deleteControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
         let pSoul = findNode(this.editControlSoul.pid);
         if(pSoul){
           let index = pSoul.children.indexOf(this.editControlSoul);
           pSoul.children.splice(index,1)
-        }else {
-          store.commit('dragModule/clearPageSoul')
         }
         this.clear()
         saveSoul()
@@ -196,6 +193,7 @@
       resetSnapShot()
       this.appId = localStorage.getItem('appId')
       this.pageSoulId = localStorage.getItem('pageSoulId')
+      this.clear()
 
       getControlList.call(this, (data) => {
 
@@ -230,33 +228,17 @@
           saveSoul()
 
         } else {
-
           //when update page
-
           getRichPage.call(this, this.pageSoulId, (data) => {
             this.opModel = data
-            let pageSoul = data.pageSoul
-            pageSoul = parse(pageSoul)//deserialize functions from json
-            resetUid(pageSoul['maxUid'])
-            for (let key in pageSoul) {
-              if (key !== 'maxUid') {
-                addRenderFn(pageSoul[key])
-              }
-            }
-
-            this.setPageSoul({pageSoul})
-
+            let soul = parse(data.pageSoul)
+            addRenderFn(soul)
+            resetUid(soul.maxUid)
             saveSoul()
+            this.setSoul(soul)
           })
         }
-        let frame = findSoul(105, this.draggableControls)
-        frame.uid = generateUid()
-        let dropPanelSoul = findSoul(100, this.draggableControls)
-        dropPanelSoul.uid = generateUid()
-        frame.children.push(deepCopy(dropPanelSoul))
-        this.setOriginSoul(frame)
 
-        this.clear()
       })
     }
   }

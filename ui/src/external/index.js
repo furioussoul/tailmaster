@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import {
-  appFrame,
   WrapCard,
   WrapUpload,
   WrapModal,
@@ -17,7 +16,6 @@ import store from './store'
 import renderVue from './component/render.vue'
 import {addRenderFn} from '../helper/code_helper'
 
-Vue.component('AppFrame', appFrame);
 Vue.component('WrapCard', WrapCard);
 Vue.component('WrapUpload', WrapUpload);
 Vue.component('WrapModal', WrapModal);
@@ -54,19 +52,9 @@ function render({appName, pageName}, token) {
     pageName,
     token
   }, data => {
-    let pageSoul = parse(data[0].pageSoul)
-    let soulType = pageSoul.soulType
-    for (let key in pageSoul) {
-      if (key && key !== 'maxUid' && key !== 'soulType') {
-        if (!soulType || soulType === 'multiple') {
-          addRenderFn(pageSoul[key])
-        } else {
-          addRenderFn(pageSoul)
-        }
-      }
-    }
-    store.commit('soulModule/setPageSoul', pageSoul)
-    store.commit('soulModule/setSoul', pageSoul['index'])
+    let soul = parse(data[0].pageSoul)
+    addRenderFn(soul)
+    store.commit('soulModule/setSoul', soul)
 
     if(!getConfig('type')){
       Vue.directive('droppable',emptyDirective)
