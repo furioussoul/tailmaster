@@ -57,7 +57,7 @@ function render({appName, pageName}, token) {
     let pageSoul = parse(data[0].pageSoul)
     let soulType = pageSoul.soulType
     for (let key in pageSoul) {
-      if (key !== 'maxUid' && key !== 'soulType') {
+      if (key && key !== 'maxUid' && key !== 'soulType') {
         if (!soulType || soulType === 'multiple') {
           addRenderFn(pageSoul[key])
         } else {
