@@ -55,6 +55,10 @@
           </h1>
         </div>
         <div class="layout-header-right" v-cloak>
+          <Button @click="goGithub" size="small">
+            <Icon type="social-github"></Icon>
+            github
+          </Button>
           <Poptip style="height: 50px;" trigger="hover" title="user" content="" placement="bottom-end"
                   v-if="userInfo">
             <div class="ivu-menu-item">
@@ -84,7 +88,6 @@
         <!--路由视图 start-->
         <router-view></router-view>
         <!--路由视图 end-->
-
 
       </div>
 
@@ -141,6 +144,9 @@ export default{
     },
     methods: {
       ...mapActions('dragModule', ['getControlClazzes']),
+      goGithub(){
+        location.href='https://github.com/furioussoul/soul-esview'
+      },
       home(){
         this.$router.push('/')
       },
