@@ -1,5 +1,4 @@
-import {generateUid, findSoul} from '../helper/soul_helper'
-import {deepCopy, getQueryParam,isPlain} from '../util/assist'
+import Vue from 'vue'
 
 export default {
   namespaced: true,
@@ -8,14 +7,16 @@ export default {
     dragElement: null,//current dragging element
     draggableControls: null,//draggableControls are the draggable items on the left side of dropPanel
     editLayer: {},//the cover appears when hover the dropped element
-    rightClickMenu: {}//right click menu when right click the dropped element
+    rightClickMenu: {},//right click menu when right click the dropped element
+    controlClazzes: []//left side controls in assemble factory
   },
   getters: {
     soul: ({soul}) => soul,
     dragElement: ({dragElement}) => dragElement,
     draggableControls: ({draggableControls}) => draggableControls,
     editLayer: ({editLayer}) => editLayer,
-    rightClickMenu: ({rightClickMenu}) => rightClickMenu
+    rightClickMenu: ({rightClickMenu}) => rightClickMenu,
+    controlClazzes: ({controlClazzes}) => controlClazzes
   },
   mutations: {
     setSoul: (state, soul) => {
@@ -68,5 +69,15 @@ export default {
       }
     }
   },
-  actions: {}
+  actions: {
+    getControlClazzes({state}){
+      Vue.http.post('class/classList').then(res => {
+        if (res.data.code === 10000) {
+          state.controlClazzes = res.data.data
+        } else {
+          console.error('queried failed')
+        }
+      })
+    }
+  }
 }

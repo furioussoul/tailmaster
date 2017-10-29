@@ -95,11 +95,11 @@
   </div>
 </template>
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {mapGetters, mapMutations,mapActions} from 'vuex'
   import store from '../../../store'
-  import {findSoul, findNode, resetUid,generateUid} from '../../../helper/soul_helper'
+  import {findSoul, findNode, resetUid, generateUid} from '../../../helper/soul_helper'
   import {makeControl, addRenderFn} from '../../../helper/code_helper'
-  import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../helper/user_operation'
+  import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../core/assemble'
   import {copyProperties, stringify, parse, deepCopy}from '../../../util/assist'
   import {getControlList} from  '../../../resource/develop_resource'
   import {
@@ -123,22 +123,23 @@
         showEditScriptModal: false,
         opModel: {},
         editControlSoul: {scriptString: ''},
-        pageSoulId:'',
-        appId:''
+        pageSoulId: '',
+        appId: ''
       }
     },
     computed: {
-      ...mapGetters('userModule', ['controlClazzes']),
-      ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu',  'draggableControls'])
+      ...mapGetters('dragModule', ['controlClazzes']),
+      ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu', 'draggableControls'])
     },
     methods: {
       ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls',]),
+      ...mapActions('dragModule', ['getControlClazzes']),
       deleteControl(){
         this.editControlSoul = findNode(this.rightClickMenu.uid)
         let pSoul = findNode(this.editControlSoul.pid);
-        if(pSoul){
+        if (pSoul) {
           let index = pSoul.children.indexOf(this.editControlSoul);
-          pSoul.children.splice(index,1)
+          pSoul.children.splice(index, 1)
         }
         this.clear()
         saveSoul()
@@ -154,14 +155,14 @@
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal = false
         let pSoul = findNode(this.editControlSoul.pid);
-        if(pSoul){
+        if (pSoul) {
           let editSoulCopy = deepCopy(this.editControlSoul)
           let index = pSoul.children.indexOf(this.editControlSoul);
-          pSoul.children.splice(index,1)
-          setTimeout(()=>{
+          pSoul.children.splice(index, 1)
+          setTimeout(() => {
             editSoulCopy.initScript = false
-            pSoul.children.splice(index,0,editSoulCopy)
-          },1)
+            pSoul.children.splice(index, 0, editSoulCopy)
+          }, 1)
         }
       },
 
@@ -190,6 +191,7 @@
       }
     },
     mounted(){
+      this.getControlClazzes()
       resetSnapShot()
       this.appId = localStorage.getItem('appId')
       this.pageSoulId = localStorage.getItem('pageSoulId')
@@ -246,7 +248,7 @@
 
 <style scoped>
 
-  .controls-container{
+  .controls-container {
     position: fixed;
     top: 100px;
     left: 200px;

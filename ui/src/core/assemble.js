@@ -6,7 +6,7 @@ import {
   generateUid,
   resetUid,
   findSoul
-} from './soul_helper'
+} from '../helper/soul_helper'
 import {
   stringify,
   parse

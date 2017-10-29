@@ -140,7 +140,7 @@ export default{
       }
     },
     methods: {
-      ...mapActions('userModule', ['getControlClazzes']),
+      ...mapActions('dragModule', ['getControlClazzes']),
       home(){
         this.$router.push('/')
       },

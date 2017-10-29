@@ -14,7 +14,7 @@ import {
 } from '../helper/soul_helper'
 import {
   drop
-} from '../helper/user_operation'
+} from './assemble'
 
 function onDragStart(e) {
   store.commit('dragModule/setDragElement', e.target)
