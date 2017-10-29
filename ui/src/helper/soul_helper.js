@@ -21,9 +21,9 @@ function reset(soul) {
   //   soul.model.value = ''
   // }
   //
-  // for (let i = 0; i < soul.children.length; i++) {
-  //   reset(soul.children[i])
-  // }
+  for (let i = 0; i < soul.children.length; i++) {
+    reset(soul.children[i])
+  }
 }
 
 function findSoul(cid, controls) {
