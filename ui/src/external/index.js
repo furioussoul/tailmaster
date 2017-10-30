@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {fire} from '../core/lifecycle'
 import {
   WrapCard,
   WrapUpload,
@@ -54,8 +55,8 @@ function render({appName, pageName}, token) {
   }, data => {
     let soul = parse(data[0].pageSoul)
     addRenderFn(soul)
+    fire('_beforeCreate',soul)
     store.commit('soulModule/setSoul', soul)
-
     if(!getConfig('type')){
       Vue.directive('droppable',emptyDirective)
       Vue.directive('editable',emptyDirective)

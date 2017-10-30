@@ -7,6 +7,9 @@ export default {
   },
   mutations: {
     clear(){
+    },
+    showEditorPanel(){
+
     }
   },
   actions: {}

@@ -49,10 +49,14 @@
           </transition>
         </i-col>
 
-        <i-col style="margin-left: 200px" span="21" :class="{'is-preview':isPreview}">
-          <RenderDev :soul="soul"></RenderDev>
-        </i-col>
-
+        <Row style="margin-left: 200px" >
+          <i-col span="20" :class="{'is-preview':isPreview}">
+            <RenderDev :soul="soul"></RenderDev>
+          </i-col>
+          <i-col span="4">
+            <ModelEditor :editSoul="editSoul"></ModelEditor>
+          </i-col>
+        </Row>
       </Row>
     </div>
 
@@ -97,7 +101,7 @@
 <script>
   import {mapGetters, mapMutations,mapActions} from 'vuex'
   import store from '../../../store'
-  import {findSoul, findNode, resetUid, generateUid} from '../../../helper/soul_helper'
+  import {findSoulByCid, findSoulByUidDown, resetUid, generateUid,findSoulByCTypeUp} from '../../../helper/soul_helper'
   import {makeControl, addRenderFn} from '../../../helper/code_helper'
   import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../core/assemble'
   import {copyProperties, stringify, parse, deepCopy}from '../../../util/assist'
@@ -111,6 +115,9 @@
     getRichPage,
     getAppList
   } from '../../../resource/assemble_resource'
+  import {
+      isFormItem
+  } from '../../../core/dnd'
   import{
     interceptDrop
   }from '../../../core/dnd'
@@ -128,24 +135,27 @@
       }
     },
     computed: {
-      ...mapGetters('dragModule', ['controlClazzes']),
-      ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu', 'draggableControls'])
+      ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu', 'draggableControls','editSoul','controlClazzes'])
     },
     methods: {
       ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls',]),
       ...mapActions('dragModule', ['getControlClazzes']),
       deleteControl(){
-        this.editControlSoul = findNode(this.rightClickMenu.uid)
-        let pSoul = findNode(this.editControlSoul.pid);
+        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid)
+        let pSoul = findSoulByUidDown(this.editControlSoul.pid);
         if (pSoul) {
           let index = pSoul.children.indexOf(this.editControlSoul);
           pSoul.children.splice(index, 1)
         }
         this.clear()
         saveSoul()
+        if(isFormItem(this.editControlSoul)){
+          let form = findSoulByCTypeUp('Form',this.editControlSoul);
+          delete form.model.model.value[this.editControlSoul.model.formKey.value]
+        }
       },
       editControl(){
-        this.editControlSoul = findNode(this.rightClickMenu.uid)
+        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid)
         this.editControlSoul.scriptString = this.editControlSoul.script.toString()
         this.clear()
         this.showEditScriptModal = true
@@ -154,7 +164,7 @@
         this.editControlSoul.scriptString = code
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal = false
-        let pSoul = findNode(this.editControlSoul.pid);
+        let pSoul = findSoulByUidDown(this.editControlSoul.pid);
         if (pSoul) {
           let editSoulCopy = deepCopy(this.editControlSoul)
           let index = pSoul.children.indexOf(this.editControlSoul);
@@ -228,7 +238,6 @@
           //when add new page
           init(draggableControls)
           saveSoul()
-
         } else {
           //when update page
           getRichPage.call(this, this.pageSoulId, (data) => {
@@ -249,9 +258,6 @@
 <style scoped>
 
   .controls-container {
-    position: fixed;
-    top: 100px;
-    left: 200px;
     width: 200px
   }
 

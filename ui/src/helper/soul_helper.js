@@ -1,4 +1,5 @@
 import store from '../store/index'
+import {deepCopy} from '../util/assist'
 let uid = 1
 const generateUid = (() => uid++)
 const resetUid =function (newuid) {
@@ -14,7 +15,13 @@ function refreshInitScript(soul) {
   }
 }
 
-function findSoul(cid, controls) {
+function findSoulByCTypeUp(type, drag, soul) {
+  if (drag.type === type)return drag
+  let dragParent = findSoulByUidDown(drag.pid,soul)
+  return findSoulByCTypeUp(type,dragParent)
+}
+
+function findSoulByCid(cid, controls) {
   if(!controls){
     controls = store.getters['dragModule/draggableControls']
   }
@@ -25,7 +32,7 @@ function findSoul(cid, controls) {
   }
 }
 
-function findNode(uid, soul) {
+function findSoulByUidDown(uid, soul) {
   if (!soul) {
     soul = store.getters['dragModule/soul']
   }
@@ -36,7 +43,7 @@ function findNode(uid, soul) {
 
   let node;
   for (let i = 0; i < soul.children.length; i++) {
-    node = findNode(uid, soul.children[i])
+    node = findSoulByUidDown(uid, soul.children[i])
     if (node) {
       return node;
     }
@@ -45,9 +52,10 @@ function findNode(uid, soul) {
 
 export {
   generateUid,
-  findNode,
+  findSoulByUidDown,
   resetUid,
   currentUid,
-  findSoul,
-  refreshInitScript
+  findSoulByCid,
+  refreshInitScript,
+  findSoulByCTypeUp
 }

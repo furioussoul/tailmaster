@@ -1,5 +1,5 @@
 <template>
-  <Row>
+  <Row class="model-config">
     <i-col span="24">
       <Card>
         <p slot="title">
@@ -94,3 +94,7 @@
     }
   }
 </script>
+<style lang="less" scoped>
+  .model-config{
+  }
+</style>

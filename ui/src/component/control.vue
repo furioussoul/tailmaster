@@ -7,9 +7,6 @@
 </template>
 <script>
   import {
-    makeIdentify
-  } from '../helper/dom_helper'
-  import {
     onDragStart,
     onDrag,
     onDragEnd

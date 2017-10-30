@@ -10,7 +10,8 @@ import {
 } from '../util/assist'
 import {
   generateUid,
-  findSoul
+  findSoulByCid,
+  findSoulByCTypeUp
 } from '../helper/soul_helper'
 import {
   drop
@@ -62,18 +63,18 @@ function validateDrop(drag, drop) {
     return false
   }
 
-  if(drag.controlConfig.allowPlace){
+  if (drag.controlConfig.allowPlace) {
     //优先处理allow_place: FormItem只能放在Form里面
     return drag.controlConfig.allowPlace.indexOf(drop.controlConfig.cid) > -1;
 
-  }else {
+  } else {
     if (!drop || !drop.controlConfig.allow) {
       return false
 
-    } else if(drop.controlConfig.allow && drop.controlConfig.allow.length === 0){
+    } else if (drop.controlConfig.allow && drop.controlConfig.allow.length === 0) {
       return true
 
-    }else if (drop.controlConfig.allow.indexOf(drag.controlConfig.cid) > -1) {
+    } else if (drop.controlConfig.allow.indexOf(drag.controlConfig.cid) > -1) {
       return true
     }
   }
@@ -89,20 +90,63 @@ function markDrop(drop, mark) {
   }
 }
 
+function isFormItem(drag) {
+  switch (drag.type) {
+    case 'Input':
+    case 'CheckboxGroup':
+    case 'RadioGroup':
+    case 'Select':
+      return true;
+    default:
+      return false;
+  }
+}
+
 function interceptDrop(saveInfo) {
-  if(saveInfo.drag.type === 'AppFrame'){
-    let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
+  if (saveInfo.drag.type === 'AppFrame') {
+    let dropPanelSoul = findSoulByCid(100, store.getters['dragModule/draggableControls'])
     dropPanelSoul.uid = generateUid()
     saveInfo.drag.children.push(deepCopy(dropPanelSoul))
-    store.commit('dragModule/setSoul',saveInfo.drag)
+    store.commit('dragModule/setSoul', saveInfo.drag)
 
-  }else if(saveInfo.drag.type === 'WrapCard'){
-    let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
-    for(let i = 0;i<3;i++){
+  } else if (saveInfo.drag.type === 'WrapCard') {
+    let dropPanelSoul = findSoulByCid(100, store.getters['dragModule/draggableControls'])
+    for (let i = 0; i < 3; i++) {
       let copy = deepCopy(dropPanelSoul)
       copy.uid = generateUid()
       saveInfo.drag.children.push(copy)
     }
+  } else if (isFormItem(saveInfo.drag)) {
+    saveInfo.drag._beforeCreate = () => {
+      let form = findSoulByCTypeUp('Form', saveInfo.drag);
+      form.model.model.value[saveInfo.drag.model.formKey.value] = saveInfo.drag.model.value.value
+      let copy = saveInfo.drag.model.formKey.value
+      Object.defineProperty(saveInfo.drag.model.formKey, 'value', {
+        set: (n) => {
+          console.log(form.model.model.value)
+          delete form.model.model.value[saveInfo.drag.model.formKey.value]
+          form.model.model.value[n] = saveInfo.drag.model.value.value
+          copy = n
+        },
+        get: () => {
+          return copy
+        }
+      })
+
+      let copyValue = saveInfo.drag.model.value.value
+      Object.defineProperty(saveInfo.drag.model.value, 'value', {
+        set: (n) => {
+          console.log(n)
+          form.model.model.value[saveInfo.drag.model.formKey.value] = n
+          copyValue = n
+        },
+        get: () => {
+          return copyValue
+        }
+      })
+    }
+
+    saveInfo.drag._beforeCreate()
   }
 }
 
@@ -112,7 +156,7 @@ function onDrop(e) {
 
   const drag = store.getters['dragModule/dragElement'];
 
-  if (!validateDrop(drag,this)) {
+  if (!validateDrop(drag, this)) {
     return false;
   }
 
@@ -121,8 +165,8 @@ function onDrop(e) {
   copy.uid = uid
 
   const saveInfo = {
-    drag:copy,
-    drop:this.controlConfig
+    drag: copy,
+    drop: this.controlConfig
   }
   saveInfo.drag.pid = saveInfo.drop.uid
 
@@ -130,7 +174,7 @@ function onDrop(e) {
 
   drop(saveInfo)
 
-  markDrop(this,false)
+  markDrop(this, false)
   return true;
 }
 
@@ -150,5 +194,6 @@ export {
   onDrop,
   onDragLeave,
   initDropEvents,
-  interceptDrop
+  interceptDrop,
+  isFormItem
 }
