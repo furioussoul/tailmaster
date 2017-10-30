@@ -141,8 +141,8 @@
       ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls',]),
       ...mapActions('dragModule', ['getControlClazzes']),
       deleteControl(){
-        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid)
-        let pSoul = findSoulByUidDown(this.editControlSoul.pid);
+        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid,this.soul)
+        let pSoul = findSoulByUidDown(this.editControlSoul.pid,this.soul);
         if (pSoul) {
           let index = pSoul.children.indexOf(this.editControlSoul);
           pSoul.children.splice(index, 1)
@@ -155,7 +155,7 @@
         }
       },
       editControl(){
-        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid)
+        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid,this.soul)
         this.editControlSoul.scriptString = this.editControlSoul.script.toString()
         this.clear()
         this.showEditScriptModal = true

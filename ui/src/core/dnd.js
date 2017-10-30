@@ -117,8 +117,8 @@ function interceptDrop(saveInfo) {
       saveInfo.drag.children.push(copy)
     }
   } else if (isFormItem(saveInfo.drag)) {
-    saveInfo.drag._beforeCreate = () => {
-      let form = findSoulByCTypeUp('Form', saveInfo.drag);
+    saveInfo.drag._beforeCreate = (soul) => {
+      let form = findSoulByCTypeUp('Form', saveInfo.drag,soul);
       form.model.model.value[saveInfo.drag.model.formKey.value] = saveInfo.drag.model.value.value
       let copy = saveInfo.drag.model.formKey.value
       Object.defineProperty(saveInfo.drag.model.formKey, 'value', {
