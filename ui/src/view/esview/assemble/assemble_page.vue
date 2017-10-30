@@ -115,9 +115,8 @@
     getRichPage,
     getAppList
   } from '../../../resource/assemble_resource'
-  import {
-      isFormItem
-  } from '../../../core/dnd'
+  import {registerFormItem} from '../../../core/lifecycle'
+  import {walkSoul} from '../../../helper/soul_helper'
   import{
     interceptDrop
   }from '../../../core/dnd'
@@ -242,11 +241,14 @@
           //when update page
           getRichPage.call(this, this.pageSoulId, (data) => {
             this.opModel = data
-            let soul = parse(data.pageSoul)
-            addRenderFn(soul)
-            resetUid(soul.maxUid)
+            let ancestorSoul = parse(data.pageSoul)
+            addRenderFn(ancestorSoul)
+            resetUid(ancestorSoul.maxUid)
             saveSoul()
-            this.setSoul(soul)
+            this.setSoul(ancestorSoul)
+            walkSoul(ancestorSoul,(soul)=>{
+              registerFormItem(soul,ancestorSoul)
+            })
           })
         }
 

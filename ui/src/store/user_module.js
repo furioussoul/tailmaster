@@ -2,7 +2,7 @@ export default {
   namespaced: true,
   state: {
     me: {},
-    page: "test" //test
+    page: "manage" //test
   },
   getters: {
     me: ({me}) => me,

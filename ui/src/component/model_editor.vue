@@ -5,9 +5,9 @@
         <p slot="title">
           Model Config
         </p>
-        <i-form  label-position="left"
-          :label-width="40"
-          :model="model">
+        <i-form label-position="left"
+                :label-width="40"
+                :model="model">
 
           <div v-for="(config,index) in configs"
                :key="index">
@@ -19,16 +19,24 @@
               </i-input>
             </Form-item>
 
-            <Form-item v-if="config.type === 'select'"
+            <Form-item v-if="config.type === 'boolean'"
                        :label="config.name">
-              <Select
-                v-model="config.value">
-                <Option v-for="option in config.options"
-                        :value="option"
-                        :key="option">{{ option }}
-                </Option>
-              </Select>
+              <i-switch size="large" style="margin-left:20px" v-model="config.value">
+                <span slot="open">true</span>
+                <span slot="close">false</span>
+              </i-switch>
             </Form-item>
+
+            <!--<Form-item v-if="config.type === 'select'"-->
+            <!--:label="config.name">-->
+            <!--<i-Select-->
+            <!--v-model="config.value">-->
+            <!--<Option v-for="option in config.options"-->
+            <!--:value="option"-->
+            <!--:key="option">{{ option }}-->
+            <!--</Option>-->
+            <!--</i-Select>-->
+            <!--</Form-item>-->
 
           </div>
 
@@ -95,6 +103,6 @@
   }
 </script>
 <style lang="less" scoped>
-  .model-config{
+  .model-config {
   }
 </style>
