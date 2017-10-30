@@ -16,6 +16,9 @@ import {
 import {
   drop
 } from './assemble'
+import {
+  registerFormItem
+} from '../core/lifecycle'
 
 function onDragStart(e) {
   store.commit('dragModule/setDragElement', e.target)
@@ -90,18 +93,6 @@ function markDrop(drop, mark) {
   }
 }
 
-function isFormItem(drag) {
-  switch (drag.type) {
-    case 'Input':
-    case 'CheckboxGroup':
-    case 'RadioGroup':
-    case 'Select':
-      return true;
-    default:
-      return false;
-  }
-}
-
 function interceptDrop(saveInfo) {
   if (saveInfo.drag.type === 'AppFrame') {
     let dropPanelSoul = findSoulByCid(100, store.getters['dragModule/draggableControls'])
@@ -116,38 +107,9 @@ function interceptDrop(saveInfo) {
       copy.uid = generateUid()
       saveInfo.drag.children.push(copy)
     }
-  } else if (isFormItem(saveInfo.drag)) {
-    saveInfo.drag._beforeCreate = (soul) => {
-      let form = findSoulByCTypeUp('Form', saveInfo.drag,soul);
-      form.model.model.value[saveInfo.drag.model.formKey.value] = saveInfo.drag.model.value.value
-      let copy = saveInfo.drag.model.formKey.value
-      Object.defineProperty(saveInfo.drag.model.formKey, 'value', {
-        set: (n) => {
-          console.log(form.model.model.value)
-          delete form.model.model.value[saveInfo.drag.model.formKey.value]
-          form.model.model.value[n] = saveInfo.drag.model.value.value
-          copy = n
-        },
-        get: () => {
-          return copy
-        }
-      })
-
-      let copyValue = saveInfo.drag.model.value.value
-      Object.defineProperty(saveInfo.drag.model.value, 'value', {
-        set: (n) => {
-          console.log(n)
-          form.model.model.value[saveInfo.drag.model.formKey.value] = n
-          copyValue = n
-        },
-        get: () => {
-          return copyValue
-        }
-      })
-    }
-
-    saveInfo.drag._beforeCreate()
   }
+
+  registerFormItem(saveInfo.drag,store.getters['dragModule/soul'])
 }
 
 function onDrop(e) {
@@ -194,6 +156,5 @@ export {
   onDrop,
   onDragLeave,
   initDropEvents,
-  interceptDrop,
-  isFormItem
+  interceptDrop
 }
