@@ -152,12 +152,6 @@
     methods: {
       ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
       ...mapActions('dragModule', ['getControlClazzes']),
-      copyCode(){
-        let code = this.vueCode.replace(/\r/g,'\r\n')
-        code = this.vueCode.replace(/\n/g,'\r\n')
-        jsCopy('copy',code)
-        this.$Message.success('copied')
-      },
       deleteControl(){
         this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid, this.soul)
         let pSoul = findSoulByUidDown(this.editControlSoul.pid, this.soul);
@@ -189,7 +183,6 @@
           }, 1)
         }
       },
-
       okPageName(){
         addPage.call(this)
       },

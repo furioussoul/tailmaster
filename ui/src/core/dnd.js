@@ -91,19 +91,20 @@ function markDrop(drop, mark) {
 }
 
 function interceptDrop(saveInfo) {
-  if (saveInfo.drag.type === 'AppFrame') {
-    let dropPanelSoul = findSoulByCid(100, store.getters['dragModule/draggableControls'])
-    dropPanelSoul.uid = generateUid()
-    saveInfo.drag.children.push(deepCopy(dropPanelSoul))
-    store.commit('dragModule/setSoul', saveInfo.drag)
-
-  } else if (saveInfo.drag.type === 'WrapCard') {
-    let dropPanelSoul = findSoulByCid(100, store.getters['dragModule/draggableControls'])
-    for (let i = 0; i < 3; i++) {
+  if (saveInfo.drag.type === 'WrapCard') {
+    let dropPanelSoul = findSoulByCid(44, store.getters['dragModule/draggableControls'])
       let copy = deepCopy(dropPanelSoul)
+    copy.slotName='title'
       copy.uid = generateUid()
       saveInfo.drag.children.push(copy)
-    }
+    copy = deepCopy(dropPanelSoul)
+    copy.slotName='extra'
+    copy.uid = generateUid()
+    saveInfo.drag.children.push(copy)
+    copy = deepCopy(dropPanelSoul)
+    copy.slotName='default'
+    copy.uid = generateUid()
+    saveInfo.drag.children.push(copy)
   }
 }
 
