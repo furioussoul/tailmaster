@@ -6,7 +6,6 @@
 
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/esview"><img src="https://img.shields.io/npm/dm/esview.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/esview"><img src="https://img.shields.io/npm/v/esview.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/esview"><img src="https://img.shields.io/npm/l/esview.svg" alt="License"></a>
    <br>
@@ -14,10 +13,9 @@
   
   
 # Introduction
-Esview is a web frontend platform for building vue spa through html5 drag/drop api.  
+Esview is a vue codegen by html5 drag/drop.
 
-Recommand use webpack constructor spa to inject esview.
-![QQ图片20171027113639.png](http://chuantu.biz/t6/115/1509167213x1926933951.gif)
+![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509462104x3026947657.gif)
 
 # How to drag/drop?
 Esview use grid system,  
@@ -34,26 +32,10 @@ right click to edit script to use eventCenter to comminute between components,
 
 also you can use ajax in script in the same domain.  
 
-# Quick Start
 
-To build vue spa,you only need 3 steps, after then run script
+# Online Demo
 
-First step : download vue-spa demo(esview-demo) https://github.com/furioussoul/esview-demo   
-
-Second step : assemble pages online on manager-site(this is online demo : http://localhost:9090/#/esview/assemble/index)  
-
-Third step: esview-demo install esview npm package and npm run dev to deploy
-
-
-# Demo
-
-Assemble vue spa on manager-site,then you can see spa changed on client-site.
-
-manager-site: http://47.94.2.0:9090  
-
-client-site: http://47.94.2.0:9091
-
-usage: https://github.com/furioussoul/esview-demo
+http://47.94.2.0:9090  
 
 
 # License
