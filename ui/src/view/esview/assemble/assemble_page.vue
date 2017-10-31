@@ -66,6 +66,7 @@
     </div>
 
     <Modal
+      :mask-closable="false"
       v-model="showConfirmPageNameModal"
       title="confirmPageName"
       @on-ok="okPageName">
@@ -77,12 +78,14 @@
     </Modal>
 
     <Modal
+      style="width: 600px"
+      :mask-closable="false"
       v-model="showEditScriptModal"
       title="script">
       <div slot="footer">
       </div>
       <CodeEditor
-        style="height: 500px"
+        style="height: 600px"
         :code="editControlSoul.scriptString"
         @save="saveCode">
       </CodeEditor>
