@@ -1,3 +1,7 @@
+import {
+  typeOf
+}from'../util/assist'
+
 const REG_EX = new RegExp(/.([a-zA-Z]+)[\s]*=[\s]*([\s\S]*)(;*)/)
 
 export function getVueCode(soul) {
@@ -21,17 +25,30 @@ export function getVueCode(soul) {
     if(model[key].exclude){
       continue
     }
+    let propStr,
     prop = {}
-    prop[key] = model[key].value
-    let propStr = JSON.stringify(prop)
-    propStr = propStr.substring(1, propStr.length)
-    propStr = propStr.substring(0, propStr.length - 1)
-
-    //delete comma
-    let match = propStr.match(/("([\s\S]*?)":)/)
-    propStr = match[2]+'='+propStr.substring(match[1].length,propStr.length+1)
-
-    props += ' ' + propStr + ' '
+    if(typeOf(model[key].value) === 'object'){
+      prop[key] = model[key].value
+      propStr = prop[key] =JSON.stringify(prop)
+      propStr = propStr.substring(1, propStr.length)
+      propStr = propStr.substring(0, propStr.length - 1)
+      let match = propStr.match(/("([\s\S]*?)":)/)
+      propStr = match[2]+'='+propStr.substring(match[1].length,propStr.length+1)
+      propStr = propStr.trim()
+      props += ' ' + propStr + ' '
+    }else {
+      prop[key] = model[key].value + ''
+      propStr = JSON.stringify(prop)
+      propStr = propStr.trim()
+      //remove {}
+      propStr = propStr.substring(1, propStr.length)
+      propStr = propStr.substring(0, propStr.length - 1)
+      //delete comma
+      let match = propStr.match(/("([\s\S]*?)":)/)
+      propStr = ':' + match[2]+'='+propStr.substring(match[1].length,propStr.length+1)
+      propStr = propStr.trim()
+      props += ' ' + propStr + ' '
+    }
   }
 
   temp = temp.replace('{slot}', childCode)
