@@ -12,6 +12,8 @@ Esview是一个vue代码生成平台。
 ![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463124x2890191685.png)
 ![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463255x2890191685.gif)
 
+# 在线demo  
+http://47.94.2.0:9090/#/esview/assemble/assemble_page?pageSoulId=235
 
 
 # License
