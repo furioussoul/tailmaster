@@ -6,7 +6,7 @@
           Model Config
         </p>
         <i-form label-position="left"
-                :label-width="40"
+                :label-width="80"
                 :model="model">
 
           <div v-for="(config,index) in configs"
@@ -42,9 +42,9 @@
 
         </i-form>
 
-        <div style="width: 200px; margin: 15px auto 0;">
+      <!--  <div style="width: 200px; margin: 15px auto 0;">
           <Button class="tool-button" type="info" @click="save">保存</Button>
-        </div>
+        </div>-->
       </Card>
     </i-col>
   </Row>
@@ -69,8 +69,6 @@
           let config = this.configs[i]
           this.model[config.name] = config.value
         }
-
-        console.log(this.model)
       }
     },
     watch: {

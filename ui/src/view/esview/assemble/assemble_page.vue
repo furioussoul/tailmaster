@@ -3,25 +3,29 @@
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
       <div class="index-layout-nav">
-        <MenuItem name="3">
-          <Icon type="ios-eye"></Icon>
-          preview
+        <MenuItem name="4">
+          <Icon type="code"></Icon>
+          code
+        </MenuItem>
+        <MenuItem name="5">
+          <Icon type="wrench"></Icon>
+          layout
         </MenuItem>
         <MenuItem name="6">
           <Icon type="document-text"></Icon>
           save
         </MenuItem>
         <MenuItem name="9">
-          <Icon type="android-arrow-back"></Icon>
+          <Icon type="ios-undo"></Icon>
           undo
         </MenuItem>
         <MenuItem name="12">
-          <Icon type="android-arrow-forward"></Icon>
+          <Icon type="ios-redo"></Icon>
           redo
         </MenuItem>
-        <MenuItem name="15">
+        <MenuItem name="3">
           <Icon type="ios-eye"></Icon>
-          code
+          no bord
         </MenuItem>
       </div>
     </Menu>
@@ -53,10 +57,15 @@
           </transition>
         </i-col>
 
-        <Row style="margin-left: 200px">
-          <i-col span="20" :class="{'is-preview':isPreview}">
+        <Row style="margin-left: 200px;height: 1000px;">
+          <i-col span="20" class="middle" :class="{'is-preview':isPreview}">
             <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
-            <pre  v-else v-highlightjs="vueCode"><code class="html"></code></pre>
+            <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
+             <Button @click="copyCode" type="primary" size="small" style="position: absolute;right: 0;top: 0;">
+                <Icon type="ios-copy-outline"></Icon>
+                copy
+              </Button>
+            </pre>
           </i-col>
           <i-col span="4">
             <ModelEditor :editSoul="editSoul"></ModelEditor>
@@ -103,7 +112,7 @@
         </DropdownMenu>
       </Dropdown>
     </div>
-
+    <input id="copy" style="width: 1px;height: 1px;border: 0;outline:0" />
   </div>
 </template>
 <script>
@@ -112,7 +121,7 @@
   import {findSoulByCid, findSoulByUidDown, resetUid, generateUid, findSoulByCTypeUp} from '../../../helper/soul_helper'
   import {makeControl, addRenderFn} from '../../../helper/code_helper'
   import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../core/assemble'
-  import {copyProperties, stringify, parse, deepCopy}from '../../../util/assist'
+  import {copyProperties, stringify, parse, deepCopy,jsCopy}from '../../../util/assist'
   import {getControlList} from  '../../../resource/develop_resource'
   import {
     addPage,
@@ -142,11 +151,15 @@
     },
     computed: {
       ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu',
-        'draggableControls', 'editSoul', 'controlClazzes', 'vueCode','showCode'])
+        'draggableControls', 'editSoul', 'controlClazzes', 'vueCode', 'showCode'])
     },
     methods: {
       ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
       ...mapActions('dragModule', ['getControlClazzes']),
+      copyCode(){
+        jsCopy('copy',this.vueCode)
+        this.$Message.success('copied')
+      },
       deleteControl(){
         this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid, this.soul)
         let pSoul = findSoulByUidDown(this.editControlSoul.pid, this.soul);
@@ -156,10 +169,6 @@
         }
         this.clear()
         saveSoul()
-        if (isFormItem(this.editControlSoul)) {
-          let form = findSoulByCTypeUp('Form', this.editControlSoul);
-          delete form.model.model.value[this.editControlSoul.model.formKey.value]
-        }
       },
       editControl(){
         this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid, this.soul)
@@ -191,6 +200,12 @@
           //toggle preview
           this.isPreview = !this.isPreview
 
+        } else if (a === '4') {
+          this.setShowCode(true)
+
+        } else if (a === '5') {
+          this.setShowCode(false)
+
         } else if (a === '6') {
           //save changes of page
           if (!this.opModel.id) {
@@ -204,9 +219,6 @@
 
         } else if (a === '12') {
           redo()
-        } else if (a === '15') {
-          if(!this.showCode)  this.setShowCode(true)
-          else this.setShowCode(false)
         }
       }
     },
@@ -266,6 +278,13 @@
 </script>
 
 <style scoped>
+  .middle {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .117647), 0 1px 4px rgba(0, 0, 0, .117647);
+  }
+
+  .code {
+    height: 1000px;
+  }
 
   .controls-container {
     width: 200px

@@ -34,7 +34,7 @@ export function getVueCode(soul) {
       propStr = propStr.substring(0, propStr.length - 1)
       let match = propStr.match(/("([\s\S]*?)":)/)
       propStr = match[2]+'='+propStr.substring(match[1].length,propStr.length+1)
-      propStr= propStr.replace(',',';')
+      propStr= propStr.replace(/,/g,';')
       propStr= propStr.replace(/"/g,'')
       propStr=propStr.replace('{','"')
       propStr=propStr.replace('}','"')
