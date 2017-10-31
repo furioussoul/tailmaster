@@ -9,8 +9,7 @@
 # 介绍
 Esview是一个vue代码生成平台。
 
-
-![QQ图片20171027113639.png](https://user-gold-cdn.xitu.io/2017/10/31/4fdd5e90be0fbb9120d2fc65bab32266)
+![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463255x2890191685.gif)
 
 
 
