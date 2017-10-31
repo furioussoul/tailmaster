@@ -1,4 +1,9 @@
 import Vue from 'vue'
+import {findSoulByUidDown} from '../helper/soul_helper'
+import {findElUpward} from '../helper/dom_helper'
+import {isPlain} from '../util/assist'
+import {getVueCode} from '../helper/code_helper'
+import pretty from 'pretty'
 
 export default {
   namespaced: true,
@@ -8,7 +13,10 @@ export default {
     draggableControls: null,//draggableControls are the draggable items on the left side of dropPanel
     editLayer: {},//the cover appears when hover the dropped element
     rightClickMenu: {},//right click menu when right click the dropped element
-    controlClazzes: []//left side controls in assemble factory
+    controlClazzes: [],//left side controls in assemble factory
+    editSoul: null,
+    vueCode:null,
+    showCode:false
   },
   getters: {
     soul: ({soul}) => soul,
@@ -16,9 +24,20 @@ export default {
     draggableControls: ({draggableControls}) => draggableControls,
     editLayer: ({editLayer}) => editLayer,
     rightClickMenu: ({rightClickMenu}) => rightClickMenu,
-    controlClazzes: ({controlClazzes}) => controlClazzes
-  },
+    controlClazzes: ({controlClazzes}) => controlClazzes,
+    editSoul: ({editSoul}) => editSoul,
+    showCode:({showCode})=>showCode,
+    vueCode: ({soul}) => {
+      let data = {},
+        prettyCode = pretty(getVueCode(soul))
+
+      return prettyCode
+    }
+  } ,
   mutations: {
+    setShowCode:(state,showCode)=>{
+      state.showCode = showCode
+    },
     setSoul: (state, soul) => {
       state.soul = soul
     },
@@ -67,6 +86,16 @@ export default {
         },
         uid: el.controlConfig.uid
       }
+    },
+    showEditorPanel(state, e){
+      e.stopPropagation()
+      const el = findElUpward(e.target);
+      const soul = findSoulByUidDown(el.controlConfig.uid, state.soul);
+      if (!soul || !isPlain(soul.model)) {
+        state.editSoul = soul
+        return
+      }
+      state.editSoul = null
     }
   },
   actions: {

@@ -5,7 +5,7 @@ import{
 import {
   generateUid,
   resetUid,
-  findSoul
+  findSoulByCid
 } from '../helper/soul_helper'
 import {
   stringify,
@@ -44,7 +44,7 @@ function undo() {
   }
   let dataSnapshot = templateStore.dataSnapshot[templateStore.count - 2];
   if(!dataSnapshot) {
-    let dropPanelSoul = findSoul(100, store.getters['dragModule/draggableControls'])
+    let dropPanelSoul = findSoulByCid(100, store.getters['dragModule/draggableControls'])
     dropPanelSoul.uid = generateUid()
     dataSnapshot = dropPanelSoul
   }
@@ -78,7 +78,7 @@ function clear() {
 }
 
 function init(draggableControls) {
-  let dropPanelSoul = findSoul(100, draggableControls),
+  let dropPanelSoul = findSoulByCid(100, draggableControls),
   copy = deepCopy(dropPanelSoul);//before drop ,must copy drag control
   copy.uid = generateUid() //dropped control has unique uid
   store.commit('dragModule/setSoul', copy)

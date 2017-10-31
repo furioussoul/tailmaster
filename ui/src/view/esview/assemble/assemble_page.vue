@@ -3,21 +3,29 @@
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
 
       <div class="index-layout-nav">
-        <MenuItem name="3">
-          <Icon type="ios-eye"></Icon>
-          preview
+        <MenuItem name="4">
+          <Icon type="code"></Icon>
+          code
+        </MenuItem>
+        <MenuItem name="5">
+          <Icon type="wrench"></Icon>
+          layout
         </MenuItem>
         <MenuItem name="6">
           <Icon type="document-text"></Icon>
           save
         </MenuItem>
         <MenuItem name="9">
-          <Icon type="android-arrow-back"></Icon>
+          <Icon type="ios-undo"></Icon>
           undo
         </MenuItem>
         <MenuItem name="12">
-          <Icon type="android-arrow-forward"></Icon>
+          <Icon type="ios-redo"></Icon>
           redo
+        </MenuItem>
+        <MenuItem name="3">
+          <Icon type="ios-eye"></Icon>
+          no bord
         </MenuItem>
       </div>
     </Menu>
@@ -49,14 +57,25 @@
           </transition>
         </i-col>
 
-        <i-col style="margin-left: 200px" span="21" :class="{'is-preview':isPreview}">
-          <RenderDev :soul="soul"></RenderDev>
-        </i-col>
-
+        <Row style="margin-left: 200px;height: 1000px;">
+          <i-col span="20" class="middle" :class="{'is-preview':isPreview}">
+            <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
+            <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
+             <Button @click="copyCode" typ size="small" style="position: absolute;right: 0;top: 0;">
+                <Icon type="ios-copy-outline"></Icon>
+                copy
+              </Button>
+            </pre>
+          </i-col>
+          <i-col span="4">
+            <ModelEditor :editSoul="editSoul"></ModelEditor>
+          </i-col>
+        </Row>
       </Row>
     </div>
 
     <Modal
+      :mask-closable="false"
       v-model="showConfirmPageNameModal"
       title="confirmPageName"
       @on-ok="okPageName">
@@ -68,12 +87,14 @@
     </Modal>
 
     <Modal
+      style="width: 600px"
+      :mask-closable="false"
       v-model="showEditScriptModal"
       title="script">
       <div slot="footer">
       </div>
       <CodeEditor
-        style="height: 500px"
+        style="height: 600px"
         :code="editControlSoul.scriptString"
         @save="saveCode">
       </CodeEditor>
@@ -91,16 +112,16 @@
         </DropdownMenu>
       </Dropdown>
     </div>
-
+    <input id="copy" style="width: 1px;height: 1px;border: 0;outline:0" />
   </div>
 </template>
 <script>
-  import {mapGetters, mapMutations,mapActions} from 'vuex'
+  import {mapGetters, mapMutations, mapActions} from 'vuex'
   import store from '../../../store'
-  import {findSoul, findNode, resetUid, generateUid} from '../../../helper/soul_helper'
+  import {findSoulByCid, findSoulByUidDown, resetUid, generateUid, findSoulByCTypeUp} from '../../../helper/soul_helper'
   import {makeControl, addRenderFn} from '../../../helper/code_helper'
   import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../core/assemble'
-  import {copyProperties, stringify, parse, deepCopy}from '../../../util/assist'
+  import {copyProperties, stringify, parse, deepCopy,jsCopy}from '../../../util/assist'
   import {getControlList} from  '../../../resource/develop_resource'
   import {
     addPage,
@@ -111,6 +132,7 @@
     getRichPage,
     getAppList
   } from '../../../resource/assemble_resource'
+  import {walkSoul} from '../../../helper/soul_helper'
   import{
     interceptDrop
   }from '../../../core/dnd'
@@ -128,15 +150,21 @@
       }
     },
     computed: {
-      ...mapGetters('dragModule', ['controlClazzes']),
-      ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu', 'draggableControls'])
+      ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu',
+        'draggableControls', 'editSoul', 'controlClazzes', 'vueCode', 'showCode'])
     },
     methods: {
-      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls',]),
+      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
       ...mapActions('dragModule', ['getControlClazzes']),
+      copyCode(){
+        let code = this.vueCode.replace(/\r/g,'\r\n')
+        code = this.vueCode.replace(/\n/g,'\r\n')
+        jsCopy('copy',code)
+        this.$Message.success('copied')
+      },
       deleteControl(){
-        this.editControlSoul = findNode(this.rightClickMenu.uid)
-        let pSoul = findNode(this.editControlSoul.pid);
+        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid, this.soul)
+        let pSoul = findSoulByUidDown(this.editControlSoul.pid, this.soul);
         if (pSoul) {
           let index = pSoul.children.indexOf(this.editControlSoul);
           pSoul.children.splice(index, 1)
@@ -145,7 +173,7 @@
         saveSoul()
       },
       editControl(){
-        this.editControlSoul = findNode(this.rightClickMenu.uid)
+        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid, this.soul)
         this.editControlSoul.scriptString = this.editControlSoul.script.toString()
         this.clear()
         this.showEditScriptModal = true
@@ -154,7 +182,7 @@
         this.editControlSoul.scriptString = code
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal = false
-        let pSoul = findNode(this.editControlSoul.pid);
+        let pSoul = findSoulByUidDown(this.editControlSoul.pid);
         if (pSoul) {
           let editSoulCopy = deepCopy(this.editControlSoul)
           let index = pSoul.children.indexOf(this.editControlSoul);
@@ -173,6 +201,12 @@
         if (a === '3') {
           //toggle preview
           this.isPreview = !this.isPreview
+
+        } else if (a === '4') {
+          this.setShowCode(true)
+
+        } else if (a === '5') {
+          this.setShowCode(false)
 
         } else if (a === '6') {
           //save changes of page
@@ -228,16 +262,15 @@
           //when add new page
           init(draggableControls)
           saveSoul()
-
         } else {
           //when update page
           getRichPage.call(this, this.pageSoulId, (data) => {
             this.opModel = data
-            let soul = parse(data.pageSoul)
-            addRenderFn(soul)
-            resetUid(soul.maxUid)
+            let ancestorSoul = parse(data.pageSoul)
+            addRenderFn(ancestorSoul)
+            resetUid(ancestorSoul.maxUid)
             saveSoul()
-            this.setSoul(soul)
+            this.setSoul(ancestorSoul)
           })
         }
 
@@ -247,11 +280,15 @@
 </script>
 
 <style scoped>
+  .middle {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .117647), 0 1px 4px rgba(0, 0, 0, .117647);
+  }
+
+  .code {
+    height: 1000px;
+  }
 
   .controls-container {
-    position: fixed;
-    top: 100px;
-    left: 200px;
     width: 200px
   }
 

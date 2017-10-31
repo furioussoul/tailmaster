@@ -1,13 +1,13 @@
 <template>
-  <Row>
+  <Row class="model-config">
     <i-col span="24">
       <Card>
         <p slot="title">
           Model Config
         </p>
-        <i-form  label-position="left"
-          :label-width="40"
-          :model="model">
+        <i-form label-position="left"
+                :label-width="80"
+                :model="model">
 
           <div v-for="(config,index) in configs"
                :key="index">
@@ -19,24 +19,32 @@
               </i-input>
             </Form-item>
 
-            <Form-item v-if="config.type === 'select'"
+            <Form-item v-if="config.type === 'boolean'"
                        :label="config.name">
-              <Select
-                v-model="config.value">
-                <Option v-for="option in config.options"
-                        :value="option"
-                        :key="option">{{ option }}
-                </Option>
-              </Select>
+              <i-switch size="large" style="margin-left:20px" v-model="config.value">
+                <span slot="open">true</span>
+                <span slot="close">false</span>
+              </i-switch>
             </Form-item>
+
+            <!--<Form-item v-if="config.type === 'select'"-->
+            <!--:label="config.name">-->
+            <!--<i-Select-->
+            <!--v-model="config.value">-->
+            <!--<Option v-for="option in config.options"-->
+            <!--:value="option"-->
+            <!--:key="option">{{ option }}-->
+            <!--</Option>-->
+            <!--</i-Select>-->
+            <!--</Form-item>-->
 
           </div>
 
         </i-form>
 
-        <div style="width: 200px; margin: 15px auto 0;">
+      <!--  <div style="width: 200px; margin: 15px auto 0;">
           <Button class="tool-button" type="info" @click="save">保存</Button>
-        </div>
+        </div>-->
       </Card>
     </i-col>
   </Row>
@@ -61,8 +69,6 @@
           let config = this.configs[i]
           this.model[config.name] = config.value
         }
-
-        console.log(this.model)
       }
     },
     watch: {
@@ -94,3 +100,7 @@
     }
   }
 </script>
+<style lang="less" scoped>
+  .model-config {
+  }
+</style>

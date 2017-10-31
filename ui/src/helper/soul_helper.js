@@ -6,6 +6,13 @@ const resetUid =function (newuid) {
 }
 const currentUid = (() => uid)
 
+function walkSoul(soul,fn) {
+  fn.call(soul,soul)
+  soul.children.forEach(child=>{
+    walkSoul(child,fn)
+  })
+}
+
 function refreshInitScript(soul) {
   if(!soul) return
   soul.initScript=false
@@ -14,7 +21,13 @@ function refreshInitScript(soul) {
   }
 }
 
-function findSoul(cid, controls) {
+function findSoulByCTypeUp(type, drag, soul) {
+  if (drag.type === type)return drag
+  let dragParent = findSoulByUidDown(drag.pid,soul)
+  return findSoulByCTypeUp(type,dragParent,soul)
+}
+
+function findSoulByCid(cid, controls) {
   if(!controls){
     controls = store.getters['dragModule/draggableControls']
   }
@@ -25,7 +38,7 @@ function findSoul(cid, controls) {
   }
 }
 
-function findNode(uid, soul) {
+function findSoulByUidDown(uid, soul) {
   if (!soul) {
     soul = store.getters['dragModule/soul']
   }
@@ -36,7 +49,7 @@ function findNode(uid, soul) {
 
   let node;
   for (let i = 0; i < soul.children.length; i++) {
-    node = findNode(uid, soul.children[i])
+    node = findSoulByUidDown(uid, soul.children[i])
     if (node) {
       return node;
     }
@@ -45,9 +58,11 @@ function findNode(uid, soul) {
 
 export {
   generateUid,
-  findNode,
+  findSoulByUidDown,
   resetUid,
   currentUid,
-  findSoul,
-  refreshInitScript
+  findSoulByCid,
+  refreshInitScript,
+  findSoulByCTypeUp,
+  walkSoul
 }

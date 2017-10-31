@@ -13,11 +13,22 @@ import Login from './view/esview/login.vue'
 import locale  from 'iview/dist/locale/en-US';
 import 'iview/dist/styles/iview.css'
 import './style/index.less'
-
+import store from './external/store'
 import esview from './external' //test
 
+import VueHighlightJS from 'vue-highlightjs'
+Vue.use(VueHighlightJS)
+
+import {
+  findSoulByCTypeUp
+}from './helper/soul_helper'
+
 esview.addConfig('router', router)
-esview.addConfig('type', 'assemble')
+esview.addConfig('store', store)
+esview.addConfig('util', {
+  findSoulByCTypeUp
+})
+// esview.addConfig('type', 'assemble')
 
 Vue.dev = true
 

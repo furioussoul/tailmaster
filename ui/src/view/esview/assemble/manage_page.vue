@@ -2,6 +2,7 @@
   <Row>
     <i-col span="24">
       <Card>
+
         <div>
           <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
             <Form-item prop="name" label="PageName:">
@@ -15,7 +16,6 @@
             </ButtonGroup>
           </Form>
         </div>
-
         <Table border
                :loading="loading"
                :columns="columns"

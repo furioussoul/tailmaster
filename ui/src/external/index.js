@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {walkSoul} from '../helper/soul_helper'
 import {
   WrapCard,
   WrapUpload,
@@ -52,10 +53,9 @@ function render({appName, pageName}, token) {
     pageName,
     token
   }, data => {
-    let soul = parse(data[0].pageSoul)
-    addRenderFn(soul)
-    store.commit('soulModule/setSoul', soul)
-
+    let ancestorSoul = parse(data[0].pageSoul)
+    addRenderFn(ancestorSoul)
+    store.commit('soulModule/setSoul', ancestorSoul)
     if(!getConfig('type')){
       Vue.directive('droppable',emptyDirective)
       Vue.directive('editable',emptyDirective)
