@@ -28,7 +28,10 @@ export default {
     editSoul: ({editSoul}) => editSoul,
     showCode:({showCode})=>showCode,
     vueCode: ({soul}) => {
-      return pretty(getVueCode(soul))
+      let data = {},
+        prettyCode = pretty(getVueCode(soul))
+
+      return prettyCode
     }
   } ,
   mutations: {

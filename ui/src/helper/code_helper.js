@@ -1,46 +1,49 @@
 import {
   typeOf
 }from'../util/assist'
-
+import pretty from 'pretty'
 const REG_EX = new RegExp(/.([a-zA-Z]+)[\s]*=[\s]*([\s\S]*)(;*)/)
 
-export function getVueCode(soul) {
+function getVueHtml(soul,data) {
   let temp = soul.template,
     childCode = ''
 
   temp = temp.trim()
-  temp = temp.replace(';','')
-  temp = temp.substring(1,temp.length)
-  temp = temp.substring(0,temp.length-1)
+  temp = temp.replace(';', '')
+  temp = temp.substring(1, temp.length)
+  temp = temp.substring(0, temp.length - 1)
   temp = temp.trim()
 
   soul.children.forEach(child => {
-    childCode += getVueCode(child)
+    childCode += getVueHtml(child,data)
   })
 
   let model = soul.model;
   let props = ''
   let prop = {}
   for (let key in model) {
-    if(model[key].exclude){
+    if (model[key].exclude) {
       continue
     }
     let propStr,
-    prop = {}
-    if(typeOf(model[key].value) === 'object'){
+      prop = {}
+    if (typeOf(model[key].value) === 'array') {
+      data[key] = model[key].value
+      props += ' :' + key+ '=' + '"' + key + '"' + ' '
+    } else if (typeOf(model[key].value) === 'object') {
       prop[key] = model[key].value
-      propStr = prop[key] =JSON.stringify(prop)
+      propStr = prop[key] = JSON.stringify(prop)
       propStr = propStr.substring(1, propStr.length)
       propStr = propStr.substring(0, propStr.length - 1)
       let match = propStr.match(/("([\s\S]*?)":)/)
-      propStr = match[2]+'='+propStr.substring(match[1].length,propStr.length+1)
-      propStr= propStr.replace(/,/g,';')
-      propStr= propStr.replace(/"/g,'')
-      propStr=propStr.replace('{','"')
-      propStr=propStr.replace('}','"')
+      propStr = match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
+      propStr = propStr.replace(/,/g, ';')
+      propStr = propStr.replace(/"/g, '')
+      propStr = propStr.replace('{', '"')
+      propStr = propStr.replace('}', '"')
       propStr = propStr.trim()
       props += ' ' + propStr + ' '
-    }else {
+    } else {
       prop[key] = model[key].value + ''
       propStr = JSON.stringify(prop)
       propStr = propStr.trim()
@@ -49,7 +52,7 @@ export function getVueCode(soul) {
       propStr = propStr.substring(0, propStr.length - 1)
       //delete comma
       let match = propStr.match(/("([\s\S]*?)":)/)
-      propStr = ':' + match[2]+'='+propStr.substring(match[1].length,propStr.length+1)
+      propStr = ':' + match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
       propStr = propStr.trim()
       props += ' ' + propStr + ' '
     }
@@ -57,6 +60,31 @@ export function getVueCode(soul) {
 
   temp = temp.replace('{slot}', childCode)
   return temp.replace('{model}', props).trim()
+}
+
+function getVueScript(data) {
+  let script=`
+  <script>
+    export default{
+      data(){
+        return{
+          {dataSlot}
+        }
+      }
+    }
+  </script>
+  `
+  let dataStr =  JSON.stringify(data)
+  dataStr=dataStr.substring(1,dataStr.length)
+  dataStr=dataStr.substring(0,dataStr.length - 1)
+  return script.replace('{dataSlot}',dataStr)
+}
+
+export function getVueCode(soul) {
+  let data = {},
+    vueHtml = getVueHtml(soul,data),
+  vueScript = getVueScript(data)
+  return vueHtml+'\r\n'+pretty(vueScript)
 }
 
 export function addRenderFn(soul) {

@@ -61,7 +61,7 @@
           <i-col span="20" class="middle" :class="{'is-preview':isPreview}">
             <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
             <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
-             <Button @click="copyCode" type="primary" size="small" style="position: absolute;right: 0;top: 0;">
+             <Button @click="copyCode" typ size="small" style="position: absolute;right: 0;top: 0;">
                 <Icon type="ios-copy-outline"></Icon>
                 copy
               </Button>
@@ -157,7 +157,9 @@
       ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
       ...mapActions('dragModule', ['getControlClazzes']),
       copyCode(){
-        jsCopy('copy',this.vueCode)
+        let code = this.vueCode.replace(/\r/g,'\r\n')
+        code = this.vueCode.replace(/\n/g,'\r\n')
+        jsCopy('copy',code)
         this.$Message.success('copied')
       },
       deleteControl(){
