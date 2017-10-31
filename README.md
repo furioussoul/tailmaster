@@ -28,10 +28,6 @@ For creating a search form ,you should drop 'Form' into 'Col'.
 
 then drop 'FormItem' into 'Form',drop 'Input、Radio、Button etc.' into 'FormItem'.
 
-right click to edit script to use eventCenter to comminute between components,  
-
-also you can use ajax in script in the same domain.  
-
 
 # Online Demo
 
