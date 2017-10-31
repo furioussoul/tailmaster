@@ -2,12 +2,14 @@ import {
   findSoulByUidDown
 } from '../helper/soul_helper'
 import {
-  deepCopy
+  deepCopy,
+  isPlain
 }from '../util/assist'
 
 function resetSoul(soul) {
+  if(isPlain(soul.model))return
   for (let key in soul.model) {
-    let copy
+    let copy = soul.model[key].value
     Object.defineProperty(soul.model[key], 'value', {
       set: (n) => {
         copy = n

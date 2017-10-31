@@ -102,7 +102,7 @@ function getVueScript(data) {
 
 export function getVueCode(soul) {
   let data = {},
-    vueHtml = getVueHtml(soul,data),
+    vueHtml = '<template>' + getVueHtml(soul,data) + '</template>',
   vueScript = getVueScript(data)
   return vueHtml+'\r\n'+pretty(vueScript)
 }
