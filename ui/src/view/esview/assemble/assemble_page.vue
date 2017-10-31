@@ -19,6 +19,10 @@
           <Icon type="android-arrow-forward"></Icon>
           redo
         </MenuItem>
+        <MenuItem name="15">
+          <Icon type="ios-eye"></Icon>
+          code
+        </MenuItem>
       </div>
     </Menu>
 
@@ -49,9 +53,10 @@
           </transition>
         </i-col>
 
-        <Row style="margin-left: 200px" >
+        <Row style="margin-left: 200px">
           <i-col span="20" :class="{'is-preview':isPreview}">
-            <RenderDev :soul="soul"></RenderDev>
+            <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
+            <pre  v-else v-highlightjs="vueCode"><code class="html"></code></pre>
           </i-col>
           <i-col span="4">
             <ModelEditor :editSoul="editSoul"></ModelEditor>
@@ -99,9 +104,9 @@
   </div>
 </template>
 <script>
-  import {mapGetters, mapMutations,mapActions} from 'vuex'
+  import {mapGetters, mapMutations, mapActions} from 'vuex'
   import store from '../../../store'
-  import {findSoulByCid, findSoulByUidDown, resetUid, generateUid,findSoulByCTypeUp} from '../../../helper/soul_helper'
+  import {findSoulByCid, findSoulByUidDown, resetUid, generateUid, findSoulByCTypeUp} from '../../../helper/soul_helper'
   import {makeControl, addRenderFn} from '../../../helper/code_helper'
   import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../core/assemble'
   import {copyProperties, stringify, parse, deepCopy}from '../../../util/assist'
@@ -115,7 +120,6 @@
     getRichPage,
     getAppList
   } from '../../../resource/assemble_resource'
-  import {registerFormItem} from '../../../core/lifecycle'
   import {walkSoul} from '../../../helper/soul_helper'
   import{
     interceptDrop
@@ -134,27 +138,28 @@
       }
     },
     computed: {
-      ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu', 'draggableControls','editSoul','controlClazzes'])
+      ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu',
+        'draggableControls', 'editSoul', 'controlClazzes', 'vueCode','showCode'])
     },
     methods: {
-      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls',]),
+      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
       ...mapActions('dragModule', ['getControlClazzes']),
       deleteControl(){
-        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid,this.soul)
-        let pSoul = findSoulByUidDown(this.editControlSoul.pid,this.soul);
+        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid, this.soul)
+        let pSoul = findSoulByUidDown(this.editControlSoul.pid, this.soul);
         if (pSoul) {
           let index = pSoul.children.indexOf(this.editControlSoul);
           pSoul.children.splice(index, 1)
         }
         this.clear()
         saveSoul()
-        if(isFormItem(this.editControlSoul)){
-          let form = findSoulByCTypeUp('Form',this.editControlSoul);
+        if (isFormItem(this.editControlSoul)) {
+          let form = findSoulByCTypeUp('Form', this.editControlSoul);
           delete form.model.model.value[this.editControlSoul.model.formKey.value]
         }
       },
       editControl(){
-        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid,this.soul)
+        this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid, this.soul)
         this.editControlSoul.scriptString = this.editControlSoul.script.toString()
         this.clear()
         this.showEditScriptModal = true
@@ -196,6 +201,9 @@
 
         } else if (a === '12') {
           redo()
+        } else if (a === '15') {
+          if(!this.showCode)  this.setShowCode(true)
+          else this.setShowCode(false)
         }
       }
     },
@@ -246,9 +254,6 @@
             resetUid(ancestorSoul.maxUid)
             saveSoul()
             this.setSoul(ancestorSoul)
-            walkSoul(ancestorSoul,(soul)=>{
-              registerFormItem(soul,ancestorSoul)
-            })
           })
         }
 

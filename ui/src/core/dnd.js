@@ -16,9 +16,6 @@ import {
 import {
   drop
 } from './assemble'
-import {
-  registerFormItem
-} from '../core/lifecycle'
 
 function onDragStart(e) {
   store.commit('dragModule/setDragElement', e.target)
@@ -108,8 +105,6 @@ function interceptDrop(saveInfo) {
       saveInfo.drag.children.push(copy)
     }
   }
-
-  registerFormItem(saveInfo.drag,store.getters['dragModule/soul'])
 }
 
 function onDrop(e) {

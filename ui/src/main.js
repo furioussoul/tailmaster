@@ -14,8 +14,11 @@ import locale  from 'iview/dist/locale/en-US';
 import 'iview/dist/styles/iview.css'
 import './style/index.less'
 import store from './external/store'
-
 import esview from './external' //test
+
+import VueHighlightJS from 'vue-highlightjs'
+Vue.use(VueHighlightJS)
+
 import {
   findSoulByCTypeUp
 }from './helper/soul_helper'

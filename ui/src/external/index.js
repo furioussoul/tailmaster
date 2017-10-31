@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import {registerFormItem} from '../core/lifecycle'
 import {walkSoul} from '../helper/soul_helper'
 import {
   WrapCard,
@@ -56,9 +55,6 @@ function render({appName, pageName}, token) {
   }, data => {
     let ancestorSoul = parse(data[0].pageSoul)
     addRenderFn(ancestorSoul)
-    walkSoul(ancestorSoul,(soul)=>{
-      registerFormItem(soul,ancestorSoul)
-    })
     store.commit('soulModule/setSoul', ancestorSoul)
     if(!getConfig('type')){
       Vue.directive('droppable',emptyDirective)

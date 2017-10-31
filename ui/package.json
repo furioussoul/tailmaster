@@ -29,6 +29,8 @@
     "vuex-router-sync": "^4.1.3"
    },
   "devDependencies": {
+    "vue-highlightjs": "^1.3.3",
+    "pretty": "^2.0.0",
     "js-md5": "^0.4.2",
     "object-assign": "^4.1.0",
     "throttle-debounce": "^1.0.1",

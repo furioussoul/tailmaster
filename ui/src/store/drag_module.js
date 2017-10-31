@@ -2,6 +2,8 @@ import Vue from 'vue'
 import {findSoulByUidDown} from '../helper/soul_helper'
 import {findElUpward} from '../helper/dom_helper'
 import {isPlain} from '../util/assist'
+import {getVueCode} from '../helper/code_helper'
+import pretty from 'pretty'
 
 export default {
   namespaced: true,
@@ -13,6 +15,8 @@ export default {
     rightClickMenu: {},//right click menu when right click the dropped element
     controlClazzes: [],//left side controls in assemble factory
     editSoul: null,
+    vueCode:null,
+    showCode:false
   },
   getters: {
     soul: ({soul}) => soul,
@@ -21,9 +25,16 @@ export default {
     editLayer: ({editLayer}) => editLayer,
     rightClickMenu: ({rightClickMenu}) => rightClickMenu,
     controlClazzes: ({controlClazzes}) => controlClazzes,
-    editSoul:({editSoul}) => editSoul
-  },
+    editSoul: ({editSoul}) => editSoul,
+    showCode:({showCode})=>showCode,
+    vueCode: ({soul}) => {
+      return pretty(getVueCode(soul))
+    }
+  } ,
   mutations: {
+    setShowCode:(state,showCode)=>{
+      state.showCode = showCode
+    },
     setSoul: (state, soul) => {
       state.soul = soul
     },

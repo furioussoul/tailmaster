@@ -1,5 +1,43 @@
 const REG_EX = new RegExp(/.([a-zA-Z]+)[\s]*=[\s]*([\s\S]*)(;*)/)
 
+export function getVueCode(soul) {
+  let temp = soul.template,
+    childCode = ''
+
+  temp = temp.trim()
+  temp = temp.replace(';','')
+  temp = temp.substring(1,temp.length)
+  temp = temp.substring(0,temp.length-1)
+  temp = temp.trim()
+
+  soul.children.forEach(child => {
+    childCode += getVueCode(child)
+  })
+
+  let model = soul.model;
+  let props = ''
+  let prop = {}
+  for (let key in model) {
+    if(model[key].exclude){
+      continue
+    }
+    prop = {}
+    prop[key] = model[key].value
+    let propStr = JSON.stringify(prop)
+    propStr = propStr.substring(1, propStr.length)
+    propStr = propStr.substring(0, propStr.length - 1)
+
+    //delete comma
+    let match = propStr.match(/("([\s\S]*?)":)/)
+    propStr = match[2]+'='+propStr.substring(match[1].length,propStr.length+1)
+
+    props += ' ' + propStr + ' '
+  }
+
+  temp = temp.replace('{slot}', childCode)
+  return temp.replace('{model}', props).trim()
+}
+
 export function addRenderFn(soul) {
   let config = makeControl(soul.code);
   soul.render = config.render
