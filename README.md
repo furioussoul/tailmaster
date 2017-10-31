@@ -14,7 +14,7 @@
 # Introduction
 Esview is a vue codegen by html5 drag/drop.
 
-![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509462104x3026947657.gif)
+![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509462423x3026947657.gif)
 
 # How to drag/drop?
 Esview use grid system,  
