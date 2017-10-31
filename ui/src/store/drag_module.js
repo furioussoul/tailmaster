@@ -69,7 +69,7 @@ export default {
           height: rect.height + 'px',
           display: 'block'
         },
-        name: bind.binding.value
+        name: bind.binding.value + ':' + bind.el.controlConfig.uid
       }
     },
     setRightClickMenu(state, el){

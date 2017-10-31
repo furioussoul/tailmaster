@@ -16,6 +16,9 @@ import {
 import {
   drop
 } from './assemble'
+import {
+  resetSoul
+} from '../core/lifecycle'
 
 function onDragStart(e) {
   store.commit('dragModule/setDragElement', e.target)
@@ -92,7 +95,7 @@ function markDrop(drop, mark) {
 
 function interceptDrop(saveInfo) {
   if (saveInfo.drag.type === 'WrapCard') {
-    let dropPanelSoul = findSoulByCid(44, store.getters['dragModule/draggableControls'])
+    let dropPanelSoul = findSoulByCid(100, store.getters['dragModule/draggableControls'])
       let copy = deepCopy(dropPanelSoul)
     copy.slotName='title'
       copy.uid = generateUid()
@@ -106,6 +109,8 @@ function interceptDrop(saveInfo) {
     copy.uid = generateUid()
     saveInfo.drag.children.push(copy)
   }
+
+  resetSoul(saveInfo.drag)
 }
 
 function onDrop(e) {

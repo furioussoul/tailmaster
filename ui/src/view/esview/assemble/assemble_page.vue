@@ -119,6 +119,7 @@
   import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../core/assemble'
   import {copyProperties, stringify, parse, deepCopy,jsCopy}from '../../../util/assist'
   import {getControlList} from  '../../../resource/develop_resource'
+  import {resetSoul,reset} from  '../../../core/lifecycle'
   import {
     addPage,
     delPage,
@@ -172,16 +173,7 @@
         this.editControlSoul.scriptString = code
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal = false
-        let pSoul = findSoulByUidDown(this.editControlSoul.pid);
-        if (pSoul) {
-          let editSoulCopy = deepCopy(this.editControlSoul)
-          let index = pSoul.children.indexOf(this.editControlSoul);
-          pSoul.children.splice(index, 1)
-          setTimeout(() => {
-            editSoulCopy.initScript = false
-            pSoul.children.splice(index, 0, editSoulCopy)
-          }, 1)
-        }
+        reset(this.editControlSoul)
       },
       okPageName(){
         addPage.call(this)
@@ -260,6 +252,9 @@
             resetUid(ancestorSoul.maxUid)
             saveSoul()
             this.setSoul(ancestorSoul)
+            walkSoul(ancestorSoul,(soul)=>{
+              resetSoul(soul)
+            })
           })
         }
         this.setShowCode(false)

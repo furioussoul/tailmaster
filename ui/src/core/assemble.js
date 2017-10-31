@@ -5,12 +5,16 @@ import{
 import {
   generateUid,
   resetUid,
-  findSoulByCid
+  findSoulByCid,
+  walkSoul
 } from '../helper/soul_helper'
 import {
   stringify,
   parse
 }from '../util/assist'
+import {
+  resetSoul
+} from '../core/lifecycle'
 
 let templateStore = {
   count: 0,//version number
@@ -51,6 +55,10 @@ function undo() {
   let soulCopy = deepCopy(dataSnapshot)
 
   store.commit('dragModule/setSoul', soulCopy)
+  walkSoul(soulCopy,(soul)=>{
+    resetSoul(soul)
+  })
+
   templateStore.count--;
   return true;
 }
@@ -61,7 +69,11 @@ function redo() {
   }
   let soulSnap = templateStore.dataSnapshot[templateStore.count++]
   let soulCopy = deepCopy(soulSnap)
+
   store.commit('dragModule/setSoul', soulCopy)
+  walkSoul(soulCopy,(soul)=>{
+    resetSoul(soul)
+  })
   return true;
 }
 
