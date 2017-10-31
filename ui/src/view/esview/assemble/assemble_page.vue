@@ -61,10 +61,6 @@
           <i-col span="20" class="middle" :class="{'is-preview':isPreview}">
             <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
             <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
-             <Button @click="copyCode" typ size="small" style="position: absolute;right: 0;top: 0;">
-                <Icon type="ios-copy-outline"></Icon>
-                copy
-              </Button>
             </pre>
           </i-col>
           <i-col span="4">
@@ -227,8 +223,8 @@
     mounted(){
       this.getControlClazzes()
       resetSnapShot()
-      this.appId = localStorage.getItem('appId')
-      this.pageSoulId = localStorage.getItem('pageSoulId')
+      this.appId = this.$route.query.appId
+      this.pageSoulId = this.$route.query.pageSoulId
       this.clear()
 
       getControlList.call(this, (data) => {
@@ -273,7 +269,7 @@
             this.setSoul(ancestorSoul)
           })
         }
-
+        this.setShowCode(false)
       })
     }
   }
@@ -285,7 +281,7 @@
   }
 
   .code {
-    height: 1000px;
+    height: 100%;
   }
 
   .controls-container {
