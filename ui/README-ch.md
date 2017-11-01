@@ -31,6 +31,14 @@ http://47.94.2.0:9090/#/esview/assemble/assemble_page?pageSoulId=235
 
 组件的属性编辑影响组件样式：vue会监听这棵属性结构的所有属性，当属性被编辑过后，vue会更新整个页面。  
 
+# 4 安装
+
+前端: Esview使用webpack和vue、iview，所以必须安装他们和nodejs，下载本项目后npm install,npm run dev就能启动dev 模式。
+dev模式不需要安装后端。
+
+后端: 使用Java（springboot）,所以你必须先安装jdk.
+
+数据库: mysql,数据库表文件在'server'目录下,名字叫 'soul-esview.sql'.
 
 # License
 [MIT](https://opensource.org/licenses/MIT)
