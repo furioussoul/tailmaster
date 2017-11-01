@@ -278,6 +278,27 @@ export default{
                     "subMenuList": null
                   }
                 ]
+              }, {
+                "id": 74842,
+                "name": "test",
+                "title": "test",
+                "url": "/esview/test",
+                "orderNo": 1,
+                "mtype": 0,
+                "icon": 'ios-game-controller-b',
+                "hasPermisson": 1,
+                "subMenuList": [
+                  {
+                    "id": 74840,
+                    "name": "test",
+                    "title": "test",
+                    "url": "/esview/test/index",
+                    "orderNo": 1,
+                    "mtype": 1,
+                    "hasPermisson": 1,
+                    "subMenuList": null
+                  }
+                ]
               }
             ]
           }

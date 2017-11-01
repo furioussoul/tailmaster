@@ -6,7 +6,7 @@
           Model Config
         </p>
         <i-form label-position="left"
-                :label-width="80"
+                :label-width="70"
                 :model="model">
 
           <div v-for="(config,index) in configs"

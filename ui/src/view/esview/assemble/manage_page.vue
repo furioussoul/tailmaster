@@ -58,8 +58,8 @@
     },
     watch: {
       refresh(n){
-        this.searchInput.appId = localStorage.getItem('appId')
-          getTablePageList.call(this)
+        this.searchInput.appId = this.$route.query.appId
+        getTablePageList.call(this)
       }
     },
     data() {
@@ -127,12 +127,9 @@
         this.$refs[name].resetFields();
       },
       hrefAdd(){
-        localStorage.setItem('pageSoulId','')
         this.$router.push({path: './assemble_page', query: {appId: this.$route.query.appId}})
       },
       edit(param){
-        this.setSoul(null)
-        localStorage.setItem('pageSoulId', param.row.id)
         this.$router.push({path: './assemble_page', query: {pageSoulId: param.row.id}})
       },
       del(param){

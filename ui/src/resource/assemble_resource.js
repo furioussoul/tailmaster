@@ -88,7 +88,6 @@ function addPage() {
   this.$http.post('page/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
       this.opModel.id = res.data.data.id
-      localStorage.setItem('pageSoulId', this.opModel.id)
       this.$Message.success('saved')
     }
   })

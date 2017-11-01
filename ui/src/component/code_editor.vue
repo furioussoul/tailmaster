@@ -26,6 +26,7 @@
     watch:{
       code(n){
         if(n===undefined ) n = ''
+        console.log(n)
         this.editor.setValue(n)
       }
     },
