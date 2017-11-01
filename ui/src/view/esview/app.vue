@@ -55,7 +55,7 @@
           </h1>
         </div>
         <div class="layout-header-right" v-cloak>
-          <Button @click="goGithub" size="small">
+          <Button style="margin-right: 20px" @click="goGithub" size="small">
             <Icon type="social-github"></Icon>
             github
           </Button>

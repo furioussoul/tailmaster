@@ -2,7 +2,6 @@
   <Row>
     <i-col span="24">
       <Card>
-
         <div>
           <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
             <Form-item prop="name" label="PageName:">
@@ -76,8 +75,7 @@
             width: 200,
             align: 'center',
             render: (h, params) => {
-              return h('ButtonGroup', [
-                h('Button', {
+              let layout = h('Button', {
                   props: {
                     type: 'primary',
                     size: 'small'
@@ -87,8 +85,8 @@
                       this.edit(params)
                     }
                   }
-                }, 'edit'),
-                h('Button', {
+                }, 'layout'),
+                del = this.me.username === params.row.createBy && h('Button', {
                   props: {
                     type: 'error',
                     size: 'small'
@@ -99,7 +97,7 @@
                     }
                   }
                 }, 'del')
-              ]);
+              return h('ButtonGroup', [layout,del ]);
             }
           }
         ],
@@ -112,6 +110,9 @@
           name: ''
         }
       }
+    },
+    computed:{
+      ...mapGetters('userModule', ['me']),
     },
     methods: {
       ...mapMutations('dragModule', ['setSoul']),
