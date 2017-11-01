@@ -72,7 +72,10 @@
             </Button>
           </i-col>
           <i-col v-show="!showCode" span="4">
-            <ModelEditor :editSoul="editSoul"></ModelEditor>
+            <ModelEditor
+              :pageName="opModel.name"
+              :editSoul="editSoul">
+            </ModelEditor>
           </i-col>
         </Row>
       </Row>
@@ -150,8 +153,7 @@
         showEditScriptModal: false,
         opModel: {},
         editControlSoul: {scriptString: ''},
-        pageSoulId: '',
-        appId: ''
+        pageSoulId: ''
       }
     },
     computed: {
