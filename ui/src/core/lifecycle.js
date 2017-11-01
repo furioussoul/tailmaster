@@ -10,10 +10,8 @@ function resetSoul(soul) {
   if(isPlain(soul.model))return
   for (let key in soul.model) {
     let copy = soul.model[key].value
-    console.log('reset:',key)
     Object.defineProperty(soul.model[key], 'value', {
       set: (n) => {
-        console.log(key,n)
         copy = n
         reset(soul)
       },

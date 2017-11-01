@@ -22,7 +22,8 @@ function getVueHtml(soul,data) {
   let model = soul.model,
     props = '',
     prop = {},
-    slotName=''
+    slotName='',
+    innerHTML = ''
 
   for (let key in model) {
 
@@ -30,15 +31,18 @@ function getVueHtml(soul,data) {
       prop = {}
 
     if (model[key].exclude || '' === model[key].value || isPlain(model[key].value)) {
+      //don't need compile this model value
       propStr = ''
 
     }else if(soul.slotName){
+      //is a slot of parent
       if(!soul.showSlot){
         return ''
       }
       slotName = 'slot="'+soul.slotName+'"'
 
     }else if(soul.type ==='Icon'){
+      //is Icon
       prop[key] = model[key].value + ''
       propStr = JSON.stringify(prop)
       propStr = propStr.trim()
@@ -50,10 +54,16 @@ function getVueHtml(soul,data) {
       propStr = match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
       propStr = propStr.trim()
       props += ' ' + propStr + ' '
+    }else if(model[key].compileType==='innerHTML'){
+
+      innerHTML+=model[key].value
+
     } else if (typeOf(model[key].value) === 'array') {
+      //model value is array
       data[key] = model[key].value
       props += ' :' + key+ '=' + '"' + key + '"' + ' '
     } else if (typeOf(model[key].value) === 'object') {
+      //model value is object
       prop[key] = model[key].value
       propStr = prop[key] = JSON.stringify(prop)
       propStr = propStr.substring(1, propStr.length)
@@ -83,6 +93,7 @@ function getVueHtml(soul,data) {
 
   temp = temp.replace('{slot}', childCode)
   temp = temp.replace('{slotName}', slotName)
+  temp = temp.replace('{innerHTML}', innerHTML).trim()
   return temp.replace('{model}', props).trim()
 }
 

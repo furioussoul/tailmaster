@@ -1,29 +1,29 @@
 <template>
   <Div>
-    <Row>
-      <Col>
-      <Form>
-        <FormItem>
+    <Row type="null">
+      <Col span="12">
+      <Form labelWidth="100">
+        <FormItem label="test">
           <Input disabled="false" style="width:200px">
           </Input>
         </FormItem>
-        <FormItem>
+        <FormItem label="test">
           <TimePicker>
           </TimePicker>
         </FormItem>
-        <FormItem>
+        <FormItem label="test">
           <DatePicker format="yyyy-MM-dd" type="date">
           </DatePicker>
         </FormItem>
-        <FormItem>
-          <Button type="primary"></Button>
+        <FormItem label="test">
+          <Button name="提交" type="primary"></Button>
         </FormItem>
       </Form>
       </Col>
     </Row>
-    <Row>
-      <Col>
-      <Table></Table>
+    <Row type="null">
+      <Col span="24">
+      <Table :data="data" :columns="columns"></Table>
       </Col>
     </Row>
   </Div>
