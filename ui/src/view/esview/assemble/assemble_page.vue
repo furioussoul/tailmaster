@@ -159,7 +159,7 @@
         'draggableControls', 'editSoul', 'controlClazzes', 'vueCode', 'showCode'])
     },
     methods: {
-      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
+      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode'm]),
       ...mapActions('dragModule', ['getControlClazzes']),
       copyCode(){
         jsCopy('copy',this.vueCode)
