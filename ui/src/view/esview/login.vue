@@ -1,6 +1,5 @@
 <template>
   <div class="login-background">
-    <img class="login-background" src="../../../static/img/login.jpg">
     <Card class="loginPanel">
       <p slot="title">esview</p>
       <Form ref="auth" :model="userInfo" :label-width="80">
@@ -72,8 +71,8 @@
   .loginPanel {
     width: 350px;
     position: fixed;
-    right: 50px;
-    top: 20%;
+    right: 40%;
+    top: 30%;
   }
 
   .login-background{
