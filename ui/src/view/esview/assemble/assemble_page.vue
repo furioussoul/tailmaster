@@ -33,7 +33,7 @@
     <div class="index-layout-content">
       <Row>
 
-        <i-col class="controls-container" span="3">
+        <i-col v-show="!showCode" class="controls-container" span="3">
           <transition name="index-soul-control-class-fade">
             <div>
               <Collapse :key="classIndex" v-for="(controlClass, classIndex) in controlClazzes">
@@ -71,7 +71,7 @@
               copy
             </Button>
           </i-col>
-          <i-col span="4">
+          <i-col v-show="!showCode" span="4">
             <ModelEditor :editSoul="editSoul"></ModelEditor>
           </i-col>
         </Row>
