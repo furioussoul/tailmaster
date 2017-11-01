@@ -24,7 +24,7 @@ function getVueHtml(soul,data) {
     slotName=''
 
   for (let key in model) {
-    if (model[key].exclude) {
+    if (model[key].exclude || !model[key].value) {
       continue
     }
     let propStr,
@@ -71,7 +71,7 @@ function getVueHtml(soul,data) {
       propStr = propStr.substring(0, propStr.length - 1)
       //delete comma
       let match = propStr.match(/("([\s\S]*?)":)/)
-      propStr = ':' + match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
+      propStr = match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
       propStr = propStr.trim()
       props += ' ' + propStr + ' '
     }

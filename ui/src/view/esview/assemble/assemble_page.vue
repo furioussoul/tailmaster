@@ -270,6 +270,7 @@
 
   .code {
     height: 100%;
+    overflow: auto;
   }
 
   .controls-container {
