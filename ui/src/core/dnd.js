@@ -11,7 +11,8 @@ import {
 import {
   generateUid,
   findSoulByCid,
-  findSoulByCTypeUp
+  findSoulByCTypeUp,
+  walkSoul
 } from '../helper/soul_helper'
 import {
   drop
@@ -96,21 +97,22 @@ function markDrop(drop, mark) {
 function interceptDrop(saveInfo) {
   if (saveInfo.drag.type === 'WrapCard') {
     let dropPanelSoul = findSoulByCid(100, store.getters['dragModule/draggableControls'])
-      let copy = deepCopy(dropPanelSoul)
-    copy.slotName='title'
-      copy.uid = generateUid()
-      saveInfo.drag.children.push(copy)
-    copy = deepCopy(dropPanelSoul)
-    copy.slotName='extra'
+    let copy = deepCopy(dropPanelSoul)
+    copy.slotName = 'title'
     copy.uid = generateUid()
     saveInfo.drag.children.push(copy)
     copy = deepCopy(dropPanelSoul)
-    copy.slotName='default'
+    copy.slotName = 'extra'
+    copy.uid = generateUid()
+    saveInfo.drag.children.push(copy)
+    copy = deepCopy(dropPanelSoul)
+    copy.slotName = 'default'
     copy.uid = generateUid()
     saveInfo.drag.children.push(copy)
   }
-
-  resetSoul(saveInfo.drag)
+  walkSoul(saveInfo.drag,(soul)=>{
+    resetSoul(soul)
+  })
 }
 
 function onDrop(e) {
