@@ -17,9 +17,6 @@ Esview is a vue code generator by html5 drag/drop.
 You can get .vue file code by dnd components on esview.
 
 ![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463255x2890191685.gif)
-![QQ图片20171027113639.png](https://user-gold-cdn.xitu.io/2017/10/31/4e39e42e4f101efe9bd9aee3a5bb73a7)
-![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463124x2890191685.png)
-
 
 # How to drag/drop?
 Esview use grid system,  
