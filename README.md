@@ -50,7 +50,7 @@ backend: Java（springboot）,so you must install jdk firstly.
 database:mysql,the sql file is on directory 'server',named 'soul-esview.sql'.
 
 # Theory
-How to implement dnd：I use html api，the code is in dnd.js
+How to implement dnd：I use html api，the code is in dnd.js .
 
 How to generate code：The data structure behind assembled page is a tree,I use Recursive downward parsing to get the final .vue code.  
 
