@@ -61,10 +61,6 @@
           <i-col span="20" class="middle" :class="{'is-preview':isPreview}">
             <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
             <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
-             <Button @click="copyCode" typ size="small" style="position: absolute;right: 0;top: 0;">
-                <Icon type="ios-copy-outline"></Icon>
-                copy
-              </Button>
             </pre>
           </i-col>
           <i-col span="4">
@@ -123,6 +119,7 @@
   import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../core/assemble'
   import {copyProperties, stringify, parse, deepCopy,jsCopy}from '../../../util/assist'
   import {getControlList} from  '../../../resource/develop_resource'
+  import {resetSoul,reset} from  '../../../core/lifecycle'
   import {
     addPage,
     delPage,
@@ -156,12 +153,6 @@
     methods: {
       ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
       ...mapActions('dragModule', ['getControlClazzes']),
-      copyCode(){
-        let code = this.vueCode.replace(/\r/g,'\r\n')
-        code = this.vueCode.replace(/\n/g,'\r\n')
-        jsCopy('copy',code)
-        this.$Message.success('copied')
-      },
       deleteControl(){
         this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid, this.soul)
         let pSoul = findSoulByUidDown(this.editControlSoul.pid, this.soul);
@@ -182,18 +173,8 @@
         this.editControlSoul.scriptString = code
         this.editControlSoul.script = eval('(function () { \r\n return ' + code + '})()')
         this.showEditScriptModal = false
-        let pSoul = findSoulByUidDown(this.editControlSoul.pid);
-        if (pSoul) {
-          let editSoulCopy = deepCopy(this.editControlSoul)
-          let index = pSoul.children.indexOf(this.editControlSoul);
-          pSoul.children.splice(index, 1)
-          setTimeout(() => {
-            editSoulCopy.initScript = false
-            pSoul.children.splice(index, 0, editSoulCopy)
-          }, 1)
-        }
+        reset(this.editControlSoul)
       },
-
       okPageName(){
         addPage.call(this)
       },
@@ -227,8 +208,8 @@
     mounted(){
       this.getControlClazzes()
       resetSnapShot()
-      this.appId = localStorage.getItem('appId')
-      this.pageSoulId = localStorage.getItem('pageSoulId')
+      this.appId = this.$route.query.appId
+      this.pageSoulId = this.$route.query.pageSoulId
       this.clear()
 
       getControlList.call(this, (data) => {
@@ -271,9 +252,12 @@
             resetUid(ancestorSoul.maxUid)
             saveSoul()
             this.setSoul(ancestorSoul)
+            walkSoul(ancestorSoul,(soul)=>{
+              resetSoul(soul)
+            })
           })
         }
-
+        this.setShowCode(false)
       })
     }
   }
@@ -285,7 +269,7 @@
   }
 
   .code {
-    height: 1000px;
+    height: 100%;
   }
 
   .controls-container {

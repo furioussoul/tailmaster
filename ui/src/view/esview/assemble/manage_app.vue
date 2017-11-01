@@ -159,7 +159,7 @@
       },
       page(param){
         this.random = Math.random()
-        localStorage.setItem('appId', param.row.id)
+        this.$route.query.appId = param.row.id
         this.showManagePageModal = true
       },
       add(){

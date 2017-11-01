@@ -18,16 +18,35 @@ function getVueHtml(soul,data) {
     childCode += getVueHtml(child,data)
   })
 
-  let model = soul.model;
-  let props = ''
-  let prop = {}
+  let model = soul.model,
+    props = '',
+    prop = {},
+    slotName=''
+
   for (let key in model) {
     if (model[key].exclude) {
       continue
     }
     let propStr,
       prop = {}
-    if (typeOf(model[key].value) === 'array') {
+    if(soul.slotName){
+      if(!soul.showSlot){
+        return ''
+      }
+      slotName = 'slot="'+soul.slotName+'"'
+    }else if(soul.type ==='Icon'){
+      prop[key] = model[key].value + ''
+      propStr = JSON.stringify(prop)
+      propStr = propStr.trim()
+      //remove {}
+      propStr = propStr.substring(1, propStr.length)
+      propStr = propStr.substring(0, propStr.length - 1)
+      //delete comma
+      let match = propStr.match(/("([\s\S]*?)":)/)
+      propStr = match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
+      propStr = propStr.trim()
+      props += ' ' + propStr + ' '
+    } else if (typeOf(model[key].value) === 'array') {
       data[key] = model[key].value
       props += ' :' + key+ '=' + '"' + key + '"' + ' '
     } else if (typeOf(model[key].value) === 'object') {
@@ -59,6 +78,7 @@ function getVueHtml(soul,data) {
   }
 
   temp = temp.replace('{slot}', childCode)
+  temp = temp.replace('{slotName}', slotName)
   return temp.replace('{model}', props).trim()
 }
 
@@ -82,7 +102,7 @@ function getVueScript(data) {
 
 export function getVueCode(soul) {
   let data = {},
-    vueHtml = getVueHtml(soul,data),
+    vueHtml = '<template>' + getVueHtml(soul,data) + '</template>',
   vueScript = getVueScript(data)
   return vueHtml+'\r\n'+pretty(vueScript)
 }
