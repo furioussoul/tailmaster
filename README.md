@@ -25,14 +25,21 @@ Also you can customize your own draggable components.
 http://47.94.2.0:9090  
 
 # Doc
-1 generate code) 
+1) generate code:
 
-For generating .vue file code,you show go to Assemble->ManageApp to create an app,then add a page,
+For generating .vue file code,you should go to page 'Assemble->ManageApp' to create an app,then add a page,
 
 for now you can assemble page by dragging components on the left side and drop them into the middle section.  
 
-Click 'code' on the action bar to see generated code and click copy to get code.  
+Click 'code' on the action bar to see generated code and click copy to get code.    
 
+2) customize own draggable components:  
+
+You should know how to register components on vue,so this is the first step,  
+
+second step is to go to page 'Develop->ManageControl',copy code of 'Div',    
+
+and modify exports.* according to your own components,click save and you will see it on page 'Assemble->AssemblePage'.
 
 
 # Install  
