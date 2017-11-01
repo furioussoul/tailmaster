@@ -28,11 +28,16 @@ function getVueHtml(soul,data) {
 
     let propStr,
       prop = {}
-    if(soul.slotName){
+
+    if (model[key].exclude || '' === model[key].value || isPlain(model[key].value)) {
+      propStr = ''
+
+    }else if(soul.slotName){
       if(!soul.showSlot){
         return ''
       }
       slotName = 'slot="'+soul.slotName+'"'
+
     }else if(soul.type ==='Icon'){
       prop[key] = model[key].value + ''
       propStr = JSON.stringify(prop)
@@ -73,10 +78,6 @@ function getVueHtml(soul,data) {
       propStr = match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
       propStr = propStr.trim()
       props += ' ' + propStr + ' '
-    }
-
-    if (model[key].exclude || '' === model[key].value || isPlain(model[key].value)) {
-      props = ''
     }
   }
 
