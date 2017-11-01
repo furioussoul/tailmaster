@@ -1,5 +1,11 @@
 <template>
   <div class="login-background">
+    <Card class="noticePanel">
+      <span slot="title" style="color: red;">提示：</span>
+      用户名: 33，密码 : 1,</br>
+      Username : 33 Password : 1
+      </br>
+    </Card>
     <Card class="loginPanel">
       <p slot="title">esview</p>
       <Form ref="auth" :model="userInfo" :label-width="80">
