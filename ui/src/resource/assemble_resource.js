@@ -83,11 +83,13 @@ function getRichApp(id, fn) {
 
 function addPage() {
   let soul = store.getters['dragModule/soul']
+  soul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(soul)
   this.opModel.appId = this.appId
   this.$http.post('page/add', this.opModel).then(res => {
     if (res.data.code === 10000) {
-      this.opModel.id = res.data.data.id
+      this.pageSoulId = this.opModel.id = res.data.data.id
+      window.location.href += '?pageSoulId=' +  this.pageSoulId
       this.$Message.success('saved')
     }
   })
