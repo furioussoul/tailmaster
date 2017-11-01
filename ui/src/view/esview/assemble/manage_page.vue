@@ -45,7 +45,8 @@
     updatePage,
     getPageList,
     getTablePageList,
-    getRichPage
+    getRichPage,
+    getTableAppList
   } from '../../../resource/assemble_resource'
   import{
     paginationMixin
@@ -53,30 +54,21 @@
   export default{
     name: 'ManagePage',
     mixins: [paginationMixin],
-    props: {
-      refresh: [String, Number]
-    },
-    watch: {
-      refresh(n){
-        this.searchInput.appId = this.$route.query.appId
-        getTablePageList.call(this)
-      }
-    },
     data() {
       return {
         fn: {
-          initFns: [],
+          initFns: [getTablePageList],
           searchFns: [getTablePageList]
         },
         columns: [
           {
             title: 'PageId',
-            key: 'id'
+            key: 'id',
+            width: 150
           },
           {
             title: 'PageName',
             key: 'name',
-            width:150
           },
           {
             title: 'action',
@@ -111,11 +103,11 @@
             }
           }
         ],
-        loading:false,
+        loading: false,
         tableData: [],
         searchInput: {
           pageNum: 1,
-          pageSize: 20,
+          pageSize: 15,
           total: 0,
           name: ''
         }
@@ -133,7 +125,7 @@
         this.$router.push({path: './assemble_page', query: {pageSoulId: param.row.id}})
       },
       del(param){
-        delPage.call(this,param.row.id)
+        delPage.call(this, param.row.id)
       }
     }
   }

@@ -227,9 +227,9 @@ export default{
                 "subMenuList": [
                   {
                     "id": 3,
-                    "name": "ManageApp",
-                    "title": "ManageApp",
-                    "url": "/esview/assemble/manage_app",
+                    "name": "managePage",
+                    "title": "managePage",
+                    "url": "/esview/assemble/manage_page",
                     "orderNo": 1,
                     "mtype": 1,
                     "hasPermisson": 1,
