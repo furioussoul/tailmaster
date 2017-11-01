@@ -29,7 +29,7 @@ http://47.94.2.0:9090
 
 For generating .vue file code,you should go to page 'Assemble->ManageApp' to create an app,then add a page,
 
-for now you can assemble page by dragging components on the left side and drop them into the middle section.  
+for now you are in page 'Assemble->AssemblePage' you can assemble page by dragging components on the left side and drop them into the middle section.  
 
 Click 'code' on the action bar to see generated code and click copy to get code.    
 
