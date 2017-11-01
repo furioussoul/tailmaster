@@ -50,24 +50,15 @@
     <select id="selectByExample" resultType="esform.domain.Page">
         select *
         from page
-        RIGHT JOIN app
-        on app.id = page.appId
         <where>
             <if test="id != null">
-                page.id = #{id}
+               id = #{id}
             </if>
             <if test="name != null">
-                and page.name = #{name}
+                and `name`= #{name}
             </if>
-            <if test="appName != null">
-                and app.name = #{appName}
-            </if>
-            <if test="appId != null">
-                and app.appId = #{appId}
-            </if>
-            and app.rowStatus = 1
-            and page.rowStatus = 1
+            and rowStatus = 1
         </where>
-        ORDER  BY page.id DESC
+        ORDER  BY id DESC
     </select>
 </mapper>
