@@ -62,6 +62,14 @@
             <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
             <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
             </pre>
+            <Button v-if="showCode"
+                    @click="copyCode"
+                    type="ghost"
+                    size="small"
+                    style="position: absolute;right: 0;top: 0;opacity:0.5">
+              <Icon type="ios-copy-outline"></Icon>
+              copy
+            </Button>
           </i-col>
           <i-col span="4">
             <ModelEditor :editSoul="editSoul"></ModelEditor>
@@ -108,7 +116,7 @@
         </DropdownMenu>
       </Dropdown>
     </div>
-    <input id="copy" style="width: 1px;height: 1px;border: 0;outline:0" />
+    <textarea id="copy" style="width: 1px;height: 1px;border: 0;outline:0" />
   </div>
 </template>
 <script>
@@ -153,6 +161,10 @@
     methods: {
       ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
       ...mapActions('dragModule', ['getControlClazzes']),
+      copyCode(){
+        jsCopy('copy',this.vueCode)
+        this.$Message.success('copied')
+      },
       deleteControl(){
         this.editControlSoul = findSoulByUidDown(this.rightClickMenu.uid, this.soul)
         let pSoul = findSoulByUidDown(this.editControlSoul.pid, this.soul);

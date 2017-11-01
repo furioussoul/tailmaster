@@ -22,7 +22,7 @@ function resetSoul(soul) {
   }
 }
 
-function reset(soul) {
+export function reset(soul) {
   let pSoul = findSoulByUidDown(soul.pid);
   if (pSoul) {
     let soulCopy = deepCopy(soul)
