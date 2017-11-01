@@ -57,12 +57,19 @@
           </transition>
         </i-col>
 
-        <Row style="margin-left: 200px;height: 1000px;">
+        <Row  v-if="!showCode" style="margin-left: 200px;height: 1000px;">
           <i-col span="20" class="middle" :class="{'is-preview':isPreview}">
-            <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
-            <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
+            <RenderDev :soul="soul"></RenderDev>
+          </i-col>
+          <i-col span="4">
+            <ModelEditor :editSoul="editSoul"></ModelEditor>
+          </i-col>
+        </Row>
+        <Row v-else style="margin-left: 200px;height: 1000px;">
+          <i-col span="24" class="middle">
+              <pre v-highlightjs="vueCode" class="code" id="code"><code></code>
             </pre>
-            <Button v-if="showCode"
+            <Button
                     @click="copyCode"
                     type="ghost"
                     size="small"
@@ -71,10 +78,8 @@
               copy
             </Button>
           </i-col>
-          <i-col span="4">
-            <ModelEditor :editSoul="editSoul"></ModelEditor>
-          </i-col>
         </Row>
+
       </Row>
     </div>
 
@@ -159,7 +164,7 @@
         'draggableControls', 'editSoul', 'controlClazzes', 'vueCode', 'showCode'])
     },
     methods: {
-      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode'm]),
+      ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
       ...mapActions('dragModule', ['getControlClazzes']),
       copyCode(){
         jsCopy('copy',this.vueCode)
