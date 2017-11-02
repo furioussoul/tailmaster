@@ -11,7 +11,7 @@
           <Icon type="wrench"></Icon>
           layout
         </MenuItem>
-        <MenuItem name="6">
+        <MenuItem v-if="!opModel.createBy ||  me.username === opModel.createBy" name="6">
           <Icon type="document-text"></Icon>
           save
         </MenuItem>
@@ -157,6 +157,7 @@
       }
     },
     computed: {
+      ...mapGetters('userModule', ['me']),
       ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu',
         'draggableControls', 'editSoul', 'controlClazzes', 'vueCode', 'showCode'])
     },

@@ -6,6 +6,8 @@ import esform.control.request.OperateControlRequest;
 import esform.control.request.QueryControlRequest;
 import esform.dao.ControlDao;
 import esform.domain.Control;
+import esform.domain.User;
+import esform.filter.OauthFilter;
 import esform.response.Response;
 import esform.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,11 @@ public class ControlResource {
     @GetMapping("del/{id}")
     @ResponseBody
     public Response del(@PathVariable("id") Long id) {
-        controlDao.del(id);
+        Control domain = new Control(id);
+        User user = OauthFilter.getUser();
+        domain.setCreateBy(user.getUserName());
+        Util.trace(domain,false);
+        controlDao.del(domain);
         return Response.ok();
     }
 
@@ -47,6 +53,9 @@ public class ControlResource {
     @ResponseBody
     public Response update(@RequestBody OperateControlRequest request) {
         Control domain = request.getDomain();
+        User user = OauthFilter.getUser();
+        domain.setCreateBy(user.getUserName());
+        Util.trace(domain,false);
         controlDao.update(domain);
         return Response.ok();
     }

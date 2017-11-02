@@ -30,7 +30,7 @@ function getVueHtml(soul,data) {
     let propStr,
       prop = {}
 
-    if (model[key].exclude || '' === model[key].value || isPlain(model[key].value)) {
+    if (model[key].exclude || false===model[key].value || '' === model[key].value || isPlain(model[key].value)) {
       //don't need compile this model value
       propStr = ''
 

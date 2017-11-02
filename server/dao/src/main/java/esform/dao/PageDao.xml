@@ -10,10 +10,11 @@
         VALUES (#{name},#{pageSoul},#{appId},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
     </insert>
 
-    <delete id="del" parameterType="java.lang.Long">
+    <delete id="del" parameterType="esform.domain.Page">
         update page
         SET rowStatus = 0
         WHERE id = #{id}
+         AND createBy = #{createBy}
     </delete>
 
     <update id="update" parameterType="esform.domain.Page">
@@ -32,6 +33,7 @@
             updateDt = #{updateDt}
         </set>
         WHERE id = #{id}
+        AND createBy = #{createBy}
     </update>
 
     <select id="select" resultType="esform.domain.Page">

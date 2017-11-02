@@ -99,7 +99,11 @@ public class OauthFilter implements Filter {
 
     public static User getUser(){
         Map<String, Object> stringObjectMap = LOCAL_VARS.get();
-        return null != stringObjectMap ? (User)stringObjectMap.get("user") : null;
+        User user = (User)stringObjectMap.get("user");
+        if(user == null){
+            throw new RuntimeException("unauthorized");
+        }
+        return user;
     }
 
     public static Object getVar(String key) {

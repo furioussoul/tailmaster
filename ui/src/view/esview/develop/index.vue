@@ -103,6 +103,14 @@
             key: 'sort'
           },
           {
+            title: 'updateBy',
+            key: 'updateBy',
+          },
+          {
+            title: 'updateDt',
+            key: 'updateDt',
+          },
+          {
             title: 'action',
             key: 'action',
             width: 300,
