@@ -6,7 +6,9 @@ import {
   RenderDev,
   WrapModal,
   WrapSelect,
-  WrapUpload
+  WrapUpload,
+  FormInput,
+  FormSelect
 } from '../component'
 
 const soul = {
@@ -17,9 +19,10 @@ const soul = {
   RenderDev,
   WrapModal,
   WrapSelect,
-  WrapUpload
+  WrapUpload,
+  FormInput,
+  FormSelect
 };
-
 
 const install = function (Vue, opts = {}) {
   Object.keys(soul).forEach((key) => {

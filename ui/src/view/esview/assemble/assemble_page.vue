@@ -35,8 +35,8 @@
         <i-col v-show="!showCode" class="controls-container" span="3">
           <transition name="index-soul-control-class-fade">
             <div>
-              <Collapse :key="classIndex" v-for="(controlClass, classIndex) in controlClazzes">
-                <Panel :name="classIndex+''">
+              <Collapse v-model="open" :key="classIndex" v-for="(controlClass, classIndex) in controlClazzes">
+                <Panel :name="classIndex+1+''">
                   {{controlClass.name}}
                   <p slot="content" class="index-layout-content__class">
                     <Control
@@ -147,6 +147,7 @@
     name: 'AssemblePage',
     data(){
       return {
+        open:'1',
         isPreview: true,
         showConfirmPageNameModal: false,
         showEditScriptModal: false,

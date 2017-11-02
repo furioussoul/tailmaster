@@ -10,6 +10,7 @@
                 :model="model">
 
           <div v-for="(config,index) in configs"
+               v-if="config.showConfig === undefined|| config.showConfig"
                :key="index">
 
             <Form-item v-if="config.type === 'text'"
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+
 
   export default {
     name: 'Editor',

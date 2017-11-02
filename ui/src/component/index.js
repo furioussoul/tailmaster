@@ -6,7 +6,9 @@ import {
   WrapCard,
   WrapModal,
   WrapSelect,
-  WrapUpload
+  WrapUpload,
+  FormInput,
+  FormSelect
 } from '../external/component/wrap'
 
 export {
@@ -17,5 +19,7 @@ export {
   RenderDev,
   WrapModal,
   WrapSelect,
-  WrapUpload
+  WrapUpload,
+  FormInput,
+  FormSelect
 }

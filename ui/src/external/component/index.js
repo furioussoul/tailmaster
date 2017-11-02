@@ -3,7 +3,9 @@ import {
   WrapCard,
   WrapUpload,
   WrapModal,
-  WrapSelect
+  WrapSelect,
+  FormInput,
+  FormSelect
 } from './wrap'
 
 export {
@@ -11,6 +13,8 @@ export {
   WrapCard,
   WrapUpload,
   WrapModal,
-  WrapSelect
+  WrapSelect,
+  FormInput,
+  FormSelect
 }
 
