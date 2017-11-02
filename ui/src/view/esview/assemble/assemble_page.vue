@@ -1,7 +1,6 @@
 <template>
-  <div style="margin-top: 50px">
+  <div>
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
-
       <div class="index-layout-nav">
         <MenuItem name="4">
           <Icon type="code"></Icon>
@@ -11,7 +10,7 @@
           <Icon type="wrench"></Icon>
           layout
         </MenuItem>
-        <MenuItem name="6">
+        <MenuItem v-if="!opModel.createBy ||  me.username === opModel.createBy" name="6">
           <Icon type="document-text"></Icon>
           save
         </MenuItem>
@@ -72,7 +71,10 @@
             </Button>
           </i-col>
           <i-col v-show="!showCode" span="4">
-            <ModelEditor :editSoul="editSoul"></ModelEditor>
+            <ModelEditor
+              :pageName="opModel.name"
+              :editSoul="editSoul">
+            </ModelEditor>
           </i-col>
         </Row>
       </Row>
@@ -85,7 +87,7 @@
       @on-ok="okPageName">
       <i-form :label-width="100">
         <FormItem label="PageName">
-          <i-input v-model="opModel.name"></i-input>
+          <i-input v-model="opModel.name"  @keyup.13.native="okPageName"></i-input>
         </FormItem>
       </i-form>
     </Modal>
@@ -150,11 +152,11 @@
         showEditScriptModal: false,
         opModel: {},
         editControlSoul: {scriptString: ''},
-        pageSoulId: '',
-        appId: ''
+        pageSoulId: ''
       }
     },
     computed: {
+      ...mapGetters('userModule', ['me']),
       ...mapGetters('dragModule', ['soul', 'editLayer', 'rightClickMenu',
         'draggableControls', 'editSoul', 'controlClazzes', 'vueCode', 'showCode'])
     },
@@ -328,9 +330,9 @@
   }
 
   .action_bar {
-    position: fixed;
+    position: sticky;
     line-height: 3.5;
-    top: 50px;
+    top: 0px;
     height: 50px;
     width: 100%;
   }

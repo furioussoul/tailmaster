@@ -3,7 +3,6 @@ package esform.dao;
 import esform.domain.Control;
 import esform.request.BaseRequest;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface ControlDao {
 
     int add(Control control);
 
-    int del(@Param("id") Long id);
+    int del(Control control);
 
     int update(Control control);
 

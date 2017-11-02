@@ -3,7 +3,7 @@
     <i-col span="24">
       <Card>
         <p slot="title">
-          Model Config
+          {{pageName}}: Model Config
         </p>
         <i-form label-position="left"
                 :label-width="70"
@@ -55,6 +55,7 @@
   export default {
     name: 'Editor',
     props: {
+      pageName:'',
       editSoul: [Object]
     },
     data(){

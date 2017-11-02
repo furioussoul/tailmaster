@@ -1,6 +1,9 @@
 import {
   makeControl
 } from '../helper/code_helper'
+import {
+  dateFormat
+}from '../util/assist'
 
 function addControl(fn) {
 

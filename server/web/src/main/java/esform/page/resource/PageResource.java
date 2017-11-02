@@ -2,11 +2,12 @@ package esform.page.resource;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import esform.dao.PageDao;
 import esform.domain.Page;
 import esform.page.request.OperatePageRequest;
 import esform.page.request.QueryPageRequest;
-import esform.dao.PageDao;
 import esform.response.Response;
+import esform.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -30,6 +31,7 @@ public class PageResource {
     @ResponseBody
     public Response add(@RequestBody OperatePageRequest request) {
         Page domain = request.getDomain();
+        Util.trace(domain,true);
         pageDao.add(domain);
         return Response.ok(domain);
     }
@@ -37,7 +39,10 @@ public class PageResource {
     @GetMapping("del/{id}")
     @ResponseBody
     public Response del(@PathVariable("id") Long id) {
-        pageDao.del(id);
+        Page domain = new Page(id);
+        Util.trace(domain,false);
+        Util.trace(domain,true);
+        pageDao.del(domain);
         return Response.ok();
     }
 
@@ -45,6 +50,8 @@ public class PageResource {
     @ResponseBody
     public Response update(@RequestBody OperatePageRequest request) {
         Page domain = request.getDomain();
+        Util.trace(domain,false);
+        Util.trace(domain,true);
         pageDao.update(domain);
         return Response.ok();
     }

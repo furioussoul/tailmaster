@@ -3,7 +3,10 @@ import {
   ModelEditor,
   WrapCard,
   CodeEditor,
-  RenderDev
+  RenderDev,
+  WrapModal,
+  WrapSelect,
+  WrapUpload
 } from '../component'
 
 const soul = {
@@ -11,7 +14,10 @@ const soul = {
   ModelEditor,
   WrapCard,
   CodeEditor,
-  RenderDev
+  RenderDev,
+  WrapModal,
+  WrapSelect,
+  WrapUpload
 };
 
 

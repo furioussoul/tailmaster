@@ -3,7 +3,10 @@ import ModelEditor from './model_editor.vue'
 import CodeEditor from './code_editor.vue'
 import RenderDev from './render_dev.js'
 import {
-  WrapCard
+  WrapCard,
+  WrapModal,
+  WrapSelect,
+  WrapUpload
 } from '../external/component/wrap'
 
 export {
@@ -11,5 +14,8 @@ export {
   ModelEditor,
   WrapCard,
   CodeEditor,
-  RenderDev
+  RenderDev,
+  WrapModal,
+  WrapSelect,
+  WrapUpload
 }

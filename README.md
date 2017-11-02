@@ -12,29 +12,32 @@
   
   
 # Introduction
-Esview is a vue code generator by html5 drag/drop.  
+Esview is a vue code generator based on iview-ui.  
 
 You can get .vue file code by dnd components on esview.
 
-![QQ图片20171027113639.png](https://user-gold-cdn.xitu.io/2017/10/31/4e39e42e4f101efe9bd9aee3a5bb73a7)
-![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463124x2890191685.png)
+Also you can customize your own draggable components. 
+
 ![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463255x2890191685.gif)
-
-# How to drag/drop?
-Esview use grid system,  
-
-for creating an app, you should drop 'Frame' into 'DropPanel',  
-
-drop 'Row' into 'DropPanel',drop 'Col' into 'Row'.  
-
-For creating a search form ,you should drop 'Form' into 'Col'.  
-
-then drop 'FormItem' into 'Form',drop 'Input、Radio、Button etc.' into 'FormItem'.
-
 
 # Online Demo
 
 http://47.94.2.0:9090  
+
+# Doc
+1 generate code:  
+
+You can assemble page by dragging components on the left side and drop them into the middle section.  
+
+Click 'code' on the action bar to see generated code and click copy to get code.    
+
+2 customize own draggable components:  
+
+You should know how to register components on vue,so this is the first step,  
+
+second step is to go to page 'Develop->ManageControl',copy code of 'Div',    
+
+and modify exports.* according to your own components,click save and you will see it on assemble page.
 
 
 # Install  
@@ -45,9 +48,11 @@ backend: Java（springboot）,so you must install jdk firstly.
 database:mysql,the sql file is on directory 'server',named 'soul-esview.sql'.
 
 # Theory
-How to implement dnd：I use html api，the code is in dnd.js
+How to implement dnd：I use html api，the code is in dnd.js .
 
-How to generate code：The data structure behind assembled page is a tree,I use Recursive downward parsing to get the final .vue code.  
+How to generate code：The data structure behind assembled page is a syntax tree,  
+
+I use recursive downward parsing to get the final .vue code.  
 
 # License
 [MIT](https://opensource.org/licenses/MIT)

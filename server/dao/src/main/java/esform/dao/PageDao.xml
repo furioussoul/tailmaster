@@ -10,10 +10,11 @@
         VALUES (#{name},#{pageSoul},#{appId},#{createBy},#{createDt},#{updateBy},#{updateDt},1)
     </insert>
 
-    <delete id="del" parameterType="java.lang.Long">
+    <delete id="del" parameterType="esform.domain.Page">
         update page
         SET rowStatus = 0
         WHERE id = #{id}
+         AND createBy = #{createBy}
     </delete>
 
     <update id="update" parameterType="esform.domain.Page">
@@ -32,10 +33,11 @@
             updateDt = #{updateDt}
         </set>
         WHERE id = #{id}
+        AND createBy = #{createBy}
     </update>
 
     <select id="select" resultType="esform.domain.Page">
-        select *
+        select id,`name`,createBy,createDt,updateBy,updateDt,rowStatus
         from page
         WHERE rowStatus = 1
         <if test="name != null and name != ''">
@@ -48,26 +50,17 @@
     </select>
 
     <select id="selectByExample" resultType="esform.domain.Page">
-        select *
+        select id,pageSoul,`name`,createBy,createDt,updateBy,updateDt,rowStatus
         from page
-        RIGHT JOIN app
-        on app.id = page.appId
         <where>
             <if test="id != null">
-                page.id = #{id}
+               id = #{id}
             </if>
             <if test="name != null">
-                and page.name = #{name}
+                and `name`= #{name}
             </if>
-            <if test="appName != null">
-                and app.name = #{appName}
-            </if>
-            <if test="appId != null">
-                and app.appId = #{appId}
-            </if>
-            and app.rowStatus = 1
-            and page.rowStatus = 1
+            and rowStatus = 1
         </where>
-        ORDER  BY page.id DESC
+        ORDER  BY id DESC
     </select>
 </mapper>
