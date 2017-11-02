@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
+    <Menu ref="actionBar"   class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
       <div class="index-layout-nav">
         <MenuItem name="4">
           <Icon type="code"></Icon>
@@ -118,6 +118,7 @@
     <textarea id="copy" style="width: 1px;height: 1px;border: 0;outline:0" />
   </div>
 </template>
+
 <script>
   import {mapGetters, mapMutations, mapActions} from 'vuex'
   import store from '../../../store'
@@ -140,6 +141,7 @@
   import{
     interceptDrop
   }from '../../../core/dnd'
+
   export default {
     name: 'AssemblePage',
     data(){
@@ -150,7 +152,8 @@
         opModel: {},
         editControlSoul: {scriptString: ''},
         pageSoulId: '',
-        appId: ''
+        appId: '',
+        actionBarPosition:''
       }
     },
     computed: {
@@ -270,6 +273,11 @@
         }
         this.setShowCode(false)
       })
+    },
+    watch:{
+      'actionBarPosition':function(){
+        this.setActionBarPosition();
+      }
     }
   }
 </script>
