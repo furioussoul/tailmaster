@@ -87,7 +87,7 @@
       @on-ok="okPageName">
       <i-form :label-width="100">
         <FormItem label="PageName">
-          <i-input v-model="opModel.name"></i-input>
+          <i-input v-model="opModel.name"  @keyup.13.native="okPageName"></i-input>
         </FormItem>
       </i-form>
     </Modal>

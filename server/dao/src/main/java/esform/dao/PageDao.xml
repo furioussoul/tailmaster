@@ -37,7 +37,7 @@
     </update>
 
     <select id="select" resultType="esform.domain.Page">
-        select `name`,appId,createBy,createDt,updateBy,updateDt,rowStatus
+        select id,`name`,createBy,createDt,updateBy,updateDt,rowStatus
         from page
         WHERE rowStatus = 1
         <if test="name != null and name != ''">
@@ -50,7 +50,7 @@
     </select>
 
     <select id="selectByExample" resultType="esform.domain.Page">
-        select `name`,appId,createBy,createDt,updateBy,updateDt,rowStatus
+        select id,pageSoul,`name`,createBy,createDt,updateBy,updateDt,rowStatus
         from page
         <where>
             <if test="id != null">

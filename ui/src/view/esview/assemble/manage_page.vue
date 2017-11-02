@@ -128,7 +128,7 @@
         this.$refs[name].resetFields();
       },
       hrefAdd(){
-        this.$router.push({path: './assemble_page', query: {appId: this.$route.query.appId}})
+        this.$router.push({path: './assemble_page'})
       },
       edit(param){
         this.$router.push({path: './assemble_page', query: {pageSoulId: param.row.id}})
