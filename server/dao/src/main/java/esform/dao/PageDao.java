@@ -3,7 +3,6 @@ package esform.dao;
 import esform.domain.Page;
 import esform.request.BaseRequest;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,11 +15,11 @@ import java.util.List;
 @Mapper
 public interface PageDao {
 
-    int add(Page control);
+    int add(Page page);
 
-    int del(@Param("id") Long id);
+    int del(Page page);
 
-    int update(Page control);
+    int update(Page page);
 
     List<Page> select(BaseRequest request);
 

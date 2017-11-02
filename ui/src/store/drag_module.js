@@ -91,7 +91,7 @@ export default {
       e.stopPropagation()
       const el = findElUpward(e.target);
       const soul = findSoulByUidDown(el.controlConfig.uid, state.soul);
-      if (!soul || !isPlain(soul.model)) {
+      if (soul && soul.model) {
         state.editSoul = soul
         return
       }

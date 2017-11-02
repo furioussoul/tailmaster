@@ -2,7 +2,6 @@
   <Row>
     <i-col span="24">
       <Card>
-
         <div>
           <Form ref="searchForm" :model="searchInput" :label-width="80" inline>
             <Form-item prop="name" label="PageName:">
@@ -45,7 +44,8 @@
     updatePage,
     getPageList,
     getTablePageList,
-    getRichPage
+    getRichPage,
+    getTableAppList
   } from '../../../resource/assemble_resource'
   import{
     paginationMixin
@@ -53,30 +53,29 @@
   export default{
     name: 'ManagePage',
     mixins: [paginationMixin],
-    props: {
-      refresh: [String, Number]
-    },
-    watch: {
-      refresh(n){
-        this.searchInput.appId = this.$route.query.appId
-        getTablePageList.call(this)
-      }
-    },
     data() {
       return {
         fn: {
-          initFns: [],
+          initFns: [getTablePageList],
           searchFns: [getTablePageList]
         },
         columns: [
           {
             title: 'PageId',
-            key: 'id'
+            key: 'id',
+            width: 150
           },
           {
             title: 'PageName',
             key: 'name',
-            width:150
+          },
+          {
+            title: 'updateBy',
+            key: 'updateBy',
+          },
+          {
+            title: 'updateDt',
+            key: 'updateDt',
           },
           {
             title: 'action',
@@ -84,8 +83,7 @@
             width: 200,
             align: 'center',
             render: (h, params) => {
-              return h('ButtonGroup', [
-                h('Button', {
+              let layout = h('Button', {
                   props: {
                     type: 'primary',
                     size: 'small'
@@ -95,8 +93,8 @@
                       this.edit(params)
                     }
                   }
-                }, 'edit'),
-                h('Button', {
+                }, 'layout'),
+                del = this.me.username === params.row.createBy && h('Button', {
                   props: {
                     type: 'error',
                     size: 'small'
@@ -107,19 +105,22 @@
                     }
                   }
                 }, 'del')
-              ]);
+              return h('ButtonGroup', [layout,del ]);
             }
           }
         ],
-        loading:false,
+        loading: false,
         tableData: [],
         searchInput: {
           pageNum: 1,
-          pageSize: 20,
+          pageSize: 10,
           total: 0,
           name: ''
         }
       }
+    },
+    computed:{
+      ...mapGetters('userModule', ['me']),
     },
     methods: {
       ...mapMutations('dragModule', ['setSoul']),
@@ -127,13 +128,13 @@
         this.$refs[name].resetFields();
       },
       hrefAdd(){
-        this.$router.push({path: './assemble_page', query: {appId: this.$route.query.appId}})
+        this.$router.push({path: './assemble_page'})
       },
       edit(param){
         this.$router.push({path: './assemble_page', query: {pageSoulId: param.row.id}})
       },
       del(param){
-        delPage.call(this,param.row.id)
+        delPage.call(this, param.row.id)
       }
     }
   }
