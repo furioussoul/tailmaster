@@ -1,5 +1,7 @@
 <template>
-    <CodeEditor :buttonStyle="codeButtonStyle"
+    <CodeEditor
+                :editorStyle="editorStyle"
+                :buttonStyle="codeButtonStyle"
                 class="code-editor"
                 :code="opModel.code"
                 @save="saveCode">
@@ -31,7 +33,8 @@
           height: '50px',
           zIndex:1000000,
           display:'none'
-        }
+        },
+        editorStyle:{height:'1000px'}
       }
     },
     computed: {

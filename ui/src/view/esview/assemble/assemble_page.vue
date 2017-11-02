@@ -100,7 +100,7 @@
       <div slot="footer">
       </div>
       <CodeEditor
-        style="height: 600px"
+        :editorStyle="editorStyle"
         :code="editControlSoul.scriptString"
         @save="saveCode">
       </CodeEditor>
@@ -157,7 +157,7 @@
         editControlSoul: {scriptString: ''},
         pageSoulId: '',
         appId: '',
-        actionBarPosition:''
+        editorStyle:{height:'400px'}
       }
     },
     computed: {

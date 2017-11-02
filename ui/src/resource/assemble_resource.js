@@ -2,7 +2,8 @@ import store from '../store'
 import {
   isPlain,
   stringify,
-  isNumber
+  isNumber,
+  dataFormat
 } from '../util/assist'
 import {
   currentUid,
@@ -134,6 +135,9 @@ function getTablePageList() {
     if (res.data.code === 10000) {
       this.loading = false
       let data = res.data.data
+      data.list.forEach(item=>{
+        item.updateDt = dataFormat(item.updateDt)
+      })
       this.searchInput.total = data.total
       this.tableData = data.list
     }

@@ -2,7 +2,7 @@ import {
   makeControl
 } from '../helper/code_helper'
 import {
-  dateFormat
+  dataFormat
 }from '../util/assist'
 
 function addControl(fn) {
@@ -57,6 +57,9 @@ function getTableControlList() {
     if (res.data.code === 10000) {
       this.loading = false
       let data = res.data.data
+      data.list.forEach(item=>{
+        item.updateDt = dataFormat(item.updateDt)
+      })
       this.searchInput.total = data.total
       this.tableData = data.list
     }
