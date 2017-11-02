@@ -1,7 +1,6 @@
 <template>
-  <div style="margin-top: 50px">
+  <div>
     <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
-
       <div class="index-layout-nav">
         <MenuItem name="4">
           <Icon type="code"></Icon>
@@ -328,9 +327,9 @@
   }
 
   .action_bar {
-    position: fixed;
+    position: sticky;
     line-height: 3.5;
-    top: 50px;
+    top: 0px;
     height: 50px;
     width: 100%;
   }
