@@ -37,7 +37,7 @@ You should know how to register components on vue,so this is the first step,
 
 second step is to go to page 'Develop->ManageControl',copy code of 'Div',    
 
-and modify exports.* according to your own components,click save and you will see it on page assemble page.
+and modify exports.* according to your own components,click save and you will see it on assemble page.
 
 
 # Install  
@@ -50,7 +50,9 @@ database:mysql,the sql file is on directory 'server',named 'soul-esview.sql'.
 # Theory
 How to implement dnd：I use html api，the code is in dnd.js .
 
-How to generate code：The data structure behind assembled page is a tree,I use Recursive downward parsing to get the final .vue code.  
+How to generate code：The data structure behind assembled page is a syntax tree,  
+
+I use recursive downward parsing to get the final .vue code.  
 
 # License
 [MIT](https://opensource.org/licenses/MIT)
