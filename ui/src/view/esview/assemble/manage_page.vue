@@ -113,7 +113,7 @@
         tableData: [],
         searchInput: {
           pageNum: 1,
-          pageSize: 15,
+          pageSize: 10,
           total: 0,
           name: ''
         }
