@@ -8,7 +8,10 @@ import {
   WrapSelect,
   WrapUpload,
   FormInput,
-  FormSelect
+  FormSelect,
+  FormNumber,
+  FormDate,
+  FormUpload
 } from '../external/component/wrap'
 
 export {
@@ -21,5 +24,8 @@ export {
   WrapSelect,
   WrapUpload,
   FormInput,
-  FormSelect
+  FormSelect,
+  FormNumber,
+  FormDate,
+  FormUpload
 }

@@ -8,7 +8,10 @@ import {
   WrapSelect,
   WrapUpload,
   FormInput,
-  FormSelect
+  FormSelect,
+  FormNumber,
+  FormDate,
+  FormUpload
 } from '../component'
 
 const soul = {
@@ -21,7 +24,10 @@ const soul = {
   WrapSelect,
   WrapUpload,
   FormInput,
-  FormSelect
+  FormSelect,
+  FormNumber,
+  FormDate,
+  FormUpload
 };
 
 const install = function (Vue, opts = {}) {

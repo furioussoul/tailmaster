@@ -1,6 +1,6 @@
 <template>
   <Form
-    :ref="model"
+    ref="model"
     :model="soul.model.value"
     :label-width="120"
     :show-message="true"
@@ -9,16 +9,20 @@
       v-if="soul.model.required.value"
       :prop="soul.model.prop.value"
       :label="soul.model.label.value">
-      <Input
-        v-model="soul.model.value.value">
-      </Input>
+      <Date-picker
+        :format="soul.model.format.value"
+        :type="soul.model.type.value"
+        :value="soul.model.value.value">
+      </Date-picker>
     </Form-item>
     <Form-item
       v-else
       :label="soul.model.label.value">
-      <Input
-        v-model="soul.model.value.value">
-      </Input>
+      <Date-picker
+        :format="soul.model.format.value"
+        :type="soul.model.type.value"
+        :value="soul.model.value.value">
+      </Date-picker>
     </Form-item>
   </Form>
 </template>
@@ -27,7 +31,7 @@
     resetSoul
   } from '../../../core/lifecycle'
   export default{
-    name: 'FormInput',
+    name: 'FormDate',
     props: {
       soul: [Object]
     },
@@ -37,13 +41,11 @@
         resetSoul(this.soul)
         this.soul.model.required.value = n
       }
-    },
-    data: function () {
+    },data: function () {
       return {
-        model:'model',
         ruleValidate: {
           value: [
-            {required: true, message:'cant be empty', trigger: 'blur'}
+            {required: true, message:'cant be empty', trigger: 'change'}
           ]
         }
       }

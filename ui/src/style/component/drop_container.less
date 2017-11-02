@@ -19,13 +19,13 @@
     height:800px;
   }
 
-  & .ivu-row{
+  &  [class^="ivu-row"]{
     .is-preview &{
       .makeContainer();
     }
   }
 
-  & .ivu-col{
+  & [class^="ivu-col"]{
     .is-preview &{
       .makeContainer();
     }
@@ -42,6 +42,14 @@
     .is-preview &{
       .makeContainer();
     }
+  }
+
+  .ivu-form .ivu-form,.ivu-form .ivu-form-item{
+    min-height: 0;
+    transition:  none;
+    padding: auto;
+    border: none;
+    box-shadow: none;
   }
 
   & .ivu-radio-group,

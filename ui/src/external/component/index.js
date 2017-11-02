@@ -5,7 +5,10 @@ import {
   WrapModal,
   WrapSelect,
   FormInput,
-  FormSelect
+  FormSelect,
+  FormNumber,
+  FormDate,
+  FormUpload
 } from './wrap'
 
 export {
@@ -15,6 +18,9 @@ export {
   WrapModal,
   WrapSelect,
   FormInput,
-  FormSelect
+  FormSelect,
+  FormNumber,
+  FormDate,
+  FormUpload
 }
 

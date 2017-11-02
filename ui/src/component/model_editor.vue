@@ -91,14 +91,18 @@
         this.editSoul = n
         let configs = []
         let model = {}
-        for (let name in this.editSoul.model) {
-          let config = this.editSoul.model[name]
-          model[name] = ''
-          config.name = name
-          configs.push(config)
+        try{
+          for (let name in this.editSoul.model) {
+            let config = this.editSoul.model[name]
+            model[name] = ''
+            config.name = name
+            configs.push(config)
+          }
+          this.model = model
+          this.configs = configs
+        }catch (ex){
+            console.warn(ex)
         }
-        this.model = model
-        this.configs = configs
       }
     }
   }
