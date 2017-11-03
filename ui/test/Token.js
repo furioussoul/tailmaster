@@ -6,13 +6,13 @@ function Token(tag) {
 }
 
 util.extend(Token, {
-    'qid':262,
     'and': 258,
     'or': 259,
     'id': 257,
     'number': 256,
     'lp': 260,//(
     'rp': 261,//)
+    'qt': 262,//)
     'eof': -1
 })
 

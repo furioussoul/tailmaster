@@ -77,10 +77,13 @@ Parser.prototype.stmt =function ()  {
   }
 }
 
+//factory -> Number | 'Id'
 Parser.prototype.factory =function ()  {
-  if(this.look.tag === Token.id){
-    console.log(this.look.lexeme)
+  if(this.look.tag === Token.qt){
+    this.match(Token.qt)
+    console.log('\''+this.look.lexeme+'\'')
     this.match(Token.id)
+    this.match(Token.qt)
   }else {
     console.log(this.look.lexeme)
     this.match(Token.number)
@@ -99,7 +102,7 @@ Parser.prototype.match = function(t) {
 }
 
 var content = `
-((a and 1) and  a and 1 and a and 1  )
+('不好a1123' or '不可以' and('你麻痹') or ('呵呵' and '哈哈' and('哇哈哈哈' and ('草拟吗'))))
 
 `
 var lexer = new Lexer(content)

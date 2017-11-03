@@ -13,7 +13,10 @@ Lexer.prototype.isDigit = function (char) {
 }
 
 Lexer.prototype.isAlphabetic = function (char) {
-  var reg = /[a-zA-Z]/
+  if(!char){
+    return false
+  }
+  var reg = /[\u4e00-\u9fa5a-zA-Z]/
   return reg.test(char)
 }
 
@@ -26,8 +29,6 @@ function Lexer(input) {
 
   reserve(new Word('and', Tag.AND))
   reserve(new Word('or', Tag.OR))
-  reserve(new Word('(', Tag.LP))
-  reserve(new Word(')', Tag.RP))
 
   this.line = 1
   this.input = input
@@ -35,10 +36,6 @@ function Lexer(input) {
   this.peek = ' '
 
   this.scan = function () {
-
-    if(this.index === this.input.length - 1){
-      return Token.eof
-    }
 
     this.peek = this.input[this.index]
     while(this.peek === ' ' || this.peek === '\t' || this.peek === '\n'){
@@ -54,6 +51,10 @@ function Lexer(input) {
       }
     }
 
+    if(undefined === this.peek){
+      return new Token(Token.eof)
+    }
+
     switch (this.peek){
       case '(':
         this.index++
@@ -61,6 +62,9 @@ function Lexer(input) {
       case ')':
         this.index++
         return new Token(Tag.RP)
+      case '\'':
+        this.index++
+        return new Token(Tag.QT)
     }
 
     if (this.isDigit(this.peek)) {
