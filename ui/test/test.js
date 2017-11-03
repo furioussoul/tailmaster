@@ -43,28 +43,3 @@ class BinaryTreeParser {
   }
 }
 
-
-program -> block
-block -> (stmts) | ε
-stmts -> stmts stmt | block
-stmt -> bool loc | loc
-bool ->  OR loc | AND loc
-loc -> Number | ID
-/*
- (
- '消协'
- OR '起诉'
- OR '315'
- OR '微博'
- OR '曝光'
- OR '律师'
- OR '电视台'
- OR '记者'
- OR '工商投诉'
- AND 1
- )
- AND (
- ('不行' OR '不可以')
- AND 2
- )
- */
