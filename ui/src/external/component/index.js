@@ -8,7 +8,9 @@ import {
   FormSelect,
   FormNumber,
   FormDate,
-  FormUpload
+  FormUpload,
+  FormRadio,
+  FormCheckbox
 } from './wrap'
 
 export {
@@ -21,6 +23,8 @@ export {
   FormSelect,
   FormNumber,
   FormDate,
-  FormUpload
+  FormUpload,
+  FormRadio,
+  FormCheckbox
 }
 

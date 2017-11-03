@@ -11,7 +11,9 @@ import {
   FormSelect,
   FormNumber,
   FormDate,
-  FormUpload
+  FormUpload,
+  FormRadio,
+  FormCheckbox
 } from '../component'
 
 const soul = {
@@ -27,7 +29,9 @@ const soul = {
   FormSelect,
   FormNumber,
   FormDate,
-  FormUpload
+  FormUpload,
+  FormRadio,
+  FormCheckbox
 };
 
 const install = function (Vue, opts = {}) {

@@ -7,6 +7,8 @@ import FormSelect from './formSelect.vue'
 import FormNumber from './formNumber.vue'
 import FormDate from './formDate.vue'
 import FormUpload from './formUpload.vue'
+import FormRadio from './formRadio.vue'
+import FormCheckbox from './formCheckbox.vue'
 export {
   WrapCard,
   WrapUpload,
@@ -16,5 +18,7 @@ export {
   FormSelect,
   FormNumber,
   FormDate,
-  FormUpload
+  FormUpload,
+  FormRadio,
+  FormCheckbox
 }

@@ -44,11 +44,6 @@
       soul: [Object]
     },
     watch:{
-      'soul.model.value.value'(n){
-        //v-if will reset get/set of model value
-        console.log(n)
-        this.soul.model.value.value = n
-      },
       'soul.model.required.value'(n){
         //v-if will reset get/set of model value
         resetSoul(this.soul)

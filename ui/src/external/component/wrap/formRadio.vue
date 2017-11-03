@@ -1,6 +1,6 @@
 <template>
   <Form
-    ref="model"
+    :ref="model"
     :model="soul.model.value"
     :label-width="120"
     :show-message="true"
@@ -9,22 +9,28 @@
       v-if="soul.model.required.value"
       :prop="soul.model.prop.value"
       :label="soul.model.label.value">
-      <Date-picker
-        @on-change="dateChange"
-        :format="soul.model.format.value"
-        :type="soul.model.type.value"
-        :value="soul.model.value.value">
-      </Date-picker>
+      <Radio-group v-model="soul.model.value.value"
+                   @on-change="radioChange">
+        <Radio
+          v-for="item in soul.model.items.value"
+          :key="item.id"
+          :label="item.value">
+          {{item.label}}
+        </Radio>
+      </Radio-group>
     </Form-item>
     <Form-item
       v-else
       :label="soul.model.label.value">
-      <Date-picker
-        @on-change="dateChange"
-        :format="soul.model.format.value"
-        :type="soul.model.type.value"
-        :value="soul.model.value.value">
-      </Date-picker>
+      <Radio-group v-model="soul.model.value.value"
+                   @on-change="radioChange">
+        <Radio
+          v-for="item in soul.model.items.value"
+          :key="item.id"
+          :label="item.value">
+          {{item.label}}
+        </Radio>
+      </Radio-group>
     </Form-item>
   </Form>
 </template>
@@ -33,7 +39,7 @@
     resetSoul
   } from '../../../core/lifecycle'
   export default{
-    name: 'FormDate',
+    name: 'FormRadio',
     props: {
       soul: [Object]
     },
@@ -44,8 +50,9 @@
         this.soul.model.required.value = n
       }
     },
-    data() {
+    data: function () {
       return {
+        model:'model',
         ruleValidate: {
           value: [
             {required: true, message:'cant be empty', trigger: 'change'}
@@ -54,8 +61,8 @@
       }
     },
     methods:{
-      dateChange(date) {
-        this.soul.model.value.value = date
+      radioChange(){
+
       }
     }
   }

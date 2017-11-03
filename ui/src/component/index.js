@@ -11,7 +11,9 @@ import {
   FormSelect,
   FormNumber,
   FormDate,
-  FormUpload
+  FormUpload,
+  FormRadio,
+  FormCheckbox
 } from '../external/component/wrap'
 
 export {
@@ -27,5 +29,7 @@ export {
   FormSelect,
   FormNumber,
   FormDate,
-  FormUpload
+  FormUpload,
+  FormRadio,
+  FormCheckbox
 }
