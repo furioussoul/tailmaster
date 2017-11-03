@@ -29,6 +29,7 @@
     "vuex-router-sync": "^4.1.3"
   },
   "devDependencies": {
+    "js-beautify":"^1.7.4",
     "vue-highlightjs": "^1.3.3",
     "pretty": "^2.0.0",
     "js-md5": "^0.4.2",

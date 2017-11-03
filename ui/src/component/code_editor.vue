@@ -7,6 +7,7 @@
   </div>
 </template>
 <script>
+  import beautify from 'js-beautify'
   export default{
     name: 'CodeEditor',
     props: {
@@ -27,8 +28,7 @@
     watch:{
       code(n){
         if(n===undefined ) n = ''
-        console.log(n)
-        this.editor.setValue(n)
+        this.editor.setValue(beautify(n))
       }
     },
     mounted(){
@@ -37,12 +37,13 @@
       editor.$blockScrolling = Infinity;
       editor.setFontSize(16);
       editor.setTheme("ace/theme/tomorrow");
-      editor.session.setMode("ace/mode/javascript");
+      editor.session.setMode("ace/mode/sql");
       editor.setOptions({
         enableBasicAutocompletion: true,
         enableSnippets: true,
         enableLiveAutocompletion: true
       });
+
     }
   }
 </script>
