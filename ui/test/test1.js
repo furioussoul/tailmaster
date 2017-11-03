@@ -1,123 +1,88 @@
-// (
-//   '消协'
-// OR '起诉'
-// OR '315'
-// OR '微博'
-// OR '曝光'
-// OR '律师'
-// OR '电视台'
-// OR '记者'
-// OR '工商投诉'
-// AND 1
-// )
-// AND (
-//   ('不行' OR '不可以')
-// AND 2
-// )
-// program -> block
-// block -> (stmts) | ε
-// stmts -> stmts stmt | block
-// stmt -> bool loc | loc
-// bool ->  OR loc | AND loc
-// loc -> Number | ID
+var Lexer = require('./Lexer');
+var Token = require('./Token').Token;
 
-
-class Parser {
-
-  constructor(lexer) {
-    this.lexer = lexer
-  }
-
-  loc() {
-    let lexme1 = this.lexer.lookAhead()
-    let lexme2 = this.lexer.lookAhead()
-    console.log(lexme1,lexme2)
-  }
-
-  bool() {
-    let lexme = this.lexer.lookAhead()
-    if (lexme === 'O') {
-
-    } else if (lexme === 'A') {
-
-    }
-    this.loc()
-  }
-
-  stmt() {
-    let lexme = this.lexer.lookAhead()
-    if (lexme === 'O' || lexme === 'A') {
-      this.bool()
-      this.loc()
-    } else {
-      this.loc()
-    }
-  }
-
-  stmts() {
-    let lexme = this.lexer.lookAhead()
-    if (lexme === '(') {
-      this.block()
-    } else {
-      this.stmt()
-      this.stmts()
-    }
-  }
-
-  block() {
-    let lexme = this.lexer.lookAhead()
-    if(lexme !== '('){
-      throw new Error(`syntax error, loss '(' `);
-    }
-    this.stmts();
-
-  }
-
-  program() {
-    this.block()
+// a) S -> + S S | - S S | a
+Parser.prototype.S1 = function () {
+  var lookahead = this.lexer.getCurrentToken()
+  switch (lookahead) {
+    case Token.plus:
+      this.output += '+'
+      lexer.match(Token.plus);
+      this.S1();
+      this.S1();
+      break;
+    case Token.minus:
+      this.output += '-'
+      lexer.match(Token.minus);
+      this.S1();
+      this.S1();
+      break;
+    case Token.mul:
+      this.output += '*'
+      lexer.match(Token.mul);
+      this.S1();
+      this.S1();
+      break;
+    case Token.div:
+      this.output += '/'
+      lexer.match(Token.div);
+      this.S1();
+      this.S1();
+      break;
+    case Token.char:
+      this.output += lexer.getLexeme()
+      lexer.match(Token.char);
+      break;
+    default:
+      throw new Error('syntax error');
   }
 }
 
-class Lexer {
-  constructor(input) {
-    this.input = input
-    this.index = 0
+// b) S -> S ( S ) S | e
+/*This grammar is left recursive
+ * There is a scheme to eliminate left recursive
+ * Grammar like this : A -> Aa | b can be transferred to:
+ * A -> bR
+ * R -> aR
+ * | epsilon
+ * S -> S ( S ) S | e can be transferred to:
+ * S -> R
+ * R -> (S)SR | epsilon
+ * */
+Parser.prototype.S2 = function () {
+  this.R2()
+}
+Parser.prototype.R2 = function () {
+
+  if(!lexer.test(Token.lp)){
+    //for epsilon
+    return
   }
 
-  lookAhead() {
-    let lexme = this.input[this.index];
-
-    while (lexme === ' ' || lexme === '\n') {
-      this.index++
-      lexme = this.input[this.index];
-    }
-
-    this.index++
-    this.lexme = lexme
-    return lexme
+  if(lexer.match(Token.lp)){
+    this.output += '('
+    this.S2()
   }
-
-  peek() {
-    return this.lexme
+  if(!lexer.match(Token.rp)){
+    throw new Error('syntax error');
   }
+  this.output += ')'
+  this.S2();
+  this.R2()
 }
 
-let content = `(
-  '消协'
-OR '起诉'
-OR '315'
-OR '微博'
-OR '曝光'
-OR '律师'
-OR '电视台'
-OR '记者'
-OR '工商投诉'
-AND 1
-)
-AND (
-  ('不行' OR '不可以')
-AND 2
-)`
-let lexer = new Lexer(content)
-let parser = new Parser(lexer)
-parser.program()
+Parser.prototype.S3 = function () {
+
+}
+
+// c) S -> 0 S 1 | 0 1
+function Parser(lexer) {
+  this.output = ''
+  this.lexer = lexer
+}
+
+var lexer = new Lexer("(()()((())))");
+var parser = new Parser(lexer);
+parser.S2();
+console.log(parser.output)
+

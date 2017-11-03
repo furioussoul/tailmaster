@@ -6,28 +6,23 @@ function Token(tag) {
 }
 
 util.extend(Token, {
-    'and': 42,
-    'or': 47,
-    'plus': 43,
-    'minus': 45,
-    'lp': 40,//(
-    'rp': 41,//)
-    'lb': 91,//[
-    'rb': 93,//]
-    'lc': 123,//{
-    'rc': 125,//}
-    'char': -2, // any char
+    'and': 258,
+    'or': 259,
+    'id': 257,
+    'number': 256,
+    'lp': 260,//(
+    'rp': 261,//)
     'eof': -1
 })
 
 function Num(value) {
     this.tag = Tag.NUM
-    this.value = value
+    this.lexeme = value
 }
 
-function Word(tag, text) {
-    this.tag = tag
-    this.lexeme = text
+function Word(text, tag) {
+  this.lexeme = text
+  this.tag = tag
 }
 
 module.exports.Token = Token

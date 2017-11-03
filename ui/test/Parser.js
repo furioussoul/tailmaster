@@ -1,35 +1,57 @@
+// (
+//   '消协'
+// OR '起诉'
+// OR '315'
+// OR '微博'
+// OR '曝光'
+// OR '律师'
+// OR '电视台'
+// OR '记者'
+// OR '工商投诉'
+// AND 1
+// )
+// AND (
+//   ('不行' OR '不可以')
+// AND 2
+// )
 // program -> block
 // block -> (stmts) | ε
-// stmts -> stmts stmt | block
+// stmts -> stmts stmt | ε
 // stmt -> bool loc | loc
 // bool ->  OR loc | AND loc
-// loc -> Number | ID
-var Lexer = require('./Lexer');
+// loc -> Number | ID | block
+let Lexer = require('./Lexer');
+let Token = require('./Token').Token;
 
 class Parser {
+
   constructor(lexer) {
     this.lexer = lexer
+    this.move()
   }
 
   loc() {
-    let lexme1 = this.lexer.lookAhead()
-    let lexme2 = this.lexer.lookAhead()
-    console.log(lexme1,lexme2)
+    if(this.look.tag===Token.NUM){
+      console.log(this.look.lexeme)
+    }else if(this.look.tag === Token.ID){
+      console.log(this.look.lexeme)
+    }else if(this.look.tag === Token.lp){
+      this.block()
+    }
   }
 
   bool() {
-    let lexme = this.lexer.lookAhead()
-    if (lexme === 'O') {
 
-    } else if (lexme === 'A') {
+    if (this.look.tag === Token.and) {
+
+    } else if (this.look.tag === Token.or) {
 
     }
     this.loc()
   }
 
   stmt() {
-    let lexme = this.lexer.lookAhead()
-    if (lexme === 'O' || lexme === 'A') {
+    if (this.look.tag === Token.and || this.look.tag === Token.or) {
       this.bool()
       this.loc()
     } else {
@@ -38,46 +60,38 @@ class Parser {
   }
 
   stmts() {
-    let lexme = this.lexer.lookAhead()
-    if (lexme === '(') {
-      this.block()
-    } else {
+    while(this.look.tag !== Token.lp){
       this.stmt()
       this.stmts()
     }
   }
 
   block() {
-    let lexme = this.lexer.lookAhead()
-    if(lexme !== '('){
-      throw new Error(`syntax error, loss '(' `);
-    }
+    this.match(Token.lp)
     this.stmts();
-
+    this.match(Token.rp)
   }
 
   program() {
     this.block()
   }
+
+  move() {
+    this.look = this.lexer.scan();
+  }
+
+  match(t) {
+    if (this.look.tag === t) this.move();
+    else {
+      throw new Error('syntax error');
+    }
+  }
 }
 
 
-let content = `(
-  '消协'
-OR '起诉'
-OR '315'
-OR '微博'
-OR '曝光'
-OR '律师'
-OR '电视台'
-OR '记者'
-OR '工商投诉'
-AND 1
-)
-AND (
-  ('不行' OR '不可以')
-AND 2
-)`
+let content = `
+( abc and aa)
+`
 let lexer = new Lexer(content)
 let parser = new Parser(lexer)
 parser.program()

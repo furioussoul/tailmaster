@@ -1,6 +1,8 @@
 module.exports = {
     NUM:256,
     ID:257,
-    TRUE:258,
-    FALSE:259
+    AND:258,
+    OR:259,
+    LP:260,
+    RP:261
 }
