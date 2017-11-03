@@ -1,23 +1,23 @@
-let Token = require('./Token').Token;
-let Word = require('./Token').Word
-let Num = require('./Token').Num
-let Tag = require('./Tag')
+var Token = require('./Token').Token;
+var Word = require('./Token').Word
+var Num = require('./Token').Num
+var Tag = require('./Tag')
 
 Lexer.prototype.isAlnum = function (char) {
   return this.isDigit(char) | this.isAlphabetic(char)
 }
 
 Lexer.prototype.isDigit = function (char) {
-  let reg = /[+|-]?[0-9]/
+  var reg = /[+|-]?[0-9]/
   return reg.test(char)
 }
 
 Lexer.prototype.isAlphabetic = function (char) {
-  let reg = /[a-zA-Z]/
+  var reg = /[a-zA-Z]/
   return reg.test(char)
 }
 
-let words = {}
+var words = {}
 function reserve(word) {
   words[word.lexeme] = word
 }
@@ -35,6 +35,11 @@ function Lexer(input) {
   this.peek = ' '
 
   this.scan = function () {
+
+    if(this.index === this.input.length - 1){
+      return Token.eof
+    }
+
     this.peek = this.input[this.index]
     while(this.peek === ' ' || this.peek === '\t' || this.peek === '\n'){
       if(this.peek === ' ' || this.peek === '\t'){
@@ -59,7 +64,7 @@ function Lexer(input) {
     }
 
     if (this.isDigit(this.peek)) {
-      let val = 0
+      var val = 0
       do {
         val = 10 * val + Number(this.peek)
         this.peek = this.input[++this.index]
@@ -68,19 +73,19 @@ function Lexer(input) {
     }
 
     if (this.isAlphabetic(this.peek)) {
-      let val=''
+      var val=''
       do {
         val += this.peek
         this.peek = input[++this.index]
       } while (this.isAlnum(this.peek));
 
-      let word = words[val];
+      var word = words[val];
       if (word) return word;
       return new Word(val, Tag.ID);
     }
 
     this.index ++;
-    let token = new Token(this.peek);
+    var token = new Token(this.peek);
     this.peek = ' ';
     return token;
   }

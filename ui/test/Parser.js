@@ -14,84 +14,94 @@
 //   ('不行' OR '不可以')
 // AND 2
 // )
-// program -> block
-// block -> (stmts) | ε
-// stmts -> stmts stmt | ε
-// stmt -> bool loc | loc
-// bool ->  OR loc | AND loc
-// loc -> Number | ID | block
-let Lexer = require('./Lexer');
-let Token = require('./Token').Token;
 
-class Parser {
+var Lexer = require('./Lexer');
+var Token = require('./Token').Token;
 
-  constructor(lexer) {
+function Parser(lexer)  {
     this.lexer = lexer
     this.move()
-  }
+}
 
-  loc() {
-    if(this.look.tag===Token.NUM){
-      console.log(this.look.lexeme)
-    }else if(this.look.tag === Token.ID){
-      console.log(this.look.lexeme)
-    }else if(this.look.tag === Token.lp){
-      this.block()
-    }
-  }
+// program -> block
+Parser.prototype.program =function ()  {
+  this.block()
+}
 
-  bool() {
-
-    if (this.look.tag === Token.and) {
-
-    } else if (this.look.tag === Token.or) {
-
-    }
-    this.loc()
-  }
-
-  stmt() {
-    if (this.look.tag === Token.and || this.look.tag === Token.or) {
-      this.bool()
-      this.loc()
-    } else {
-      this.loc()
-    }
-  }
-
-  stmts() {
-    while(this.look.tag !== Token.lp){
-      this.stmt()
-      this.stmts()
-    }
-  }
-
-  block() {
+//block -> (stmts) | e
+Parser.prototype.block =function () {
+  if(this.look.tag === Token.lp){
     this.match(Token.lp)
-    this.stmts();
+    console.log('(')
+    this.stmts()
+    console.log(')')
     this.match(Token.rp)
-  }
-
-  program() {
-    this.block()
-  }
-
-  move() {
-    this.look = this.lexer.scan();
-  }
-
-  match(t) {
-    if (this.look.tag === t) this.move();
-    else {
-      throw new Error('syntax error');
-    }
+  }else {
+    return null
   }
 }
 
+//stmts -> stmt term
+Parser.prototype.stmts =function () {
+  this.stmt()
+  this.term()
+}
 
-let content = `
-( abc and aa)
+//term-> op stmt | e
+Parser.prototype.term =function () {
+  if(this.look.tag===Token.and){
+    console.log('and')
+    this.match(Token.and)
+    this.stmt()
+    this.term()
+  }else if(this.look.tag===Token.or){
+    console.log('or')
+    this.match(Token.or)
+    this.stmt()
+    this.term()
+  }else {
+    return null
+  }
+}
+
+//stmt -> (stmts) | factory
+Parser.prototype.stmt =function ()  {
+  if(this.look.tag === Token.lp){
+    this.match(Token.lp)
+    console.log('(')
+    this.stmts()
+    console.log(')')
+    this.match(Token.rp)
+  }else {
+   this.factory()
+  }
+}
+
+Parser.prototype.factory =function ()  {
+  if(this.look.tag === Token.id){
+    console.log(this.look.lexeme)
+    this.match(Token.id)
+  }else {
+    console.log(this.look.lexeme)
+    this.match(Token.number)
+  }
+}
+
+Parser.prototype.move = function() {
+  this.look = this.lexer.scan();
+}
+
+Parser.prototype.match = function(t) {
+  if (this.look.tag === t) this.move();
+  else {
+    throw new Error('syntax error');
+  }
+}
+
+var content = `
+((a and 1) and  a and 1 and a and 1  )
+
 `
-let lexer = new Lexer(content)
-let parser = new Parser(lexer)
+var lexer = new Lexer(content)
+var parser = new Parser(lexer)
 parser.program()

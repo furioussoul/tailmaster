@@ -6,6 +6,7 @@ function Token(tag) {
 }
 
 util.extend(Token, {
+    'qid':262,
     'and': 258,
     'or': 259,
     'id': 257,
