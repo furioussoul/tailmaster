@@ -153,6 +153,39 @@ and (
   and (
     '起诉' and
     '投诉' and '曝光'
+  )and (
+  ('不行' or '不可以'
+  and (
+    '起诉' and
+    '投诉' and '曝光'
+  )and (
+  ('不行' or '不可以'
+  and 
+    '起诉' and
+    '投诉' and '曝光'
+  )
+  )
+and 2
+  )
+and 2
+)
+  )
+and 2
+)
+and (
+  ('不行' or '不可以'
+  and (
+    '起诉' and
+    '投诉' and '曝光'
+  )
+  )
+and 2
+)
+and (
+  ('不行' or '不可以'
+  and (
+    '起诉' and
+    '投诉' and '曝光'
   )
   )
 and 2
