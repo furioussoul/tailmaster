@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Menu ref="actionBar"   class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
+    <Menu class="action_bar" @on-select="action" mode="horizontal" theme="dark" active-name="1">
       <div class="index-layout-nav">
         <MenuItem name="4">
           <Icon type="code"></Icon>
@@ -26,13 +26,37 @@
           <Icon type="ios-eye"></Icon>
           no bord
         </MenuItem>
+        <MenuItem name="15">
+          <Icon type="android-exit"></Icon>
+          exit
+        </MenuItem>
       </div>
     </Menu>
 
     <div class="index-layout-content">
       <Row>
+        <i-col span="18" class="middle" :class="{'is-preview':isPreview}">
+          <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
+          <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
+            </pre>
+          <Button v-if="showCode"
+                  @click="copyCode"
+                  type="ghost"
+                  size="small"
+                  style="position: absolute;right: 0;top: 0;opacity:0.5">
+            <Icon type="ios-copy-outline"></Icon>
+            copy
+          </Button>
+        </i-col>
 
-        <i-col v-show="!showCode" class="controls-container" span="3">
+        <i-col v-show="!showCode" span="3">
+          <ModelEditor
+            :pageName="opModel.name"
+            :editSoul="editSoul">
+          </ModelEditor>
+        </i-col>
+
+        <i-col v-show="!showCode" span="3">
           <transition name="index-soul-control-class-fade">
             <div>
               <Collapse v-model="open" :key="classIndex" v-for="(controlClass, classIndex) in controlClazzes">
@@ -55,28 +79,6 @@
             </div>
           </transition>
         </i-col>
-
-        <Row style="margin-left: 200px;height: 1000px;">
-          <i-col span="20" class="middle" :class="{'is-preview':isPreview}">
-            <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
-            <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
-            </pre>
-            <Button v-if="showCode"
-                    @click="copyCode"
-                    type="ghost"
-                    size="small"
-                    style="position: absolute;right: 0;top: 0;opacity:0.5">
-              <Icon type="ios-copy-outline"></Icon>
-              copy
-            </Button>
-          </i-col>
-          <i-col v-show="!showCode" span="4">
-            <ModelEditor
-              :pageName="opModel.name"
-              :editSoul="editSoul">
-            </ModelEditor>
-          </i-col>
-        </Row>
       </Row>
     </div>
 
@@ -221,6 +223,8 @@
 
         } else if (a === '12') {
           redo()
+        } else if(a === '15'){
+            this.change('manage')
         }
       }
     },
@@ -278,11 +282,6 @@
         }
         this.setShowCode(false)
       })
-    },
-    watch:{
-      'actionBarPosition':function(){
-        this.setActionBarPosition();
-      }
     }
   }
 </script>
@@ -295,10 +294,6 @@
   .code {
     height: 100%;
     overflow: auto;
-  }
-
-  .controls-container {
-    width: 200px
   }
 
   .edit_layer {
@@ -329,7 +324,7 @@
   }
 
   .index-layout-nav {
-    width: 600px;
+    width: 800px;
     margin: 0 auto;
   }
 
@@ -342,7 +337,7 @@
   .action_bar {
     position: sticky;
     line-height: 3.5;
-    top: 0px;
+    top: 0;
     height: 50px;
     width: 100%;
   }

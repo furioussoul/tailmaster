@@ -45,12 +45,6 @@ const app = new Vue({
         return h(manageApp)
       case 'login':
         return h(Login)
-      case 'test':
-        return h(esview.render({
-          appName: 'MyApp',
-          pageName: '1',
-          token: ''
-        }))
     }
   }
 })
