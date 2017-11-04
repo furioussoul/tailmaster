@@ -25,16 +25,25 @@ function reserve(word) {
   words[word.lexeme] = word
 }
 
+function compareStrIgnoreCase(n1,n2) {
+  if(undefined === n1 || undefined===n2){
+    return false
+  }
+  if(null === n1 || null===n2){
+    return false
+  }
+  return n1.toUpperCase()===n2.toUpperCase()
+}
+
 function Lexer(input) {
 
-  reserve(new Word('and', Tag.AND))
-  reserve(new Word('or', Tag.OR))
+  reserve(new Word('AND', Tag.AND))
+  reserve(new Word('OR', Tag.OR))
 
   this.line = 0
   this.input = input
   this.index = 0
   this.peek = ' '
-  this.crossLine=0
 
   this.scan = function () {
 
@@ -75,6 +84,12 @@ function Lexer(input) {
         this.peek = input[++this.index]
       } while (this.isAlnum(this.peek));
 
+      if(compareStrIgnoreCase(val,'AND')){
+        val = 'AND'
+      }
+      if(compareStrIgnoreCase(val,'OR')){
+        val = 'OR'
+      }
       var word = words[val];
       if (word) return word;
       return new Word(val, Tag.ID);
