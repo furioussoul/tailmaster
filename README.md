@@ -16,8 +16,9 @@ Esview is a vue code generator based on iview-ui.
 
 You can get .vue file code by dnd components on esview.
 
-Also you can customize your own draggable components. 
+Also you can customize your own draggable components.   
 
+![QQ图片20171027113639.png](http://chuantu.biz/t6/127/1509858385x1968319443.gif)
 ![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463255x2890191685.gif)
 
 # Online Demo
