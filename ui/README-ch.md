@@ -8,14 +8,15 @@
 
 # 1 介绍
 1 项目介绍
-Esview是一款拖拽组件生成vue代码的工具。  
+Esview是一款拖拽组件生成页面的工具，并且可以生成vue代码。
 
 包含拖拽生成页面、页面管理、组件管理等功能。  
 
 前端采用vue和iview，生成的代码必须安装vue和iview才能使用，  
 
-后台采用java（springboot）作为持久层，保存生成的页面、创建的组件。  
+后台采用java（springboot）作为持久层，保存生成的页面、创建的组件。   
 
+![QQ图片20171027113639.png](http://chuantu.biz/t6/127/1509858385x1968319443.gif)
 ![QQ图片20171027113639.png](https://user-gold-cdn.xitu.io/2017/10/31/4e39e42e4f101efe9bd9aee3a5bb73a7)
 ![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463124x2890191685.png)
 ![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463255x2890191685.gif)
