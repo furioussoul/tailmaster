@@ -14,7 +14,12 @@ export const router = new Router({
     {
       path: '/',
       component: () =>
-        import ('../view/esview/assemble/assemble_page.vue')
+        import ('../view/esview/home/home.vue')
+    },
+    {
+      path: '/render',
+      component: () =>
+        import ('../view/esview/render.vue')
     }
   ]
 })

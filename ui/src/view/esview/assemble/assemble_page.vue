@@ -35,26 +35,6 @@
 
     <div class="index-layout-content">
       <Row>
-        <i-col span="18" class="middle" :class="{'is-preview':isPreview}">
-          <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
-          <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
-            </pre>
-          <Button v-if="showCode"
-                  @click="copyCode"
-                  type="ghost"
-                  size="small"
-                  style="position: absolute;right: 0;top: 0;opacity:0.5">
-            <Icon type="ios-copy-outline"></Icon>
-            copy
-          </Button>
-        </i-col>
-
-        <i-col v-show="!showCode" span="3">
-          <ModelEditor
-            :pageName="opModel.name"
-            :editSoul="editSoul">
-          </ModelEditor>
-        </i-col>
 
         <i-col v-show="!showCode" span="3">
           <transition name="index-soul-control-class-fade">
@@ -79,6 +59,29 @@
             </div>
           </transition>
         </i-col>
+
+        <i-col span="18" class="middle" :class="{'is-preview':isPreview}">
+          <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
+          <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
+            </pre>
+          <Button v-if="showCode"
+                  @click="copyCode"
+                  type="ghost"
+                  size="small"
+                  style="position: absolute;right: 0;top: 0;opacity:0.5">
+            <Icon type="ios-copy-outline"></Icon>
+            copy
+          </Button>
+        </i-col>
+
+        <i-col v-show="!showCode" span="3">
+          <ModelEditor
+            :pageName="opModel.name"
+            :editSoul="editSoul">
+          </ModelEditor>
+        </i-col>
+
+
       </Row>
     </div>
 

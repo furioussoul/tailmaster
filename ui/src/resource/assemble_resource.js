@@ -117,10 +117,9 @@ function updatePage() {
   })
 }
 
-function getPageList({pageName, token}, fn) {
-  this.http.post('page/pageList', {name: pageName}).then(res => {
+function getPageList({all}, fn) {
+  this.$http.post('page/pageList', {all}).then(res => {
     if (res.data.code === 10000) {
-      this.controls = res.data.data
       if (fn) {
         fn.call(this, res.data.data)
       }

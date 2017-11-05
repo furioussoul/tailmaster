@@ -13,6 +13,7 @@ public class QueryPageRequest extends BaseRequest {
     private String appName;
     private Long appId;
     private Long pageId;
+    private boolean all;
 
     public String getName() {
         return name;
@@ -44,5 +45,13 @@ public class QueryPageRequest extends BaseRequest {
 
     public void setPageId(Long pageId) {
         this.pageId = pageId;
+    }
+
+    public boolean getAll() {
+        return all;
+    }
+
+    public void setAll(boolean all) {
+        this.all = all;
     }
 }

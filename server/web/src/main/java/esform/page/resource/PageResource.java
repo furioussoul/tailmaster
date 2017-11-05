@@ -31,7 +31,7 @@ public class PageResource {
     @ResponseBody
     public Response add(@RequestBody OperatePageRequest request) {
         Page domain = request.getDomain();
-        Util.trace(domain,true);
+        Util.trace(domain, true);
         pageDao.add(domain);
         return Response.ok(domain);
     }
@@ -40,8 +40,8 @@ public class PageResource {
     @ResponseBody
     public Response del(@PathVariable("id") Long id) {
         Page domain = new Page(id);
-        Util.trace(domain,false);
-        Util.trace(domain,true);
+        Util.trace(domain, false);
+        Util.trace(domain, true);
         pageDao.del(domain);
         return Response.ok();
     }
@@ -50,8 +50,8 @@ public class PageResource {
     @ResponseBody
     public Response update(@RequestBody OperatePageRequest request) {
         Page domain = request.getDomain();
-        Util.trace(domain,false);
-        Util.trace(domain,true);
+        Util.trace(domain, false);
+        Util.trace(domain, true);
         pageDao.update(domain);
         return Response.ok();
     }
@@ -69,6 +69,11 @@ public class PageResource {
     @PostMapping("tablePageList")
     @ResponseBody
     public Response tablePageList(@RequestBody QueryPageRequest request) {
+
+        if (request.getAll()) {
+            return Response.ok(pageDao.select(request));
+        }
+
         PageInfo<Page> pages = PageHelper
                 .startPage(request.getPageNum(), request.getPageSize())
                 .doSelectPageInfo(() -> {

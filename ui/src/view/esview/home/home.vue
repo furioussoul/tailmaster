@@ -6,7 +6,7 @@
         @click="openApp(app)"
         class="app-flow"
         v-for="app in apps"
-        key="app.sort">
+        key="app.id">
         <Card>
           <a>{{app.name}}</a>
         </Card>
@@ -15,7 +15,7 @@
   </Card>
 </template>
 <script>
-  import{getAppList}from'../../../resource/assemble_resource'
+  import{getPageList}from'../../../resource/assemble_resource'
   export default{
     name: 'Home',
     data(){
@@ -25,14 +25,11 @@
     },
     methods: {
       openApp(app){
-        if (app.url && app.url.indexOf('http')) {
-          app.url = 'http://' + app.url
-        }
-        window.open(app.url)
+        this.$router.push({path: 'render', query: {pageSoulId: app.id}})
       }
     },
     mounted(){
-      getAppList.call(this, {}, (data) => {
+      getPageList.call(this, {all:true}, (data) => {
         this.apps = data
       })
     }
