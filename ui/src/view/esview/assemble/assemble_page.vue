@@ -26,10 +26,6 @@
           <Icon type="ios-eye"></Icon>
           no bord
         </MenuItem>
-        <MenuItem name="15">
-          <Icon type="android-exit"></Icon>
-          exit
-        </MenuItem>
       </div>
     </Menu>
 
@@ -60,7 +56,7 @@
           </transition>
         </i-col>
 
-        <i-col span="18" class="middle" :class="{'is-preview':isPreview}">
+        <i-col span="17" class="middle" :class="{'is-preview':isPreview}">
           <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
           <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
             </pre>
@@ -74,7 +70,7 @@
           </Button>
         </i-col>
 
-        <i-col v-show="!showCode" span="3">
+        <i-col v-show="!showCode" span="4">
           <ModelEditor
             :pageName="opModel.name"
             :editSoul="editSoul">
@@ -226,8 +222,6 @@
 
         } else if (a === '12') {
           redo()
-        } else if(a === '15'){
-            this.change('manage')
         }
       }
     },
@@ -292,6 +286,8 @@
 <style scoped>
   .middle {
     box-shadow: 0 1px 6px rgba(0, 0, 0, .117647), 0 1px 4px rgba(0, 0, 0, .117647);
+    min-height: 948px;
+    height: auto;
   }
 
   .code {

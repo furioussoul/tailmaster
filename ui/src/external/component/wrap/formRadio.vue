@@ -1,6 +1,5 @@
 <template>
   <Form
-    :ref="model"
     :model="soul.model.value"
     :label-width="120"
     :show-message="true"

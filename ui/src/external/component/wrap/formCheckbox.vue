@@ -1,6 +1,5 @@
 <template>
   <Form
-    :ref="model"
     :model="soul.model.value"
     :label-width="120"
     :show-message="true"
@@ -53,8 +52,8 @@
         model:'model',
         ruleValidate: {
           value: [
-            { required: true, type: 'array', min: 1, message: '至少选择一个爱好', trigger: 'change' },
-            { type: 'array', max: 2, message: '最多选择两个爱好', trigger: 'change' }
+            { required: true, type: 'array', min: 1, message: 'at least 1', trigger: 'change' },
+            { type: 'array', max: 2, message: 'at most 2', trigger: 'change' }
           ]
         }
       }

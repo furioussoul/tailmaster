@@ -1,9 +1,7 @@
 import Render from './render'
 import {
   WrapCard,
-  WrapUpload,
   WrapModal,
-  WrapSelect,
   FormInput,
   FormSelect,
   FormNumber,
@@ -16,9 +14,7 @@ import {
 export {
   Render,
   WrapCard,
-  WrapUpload,
   WrapModal,
-  WrapSelect,
   FormInput,
   FormSelect,
   FormNumber,

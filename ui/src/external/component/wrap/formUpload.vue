@@ -1,14 +1,13 @@
 <template>
   <Form
-    ref="model"
     :model="soul.model.value"
     :label-width="120"
     :show-message="true"
     :rules="ruleValidate">
     <Form-item
       v-if="soul.model.required.value"
-      :label="soul.model.label.value">
-      :prop="soul.model.prop.value"
+      :label="soul.model.label.value"
+      :prop="soul.model.prop.value">
       <Upload
         :on-remove="removeFile"
         :on-success="uploadSuccess"
@@ -33,52 +32,46 @@
   import{
     resetSoul
   } from '../../../core/lifecycle'
-  var commonValid = function (rule, value, callback) {
-    //隐藏的不校验
-    if (!this.control.isShow) {
-      return callback();
-    }
 
-    if (!value || value.length == 0) {
-      var verifyPrompt = this.control.verifyPrompt;
-      return callback(new Error(verifyPrompt ? verifyPrompt : " "));
+  let commonValid = function (rule, value, callback) {
+    if (!value || value.length === 0) {
+      return callback(new Error('cant be empty'));
     } else {
       callback();
     }
   }
-
 
   export default{
     name: 'FormInput',
     props: {
       soul: [Object]
     },
-    watch:{
+    watch: {
       'soul.model.required.value'(n){
         //v-if will reset get/set of model value
         resetSoul(this.soul)
         this.soul.model.required.value = n
       }
-    },data: function () {
+    }, data: function () {
       return {
         uploadUrl: this.soul.model.uploadUrl.value,
         urlContainer: [],
         ruleValidate: {
           value: [
-            {required: true, message:'cant be empty', trigger: 'blur'}
+            {required: true, validator: this.valid, trigger: 'click'}
           ]
         }
       }
     },
-    methods:{
+    methods: {
       removeFile: function (file) {
         var fileIndex = this.urlContainer.indexOf(file);
         this.urlContainer.splice(fileIndex, 1)
-        this.soul.model.fileUrls.splice(fileIndex, 1)
+        this.soul.model.value.value.splice(fileIndex, 1)
       },
       uploadSuccess: function (res, file) {
         if (res.code === 10000) {
-          this.soul.model.fileUrls.push(res.data)
+          this.soul.model.value.value.push(res.data)
           this.urlContainer.push(file)
         }
       },
