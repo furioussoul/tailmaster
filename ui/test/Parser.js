@@ -38,7 +38,7 @@ function indent(deep) {
 //block -> (stmts) | e
 //stmts -> stmt term
 //term-> op stmt | e
-//stmt -> (stmts) | factory
+//stmt -> (stmts) | factory | ! factory
 //factory -> Number | 'Id'
 Parser.prototype.program = function () {
   this.block()
@@ -91,7 +91,7 @@ Parser.prototype.term = function () {
   }
 }
 
-//stmt -> (stmts) | factory
+//stmt -> (stmts) | factory | ! factory
 Parser.prototype.stmt = function () {
   if (this.look.tag === Token.lp) {
 
@@ -105,7 +105,11 @@ Parser.prototype.stmt = function () {
     this.output += '\n'
     this.output += indent(deep) + ')'
     this.match(Token.rp)
-  } else {
+  } else if(this.look.tag === Token.not){
+    this.match(Token.not)
+    this.before = '!'
+    this.factory()
+  }else {
     this.factory()
   }
 }
@@ -114,12 +118,22 @@ Parser.prototype.stmt = function () {
 Parser.prototype.factory = function () {
   if (this.look.tag === Token.qt) {
     this.match(Token.qt)
-    this.output += indent(this.blockDeep) + 'content='+ '\'' + this.look.lexeme + '\''
+    if(this.before === '!'){
+      this.before = ''
+      this.output += indent(this.blockDeep) + 'content<>'+ '\'' + this.look.lexeme + '\''
+    }else {
+      this.output += indent(this.blockDeep) + 'content='+ '\'' + this.look.lexeme + '\''
+    }
     this.nearby = this.look.lexeme ? this.look.lexeme:this.nearby
     this.match(Token.id)
     this.match(Token.qt)
   } else {
-    this.output += indent(this.blockDeep) + 'content='+ this.look.lexeme
+    if(this.before === '!'){
+      this.before = ''
+      this.output += indent(this.blockDeep) + 'content<>'+ this.look.lexeme
+    }else {
+      this.output += indent(this.blockDeep) + 'content='+ this.look.lexeme
+    }
     this.nearby = this.look.lexeme ? this.look.lexeme:this.nearby
     this.match(Token.id)
   }
@@ -138,58 +152,17 @@ Parser.prototype.match = function (t) {
     }else if(this.look.tag===Token.rp){
       hint+=` about ')'`
     }
-    console.log('syntax error at line: ' + this.lexer.line +' ;near: ' + this.nearby + ' ; ' +  hint)
+    throw new Error('syntax error at line: ' + this.lexer.line +' ;near: ' + this.nearby + ' ; ' +  hint)
   }
 }
 
-var content = `
+var testContent = `
 (
-'微博' or '起诉'Or '315a' or '微博' OR '曝光' Or '律师' or '电视台'or '记者'or '工商投诉'and 1
+ !1 and '1投诉' or '315啊' and ('微博' or ! '律师' and (! 2123) )
 )
-and (
-  ('不行' or '不可以'
-  and (
-    '起诉' and
-    '投诉' and '曝光'
-  )and (
-  ('不行' or '不可以'
-  and (
-    '起诉' and
-    '投诉' and '曝光'
-  )and (
-  ('不行' or '不可以'
-  and 
-    '起诉' and
-    '投诉' and '曝光'
-  )
-  )
-and 2
-  )
-and 2
-)
-  )
-and 2
-)
-and (
-  ('不行' or '不可以'
-  and (
-    '起诉' and
-    '投诉' and '曝光'
-  )
-  )
-and 2
-)
-and (
-  ('不行' or '不可以'
-  and (
-    '起诉' and
-    '投诉' and '曝光'
-  )
-  )
-and 2
-)
+
 `
-var lexer = new Lexer(content)
+var lexer = new Lexer(testContent)
 var parser = new Parser(lexer)
   parser.program()
 

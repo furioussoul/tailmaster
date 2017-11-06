@@ -16,7 +16,7 @@ Lexer.prototype.isAlphabetic = function (char) {
   if(!char){
     return false
   }
-  var reg = /[\u4e00-\u9fa5a-zA-Z0-9]/
+  var reg = /[\u4e00-\u9fa5a-zA-Z0-9!]/
   return reg.test(char)
 }
 
@@ -39,6 +39,7 @@ function Lexer(input) {
 
   reserve(new Word('AND', Tag.AND))
   reserve(new Word('OR', Tag.OR))
+  reserve(new Word('!', Tag.NOT))
 
   this.line = 0
   this.input = input
@@ -75,6 +76,9 @@ function Lexer(input) {
       case '\'':
         this.index++
         return new Token(Tag.QT)
+      case '!':
+        ++this.index
+        return new Token(Tag.NOT)
     }
 
     if (this.isAlphabetic(this.peek)) {

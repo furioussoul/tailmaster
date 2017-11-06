@@ -5,5 +5,6 @@ module.exports = {
     OR:259,
     LP:260,
     RP:261,
-    QT:262
+    QT:262,
+    NOT:263
 }
