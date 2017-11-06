@@ -1,5 +1,6 @@
 <template>
-  <div class="render-container">
+  <div  class="render-container">
+    <h3 slot="title">{{pageName}}</h3>
     <RenderDev :soul="soul"></RenderDev>
   </div>
 
@@ -19,16 +20,23 @@
     methods:{
       ...mapMutations('dragModule', ['setSoul']),
     },
+    data(){
+        return {
+          pageName:''
+        }
+    },
     mounted(){
       getRichPage.call(this, this.$route.query.pageSoulId, (data) => {
+        this.pageName = data.name
         let ancestorSoul = parse(data.pageSoul)
         this.setSoul(ancestorSoul)
       })
     }
   }
 </script>
-<style scoped>
+<style lang="less" scoped>
   .render-container{
     padding: 20px;
   }
+
 </style>
