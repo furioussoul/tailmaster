@@ -297,8 +297,9 @@
 
   .code {
     text-align: center;
-    height: 100%;
-    overflow: auto;
+    height: 1000px;
+    margin-top: 20px;
+    margin-bottom: 100px;
   }
 
   .edit_layer {
