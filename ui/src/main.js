@@ -60,6 +60,7 @@ if (window.location.hash.indexOf('assemble_page') > -1) {
 
 window.addEventListener('hashchange', function (event) {
   let newUrl = event.newURL
+  console.log(newUrl)
   if (newUrl.indexOf('assemble_page') > -1) {
     Store.commit('userModule/changePage', 'assemble')
   }else {

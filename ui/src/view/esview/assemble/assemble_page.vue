@@ -26,6 +26,10 @@
           <Icon type="ios-eye"></Icon>
           no bord
         </MenuItem>
+        <MenuItem name="15">
+          <Icon type="arrow-expand"></Icon>
+          fullScreen
+        </MenuItem>
       </div>
     </Menu>
 
@@ -222,6 +226,8 @@
 
         } else if (a === '12') {
           redo()
+        }else if (a === '12') {
+          fullScreen()
         }
       }
     },
