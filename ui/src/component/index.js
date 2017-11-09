@@ -13,7 +13,8 @@ import {
   FormDate,
   FormUpload,
   FormRadio,
-  FormCheckbox
+  FormCheckbox,
+  wrapTable
 } from '../external/component/wrap'
 
 export {
@@ -31,5 +32,6 @@ export {
   FormDate,
   FormUpload,
   FormRadio,
-  FormCheckbox
+  FormCheckbox,
+  wrapTable
 }

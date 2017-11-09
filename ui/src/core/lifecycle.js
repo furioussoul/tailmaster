@@ -3,7 +3,8 @@ import {
 } from '../helper/soul_helper'
 import {
   deepCopy,
-  isPlain
+  isPlain,
+  isNumber
 }from '../util/assist'
 
 function resetSoul(soul) {
@@ -12,6 +13,9 @@ function resetSoul(soul) {
     let copy = soul.model[key].value
     Object.defineProperty(soul.model[key], 'value', {
       set: (n) => {
+        if(isNumber(n)){
+          n = Number(n)
+        }
         copy = n
         reset(soul)
       },

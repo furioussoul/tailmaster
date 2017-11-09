@@ -7,6 +7,7 @@ import FormDate from './formDate.vue'
 import FormUpload from './formUpload.vue'
 import FormRadio from './formRadio.vue'
 import FormCheckbox from './formCheckbox.vue'
+import wrapTable from './wrapTable.vue'
 export {
   WrapCard,
   WrapModal,
@@ -16,5 +17,6 @@ export {
   FormDate,
   FormUpload,
   FormRadio,
-  FormCheckbox
+  FormCheckbox,
+  wrapTable
 }

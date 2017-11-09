@@ -2,9 +2,7 @@ import Vue from 'vue';
 import {walkSoul} from '../helper/soul_helper'
 import {
   WrapCard,
-  WrapUpload,
   WrapModal,
-  WrapSelect
 } from './component'
 import {
   addConfig,
