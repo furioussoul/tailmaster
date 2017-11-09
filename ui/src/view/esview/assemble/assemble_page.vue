@@ -287,7 +287,12 @@
   .middle {
     box-shadow: 0 1px 6px rgba(0, 0, 0, .117647), 0 1px 4px rgba(0, 0, 0, .117647);
     min-height: 948px;
-    height: auto;
+    overflow: auto;
+    position: relative;
+    height: 1000px;
+    z-index: 0;
+    padding-top: 20px;
+    padding-bottom: 500px;
   }
 
   .code {
