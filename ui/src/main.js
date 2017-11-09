@@ -9,7 +9,6 @@ import installDirective from "./plugin/install_directive"//don't delete,let vue 
 import SoulUi from "./plugin/install_component"
 import Store from './store/index'
 import manageApp from './view/esview/app.vue'
-import assemble from './view/esview/assemble/assemble_page.vue'
 import Login from './view/esview/login.vue'
 import locale  from 'iview/dist/locale/en-US';
 import 'iview/dist/styles/iview.css'
@@ -42,8 +41,6 @@ const app = new Vue({
     }
 
     switch (Store.getters['userModule/page']) {
-      case 'assemble':
-        return h(assemble)
       case 'manage':
         return h(manageApp)
       case 'login':
@@ -51,22 +48,5 @@ const app = new Vue({
     }
   }
 })
-
-if (window.location.hash.indexOf('assemble_page') > -1) {
-  Store.commit('userModule/changePage', 'assemble')
-}else {
-  Store.commit('userModule/changePage','manage')
-}
-
-window.addEventListener('hashchange', function (event) {
-  let newUrl = event.newURL
-  console.log(newUrl)
-  if (newUrl.indexOf('assemble_page') > -1) {
-    Store.commit('userModule/changePage', 'assemble')
-  }else {
-    Store.commit('userModule/changePage','manage')
-  }
-});
-
 app.$mount('#app');
 interceptor(Vue, app)

@@ -25,7 +25,7 @@
         </Table>
         <Row style="margin-top:15px;">
           <Page style="float:right;"
-                :current="searchInput.pageNo"
+                :current="searchInput.pageNum"
                 :page-size="searchInput.pageSize"
                 show-total
                 :total="searchInput.total"
