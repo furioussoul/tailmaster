@@ -28,11 +28,13 @@
       current:[Number],
       'pageSize':[Number],
       total:[Number],
+      loading: {
+        type: Boolean,
+        default: false
+      }
     },
     data(){
-        return {
-          loading:true
-        }
+        return {}
     },
     methods:{
         'change'(e){

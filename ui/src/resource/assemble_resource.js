@@ -3,10 +3,12 @@ import {
   isPlain,
   stringify,
   isNumber,
-  dataFormat
+  dataFormat,
+  deepCopy
 } from '../util/assist'
 import {
   currentUid,
+  walkSoul,
   refreshInitScript
 } from '../helper/soul_helper'
 
@@ -83,7 +85,15 @@ function getRichApp(id, fn) {
 }
 
 function addPage() {
-  let soul = store.getters['dragModule/soul']
+  let soul = deepCopy(store.getters['dragModule/soul'])
+  refreshInitScript(soul)
+  walkSoul(soul,soul=>{
+    for(let key in soul.model){
+     if(soul.model[key].exclude){
+        soul.model[key].value = []
+     }
+    }
+  })
   soul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(soul)
   this.opModel.appId = this.appId
@@ -106,8 +116,15 @@ function delPage(id) {
 }
 
 function updatePage() {
-  let soul = store.getters['dragModule/soul']
+  let soul = deepCopy(store.getters['dragModule/soul'])
   refreshInitScript(soul)
+  walkSoul(soul,soul=>{
+    for(let key in soul.model){
+      if(soul.model[key].exclude){
+        soul.model[key].value = []
+      }
+    }
+  })
   soul.maxUid = currentUid()
   this.opModel.pageSoul = stringify(soul)
   this.$http.post('page/update', this.opModel).then(res => {

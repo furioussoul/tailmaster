@@ -10,7 +10,9 @@ import {
 function resetSoul(soul) {
   if(isPlain(soul.model))return
   for (let key in soul.model) {
+    if(soul.model[key].exclude) continue
     let copy = soul.model[key].value
+    if(!soul.model[key]) continue
     Object.defineProperty(soul.model[key], 'value', {
       set: (n) => {
         if(isNumber(n)){
