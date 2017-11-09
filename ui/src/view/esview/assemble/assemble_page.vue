@@ -226,7 +226,7 @@
       }
     },
     mounted(){
-      window.location.hash = deepCopy(window.location.hash) + "?a=1"
+      window.location.hash = deepCopy(window.location.hash)
       this.getControlClazzes()
       resetSnapShot()
       this.appId = this.$route.query.appId
