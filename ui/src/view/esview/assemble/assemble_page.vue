@@ -32,7 +32,7 @@
     <div class="index-layout-content">
       <Row>
 
-        <i-col v-show="!showCode" span="3">
+        <i-col span="3">
           <transition name="index-soul-control-class-fade">
             <div>
               <Collapse v-model="open" :key="classIndex" v-for="(controlClass, classIndex) in controlClazzes">
@@ -58,7 +58,7 @@
 
         <i-col span="17" class="middle" :class="{'is-preview':isPreview}">
           <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
-          <pre v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
+          <pre contenteditable="true" v-else v-highlightjs="vueCode" class="code" id="code"><code ></code>
             </pre>
           <Button v-if="showCode"
                   @click="copyCode"
@@ -70,7 +70,7 @@
           </Button>
         </i-col>
 
-        <i-col v-show="!showCode" span="4">
+        <i-col span="4">
           <ModelEditor
             :pageName="opModel.name"
             :editSoul="editSoul">
@@ -291,6 +291,7 @@
   }
 
   .code {
+    text-align: center;
     height: 100%;
     overflow: auto;
   }
