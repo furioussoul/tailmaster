@@ -26,10 +26,6 @@
           <Icon type="ios-eye"></Icon>
           no bord
         </MenuItem>
-        <MenuItem name="15">
-          <Icon type="arrow-expand"></Icon>
-          fullScreen
-        </MenuItem>
       </div>
     </Menu>
 
@@ -226,12 +222,11 @@
 
         } else if (a === '12') {
           redo()
-        }else if (a === '12') {
-          fullScreen()
         }
       }
     },
     mounted(){
+      window.location.hash = deepCopy(window.location.hash) + "?a=1"
       this.getControlClazzes()
       resetSnapShot()
       this.appId = this.$route.query.appId
