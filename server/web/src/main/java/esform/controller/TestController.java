@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by
@@ -19,10 +19,17 @@ import java.util.Map;
 @RequestMapping("/test")
 public class TestController {
 
-    @PostMapping("submit_form")
+    @PostMapping("refreshTable")
     @ResponseBody
     public Response submit_form(@RequestBody Map map) {
-        System.out.println(map);
-        return Response.ok(map);
+        List<Map> list= new ArrayList<>();
+        for(int i =0;i<10;i++){
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("name","xm");
+            hashMap.put("age","18");
+            hashMap.put("gender","male");
+            list.add(hashMap);
+        }
+        return Response.ok(list);
     }
 }
