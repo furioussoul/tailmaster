@@ -5,8 +5,9 @@
   .is-preview &{
     transition:  box-shadow @transition-time linear;
     position: relative;
-    .makeContainer();
+    .makeContainer()
   }
+
 
   .is-preview > &{
     .makeContainer();
@@ -87,6 +88,9 @@
 }
 }
 
+.is-preview  .ivu-card-extra .soul-drop-panel{
+  min-height:100px;
+}
 .makeContainer(){
   min-height: 40px;
   transition:  box-shadow @transition-time linear;
