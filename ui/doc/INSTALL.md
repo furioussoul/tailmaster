@@ -7,7 +7,7 @@
 ```shell
 npm install
 ```
-第二步：启动dev模式：
+第二步：启动dev模式（dev模式不需要启动后端）：
 ```shell
 npm run dev
 ```
