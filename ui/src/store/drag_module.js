@@ -55,7 +55,6 @@ export default {
           }
         }
       }else {
-        state.editSoul = {}
         state.rightClickMenu = {}
       }
     },
@@ -89,6 +88,11 @@ export default {
     },
     showEditorPanel(state, e){
       e.stopPropagation()
+      state.rightClickMenu = {
+        style: {
+          display: "none",
+        }
+      }
       const el = findElUpward(e.target);
       const soul = findSoulByUidDown(el.controlConfig.uid, state.soul);
       if (soul && soul.model) {

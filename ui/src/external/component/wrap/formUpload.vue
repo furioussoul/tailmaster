@@ -5,20 +5,9 @@
     :show-message="true"
     :rules="ruleValidate">
     <Form-item
-      v-if="soul.model.required.value"
+      :required="soul.model.required.value"
       :label="soul.model.label.value"
       :prop="soul.model.prop.value">
-      <Upload
-        :on-remove="removeFile"
-        :on-success="uploadSuccess"
-        :action="uploadUrl">
-        <Button type="ghost" icon="ios-cloud-upload-outline">upload</Button>
-      </Upload>
-    </Form-item>
-
-    <Form-item
-      v-else
-      :label="soul.model.label.value">
       <Upload
         :on-remove="removeFile"
         :on-success="uploadSuccess"
@@ -48,9 +37,9 @@
     },
     watch: {
       'soul.model.required.value'(n){
-        //v-if will reset get/set of model value
-        resetSoul(this.soul)
-        this.soul.model.required.value = n
+        this.soul.model.prop.value = n ?
+          'value'
+          : ''
       }
     }, data: function () {
       return {

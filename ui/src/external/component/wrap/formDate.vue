@@ -5,18 +5,8 @@
     :show-message="true"
     :rules="ruleValidate">
     <Form-item
-      v-if="soul.model.required.value"
       :prop="soul.model.prop.value"
-      :label="soul.model.label.value">
-      <Date-picker
-        @on-change="dateChange"
-        :format="soul.model.format.value"
-        :type="soul.model.type.value"
-        :value="soul.model.value.value">
-      </Date-picker>
-    </Form-item>
-    <Form-item
-      v-else
+      :required="soul.model.required.value"
       :label="soul.model.label.value">
       <Date-picker
         @on-change="dateChange"
@@ -38,9 +28,9 @@
     },
     watch:{
       'soul.model.required.value'(n){
-        //v-if will reset get/set of model value
-        resetSoul(this.soul)
-        this.soul.model.required.value = n
+        this.soul.model.prop.value = n ?
+          'value'
+          : ''
       }
     },
     data() {

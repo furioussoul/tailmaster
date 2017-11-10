@@ -89,7 +89,7 @@ function addPage() {
   refreshInitScript(soul)
   walkSoul(soul,soul=>{
     for(let key in soul.model){
-     if(soul.model[key].exclude){
+     if(soul.model[key].dontSave){
         soul.model[key].value = []
      }
     }
@@ -120,7 +120,7 @@ function updatePage() {
   refreshInitScript(soul)
   walkSoul(soul,soul=>{
     for(let key in soul.model){
-      if(soul.model[key].exclude){
+      if(soul.model[key].dontSave){
         soul.model[key].value = []
       }
     }

@@ -5,7 +5,7 @@
     :show-message="true"
     :rules="ruleValidate">
     <Form-item
-      v-if="soul.model.required.value"
+      :required="soul.model.required.value"
       :prop="soul.model.prop.value"
       :label="soul.model.label.value">
       <Radio-group v-model="soul.model.value.value"
@@ -18,19 +18,7 @@
         </Radio>
       </Radio-group>
     </Form-item>
-    <Form-item
-      v-else
-      :label="soul.model.label.value">
-      <Radio-group v-model="soul.model.value.value"
-                   @on-change="radioChange">
-        <Radio
-          v-for="item in soul.model.items.value"
-          :key="item.id"
-          :label="item.value">
-          {{item.label}}
-        </Radio>
-      </Radio-group>
-    </Form-item>
+
   </Form>
 </template>
 <script>
@@ -44,9 +32,9 @@
     },
     watch:{
       'soul.model.required.value'(n){
-        //v-if will reset get/set of model value
-        resetSoul(this.soul)
-        this.soul.model.required.value = n
+        this.soul.model.prop.value = n ?
+          'value'
+          : ''
       }
     },
     data: function () {

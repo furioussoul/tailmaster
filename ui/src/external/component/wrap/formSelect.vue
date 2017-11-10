@@ -5,21 +5,8 @@
     :show-message="true"
     :rules="ruleValidate">
     <Form-item
-      v-if="soul.model.required.value"
+      :required="soul.model.required.value"
       :prop="soul.model.prop.value"
-      :label="soul.model.label.value">
-      <Select
-        v-model="soul.model.value.value">
-        <Option
-          v-for="item in soul.model.items.value"
-          :value="item.value"
-          :key="item.id">
-          {{ item.label }}
-        </Option>
-      </Select>
-    </Form-item>
-    <Form-item
-      v-else
       :label="soul.model.label.value">
       <Select
         v-model="soul.model.value.value">
@@ -44,9 +31,9 @@
     },
     watch:{
       'soul.model.required.value'(n){
-        //v-if will reset get/set of model value
-        resetSoul(this.soul)
-        this.soul.model.required.value = n
+        this.soul.model.prop.value = n ?
+          'value'
+          : ''
       }
     },data: function () {
       return {

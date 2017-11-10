@@ -5,17 +5,8 @@
     :show-message="true"
     :rules="ruleValidate">
     <Form-item
-      v-if="soul.model.required.value"
       :prop="soul.model.prop.value"
-      :label="soul.model.label.value">
-      <InputNumber
-        :max="soul.model.max.value"
-        :min="soul.model.min.value"
-        v-model="soul.model.value.value">
-      </InputNumber >
-    </Form-item>
-    <Form-item
-      v-else
+      :required="soul.model.required.value"
       :label="soul.model.label.value">
       <InputNumber
         :max="soul.model.max.value"
@@ -36,9 +27,9 @@
     },
     watch:{
       'soul.model.required.value'(n){
-        //v-if will reset get/set of model value
-        resetSoul(this.soul)
-        this.soul.model.required.value = n
+        this.soul.model.prop.value = n ?
+          'value'
+          : ''
       }
     },data: function () {
       return {
