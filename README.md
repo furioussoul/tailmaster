@@ -26,7 +26,7 @@ Also you can customize your own draggable components.
 http://47.94.2.0:9090
 
 # Doc
-<a https://github.com/furioussoul/esview/blob/master/ui/doc/SUMMARY.md">Doc</a>
+<a href="https://github.com/furioussoul/esview/blob/master/ui/doc/SUMMARY.md">Doc</a>
 
 1 generate code:
 
