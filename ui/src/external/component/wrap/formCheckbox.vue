@@ -5,8 +5,8 @@
     :show-message="true"
     :rules="ruleValidate">
     <Form-item
-      :required="soul.model.required.value"
-      :prop="soul.model.prop.value"
+      v-show="soul.model.required.value"
+      :prop="prop"
       :label="soul.model.label.value">
       <CheckboxGroup  v-model="soul.model.value.value">
         <Checkbox
@@ -16,6 +16,18 @@
           {{item.label}}
         </Checkbox>
       </CheckboxGroup >
+    </Form-item>
+    <Form-item
+      v-show="!soul.model.required.value"
+      :label="soul.model.label.value">
+      <CheckboxGroup v-model="soul.model.value.value">
+        <Checkbox
+          v-for="item in soul.model.items.value"
+          :key="item.id"
+          :label="item.value">
+          {{item.label}}
+        </Checkbox>
+      </CheckboxGroup>
     </Form-item>
   </Form>
 </template>
@@ -28,11 +40,18 @@
     props: {
       soul: [Object]
     },
+    computed: {
+      prop(){
+        return this.soul.model.required.value
+          ? 'value'
+          : ''
+      }
+    },
     watch:{
       'soul.model.required.value'(n){
-        this.soul.model.prop.value = n ?
-          'value'
-          : ''
+        //v-if will reset get/set of model value
+        resetSoul(this.soul)
+        this.soul.model.required.value = n
       }
     },
     data: function () {

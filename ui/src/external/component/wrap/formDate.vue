@@ -5,8 +5,18 @@
     :show-message="true"
     :rules="ruleValidate">
     <Form-item
-      :prop="soul.model.prop.value"
-      :required="soul.model.required.value"
+      v-show="soul.model.required.value"
+      :prop="prop"
+      :label="soul.model.label.value">
+      <Date-picker
+        @on-change="dateChange"
+        :format="soul.model.format.value"
+        :type="soul.model.type.value"
+        :value="soul.model.value.value">
+      </Date-picker>
+    </Form-item>
+    <Form-item
+      v-show="!soul.model.required.value"
       :label="soul.model.label.value">
       <Date-picker
         @on-change="dateChange"
@@ -26,11 +36,18 @@
     props: {
       soul: [Object]
     },
+    computed: {
+      prop(){
+        return this.soul.model.required.value
+          ? 'value'
+          : ''
+      }
+    },
     watch:{
       'soul.model.required.value'(n){
-        this.soul.model.prop.value = n ?
-          'value'
-          : ''
+        //v-if will reset get/set of model value
+        resetSoul(this.soul)
+        this.soul.model.required.value = n
       }
     },
     data() {

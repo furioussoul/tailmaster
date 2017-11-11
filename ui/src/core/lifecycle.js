@@ -8,18 +8,20 @@ import {
 }from '../util/assist'
 
 function resetSoul(soul) {
-  if(isPlain(soul.model))return
+  if (isPlain(soul.model))return
   for (let key in soul.model) {
-    if(soul.model[key].exclude) continue
+    if (soul.model[key].exclude) continue
     let copy = soul.model[key].value
-    if(!soul.model[key]) continue
+    if (!soul.model[key]) continue
     Object.defineProperty(soul.model[key], 'value', {
       set: (n) => {
-        if(isNumber(n)){
-          n = Number(n)
+        if (copy !== n) {
+          if (isNumber(n)) {
+            n = Number(n)
+          }
+          copy = n
+          reset(soul)
         }
-        copy = n
-        reset(soul)
       },
       get: () => {
         return copy
@@ -39,7 +41,6 @@ export function reset(soul) {
         break
       }
     }
-
     pSoul.children.splice(index, 1)
     setTimeout(() => {
       soulCopy.initScript = false

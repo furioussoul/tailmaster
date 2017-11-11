@@ -5,8 +5,17 @@
     :show-message="true"
     :rules="ruleValidate">
     <Form-item
-      :prop="soul.model.prop.value"
-      :required="soul.model.required.value"
+      v-show="soul.model.required.value"
+      :prop="prop"
+      :label="soul.model.label.value">
+      <InputNumber
+        :max="soul.model.max.value"
+        :min="soul.model.min.value"
+        v-model="soul.model.value.value">
+      </InputNumber >
+    </Form-item>
+    <Form-item
+      v-show="!soul.model.required.value"
       :label="soul.model.label.value">
       <InputNumber
         :max="soul.model.max.value"
@@ -20,22 +29,32 @@
   import{
     resetSoul
   } from '../../../core/lifecycle'
+  import{
+      isNumber
+  }from '../../../util/assist'
   export default{
     name: 'FormNumber',
     props: {
       soul: [Object]
     },
-    watch:{
-      'soul.model.required.value'(n){
-        this.soul.model.prop.value = n ?
-          'value'
+    computed: {
+      prop(){
+        return this.soul.model.required.value
+          ? 'value'
           : ''
       }
-    },data: function () {
+    },
+    watch: {
+      'soul.model.required.value'(n){
+        //v-if will reset get/set of model value
+        resetSoul(this.soul)
+        this.soul.model.required.value = n
+      }
+    }, data: function () {
       return {
         ruleValidate: {
           value: [
-            {required: true, message:'cant be empty', trigger: 'blur'}
+            {required: true, message: 'cant be empty1', trigger: 'blur'}
           ]
         }
       }
