@@ -58,13 +58,13 @@
 
         <i-col span="17" class="middle" :class="{'is-preview':isPreview}">
           <RenderDev v-if="!showCode" :soul="soul"></RenderDev>
-          <pre contenteditable="true" v-else v-highlightjs="vueCode" class="code" id="code"><code ></code>
+          <pre contenteditable="true" v-else v-highlightjs="vueCode" class="code" id="code"><code></code>
             </pre>
           <Button v-if="showCode"
                   @click="copyCode"
                   type="ghost"
                   size="small"
-                  style="position: absolute;right: 0;top: 0;opacity:0.5">
+                  style="position: absolute;right: 0;top: 0;opacity:0.9;margin-right: 20px;margin-top: 12px">
             <Icon type="ios-copy-outline"></Icon>
             copy
           </Button>
@@ -88,7 +88,7 @@
       @on-ok="okPageName">
       <i-form :label-width="100">
         <FormItem label="PageName">
-          <i-input v-model="opModel.name"  @keyup.13.native="okPageName"></i-input>
+          <i-input v-model="opModel.name" @keyup.13.native="okPageName"></i-input>
         </FormItem>
       </i-form>
     </Modal>
@@ -119,7 +119,7 @@
         </DropdownMenu>
       </Dropdown>
     </div>
-    <textarea id="copy" style="width: 1px;height: 1px;border: 0;outline:0" />
+    <textarea id="copy" style="width: 1px;height: 1px;border: 0;outline:0"/>
   </div>
 </template>
 
@@ -129,9 +129,9 @@
   import {findSoulByCid, findSoulByUidDown, resetUid, generateUid, findSoulByCTypeUp} from '../../../helper/soul_helper'
   import {makeControl, addRenderFn} from '../../../helper/code_helper'
   import{undo, redo, clear, init, saveSoul, resetSnapShot}from '../../../core/assemble'
-  import {copyProperties, stringify, parse, deepCopy,jsCopy}from '../../../util/assist'
+  import {copyProperties, stringify, parse, deepCopy, jsCopy}from '../../../util/assist'
   import {getControlList} from  '../../../resource/develop_resource'
-  import {resetSoul,reset} from  '../../../core/lifecycle'
+  import {resetSoul, reset} from  '../../../core/lifecycle'
   import {
     addPage,
     delPage,
@@ -150,7 +150,7 @@
     name: 'AssemblePage',
     data(){
       return {
-        open:'1',
+        open: '1',
         isPreview: true,
         showConfirmPageNameModal: false,
         showEditScriptModal: false,
@@ -158,7 +158,7 @@
         editControlSoul: {scriptString: ''},
         pageSoulId: '',
         appId: '',
-        editorStyle:{height:'400px'}
+        editorStyle: {height: '400px'}
       }
     },
     computed: {
@@ -170,7 +170,7 @@
       ...mapMutations('dragModule', ['setSoul', 'clear', 'setDraggableControls', 'setShowCode']),
       ...mapActions('dragModule', ['getControlClazzes']),
       copyCode(){
-        jsCopy('copy',this.vueCode)
+        jsCopy('copy', this.vueCode)
         this.$Message.success('copied')
       },
       deleteControl(){
@@ -226,6 +226,7 @@
       }
     },
     mounted(){
+      this.clear()
       window.location.hash = deepCopy(window.location.hash) + '  '
       this.getControlClazzes()
       resetSnapShot()
@@ -273,7 +274,7 @@
             resetUid(ancestorSoul.maxUid)
             saveSoul()
             this.setSoul(ancestorSoul)
-            walkSoul(ancestorSoul,(soul)=>{
+            walkSoul(ancestorSoul, (soul) => {
               resetSoul(soul)
             })
           })
@@ -297,10 +298,8 @@
   }
 
   .code {
-    text-align: center;
     height: 1000px;
-    margin-top: 20px;
-    margin-bottom: 100px;
+    margin: 20px 20px 100px 20px;
   }
 
   .edit_layer {

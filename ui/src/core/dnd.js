@@ -69,18 +69,26 @@ function validateDrop(drag, drop) {
 
   if (drag.controlConfig.allowPlace) {
     //优先处理allow_place: FormItem只能放在Form里面
-    return drag.controlConfig.allowPlace.indexOf(drop.controlConfig.cid) > -1;
+    return contains(drag.controlConfig.allowPlace,drop.controlConfig.cid);
 
   } else {
+
     if (!drop || !drop.controlConfig.allow) {
       return false
 
     } else if (drop.controlConfig.allow && drop.controlConfig.allow.length === 0) {
       return true
 
-    } else if (drop.controlConfig.allow.indexOf(drag.controlConfig.cid) > -1) {
+    } else if (contains(drop.controlConfig.allow,drag.controlConfig.cid)) {
       return true
     }
+  }
+}
+
+function contains(allow, cid) {
+  for(let i =0;i<allow.length;i++){
+    allow[i] = allow[i].trim()
+    if(allow[i] == cid) return true
   }
 }
 

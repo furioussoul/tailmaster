@@ -7,7 +7,7 @@ const REG_EX = new RegExp(/.([a-zA-Z]+)[\s]*=[\s]*([\s\S]*)(;*)/)
 
 function getVueHtml(soul,data) {
   let temp = soul.template,
-    childCode = ''
+    childCode = '     '
 
   temp = temp.trim()
   temp = temp.replace(';', '')
@@ -30,7 +30,26 @@ function getVueHtml(soul,data) {
     let propStr,
       prop = {}
 
-    if (model[key].exclude || false===model[key].value || '' === model[key].value || isPlain(model[key].value)) {
+    if (model[key].script === true) {
+      if(model[key].vModel){
+        if(model[key].type=== 'text'){
+          data[model[key].value] = ''
+        }else if(model[key].type=== 'json'){
+          data[model[key].value] = {}
+        }else {
+          data[model[key].value] = []
+        }
+
+        props +=  key+ '=' + '"' + model[key].value + '"' + ' '
+      }else {
+        data[key] = model[key].value
+
+        if(model[key].addModel){
+          props += ' :' + key+ '=' + '"' + key + '"' + ' '
+        }
+      }
+
+    }else if (model[key].exclude || false===model[key].value || '' === model[key].value || isPlain(model[key].value)) {
       //don't need compile this model value
       propStr = ''
 
@@ -39,6 +58,7 @@ function getVueHtml(soul,data) {
       if(!soul.showSlot){
         return ''
       }
+
       slotName = 'slot="'+soul.slotName+'"'
 
     }else if(soul.type ==='Icon'){
@@ -58,36 +78,34 @@ function getVueHtml(soul,data) {
 
       innerHTML+=model[key].value
 
-    } else if (typeOf(model[key].value) === 'array') {
-      //model value is array
-      data[key] = model[key].value
-      props += ' :' + key+ '=' + '"' + key + '"' + ' '
-    } else if (typeOf(model[key].value) === 'object') {
-      //model value is object
-      prop[key] = model[key].value
-      propStr = prop[key] = JSON.stringify(prop)
-      propStr = propStr.substring(1, propStr.length)
-      propStr = propStr.substring(0, propStr.length - 1)
-      let match = propStr.match(/("([\s\S]*?)":)/)
-      propStr = match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
-      propStr = propStr.replace(/,/g, ';')
-      propStr = propStr.replace(/"/g, '')
-      propStr = propStr.replace('{', '"')
-      propStr = propStr.replace('}', '"')
-      propStr = propStr.trim()
-      props += ' ' + propStr + ' '
-    } else {
-      prop[key] = model[key].value + ''
-      propStr = JSON.stringify(prop)
-      propStr = propStr.trim()
-      //remove {}
-      propStr = propStr.substring(1, propStr.length)
-      propStr = propStr.substring(0, propStr.length - 1)
-      //delete comma
-      let match = propStr.match(/("([\s\S]*?)":)/)
-      propStr = match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
-      propStr = propStr.trim()
-      props += ' ' + propStr + ' '
+    }else {
+      if (model[key].type === 'json') {
+        //model value is object
+        prop[key] = model[key].value
+        propStr = prop[key] = JSON.stringify(prop)
+        propStr = propStr.substring(1, propStr.length)
+        propStr = propStr.substring(0, propStr.length - 1)
+        let match = propStr.match(/("([\s\S]*?)":)/)
+        propStr = match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
+        propStr = propStr.replace(/,/g, ';')
+        propStr = propStr.replace(/"/g, '')
+        propStr = propStr.replace('{', '"')
+        propStr = propStr.replace('}', '"')
+        propStr = propStr.trim()
+        props += ' ' + propStr + ' '
+      }else {
+        prop[key] = model[key].value + ''
+        propStr = JSON.stringify(prop)
+        propStr = propStr.trim()
+        //remove {}
+        propStr = propStr.substring(1, propStr.length)
+        propStr = propStr.substring(0, propStr.length - 1)
+        //delete comma
+        let match = propStr.match(/("([\s\S]*?)":)/)
+        propStr = match[2] + '=' + propStr.substring(match[1].length, propStr.length + 1)
+        propStr = propStr.trim()
+        props += ' ' + propStr + ' '
+      }
     }
   }
 
