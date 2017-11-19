@@ -52,7 +52,7 @@ public class AppResource {
 
     @PostMapping("appList")
     @ResponseBody
-    public Response pageList(@RequestBody QueryAppRequest request) {
+    public Response appList(@RequestBody QueryAppRequest request) {
         List<App> apps = appDao.selectByExample(new App(request.getName()));
         return Response.ok(apps);
     }

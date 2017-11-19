@@ -63,6 +63,11 @@ public class PageResource {
         page.setAppName(request.getAppName());
         page.setName(request.getName());
         List<Page> pages = pageDao.selectByExample(page);
+
+        pages.forEach(page1->{
+            page1.setPageSoul("");
+        });
+
         return Response.ok(pages);
     }
 
