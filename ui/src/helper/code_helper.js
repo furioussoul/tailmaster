@@ -25,6 +25,15 @@ function getVueHtml(soul,data) {
     slotName='',
     innerHTML = ''
 
+  if(soul.slotName){
+    //is a slot of parent
+    if(!soul.showSlot){
+      return ''
+    }
+
+    slotName = 'slot="'+soul.slotName+'"'
+  }
+
   for (let key in model) {
 
     let propStr,
@@ -53,14 +62,6 @@ function getVueHtml(soul,data) {
       //don't need compile this model value
       propStr = ''
 
-    }else if(soul.slotName){
-      //is a slot of parent
-      if(!soul.showSlot){
-        return ''
-      }
-
-      slotName = 'slot="'+soul.slotName+'"'
-
     }else if(soul.type ==='Icon'){
       //is Icon
       prop[key] = model[key].value + ''
@@ -79,7 +80,9 @@ function getVueHtml(soul,data) {
       innerHTML+=model[key].value
 
     }else {
-      if (model[key].type === 'json') {
+      if (model[key].ignore){
+        props =''
+      }else if (model[key].type === 'json') {
         //model value is object
         prop[key] = model[key].value
         propStr = prop[key] = JSON.stringify(prop)

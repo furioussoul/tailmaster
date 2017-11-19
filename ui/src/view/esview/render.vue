@@ -2,19 +2,43 @@
   <Div>
     <Form labelWidth="100">
       <Row type="flex">
-        <Col span="12">
-        <FormItem label="label">
+        <Col span="10">
+        <FormItem label="input">
           <Input v-model="modelInput">
           </Input>
         </FormItem>
-        <FormItem label="label">
+        <FormItem label="number">
+          <InputNumber v-model="modelInput" max="10" min="0">
+          </InputNumber>
+        </FormItem>
+        <FormItem label="date">
+          <DatePicker v-model="modelDatePicker" type="date" format="yyyy-MM-dd HH:mm:ss">
+          </DatePicker>
+        </FormItem>
+        <FormItem>
           <Button type="primary">提交</Button>
         </FormItem>
         </Col>
       </Row>
     </Form>
-    <Table></Table>
-    <Page current="1" pageSize="10" total="100"></Page>
+    <Row type="flex">
+      <Col span="24">
+      <Tabs>
+        <TabPane label="tab1">
+          <Table></Table>
+          <Row type="flex">
+            <Col span="10"> </Col>
+            <Col span="14">
+            <Page current="1" pageSize="10" total="100"></Page>
+            </Col>
+          </Row>
+        </TabPane>
+        <TabPane label="tab2">
+          <Table></Table>
+        </TabPane>
+      </Tabs>
+      </Col>
+    </Row>
   </Div>
 </template>
 <script>
@@ -22,6 +46,7 @@
     data() {
       return {
         "modelInput": "",
+        "modelDatePicker": "",
         "columns": [{
           "title": "Name",
           "key": "name"
