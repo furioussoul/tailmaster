@@ -12,7 +12,7 @@
   
 
 # Introduction
-Esview is a vue page generator based on iview-ui，it alse can generate vue code.  
+Esview is a vue page code generator based on iview-ui.  
 
 You can get .vue file code by dnd components on esview.
 
