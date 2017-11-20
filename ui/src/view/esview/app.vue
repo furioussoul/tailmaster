@@ -280,9 +280,9 @@ export default{
                 ]
               },
               {
-                "id": 74842,
+                "id": 74811,
                 "name": "advice",
-                "title": "advice(建议)",
+                "title": "advise(建议)",
                 "url": "/esview/advice",
                 "orderNo": 3,
                 "mtype": 0,
@@ -292,7 +292,7 @@ export default{
                   {
                     "id": 74810,
                     "name": "index",
-                    "title": "ManageControl",
+                    "title": "advise",
                     "url": "/esview/advice/index",
                     "orderNo": 1,
                     "mtype": 1,
