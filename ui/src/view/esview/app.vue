@@ -278,6 +278,28 @@ export default{
                     "subMenuList": null
                   }
                 ]
+              },
+              {
+                "id": 74842,
+                "name": "advice",
+                "title": "advice(建议)",
+                "url": "/esview/advice",
+                "orderNo": 3,
+                "mtype": 0,
+                "icon": 'social-rss-outline',
+                "hasPermisson": 1,
+                "subMenuList": [
+                  {
+                    "id": 74810,
+                    "name": "index",
+                    "title": "ManageControl",
+                    "url": "/esview/advice/index",
+                    "orderNo": 1,
+                    "mtype": 1,
+                    "hasPermisson": 1,
+                    "subMenuList": null
+                  },
+                ]
               }
             ]
           }

@@ -16,6 +16,10 @@ import {
 } from './assemble_resource'
 
 import {
+  addAdvice
+} from './advice_resource'
+
+import {
   register,
   login
 } from './auth_resource'
@@ -33,5 +37,6 @@ export {
   getTablePageList,
   getRichPage,
   register,
-  login
+  login,
+  addAdvice
 }
