@@ -85,6 +85,9 @@ function getRichApp(id, fn) {
 }
 
 function addPage() {
+  if(!this.opModel.name){
+    return void this.$Message.warning('name can\'t be empty')
+  }
   let soul = deepCopy(store.getters['dragModule/soul'])
   refreshInitScript(soul)
   walkSoul(soul,soul=>{

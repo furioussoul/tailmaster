@@ -50,6 +50,11 @@
         }
 
         this.opModel.code = code
+
+        if(!this.opModel.name){
+          return void this.$Message.warning('name can\'t be empty')
+        }
+
         if (this.opModel.id) {
           updateControl.call(this,()=>{
             this.$router.push('./index')

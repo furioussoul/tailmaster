@@ -28,24 +28,23 @@
               </i-switch>
             </Form-item>
 
-            <!--<Form-item v-if="config.type === 'select'"-->
-            <!--:label="config.name">-->
-            <!--<i-Select-->
-            <!--v-model="config.value">-->
-            <!--<Option v-for="option in config.options"-->
-            <!--:value="option"-->
-            <!--:key="option">{{ option }}-->
-            <!--</Option>-->
-            <!--</i-Select>-->
-            <!--</Form-item>-->
+
+            <Form-item v-if="config.type === 'select'"
+                       :label="config.name">
+              <Select v-model="config.value" style="margin-left:20px">
+                <Option v-for="item in config.items" :value="item.value" :key="item.value">{{ item.label }}</Option>
+              </Select>
+            </Form-item>
+
+            <Form-item v-if="config.type === 'slider'"
+                       :label="config.name">
+              <Slider v-model="config.value" :step="1" :min="0" :max="24" show-stops style="margin-left:20px"></Slider>
+            </Form-item>
 
           </div>
 
         </i-form>
 
-      <!--  <div style="width: 200px; margin: 15px auto 0;">
-          <Button class="tool-button" type="info" @click="save">保存</Button>
-        </div>-->
       </Card>
     </i-col>
   </Row>
