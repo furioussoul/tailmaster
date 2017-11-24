@@ -14,6 +14,11 @@ util.extend(Token, {
     'rp': 261,//)
     'qt': 262,//'
     'not': 263,//'
+  'lbracket':264,//[
+  'rbracket':265,//]
+  'lbraces':266,//{
+  'rbraces':267,//}
+  'comma':268,//}
     'eof': -1
 })
 

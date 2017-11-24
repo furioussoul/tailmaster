@@ -13,7 +13,7 @@ Lexer.prototype.isDigit = function (char) {
 }
 
 Lexer.prototype.isAlphabetic = function (char) {
-  if(!char){
+  if (!char) {
     return false
   }
   var reg = /[\u4e00-\u9fa5a-zA-Z0-9!]/
@@ -25,14 +25,14 @@ function reserve(word) {
   words[word.lexeme] = word
 }
 
-function compareStrIgnoreCase(n1,n2) {
-  if(undefined === n1 || undefined===n2){
+function compareStrIgnoreCase(n1, n2) {
+  if (undefined === n1 || undefined === n2) {
     return false
   }
-  if(null === n1 || null===n2){
+  if (null === n1 || null === n2) {
     return false
   }
-  return n1.toUpperCase()===n2.toUpperCase()
+  return n1.toUpperCase() === n2.toUpperCase()
 }
 
 function Lexer(input) {
@@ -49,24 +49,24 @@ function Lexer(input) {
   this.scan = function () {
 
     this.peek = this.input[this.index]
-    while(this.peek === ' ' || this.peek === '\t' || this.peek === '\n'){
-      if(this.peek === ' ' || this.peek === '\t'){
+    while (this.peek === ' ' || this.peek === '\t' || this.peek === '\n') {
+      if (this.peek === ' ' || this.peek === '\t') {
         this.index++
         this.peek = this.input[this.index]
-      }else if(this.peek === '\n'){
+      } else if (this.peek === '\n') {
         this.index++
         this.peek = this.input[this.index]
         this.line += 1;
-      }else {
+      } else {
         break
       }
     }
 
-    if(undefined === this.peek){
+    if (undefined === this.peek) {
       return new Token(Token.eof)
     }
 
-    switch (this.peek){
+    switch (this.peek) {
       case '(':
         this.index++
         return new Token(Tag.LP)
@@ -76,22 +76,34 @@ function Lexer(input) {
       case '\'':
         this.index++
         return new Token(Tag.QT)
-      case '!':
+      case '[':
         ++this.index
-        return new Token(Tag.NOT)
+        return new Token(Tag.Lbracket)
+      case ']':
+        ++this.index
+        return new Token(Tag.Rbracket)
+      case '{':
+        ++this.index
+        return new Token(Tag.Lbraces)
+      case '}':
+        ++this.index
+        return new Token(Tag.Rbraces)
+      case ',':
+        ++this.index
+        return new Token(Tag.Comma)
     }
 
     if (this.isAlphabetic(this.peek)) {
-      var val=''
+      var val = ''
       do {
         val += this.peek
         this.peek = input[++this.index]
       } while (this.isAlnum(this.peek));
 
-      if(compareStrIgnoreCase(val,'AND')){
+      if (compareStrIgnoreCase(val, 'AND')) {
         val = 'AND'
       }
-      if(compareStrIgnoreCase(val,'OR')){
+      if (compareStrIgnoreCase(val, 'OR')) {
         val = 'OR'
       }
       var word = words[val];
@@ -99,7 +111,7 @@ function Lexer(input) {
       return new Word(val, Tag.ID);
     }
 
-    this.index ++;
+    this.index++;
     var token = new Token(this.peek);
     this.peek = ' ';
     return token;
