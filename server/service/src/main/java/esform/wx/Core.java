@@ -9,6 +9,7 @@ import esform.enums.param.*;
 import esform.util.*;
 import esform.wx.msgHandler.CommonMsgHandler;
 import esform.wx.msgHandler.IMsgHandlerFace;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.message.BasicNameValuePair;
@@ -775,7 +776,12 @@ public class Core implements LifeCycle {
                         try {
                             if (msg.getType().equals(MsgTypeEnum.TEXT.getType())) {
                                 String result = msgHandler.textMsgHandle(this, msg);
-                                MessageTools.sendMsgById(this, result, getMsgList().get(0).getFromUserName());
+                                if(StringUtils.isNotEmpty(result)){
+                                    BaseMsg baseMsg = getMsgList().get(0);
+                                    if(!this.getUserName().equals(baseMsg.getFromUserName())){
+                                        MessageTools.sendMsgById(this, result, getMsgList().get(0).getFromUserName());
+                                    }
+                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
