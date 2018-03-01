@@ -1,4 +1,4 @@
-package esform.enums;
+package esform.enums.param;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

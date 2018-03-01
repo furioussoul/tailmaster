@@ -1,19 +1,20 @@
-package esform.enums;
+package esform.enums.param;
 
 /**
  * Created by szj46941 on 2018/2/27.
  */
-public enum UUIDParaEnum {
+public enum LoginParaEnum {
 
-    APP_ID("appid", "wx782c26e4c19acffb"),
-    FUN("fun", "new"),
-    LANG("lang", "zh_CN"),
-    TIME_STAMP("_", "时间戳");
+    LOGIN_ICON("loginicon", "true"),
+    UUID("uuid", ""),
+    TIP("tip", "0"),
+    R("r", ""),
+    _("_", "");
 
     private String key;
     private String value;
 
-    UUIDParaEnum(String key, String value) {
+    LoginParaEnum(String key, String value) {
         this.key = key;
         this.value = value;
     }

@@ -1,5 +1,7 @@
 package esform.util;
 
+import com.alibaba.fastjson.JSONObject;
+import com.vdurmont.emoji.EmojiParser;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -31,5 +33,46 @@ public class CommonTool {
             e.printStackTrace();
         }
         return doc;
+    }
+
+    /**
+     * 消息格式化
+     */
+    public static void msgFormatter(JSONObject d, String k) {
+        d.put(k, d.getString(k).replace("<br/>", "\n"));
+        emojiFormatter(d, k);
+        // TODO 与emoji表情有部分兼容问题，目前暂未处理解码处理 d.put(k,
+        // StringEscapeUtils.unescapeHtml4(d.getString(k)));
+    }
+
+    /**
+     * 处理emoji表情
+     */
+    public static void emojiFormatter(JSONObject d, String k) {
+        Matcher matcher = getMatcher("<span class=\"emoji emoji(.{1,10})\"></span>", d.getString(k));
+        StringBuilder sb = new StringBuilder();
+        String content = d.getString(k);
+        int lastStart = 0;
+        while (matcher.find()) {
+            String str = matcher.group(1);
+            if (str.length() == 6) {
+
+            } else if (str.length() == 10) {
+
+            } else {
+                str = "&#x" + str + ";";
+                String tmp = content.substring(lastStart, matcher.start());
+                sb.append(tmp + str);
+                lastStart = matcher.end();
+            }
+        }
+        if (lastStart < content.length()) {
+            sb.append(content.substring(lastStart));
+        }
+        if (sb.length() != 0) {
+            d.put(k, EmojiParser.parseToUnicode(sb.toString()));
+        } else {
+            d.put(k, content);
+        }
     }
 }
