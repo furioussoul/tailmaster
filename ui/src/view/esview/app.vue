@@ -300,6 +300,17 @@ export default{
                     "subMenuList": null
                   },
                 ]
+              },
+              {
+                "id": 74812,
+                "name": "monitor",
+                "title": "monitor",
+                "url": "/esview/monitor/index",
+                "orderNo": 4,
+                "mtype": 1,
+                "icon": 'social-rss-outline',
+                "hasPermisson": 1,
+                "subMenuList": null
               }
             ]
           }
