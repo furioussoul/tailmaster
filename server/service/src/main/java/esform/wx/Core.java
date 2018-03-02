@@ -401,10 +401,10 @@ public class Core implements LifeCycle {
                         break;
                     } else if (retcode.equals(RetCodeEnum.LOGIN_OTHER_WHERE.code())) { // 其它地方登陆
 //                    LOG.info(RetCodeEnum.LOGIN_OTHERWHERE.getType());
-                        break;
+//                        break;
                     } else if (retcode.equals(RetCodeEnum.MOBILE_LOGIN_OUT.code())) { // 移动端退出
 //                    LOG.info(RetCodeEnum.MOBILE_LOGIN_OUT.getType());
-                        break;
+//                        break;
                     } else if (retcode.equals(RetCodeEnum.NORMAL.code())) {
                         setLastNormalRetCodeTime(System.currentTimeMillis()); // 最后收到正常报文时间
                         JSONObject msgObj = webWxSync();
