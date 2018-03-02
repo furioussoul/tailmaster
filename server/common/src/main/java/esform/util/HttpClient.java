@@ -1,5 +1,9 @@
 package esform.util;
 
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -13,6 +17,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -31,12 +36,56 @@ public class HttpClient {
     private static CloseableHttpClient HTTP_CLIENT;
 
     static {
+        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+        cm.setMaxTotal(200);
+        cm.setDefaultMaxPerRoute(20);
+        cm.setDefaultMaxPerRoute(50);
         COOKIE_STORE = new BasicCookieStore();
-        HTTP_CLIENT = HttpClients.custom().setDefaultCookieStore(COOKIE_STORE).build();
+        HTTP_CLIENT = HttpClients.custom().setConnectionManager(cm).setDefaultCookieStore(COOKIE_STORE).build();
+    }
+
+    public static String get(String url, List<BasicNameValuePair> params, boolean redirect,
+                      Map<String, String> headerMap) {
+        HttpGet httpGet = new HttpGet();
+        CloseableHttpResponse response = null;
+        try {
+            if (params != null) {
+                String paramStr = EntityUtils.toString(new UrlEncodedFormEntity(params, Consts.UTF_8));
+                httpGet = new HttpGet(url + "?" + paramStr);
+            } else {
+                httpGet = new HttpGet(url);
+            }
+            if (!redirect) {
+                httpGet.setConfig(RequestConfig.custom().setRedirectsEnabled(false).build()); // 禁止重定向
+            }
+            //模拟浏览器的请求
+            httpGet.setHeader("User-Agent", Config.USER_AGENT);
+            if (headerMap != null) {
+                Set<Map.Entry<String, String>> entries = headerMap.entrySet();
+                for (Map.Entry<String, String> entry : entries) {
+                    httpGet.setHeader(entry.getKey(), entry.getValue());
+                }
+            }
+
+            response = HTTP_CLIENT.execute(httpGet);
+            return EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (response != null) {
+                    response.close();
+                }
+                httpGet.releaseConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     public static HttpEntity doGet(String url, List<BasicNameValuePair> params, boolean redirect,
-                            Map<String, String> headerMap) {
+                                   Map<String, String> headerMap) {
         HttpEntity entity = null;
         HttpGet httpGet = new HttpGet();
 
@@ -63,12 +112,13 @@ public class HttpClient {
             entity = response.getEntity();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } finally {
 
+        }
         return entity;
     }
 
-    public static HttpEntity doPost(String url, String paramsStr) {
+    public static synchronized HttpEntity doPost(String url, String paramsStr) {
         HttpEntity entity = null;
         HttpPost httpPost = new HttpPost();
         try {

@@ -13,6 +13,12 @@
     <artifactId>common</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
         <!-- emoji -->
         <dependency>
             <groupId>com.vdurmont</groupId>

@@ -121,8 +121,7 @@ public class WechatTools {
 		params.add(
 				new BasicNameValuePair("skey", (String) core.getLoginInfo().get(StorageLoginInfoEnum.S_KEY.key())));
 		try {
-			HttpEntity entity = HttpClient.doGet(url, params, false, null);
-			String text = EntityUtils.toString(entity, Consts.UTF_8); // 无消息
+			HttpClient.doGet(url, params, false, null);
 			return true;
 		} catch (Exception e) {
 			LOG.debug(e.getMessage());

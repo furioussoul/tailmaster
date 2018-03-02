@@ -78,15 +78,8 @@ public class Core implements LifeCycle {
 
             params.add(new BasicNameValuePair(LoginParaEnum.R.key(), String.valueOf(millis / 1579L)));
             params.add(new BasicNameValuePair(LoginParaEnum._.key(), String.valueOf(millis)));
-            HttpEntity entity = HttpClient.doGet(URLEnum.LOGIN_URL.url(), params, true, null);
+            String result = HttpClient.get(URLEnum.LOGIN_URL.url(), params, true, null);
 
-            String result = null;
-            try {
-                result = EntityUtils.toString(entity);
-            } catch (IOException e) {
-                e.printStackTrace();
-                Thread.interrupted();
-            }
             String status = checkLogin(result);
 
             if (ResultEnum.SUCCESS.code().equals(status)) {
@@ -155,15 +148,8 @@ public class Core implements LifeCycle {
             }
             this.getLoginInfo().put("deviceid", "e" + String.valueOf(new Random().nextLong()).substring(1, 16)); // 生成15位随机数
             this.getLoginInfo().put("BaseRequest", new ArrayList<String>());
-            String text = "";
+            String text = HttpClient.get(originalUrl, null, false, null);
 
-            try {
-                HttpEntity entity = HttpClient.doGet(originalUrl, null, false, null);
-                text = EntityUtils.toString(entity);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return;
-            }
             //add by 默非默 2017-08-01 22:28:09
             //如果登录被禁止时，则登录返回的message内容不为空，下面代码则判断登录内容是否为空，不为空则退出程序
             String msg = getLoginMessage(text);
@@ -284,10 +270,9 @@ public class Core implements LifeCycle {
         params.add(new BasicNameValuePair(UUIDParaEnum.LANG.key(), UUIDParaEnum.LANG.value()));
         params.add(new BasicNameValuePair(UUIDParaEnum.TIME_STAMP.key(), String.valueOf(System.currentTimeMillis())));
 
-        HttpEntity entity = HttpClient.doGet(URLEnum.UUID_URL.url(), params, true, null);
+        String result = HttpClient.get(URLEnum.UUID_URL.url(), params, false, null);
 
         String uuid = null;
-        String result = EntityUtils.toString(entity);
         String regEx = "window.QRLogin.code = (\\d+); window.QRLogin.uuid = \"(\\S+?)\";";
         Matcher matcher = CommonTool.getMatcher(regEx, result);
         if (matcher.find()) {
@@ -430,7 +415,7 @@ public class Core implements LifeCycle {
                                     msgList = msgObj.getJSONArray("AddMsgList");
                                     msgList = produceMsg(msgList);
                                     for (int j = 0; j < msgList.size(); j++) {
-                                        BaseMsg baseMsg = JSON.parseObject(JSON.toJSONString(msgList.getJSONObject(j)),BaseMsg.class);
+                                        BaseMsg baseMsg = JSON.parseObject(JSON.toJSONString(msgList.getJSONObject(j)), BaseMsg.class);
                                         getMsgList().add(baseMsg);
                                     }
                                 } catch (Exception e) {
@@ -497,15 +482,14 @@ public class Core implements LifeCycle {
         params.add(new BasicNameValuePair("synckey", (String) getLoginInfo().get("synckey")));
         params.add(new BasicNameValuePair("_", String.valueOf(new Date().getTime())));
         try {
-            HttpEntity entity = HttpClient.doGet(url, params, true, null);
-            if (entity == null) {
+            String result = HttpClient.get(url, params, true, null);
+            if (result == null) {
                 resultMap.put("retcode", "9999");
                 resultMap.put("selector", "9999");
                 return resultMap;
             }
-            String text = EntityUtils.toString(entity);
             String regEx = "window.synccheck=\\{retcode:\"(\\d+)\",selector:\"(\\d+)\"\\}";
-            Matcher matcher = CommonTool.getMatcher(regEx, text);
+            Matcher matcher = CommonTool.getMatcher(regEx, result);
             if (!matcher.find() || matcher.group(1).equals("2")) {
 //                LOG.info(String.format("Unexpected sync check result: %s", text));
             } else {
@@ -583,12 +567,11 @@ public class Core implements LifeCycle {
                 // 设置seq传参
                 params.add(new BasicNameValuePair("r", String.valueOf(currentTime)));
                 params.add(new BasicNameValuePair("seq", String.valueOf(seq)));
-                entity = HttpClient.doGet(url, params, false, null);
+                result = HttpClient.get(url, params, false, null);
 
                 params.remove(new BasicNameValuePair("r", String.valueOf(currentTime)));
                 params.remove(new BasicNameValuePair("seq", String.valueOf(seq)));
 
-                result = EntityUtils.toString(entity, Consts.UTF_8);
                 fullFriendsJsonList = JSON.parseObject(result);
 
                 if (fullFriendsJsonList.get("Seq") != null) {
@@ -776,9 +759,9 @@ public class Core implements LifeCycle {
                         try {
                             if (msg.getType().equals(MsgTypeEnum.TEXT.getType())) {
                                 String result = msgHandler.textMsgHandle(this, msg);
-                                if(StringUtils.isNotEmpty(result)){
+                                if (StringUtils.isNotEmpty(result)) {
                                     BaseMsg baseMsg = getMsgList().get(0);
-                                    if(!this.getUserName().equals(baseMsg.getFromUserName())){
+                                    if (!this.getUserName().equals(baseMsg.getFromUserName())) {
                                         MessageTools.sendMsgById(this, result, getMsgList().get(0).getFromUserName());
                                     }
                                 }
