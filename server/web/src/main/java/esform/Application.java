@@ -3,6 +3,8 @@ package esform;
 import esform.filter.LoggerFilter;
 import esform.filter.OauthFilter;
 import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -29,10 +31,11 @@ public class Application {
     private LoggerFilter loggerFilter;
     @Autowired
     private OauthFilter oauthFilter;
+    private final static Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-        System.out.println("--启动了--");
+        LOGGER.info("--启动了--");
     }
 
     @Bean
