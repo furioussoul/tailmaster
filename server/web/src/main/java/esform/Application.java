@@ -39,16 +39,16 @@ public class Application {
     }
 
     @Bean
-    public FilterRegistrationBean logFilter() {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+    public FilterRegistrationBean<LoggerFilter> logFilter() {
+        FilterRegistrationBean<LoggerFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(loggerFilter);
         registrationBean.setOrder(1);
         return registrationBean;
     }
 
     @Bean
-    public FilterRegistrationBean authFilter() {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+    public FilterRegistrationBean<OauthFilter> authFilter() {
+        FilterRegistrationBean<OauthFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(oauthFilter);
         registrationBean.setOrder(2);
         return registrationBean;
