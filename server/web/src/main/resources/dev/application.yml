@@ -15,5 +15,6 @@ spring:
       time-between-eviction-runs-millis: 18800
       initial-size: 5
 server:
-  context-path: /esview
+  servlet:
+    context-path: /esview
   port: 8080
