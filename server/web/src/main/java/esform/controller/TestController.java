@@ -2,10 +2,7 @@ package esform.controller;
 
 import esform.response.Response;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,5 +31,12 @@ public class TestController {
             list.add(hashMap);
         }
         return Response.ok(list);
+    }
+
+    @GetMapping("gc")
+    @ResponseBody
+    public Response gc() {
+        System.gc();
+        return Response.ok();
     }
 }
