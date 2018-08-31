@@ -25,7 +25,7 @@ Esview是一款拖拽组件生成页面的工具，并且可以生成vue代码�
 ![QQ图片20171027113639.png](http://chuantu.biz/t6/121/1509463255x2890191685.gif)
 
 # 2 在线demo  
-http://47.94.2.0:9090/#/esview/assemble/assemble_page?pageSoulId=235
+http://47.97.220.227:9090/#/esview/assemble/assemble_page?pageSoulId=235
 
 # <a href="https://github.com/furioussoul/esview/blob/master/ui/doc/SUMMARY.md">Doc</a>
 
