@@ -22,7 +22,7 @@ Also you can customize your own draggable components.
 
 # Online Demo
 
-http://47.94.2.0:9090
+http://47.97.220.227:9090/#/
 
 # <a href="https://github.com/furioussoul/esview/blob/master/ui/doc/SUMMARY.md">Doc</a>
 
