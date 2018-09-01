@@ -1,4 +1,4 @@
-package esform.exception;
+package esform.global.exception;
 
 import esform.response.Response;
 import esform.response.Status;

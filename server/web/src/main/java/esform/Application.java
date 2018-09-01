@@ -1,8 +1,9 @@
 package esform;
 
-import esform.filter.LoggerFilter;
-import esform.filter.OauthFilter;
-import esform.listener.InitListener;
+import esform.global.filter.LoggerFilter;
+import esform.global.filter.OauthFilter;
+import esform.global.listener.InitListener;
+import esform.util.RedisUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,13 +17,9 @@ import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import redis.clients.jedis.HostAndPort;
-import redis.clients.jedis.JedisCluster;
-
-import javax.annotation.Resource;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * Created by
@@ -70,15 +67,18 @@ public class Application {
     }
 
     @Bean
-    public JedisCluster jedisClusterFactory(){
-        Set<HostAndPort> hostAndPortSet = new HashSet<>();
-        hostAndPortSet.add(new HostAndPort(redisMaster1Ip, redisMaster1Port));
-        return new JedisCluster(hostAndPortSet);
+    public JedisPool redisFactory(){
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxIdle(5);
+        config.setMaxTotal(100);
+        config.setMaxWaitMillis(1000);
+        config.setTestOnBorrow(false);
+        return new JedisPool(config, redisMaster1Ip, redisMaster1Port, 10000);
     }
 
     @Bean
-    public ServletListenerRegistrationBean XervletListenerRegistration(){
-        ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
+    public ServletListenerRegistrationBean servletListenerRegistration(){
+        ServletListenerRegistrationBean<InitListener> servletListenerRegistrationBean = new ServletListenerRegistrationBean<>();
         servletListenerRegistrationBean.setListener(new InitListener());
         return servletListenerRegistrationBean;
     }

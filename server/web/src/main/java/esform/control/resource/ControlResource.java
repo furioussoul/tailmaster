@@ -7,7 +7,7 @@ import esform.control.request.QueryControlRequest;
 import esform.dao.ControlDao;
 import esform.domain.Control;
 import esform.domain.User;
-import esform.filter.OauthFilter;
+import esform.global.filter.OauthFilter;
 import esform.response.Response;
 import esform.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;

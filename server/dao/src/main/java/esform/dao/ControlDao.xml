@@ -45,16 +45,16 @@
     <select id="select" resultType="esform.domain.Control">
         select control.*, clazz.name AS clazzName
         from control
-        LEFT JOIN  clazz
+        LEFT JOIN clazz
         ON control.clazzId = clazz.id
         <where>
             control.rowStatus = 1
             AND clazz.rowStatus = 1
             <if test="controlName != null and controlName != ''">
-              and control.name LIKE CONCAT(CONCAT('%', #{controlName}),'%')
+                and control.name LIKE CONCAT(CONCAT('%', #{controlName}),'%')
             </if>
             <if test="controlClass != null and controlClass != ''">
-              and clazz.name LIKE CONCAT(CONCAT('%', #{controlClass}),'%')
+                and clazz.name LIKE CONCAT(CONCAT('%', #{controlClass}),'%')
             </if>
         </where>
         order BY control.id desc
@@ -63,7 +63,7 @@
     <select id="selectByExample" resultType="esform.domain.Control">
         select control.*, clazz.name AS clazzName
         from control control
-        LEFT JOIN  clazz clazz
+        LEFT JOIN clazz clazz
         ON control.clazzId = clazz.id
         <where>
             <if test="id != null">

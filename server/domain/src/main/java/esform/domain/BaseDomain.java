@@ -14,7 +14,7 @@ public class BaseDomain {
     private Date createDt;
     private String updateBy;
     private Date updateDt;
-    private int rowStatus;
+    private Integer rowStatus;
 
     public BaseDomain() {
     }
@@ -63,11 +63,11 @@ public class BaseDomain {
         this.updateDt = updateDt;
     }
 
-    public int getRowStatus() {
+    public Integer getRowStatus() {
         return rowStatus;
     }
 
-    public void setRowStatus(int rowStatus) {
+    public void setRowStatus(Integer rowStatus) {
         this.rowStatus = rowStatus;
     }
 }

@@ -1,4 +1,4 @@
-package esform.filter;
+package esform.global.filter;
 
 import com.alibaba.fastjson.JSON;
 import esform.dao.UserDao;
@@ -15,7 +15,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,7 +27,7 @@ import java.util.Map;
 public class OauthFilter implements Filter {
 
     private static Logger LOGGER = LoggerFactory.getLogger(OauthFilter.class);
-    private static ThreadLocal<Map<String, Object>> LOCAL_VARS = new ThreadLocal<Map<String, Object>>();
+    private static User USER;
 
     @Autowired
     private UserDao userDao;
@@ -89,26 +88,14 @@ public class OauthFilter implements Filter {
     }
 
     private static void setVar(String key, Object obj) {
-        Map<String, Object> stringObjectMap = LOCAL_VARS.get();
-        if (null == stringObjectMap) {
-            stringObjectMap = new HashMap<>();
-            LOCAL_VARS.set(stringObjectMap);
-        }
-        stringObjectMap.put(key, obj);
+        USER = (User) obj;
     }
 
     public static User getUser() {
-        Map<String, Object> stringObjectMap = LOCAL_VARS.get();
-        User user = (User) stringObjectMap.get("user");
-        if (user == null) {
+        if (USER == null) {
             throw new RuntimeException("unauthorized");
         }
-        return user;
-    }
-
-    public static Object getVar(String key) {
-        Map<String, Object> stringObjectMap = LOCAL_VARS.get();
-        return null != stringObjectMap ? stringObjectMap.get(key) : null;
+        return USER;
     }
 
     @Override

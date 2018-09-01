@@ -1,4 +1,4 @@
-package esform.controller;
+package esform.global.controller;
 
 import esform.response.Response;
 import org.springframework.stereotype.Controller;

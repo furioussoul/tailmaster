@@ -14,7 +14,7 @@
         update page
         SET rowStatus = 0
         WHERE id = #{id}
-         AND createBy = #{createBy}
+        AND createBy = #{createBy}
     </delete>
 
     <update id="update" parameterType="esform.domain.Page">
@@ -28,6 +28,9 @@
             </if>
             <if test="appId != null">
                 `appId` = #{appId},
+            </if>
+            <if test="rowStatus != null">
+                rowStatus = #{rowStatus},
             </if>
             updateBy = #{updateBy},
             updateDt = #{updateDt}
@@ -46,7 +49,7 @@
         <if test="appId != null">
             and `appId` = #{appId}
         </if>
-        ORDER  BY id DESC
+        ORDER BY id DESC
     </select>
 
     <select id="selectByExample" resultType="esform.domain.Page">
@@ -54,13 +57,13 @@
         from page
         <where>
             <if test="id != null">
-               id = #{id}
+                id = #{id}
             </if>
             <if test="name != null">
                 and `name`= #{name}
             </if>
             and rowStatus = 1
         </where>
-        ORDER  BY id DESC
+        ORDER BY id DESC
     </select>
 </mapper>

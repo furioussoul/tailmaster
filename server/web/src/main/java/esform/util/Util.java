@@ -2,7 +2,7 @@ package esform.util;
 
 import esform.domain.BaseDomain;
 import esform.domain.User;
-import esform.filter.OauthFilter;
+import esform.global.filter.OauthFilter;
 
 import java.util.Date;
 

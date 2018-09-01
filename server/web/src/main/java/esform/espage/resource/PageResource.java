@@ -1,13 +1,18 @@
-package esform.page.resource;
+package esform.espage.resource;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import esform.dao.PageDao;
 import esform.domain.Page;
-import esform.page.request.OperatePageRequest;
-import esform.page.request.QueryPageRequest;
+import esform.espage.request.QueryPageRequest;
+import esform.espage.request.OperatePageRequest;
+import esform.global.request.RequestAsyncProcessHandler;
 import esform.response.Response;
+import esform.util.RedisUtils;
 import esform.util.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -24,6 +29,9 @@ import java.util.List;
 @Controller
 @RequestMapping("page")
 public class PageResource {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(PageResource.class);
+
     @Autowired
     private PageDao pageDao;
 
@@ -39,20 +47,21 @@ public class PageResource {
     @GetMapping("del/{id}")
     @ResponseBody
     public Response del(@PathVariable("id") Long id) {
-        Page domain = new Page(id);
-        Util.trace(domain, false);
-        Util.trace(domain, true);
-        pageDao.del(domain);
+        OperatePageRequest request = new OperatePageRequest();
+        request.setPageDao(pageDao);
+        request.setId(id);
+        request.setRowStatus(0);
+        RequestAsyncProcessHandler requestAsyncProcessHandler = new RequestAsyncProcessHandler();
+        requestAsyncProcessHandler.process(request);
         return Response.ok();
     }
 
     @PostMapping("update")
     @ResponseBody
     public Response update(@RequestBody OperatePageRequest request) {
-        Page domain = request.getDomain();
-        Util.trace(domain, false);
-        Util.trace(domain, true);
-        pageDao.update(domain);
+        request.setPageDao(pageDao);
+        RequestAsyncProcessHandler requestAsyncProcessHandler = new RequestAsyncProcessHandler();
+        requestAsyncProcessHandler.process(request);
         return Response.ok();
     }
 
@@ -73,8 +82,8 @@ public class PageResource {
 
     @PostMapping("tablePageList")
     @ResponseBody
-    public Response tablePageList(@RequestBody QueryPageRequest request) {
-
+    public Response tablePageList(@RequestBody QueryPageRequest request) throws InterruptedException {
+        Thread.sleep(1000);
         if (request.getAll()) {
             return Response.ok(pageDao.select(request));
         }
@@ -89,7 +98,28 @@ public class PageResource {
 
     @GetMapping("richPage/{id}")
     @ResponseBody
-    public Response richPage(@PathVariable("id") Long id) {
+    public Response richPage(@PathVariable("id") Long id) throws InterruptedException {
+        QueryPageRequest request = new QueryPageRequest();
+        request.setPageId(id);
+        request.setPageDao(pageDao);
+        RequestAsyncProcessHandler requestAsyncProcessHandler = new RequestAsyncProcessHandler();
+        requestAsyncProcessHandler.process(request);
+
+        long beginTime = System.currentTimeMillis();
+        while (true){
+            if(System.currentTimeMillis() - beginTime > 200){
+                break;
+            }
+
+            String resultStr = RedisUtils.REDIS_POOL.getResource().get("page$id:" + id);
+
+            if(resultStr != null){
+                return  Response.ok(JSON.toJSON(resultStr));
+            }
+            Thread.sleep(20);
+
+        }
+
         List<Page> pages = pageDao.selectByExample(new Page(id));
         if (!CollectionUtils.isEmpty(pages)) {
             return Response.ok(pages.get(0));

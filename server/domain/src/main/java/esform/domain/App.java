@@ -6,7 +6,7 @@ package esform.domain;
  * @name:孙证杰
  * @email:200765821@qq.com on 2017/10/24.
  */
-public class App extends BaseDomain{
+public class App extends BaseDomain {
     private String name;
     private Integer sort;
     private String url;

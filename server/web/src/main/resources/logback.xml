@@ -46,13 +46,8 @@
     <!--这里指定logger name -->
     <logger name="org.springframework" level="WARN"/>
     <logger name="me.prettyprint" level="WARN"/>
-    <logger name="com.mchange" level="WARN"/>
-    <logger name="org.quartz" level="WARN"/>
-    <logger name="org.eclipse.jetty" level="WARN"/>
     <logger name="org.apache.ibatis" level="WARN"/>
     <logger name="org.mybatis.spring" level="WARN"/>
-    <logger name="org.apache.commons" level="WARN"/>
-    <logger name="org.glassfish.jersey" level="WARN"/>
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
