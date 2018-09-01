@@ -33,7 +33,7 @@ public class ControlResource {
     @ResponseBody
     public Response add(@RequestBody OperateControlRequest request) {
         Control domain = request.getDomain();
-        Util.trace(domain,true);
+        Util.trace(domain, true);
         controlDao.add(domain);
         return Response.ok();
     }
@@ -44,7 +44,7 @@ public class ControlResource {
         Control domain = new Control(id);
         User user = OauthFilter.getUser();
         domain.setCreateBy(user.getUserName());
-        Util.trace(domain,false);
+        Util.trace(domain, false);
         controlDao.del(domain);
         return Response.ok();
     }
@@ -55,7 +55,7 @@ public class ControlResource {
         Control domain = request.getDomain();
         User user = OauthFilter.getUser();
         domain.setCreateBy(user.getUserName());
-        Util.trace(domain,false);
+        Util.trace(domain, false);
         controlDao.update(domain);
         return Response.ok();
     }

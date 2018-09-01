@@ -22,12 +22,12 @@ public class TestController {
     @PostMapping("refreshTable")
     @ResponseBody
     public Response submit_form(@RequestBody Map map) {
-        List<Map> list= new ArrayList<>();
-        for(int i =0;i<10;i++){
+        List<Map> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
             HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("name","xm");
-            hashMap.put("age","18");
-            hashMap.put("gender","male");
+            hashMap.put("name", "xm");
+            hashMap.put("age", "18");
+            hashMap.put("gender", "male");
             list.add(hashMap);
         }
         return Response.ok(list);

@@ -23,7 +23,7 @@ public class OperateControlRequest {
         control.setName(name);
         control.setNickname(nickname);
         control.setCode(code);
-        control.setClazzId(clazzId != null ? clazzId : 6 );
+        control.setClazzId(clazzId != null ? clazzId : 6);
         control.setSort(sort != null ? sort : -100);
         return control;
     }

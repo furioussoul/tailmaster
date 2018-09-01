@@ -40,7 +40,7 @@ public class AuthResource {
 
         userDao.add(user);
 
-        addAccessToken(response,user);
+        addAccessToken(response, user);
 
         return Response.ok();
     }
@@ -60,7 +60,7 @@ public class AuthResource {
             return Response.unAuthenticated("username or password wrong");
         }
 
-        addAccessToken(response,user);
+        addAccessToken(response, user);
 
         return Response.ok();
     }
@@ -135,7 +135,7 @@ public class AuthResource {
         return Response.ok(menuJson);
     }
 
-    private void addAccessToken(HttpServletResponse response,User user){
+    private void addAccessToken(HttpServletResponse response, User user) {
         Cookie cookie = new Cookie("access_token", user.getUserName() + "@" + user.getPassword());
         cookie.setMaxAge(7 * 24 * 60 * 60);
         cookie.setPath("/");

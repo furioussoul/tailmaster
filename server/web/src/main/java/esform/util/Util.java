@@ -14,13 +14,13 @@ import java.util.Date;
  */
 public class Util {
 
-    public static void trace(BaseDomain domain, boolean isCreate){
+    public static void trace(BaseDomain domain, boolean isCreate) {
         User user = OauthFilter.getUser();
-        if(null == user){
+        if (null == user) {
             throw new RuntimeException("not authorized");
         }
         Date now = new Date();
-        if(isCreate){
+        if (isCreate) {
             domain.setCreateBy(user.getUserName());
             domain.setCreateDt(now);
         }

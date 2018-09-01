@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration>
 <configuration>
-    <property name="APP_Name" value="es-view" />
+    <property name="APP_Name" value="es-view"/>
     <property name="LOG_HOME" value="/var/logs/es-form"/>
     <contextName>${APP_Name}</contextName>
     <timestamp key="dateFormat" datePattern="yyyy-MM-dd HH:mm:ss"/>

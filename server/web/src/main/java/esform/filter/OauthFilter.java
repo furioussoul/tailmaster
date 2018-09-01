@@ -97,10 +97,10 @@ public class OauthFilter implements Filter {
         stringObjectMap.put(key, obj);
     }
 
-    public static User getUser(){
+    public static User getUser() {
         Map<String, Object> stringObjectMap = LOCAL_VARS.get();
-        User user = (User)stringObjectMap.get("user");
-        if(user == null){
+        User user = (User) stringObjectMap.get("user");
+        if (user == null) {
             throw new RuntimeException("unauthorized");
         }
         return user;

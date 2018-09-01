@@ -8,7 +8,7 @@ import esform.request.BaseRequest;
  * @name:孙证杰
  * @email:200765821@qq.com on 2017/10/20.
  */
-public class QueryControlRequest extends BaseRequest{
+public class QueryControlRequest extends BaseRequest {
     private String controlName;
     private String controlClass;
 

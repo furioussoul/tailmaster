@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://172.16.75.62:33639/soul-esview?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://47.97.220.227:33639/soul-esview?useUnicode=true&characterEncoding=utf8
     password: mysql1992
     driver-class-name: com.mysql.jdbc.Driver
     username: root

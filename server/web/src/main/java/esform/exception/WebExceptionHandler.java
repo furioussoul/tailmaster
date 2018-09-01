@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice(basePackages = {"esform"})
 public class WebExceptionHandler {
     private static Logger LOGGER = LoggerFactory.getLogger(WebExceptionHandler.class);
+
     @ExceptionHandler(Exception.class)
     @ResponseBody
     Response handleControllerException(HttpServletRequest request, Throwable ex) {

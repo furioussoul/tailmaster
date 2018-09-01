@@ -64,7 +64,7 @@ public class PageResource {
         page.setName(request.getName());
         List<Page> pages = pageDao.selectByExample(page);
 
-        pages.forEach(page1->{
+        pages.forEach(page1 -> {
             page1.setPageSoul("");
         });
 
