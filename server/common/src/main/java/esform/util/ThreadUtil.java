@@ -11,11 +11,11 @@ public class ThreadUtil {
 
     private static volatile ExecutorService EXECUTOR;
 
-    private static ExecutorService getExecutor(){
+    private static ExecutorService getExecutor() {
 
-        if (EXECUTOR == null){
+        if (EXECUTOR == null) {
             synchronized (ExecutorService.class) {
-                if (EXECUTOR == null){
+                if (EXECUTOR == null) {
                     EXECUTOR = Executors.newFixedThreadPool(60);
                 }
             }
@@ -24,8 +24,8 @@ public class ThreadUtil {
     }
 
 
-    public static void addTask(Runnable thread){
-        int threadCount = ((ThreadPoolExecutor)ThreadUtil.getExecutor()).getActiveCount();
+    public static void addTask(Runnable thread) {
+        int threadCount = ((ThreadPoolExecutor) ThreadUtil.getExecutor()).getActiveCount();
         System.out.println("the approximate number of threads is:" + threadCount);
         getExecutor().submit(thread);
     }

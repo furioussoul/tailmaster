@@ -5,8 +5,10 @@ package esform.util.pool;
  */
 public interface Pool<T> {
     T get();
+
     //释放资源，扔回池子
     void release(T t);
+
     //关闭池子,释放所有资源
     void shutdown();
 }
