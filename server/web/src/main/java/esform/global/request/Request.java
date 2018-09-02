@@ -5,5 +5,6 @@ package esform.global.request;
  */
 public interface Request {
     Long getId();
+
     void process() throws InterruptedException;
 }

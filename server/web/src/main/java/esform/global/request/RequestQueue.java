@@ -10,32 +10,32 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class RequestQueue {
     private List<ArrayBlockingQueue<Request>> queues = new ArrayList<>();
 
-    private static class Instance{
+    private static class Instance {
         private static RequestQueue INSTANCE;
 
         static {
             INSTANCE = new RequestQueue();
         }
 
-        private static RequestQueue getInstance(){
+        private static RequestQueue getInstance() {
             return INSTANCE;
         }
     }
 
 
-    public static RequestQueue getInstance(){
+    public static RequestQueue getInstance() {
         return RequestQueue.Instance.getInstance();
     }
 
-    public void addQueue(ArrayBlockingQueue<Request> queue){
+    public void addQueue(ArrayBlockingQueue<Request> queue) {
         queues.add(queue);
     }
 
-    public ArrayBlockingQueue<Request> getQueue(int index){
+    public ArrayBlockingQueue<Request> getQueue(int index) {
         return queues.get(index);
     }
 
-    public int size(){
+    public int size() {
         return queues.size();
     }
 }

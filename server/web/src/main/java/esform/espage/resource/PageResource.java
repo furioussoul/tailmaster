@@ -6,11 +6,11 @@ import com.github.pagehelper.PageInfo;
 import esform.dao.PageDao;
 import esform.domain.Page;
 import esform.espage.PageServiceImpl;
-import esform.espage.request.QueryPageRequest;
 import esform.espage.request.OperatePageRequest;
+import esform.espage.request.QueryPageRequest;
+import esform.global.cache.RedisUtils;
 import esform.global.request.RequestAsyncProcessHandler;
 import esform.response.Response;
-import esform.global.cache.RedisUtils;
 import esform.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -103,6 +103,13 @@ public class PageResource {
     @GetMapping("richPage/{id}")
     @ResponseBody
     public Response richPage(@PathVariable("id") Long id) throws InterruptedException {
+
+        Page example = new Page(id);
+        Page localCache = pageService.getLocalCache(example);
+        if (localCache != null) {
+            return Response.ok(localCache);
+        }
+
         QueryPageRequest request = new QueryPageRequest();
         request.setPageId(id);
         request.setPageService(pageService);
@@ -110,21 +117,15 @@ public class PageResource {
         requestAsyncProcessHandler.process(request);
 
         long beginTime = System.currentTimeMillis();
-        while (true){
-            if(System.currentTimeMillis() - beginTime > 200){
+        while (true) {
+            if (System.currentTimeMillis() - beginTime > 200) {
                 break;
-            }
-
-            Page example = new Page(id);
-            Page localCache = pageService.getLocalCache(example);
-            if(localCache != null){
-                return Response.ok(localCache);
             }
 
             String resultStr = RedisUtils.REDIS_POOL.getResource().get("page$id:" + id);
 
-            if(resultStr != null){
-                return  Response.ok(JSON.toJSON(resultStr));
+            if (resultStr != null) {
+                return Response.ok(JSON.parseObject(resultStr, Page.class));
             }
             Thread.sleep(20);
 

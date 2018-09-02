@@ -20,25 +20,25 @@ public class PageServiceImpl {
     @Autowired
     private PageDao pageDao;
 
-    public Page get(Page example){
+    public Page get(Page example) {
         List<Page> pages = pageDao.selectByExample(example);
-        if(pages.size()>0){
+        if (pages.size() > 0) {
             return pages.get(0);
         }
         return null;
     }
 
-    public int update(Page page){
+    public int update(Page page) {
         return pageDao.update(page);
     }
 
     @CachePut(value = VALUE, key = "'key_' + #page.id")
-    public Page putLocalCache(Page page){
+    public Page putLocalCache(Page page) {
         return page;
     }
 
     @Cacheable(value = VALUE, key = "'key_' + #example.id")
-    public Page getLocalCache(Page example){
+    public Page getLocalCache(Page example) {
         return null;
     }
 }

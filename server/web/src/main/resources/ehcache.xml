@@ -4,7 +4,7 @@
         磁盘存储:将缓存中暂时不使用的对象,转移到硬盘,类似于Windows系统的虚拟内存
         path:指定在硬盘上存储对象的路径
      -->
-    <diskStore path="java.io.tmpdir/Tmp_EnhCache" />
+    <diskStore path="java.io.tmpdir/Tmp_EnhCache"/>
 
 
     <!--

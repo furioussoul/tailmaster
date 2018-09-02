@@ -2,8 +2,8 @@ package esform.espage.request;
 
 import esform.domain.Page;
 import esform.espage.PageServiceImpl;
-import esform.global.request.Request;
 import esform.global.cache.RedisUtils;
+import esform.global.request.Request;
 import esform.util.Util;
 
 /**
@@ -12,7 +12,7 @@ import esform.util.Util;
  * @name:孙证杰
  * @email:200765821@qq.com on 2017/10/14.
  */
-public class OperatePageRequest implements Request{
+public class OperatePageRequest implements Request {
 
     private PageServiceImpl pageService;
 
@@ -42,15 +42,15 @@ public class OperatePageRequest implements Request{
 
     @Override
     public void process() throws InterruptedException {
-        try{
+        try {
             RedisUtils.remove(() -> {
                 Page page = getDomain();
-                Util.trace(page,true);
-                Util.trace(page,false);
+                Util.trace(page, true);
+                Util.trace(page, false);
                 pageService.putLocalCache(page);
                 return pageService.update(page);
-            },"page$id：" + id.toString());
-        }catch (Exception ex){
+            }, "page$id：" + id.toString());
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

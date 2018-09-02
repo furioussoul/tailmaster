@@ -3,12 +3,11 @@ package esform.espage.request;
 import com.alibaba.fastjson.TypeReference;
 import esform.domain.Page;
 import esform.espage.PageServiceImpl;
+import esform.global.cache.RedisUtils;
 import esform.global.request.Request;
 import esform.request.BaseRequest;
-import esform.global.cache.RedisUtils;
-import org.springframework.util.CollectionUtils;
-
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by
@@ -16,7 +15,9 @@ import java.util.List;
  * @name:孙证杰
  * @email:200765821@qq.com on 2017/10/20.
  */
-public class QueryPageRequest extends BaseRequest implements Request{
+public class QueryPageRequest extends BaseRequest implements Request {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(QueryPageRequest.class);
 
     private String name;
     private String appName;
@@ -79,11 +80,12 @@ public class QueryPageRequest extends BaseRequest implements Request{
     public void process() {
         try {
             Page example = new Page(pageId);
-            RedisUtils.get(() -> {
-                return pageService.get(example);
+            RedisUtils.get(() -> pageService.get(example), (data) -> {
+                LOGGER.debug("CACHE | put localCache");
+                return pageService.putLocalCache(data);
             }, new TypeReference<Page>() {
             }, "page$id:" + pageId, 3600000);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

@@ -1,10 +1,7 @@
-package esform.global.cache; /**
- * Created by admin on 2018/8/31.
- */
+package esform.global.cache;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import esform.util.ThreadUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,12 +27,16 @@ public class RedisUtils {
     private JedisPool jedisPool;
 
     @PostConstruct
-    public void initRedisClient(){
+    public void initRedisClient() {
         REDIS_POOL = jedisPool;
     }
 
     public interface DaoCommand {
         Object execute();
+    }
+
+    public interface EhCacheCommand<R> {
+        Object execute(R data);
     }
 
     /**
@@ -48,7 +49,7 @@ public class RedisUtils {
      * @return <R> 获取的数据
      */
     @SuppressWarnings("unchecked")
-    public static <R> R get(DaoCommand command, TypeReference<R> typeReference, String key, long expiredTime) {
+    public static <R> R get(DaoCommand command, EhCacheCommand<R> command2, TypeReference<R> typeReference, String key, long expiredTime) {
 
         if (StringUtils.isEmpty(key)) {
             throw new RuntimeException("key is empty");
@@ -57,28 +58,30 @@ public class RedisUtils {
             throw new RuntimeException("expiredTime is less than 0");
         }
 
-        R result = null;
+        R result;
 
         String r = REDIS_POOL.getResource().get(key);
         if (r != null) {
             LOGGER.debug("CACHE | get value from redis key:" + key + ",value:" + r);
-            return JSON.parseObject(r, typeReference);
-        } else {
-            result = (R) command.execute();
-            LOGGER.debug("CACHE | get value from mysql key:" + key + ",value:" + JSON.toJSONString(result));
+            result = JSON.parseObject(r, typeReference);
+            command2.execute(result);
+            return result;
         }
 
-        R finalResult = result;
-        ThreadUtil.addTask(() -> REDIS_POOL.getResource().set(key, JSON.toJSONString(finalResult),"NX","EX", expiredTime));
+        result = (R) command.execute();
+        LOGGER.debug("CACHE | get value from mysql key:" + key + ",value:" + JSON.toJSONString(result));
+
+        command2.execute(result);
+        REDIS_POOL.getResource().set(key, JSON.toJSONString(result), "NX", "EX", expiredTime);
         return result;
     }
 
 
     public static void remove(DaoCommand command, String key) throws InterruptedException {
         LOGGER.debug("CACHE | remove from redis key:" + key);
-        ThreadUtil.addTask(()-> REDIS_POOL.getResource().del(key));
+        REDIS_POOL.getResource().del(key);
 
-        Thread.sleep(1000);// 测试 Cache aside pattern 双写不一致
+        //Thread.sleep(1000); 测试 Cache aside pattern 双写不一致
 
         LOGGER.debug("CACHE | remove from mysql key:" + key);
         command.execute();
@@ -87,7 +90,7 @@ public class RedisUtils {
 
     public static void main(String[] a) {
         Jedis jedis = new Jedis("47.97.220.227", 6379);
-        jedis.set("k1","v1");
+        jedis.set("k1", "v1");
         System.out.print(jedis.get("k1"));
     }
 }

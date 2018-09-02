@@ -33,7 +33,7 @@ import redis.clients.jedis.JedisPoolConfig;
 public class Application {
 
     @Value("${redis-master1.ip}")
-    private  String redisMaster1Ip;
+    private String redisMaster1Ip;
     @Value("${redis-master1.port}")
     private int redisMaster1Port;
 
@@ -65,7 +65,7 @@ public class Application {
     }
 
     @Bean
-    public JedisPool redisFactory(){
+    public JedisPool redisFactory() {
         JedisPoolConfig config = new JedisPoolConfig();
         config.setMaxIdle(5);
         config.setMaxTotal(100);
@@ -75,7 +75,7 @@ public class Application {
     }
 
     @Bean
-    public ServletListenerRegistrationBean servletListenerRegistration(){
+    public ServletListenerRegistrationBean servletListenerRegistration() {
         ServletListenerRegistrationBean<InitListener> servletListenerRegistrationBean = new ServletListenerRegistrationBean<>();
         servletListenerRegistrationBean.setListener(new InitListener());
         return servletListenerRegistrationBean;
