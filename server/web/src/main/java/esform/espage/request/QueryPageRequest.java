@@ -1,16 +1,14 @@
 package esform.espage.request;
 
 import com.alibaba.fastjson.TypeReference;
-import esform.dao.PageDao;
 import esform.domain.Page;
+import esform.espage.PageServiceImpl;
 import esform.global.request.Request;
 import esform.request.BaseRequest;
-import esform.response.Response;
-import esform.util.RedisUtils;
+import esform.global.cache.RedisUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 /**
  * Created by
@@ -19,7 +17,6 @@ import java.util.concurrent.Callable;
  * @email:200765821@qq.com on 2017/10/20.
  */
 public class QueryPageRequest extends BaseRequest implements Request{
-    private PageDao pageDao;
 
     private String name;
     private String appName;
@@ -27,8 +24,10 @@ public class QueryPageRequest extends BaseRequest implements Request{
     private Long pageId;
     private boolean all;
 
-    public void setPageDao(PageDao pageDao) {
-        this.pageDao = pageDao;
+    private PageServiceImpl pageService;
+
+    public void setPageService(PageServiceImpl pageService) {
+        this.pageService = pageService;
     }
 
     public String getName() {
@@ -79,12 +78,9 @@ public class QueryPageRequest extends BaseRequest implements Request{
     @Override
     public void process() {
         try {
+            Page example = new Page(pageId);
             RedisUtils.get(() -> {
-                List<Page> pages = pageDao.selectByExample(new Page(pageId));
-                if (!CollectionUtils.isEmpty(pages)) {
-                    return pages.get(0);
-                }
-                return null;
+                return pageService.get(example);
             }, new TypeReference<Page>() {
             }, "page$id:" + pageId, 3600000);
         } catch (Exception ex){

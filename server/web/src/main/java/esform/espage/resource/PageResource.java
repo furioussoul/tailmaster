@@ -5,11 +5,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import esform.dao.PageDao;
 import esform.domain.Page;
+import esform.espage.PageServiceImpl;
 import esform.espage.request.QueryPageRequest;
 import esform.espage.request.OperatePageRequest;
 import esform.global.request.RequestAsyncProcessHandler;
 import esform.response.Response;
-import esform.util.RedisUtils;
+import esform.global.cache.RedisUtils;
 import esform.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,9 @@ public class PageResource {
     @Autowired
     private PageDao pageDao;
 
+    @Autowired
+    private PageServiceImpl pageService;
+
     @PostMapping("add")
     @ResponseBody
     public Response add(@RequestBody OperatePageRequest request) {
@@ -48,7 +52,7 @@ public class PageResource {
     @ResponseBody
     public Response del(@PathVariable("id") Long id) {
         OperatePageRequest request = new OperatePageRequest();
-        request.setPageDao(pageDao);
+        request.setPageService(pageService);
         request.setId(id);
         request.setRowStatus(0);
         RequestAsyncProcessHandler requestAsyncProcessHandler = new RequestAsyncProcessHandler();
@@ -59,7 +63,7 @@ public class PageResource {
     @PostMapping("update")
     @ResponseBody
     public Response update(@RequestBody OperatePageRequest request) {
-        request.setPageDao(pageDao);
+        request.setPageService(pageService);
         RequestAsyncProcessHandler requestAsyncProcessHandler = new RequestAsyncProcessHandler();
         requestAsyncProcessHandler.process(request);
         return Response.ok();
@@ -101,7 +105,7 @@ public class PageResource {
     public Response richPage(@PathVariable("id") Long id) throws InterruptedException {
         QueryPageRequest request = new QueryPageRequest();
         request.setPageId(id);
-        request.setPageDao(pageDao);
+        request.setPageService(pageService);
         RequestAsyncProcessHandler requestAsyncProcessHandler = new RequestAsyncProcessHandler();
         requestAsyncProcessHandler.process(request);
 
@@ -109,6 +113,12 @@ public class PageResource {
         while (true){
             if(System.currentTimeMillis() - beginTime > 200){
                 break;
+            }
+
+            Page example = new Page(id);
+            Page localCache = pageService.getLocalCache(example);
+            if(localCache != null){
+                return Response.ok(localCache);
             }
 
             String resultStr = RedisUtils.REDIS_POOL.getResource().get("page$id:" + id);

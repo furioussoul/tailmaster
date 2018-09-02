@@ -1,9 +1,9 @@
 package esform.espage.request;
 
-import esform.dao.PageDao;
 import esform.domain.Page;
+import esform.espage.PageServiceImpl;
 import esform.global.request.Request;
-import esform.util.RedisUtils;
+import esform.global.cache.RedisUtils;
 import esform.util.Util;
 
 /**
@@ -14,17 +14,13 @@ import esform.util.Util;
  */
 public class OperatePageRequest implements Request{
 
-    private PageDao pageDao;
+    private PageServiceImpl pageService;
 
     private Long id;
     private String name;
     private String pageSoul;
     private Long appId;
     private Integer rowStatus;
-
-    public void setPageDao(PageDao dao) {
-        this.pageDao = dao;
-    }
 
     public Page getDomain() {
         Page page = new Page();
@@ -40,6 +36,10 @@ public class OperatePageRequest implements Request{
         return id;
     }
 
+    public void setPageService(PageServiceImpl pageService) {
+        this.pageService = pageService;
+    }
+
     @Override
     public void process() throws InterruptedException {
         try{
@@ -47,7 +47,8 @@ public class OperatePageRequest implements Request{
                 Page page = getDomain();
                 Util.trace(page,true);
                 Util.trace(page,false);
-                return pageDao.update(page);
+                pageService.putLocalCache(page);
+                return pageService.update(page);
             },"page$id：" + id.toString());
         }catch (Exception ex){
             ex.printStackTrace();

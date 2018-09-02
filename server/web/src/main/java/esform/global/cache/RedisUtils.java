@@ -1,9 +1,10 @@
-package esform.util; /**
+package esform.global.cache; /**
  * Created by admin on 2018/8/31.
  */
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import esform.util.ThreadUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,7 +78,7 @@ public class RedisUtils {
         LOGGER.debug("CACHE | remove from redis key:" + key);
         ThreadUtil.addTask(()-> REDIS_POOL.getResource().del(key));
 
-        Thread.sleep(10000);// 测试 Cache aside pattern 双写不一致
+        Thread.sleep(1000);// 测试 Cache aside pattern 双写不一致
 
         LOGGER.debug("CACHE | remove from mysql key:" + key);
         command.execute();
