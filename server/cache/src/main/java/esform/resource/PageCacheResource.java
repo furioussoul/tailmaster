@@ -1,4 +1,4 @@
-package cache.espage.resource;
+package esform.resource;
 
 import esform.domain.Page;
 import esform.espage.PageServiceImpl;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("cache_page")
-public class PageResource {
+public class PageCacheResource {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(PageResource.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(PageCacheResource.class);
 
     @Autowired
     private PageServiceImpl pageService;

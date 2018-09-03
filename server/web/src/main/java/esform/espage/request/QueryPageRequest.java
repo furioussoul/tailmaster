@@ -1,6 +1,6 @@
 package esform.espage.request;
 
-import common.RedisUtils;
+import esform.RedisUtils;
 import com.alibaba.fastjson.TypeReference;
 import esform.domain.Page;
 import esform.espage.PageServiceImpl;

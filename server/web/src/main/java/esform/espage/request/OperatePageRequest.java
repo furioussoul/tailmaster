@@ -1,6 +1,6 @@
 package esform.espage.request;
 
-import common.RedisUtils;
+import esform.RedisUtils;
 import esform.domain.Page;
 import esform.espage.PageServiceImpl;
 import esform.global.request.Request;

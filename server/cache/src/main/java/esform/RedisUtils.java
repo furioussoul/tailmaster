@@ -1,4 +1,4 @@
-package common;
+package esform;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;

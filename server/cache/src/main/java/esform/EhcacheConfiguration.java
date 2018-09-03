@@ -1,4 +1,4 @@
-package common;
+package esform;
 
 import net.sf.ehcache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
