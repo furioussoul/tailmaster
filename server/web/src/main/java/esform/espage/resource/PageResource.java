@@ -1,5 +1,6 @@
 package esform.espage.resource;
 
+import cache.cache.RedisUtils;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -8,7 +9,6 @@ import esform.domain.Page;
 import esform.espage.PageServiceImpl;
 import esform.espage.request.OperatePageRequest;
 import esform.espage.request.QueryPageRequest;
-import esform.global.cache.RedisUtils;
 import esform.global.request.RequestAsyncProcessHandler;
 import esform.response.Response;
 import esform.util.Util;
@@ -104,12 +104,6 @@ public class PageResource {
     @ResponseBody
     public Response richPage(@PathVariable("id") Long id) throws InterruptedException {
 
-        Page example = new Page(id);
-        Page localCache = pageService.getLocalCache(example);
-        if (localCache != null) {
-            return Response.ok(localCache);
-        }
-
         QueryPageRequest request = new QueryPageRequest();
         request.setPageId(id);
         request.setPageService(pageService);
@@ -128,7 +122,6 @@ public class PageResource {
                 return Response.ok(JSON.parseObject(resultStr, Page.class));
             }
             Thread.sleep(20);
-
         }
 
         List<Page> pages = pageDao.selectByExample(new Page(id));

@@ -14,6 +14,9 @@
         <module>domain</module>
         <module>service</module>
         <module>dao</module>
+        <module>cache</module>
+        <module>kafka</module>
+        <module>storm</module>
     </modules>
 
     <parent>

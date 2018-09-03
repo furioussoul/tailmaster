@@ -1,4 +1,4 @@
-package esform.global.cache;
+package cache.cache;
 
 import net.sf.ehcache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

@@ -1,4 +1,4 @@
-package esform.global.cache;
+package cache.cache;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -35,10 +35,6 @@ public class RedisUtils {
         Object execute();
     }
 
-    public interface EhCacheCommand<R> {
-        Object execute(R data);
-    }
-
     /**
      * Cache Aside Pattern, 有双写不一致问题
      *
@@ -49,7 +45,7 @@ public class RedisUtils {
      * @return <R> 获取的数据
      */
     @SuppressWarnings("unchecked")
-    public static <R> R get(DaoCommand command, EhCacheCommand<R> command2, TypeReference<R> typeReference, String key, long expiredTime) {
+    public static <R> R get(DaoCommand command, TypeReference<R> typeReference, String key, long expiredTime) {
 
         if (StringUtils.isEmpty(key)) {
             throw new RuntimeException("key is empty");
@@ -64,14 +60,12 @@ public class RedisUtils {
         if (r != null) {
             LOGGER.debug("CACHE | get value from redis key:" + key + ",value:" + r);
             result = JSON.parseObject(r, typeReference);
-            command2.execute(result);
             return result;
         }
 
         result = (R) command.execute();
         LOGGER.debug("CACHE | get value from mysql key:" + key + ",value:" + JSON.toJSONString(result));
 
-        command2.execute(result);
         REDIS_POOL.getResource().set(key, JSON.toJSONString(result), "NX", "EX", expiredTime);
         return result;
     }

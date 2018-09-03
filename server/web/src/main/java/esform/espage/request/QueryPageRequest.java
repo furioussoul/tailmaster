@@ -1,9 +1,9 @@
 package esform.espage.request;
 
+import cache.cache.RedisUtils;
 import com.alibaba.fastjson.TypeReference;
 import esform.domain.Page;
 import esform.espage.PageServiceImpl;
-import esform.global.cache.RedisUtils;
 import esform.global.request.Request;
 import esform.request.BaseRequest;
 import org.slf4j.Logger;
@@ -80,10 +80,7 @@ public class QueryPageRequest extends BaseRequest implements Request {
     public void process() {
         try {
             Page example = new Page(pageId);
-            RedisUtils.get(() -> pageService.get(example), (data) -> {
-                LOGGER.debug("CACHE | put localCache");
-                return pageService.putLocalCache(data);
-            }, new TypeReference<Page>() {
+            RedisUtils.get(() -> pageService.get(example), new TypeReference<Page>() {
             }, "page$id:" + pageId, 3600000);
         } catch (Exception ex) {
             ex.printStackTrace();
