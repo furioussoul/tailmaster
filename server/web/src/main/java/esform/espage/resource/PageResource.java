@@ -1,6 +1,6 @@
 package esform.espage.resource;
 
-import cache.cache.RedisUtils;
+import common.RedisUtils;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

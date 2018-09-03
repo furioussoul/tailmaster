@@ -1,6 +1,6 @@
 package esform.espage.request;
 
-import cache.cache.RedisUtils;
+import common.RedisUtils;
 import esform.domain.Page;
 import esform.espage.PageServiceImpl;
 import esform.global.request.Request;
@@ -47,7 +47,6 @@ public class OperatePageRequest implements Request {
                 Page page = getDomain();
                 Util.trace(page, true);
                 Util.trace(page, false);
-                pageService.putLocalCache(page);
                 return pageService.update(page);
             }, "page$id：" + id.toString());
         } catch (Exception ex) {
