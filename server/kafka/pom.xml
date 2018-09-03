@@ -12,6 +12,13 @@
     <artifactId>kafka</artifactId>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.12</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
         <dependency>
             <groupId>furioussoul</groupId>
             <artifactId>common</artifactId>
