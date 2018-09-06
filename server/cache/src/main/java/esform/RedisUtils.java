@@ -66,15 +66,20 @@ public class RedisUtils {
         result = (R) command.execute();
         LOGGER.debug("CACHE | get value from mysql key:" + key + ",value:" + JSON.toJSONString(result));
 
-        REDIS_POOL.getResource().set(key, JSON.toJSONString(result), "NX", "EX", expiredTime);
+        Jedis resource = REDIS_POOL.getResource();
+        resource.set(key, JSON.toJSONString(result), "NX", "EX", expiredTime);
+        resource.close();
         return result;
     }
 
 
     public static void remove(DaoCommand command, String key) throws InterruptedException {
         LOGGER.debug("CACHE | remove from redis key:" + key);
-        REDIS_POOL.getResource().del(key);
 
+        Jedis resource = REDIS_POOL.getResource();
+        resource.del(key);
+        resource.close();
+        
         //Thread.sleep(1000); 测试 Cache aside pattern 双写不一致
 
         LOGGER.debug("CACHE | remove from mysql key:" + key);
