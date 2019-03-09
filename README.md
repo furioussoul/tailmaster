@@ -1,3 +1,5 @@
+# 此项目已暂停开发
+
 <p align="right">
   <a href="https://github.com/furioussoul/soul-esview/blob/master/ui/README-ch.md">中文</a>
 </p>
